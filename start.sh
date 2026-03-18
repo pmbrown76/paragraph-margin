@@ -1,5 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
-echo "Starting ParagraphMargin API server..."
-uvicorn api.app:app --host 0.0.0.0 --port ${PORT:-8100}
+APP_PORT="${PORT:-8100}"
+
+echo "Starting ParagraphMargin API server on port ${APP_PORT}..."
+exec uvicorn api.app:app --host 0.0.0.0 --port "${APP_PORT}"
