@@ -5,7 +5,7 @@ from decimal import Decimal
 
 import pytest
 
-from margin_calc_engine import (
+from paragraph_margin import (
     Equity,
     Option,
     Position,
@@ -17,8 +17,8 @@ from margin_calc_engine import (
     RuleConfig,
     FormulaConfig,
 )
-from margin_calc_engine.models.strategies import RecognizedStrategy, StrategyLeg
-from margin_calc_engine.money import ZERO
+from paragraph_margin.models.strategies import RecognizedStrategy, StrategyLeg
+from paragraph_margin.money import ZERO
 
 
 @pytest.fixture

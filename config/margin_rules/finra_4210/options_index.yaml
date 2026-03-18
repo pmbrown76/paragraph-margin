@@ -1,0 +1,171 @@
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(f)"
+  description: "Cash-settled and index option margin requirements"
+  effective_date: "2024-01-01"
+  notes: >
+    Cash-settled index options (European-style) have specific margin treatment
+    under 4210(f). Broad-based index options use 15% of underlying index value;
+    narrow-based use 20%.
+
+rules:
+  # --- Long cash-settled index options: no maintenance margin ---
+
+  - id: "4210_long_call_index_cash"
+    description: "Long call on cash-settled index option — no maintenance margin"
+    citation: "FINRA 4210(f)(2)(A)"
+    source_quote: >
+      In the case of any put, call, currency warrant, currency index
+      warrant, or stock index warrant carried "long" in a customer's
+      account that expires in nine months or less, initial margin must
+      be deposited and maintained equal to at least 100 percent of the
+      purchase price of the option or warrant.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "long"
+      underlying_type: "index"
+      settlement_type: "cash"
+    formula:
+      type: "good_faith"
+      rate: 0.0
+    notes: "Long index options require no maintenance margin. The full premium is paid at purchase. No ongoing margin obligation exists for the holder."
+
+  - id: "4210_long_put_index_cash"
+    description: "Long put on cash-settled index option — no maintenance margin"
+    citation: "FINRA 4210(f)(2)(A)"
+    source_quote: >
+      In the case of any put, call, currency warrant, currency index
+      warrant, or stock index warrant carried "long" in a customer's
+      account that expires in nine months or less, initial margin must
+      be deposited and maintained equal to at least 100 percent of the
+      purchase price of the option or warrant.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "long"
+      underlying_type: "index"
+      settlement_type: "cash"
+    formula:
+      type: "good_faith"
+      rate: 0.0
+    notes: "Long index options require no maintenance margin. The full premium is paid at purchase. No ongoing margin obligation exists for the holder."
+
+  # --- Naked cash-settled broad-based index options (15% underlying) ---
+
+  - id: "4210_naked_call_broad_index_cash"
+    description: "Short naked call on cash-settled broad-based index"
+    citation: "FINRA 4210(f)(6)(A)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (3) Broad index stock group 15 percent.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Broad-based index option margin: 100% of premium received plus 15% of the
+      underlying index value, less any out-of-the-money amount. Minimum requirement
+      is 100% of premium plus 10% of underlying index value. Cash settlement
+      eliminates physical delivery risk, resulting in lower rates than equity options.
+
+  - id: "4210_naked_put_broad_index_cash"
+    description: "Short naked put on cash-settled broad-based index"
+    citation: "FINRA 4210(f)(6)(A)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (3) Broad index stock group 15 percent.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Broad-based index option margin: 100% of premium received plus 15% of the
+      underlying index value, less any out-of-the-money amount. Minimum requirement
+      is 100% of premium plus 10% of underlying index value.
+
+  # --- Naked cash-settled narrow-based index options (20% underlying) ---
+
+  - id: "4210_naked_call_narrow_index_cash"
+    description: "Short naked call on cash-settled narrow-based index"
+    citation: "FINRA 4210(f)(6)(B)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (2) Industry index stock group 20 percent.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Narrow-based index option margin: 100% of premium received plus 20% of the
+      underlying index value, less any out-of-the-money amount. Minimum requirement
+      is 100% of premium plus 10% of underlying index value. Higher rate than
+      broad-based indices reflects greater concentration risk.
+
+  - id: "4210_naked_put_narrow_index_cash"
+    description: "Short naked put on cash-settled narrow-based index"
+    citation: "FINRA 4210(f)(6)(B)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (2) Industry index stock group 20 percent.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Narrow-based index option margin: 100% of premium received plus 20% of the
+      underlying index value, less any out-of-the-money amount. Minimum requirement
+      is 100% of premium plus 10% of underlying index value. Higher rate than
+      broad-based indices reflects greater concentration risk.

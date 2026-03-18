@@ -1,0 +1,176 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(e)(2)(C)
+  description: Non-equity securities (corporate debt) maintenance margin
+  effective_date: '2024-01-01'
+  notes: >
+    FINRA 4210(e)(2)(C) sets maintenance margin for non-equity securities. Investment-grade debt: 10%
+    of market value. All other listed/margin-eligible non-equity securities: 20% of market value or 7%
+    of principal, whichever is greater. Section (c)(4) establishes a floor for short bonds: 5% of principal
+    or 30% of market value. Section (e)(2)(C) overrides (c)(4) per the preamble of (c).
+rules:
+- id: 4210_corp_bond_ig_long
+  description: Long investment-grade corporate bond
+  citation: FINRA 4210(e)(2)(C)(i)
+  source_quote: >
+    10 percent of the current market value in the case of investment grade debt securities.
+  conditions:
+    security_type: corporate_bond
+    position_side: long
+    investment_grade: true
+    convertible: false
+  formula:
+    type: percentage_of_market_value
+    rate: 0.1
+  notes: >
+    10% of current market value for investment-grade debt securities (rated BBB-/Baa3 or higher). Per
+    4210(e)(2)(C)(i): "10 percent of the current market value in the case of investment grade debt securities."
+- id: 4210_corp_bond_ig_short
+  description: Short investment-grade corporate bond
+  citation: FINRA 4210(e)(2)(C)(i)
+  source_quote: >
+    10 percent of the current market value in the case of investment grade debt securities.
+  conditions:
+    security_type: corporate_bond
+    position_side: short
+    investment_grade: true
+    convertible: false
+  formula:
+    type: percentage_of_market_value
+    rate: 0.1
+  notes: >
+    10% of current market value for short positions in investment-grade debt. Section (e)(2)(C) applies
+    to both long and short positions in non-equity securities, overriding the general short bond provision
+    in (c)(4).
+- id: 4210_corp_bond_hy_long
+  description: Long high-yield corporate bond
+  citation: FINRA 4210(e)(2)(C)(ii)
+  source_quote: >
+    20 percent of the current market value or 7 percent of the principal amount, whichever amount is greater,
+    in the case of all other listed non-equity securities, and all other margin eligible non-equity securities.
+  conditions:
+    security_type: corporate_bond
+    position_side: long
+    investment_grade: false
+    convertible: false
+  formula:
+    type: percentage_of_market_value
+    rate: 0.2
+  notes: >
+    20% of current market value or 7% of principal amount, whichever is greater, for non-investment-grade
+    and non-rated corporate debt. Per 4210(e)(2)(C)(ii): "20 percent of the current market value or 7
+    percent of the principal amount, whichever amount is greater, in the case of all other listed non-equity
+    securities, and all other margin eligible non-equity securities."
+- id: 4210_corp_bond_hy_short
+  description: Short high-yield corporate bond
+  citation: FINRA 4210(e)(2)(C)(ii)
+  source_quote: >
+    20 percent of the current market value or 7 percent of the principal amount, whichever amount is greater,
+    in the case of all other listed non-equity securities, and all other margin eligible non-equity securities.
+  conditions:
+    security_type: corporate_bond
+    position_side: short
+    investment_grade: false
+    convertible: false
+  formula:
+    type: percentage_of_market_value
+    rate: 0.2
+  notes: >
+    20% of current market value or 7% of principal for short positions in non-investment-grade debt. Section
+    (e)(2)(C) applies to both long and short positions.
+- id: 4210_convertible_bond_ig_long
+  description: Long convertible bond — investment grade
+  citation: FINRA 4210(e)(2)(C)(i)
+  source_quote: (i) 10 percent of the current market value in the case of investment grade debt securities;
+    and
+  conditions:
+    security_type: corporate_bond
+    position_side: long
+    investment_grade: true
+    convertible: true
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    Convertible bonds are non-equity securities under 4210(e)(2)(C), carrying a base rate of 10% for IG
+    debt. However, the conversion feature means the holder can exchange for equity at any time. Industry
+    practice and firm risk management apply the equity long maintenance rate of 25% per 4210(c)(1) when
+    the bond trades at or near conversion parity. The higher of the bond rate (10%) or equity rate (25%)
+    is used — 25% applies.
+- id: 4210_convertible_bond_ig_short
+  description: Short convertible bond — investment grade
+  citation: FINRA 4210(e)(2)(C)(i)
+  source_quote: (i) 10 percent of the current market value in the case of investment grade debt securities;
+    and
+  conditions:
+    security_type: corporate_bond
+    position_side: short
+    investment_grade: true
+    convertible: true
+  formula:
+    type: percentage_of_market_value
+    rate: 0.3
+  notes: >
+    Short convertible bonds carry equity short risk because the short seller may be delivered shares via
+    conversion. Industry practice applies the equity short maintenance rate of 30% per 4210(c)(3). The
+    conversion feature means the higher of the bond rate (10%) or equity short rate (30%) is used — 30%
+    applies. Referenced in 4210(f)(2)(E)(iii) OTC options table at 30%.
+- id: 4210_convertible_bond_hy_long
+  description: Long convertible bond — high yield
+  citation: FINRA 4210(e)(2)(C)(ii)
+  source_quote: >-
+    (ii) 20 percent of the current market value or 7 percent of the principal amount, whichever amount
+    is greater, in the case of all other listed non-equity securities, and all other margin eligible non-equity
+    securities as defined in paragraph (a)(16) of this Rule.
+  conditions:
+    security_type: corporate_bond
+    position_side: long
+    investment_grade: false
+    convertible: true
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    HY convertible bonds carry a base rate of 20% under 4210(e)(2)(C)(ii), but the conversion feature
+    exposes the holder to equity risk. The equity long maintenance rate of 25% per 4210(c)(1) is higher,
+    so 25% applies.
+- id: 4210_convertible_bond_hy_short
+  description: Short convertible bond — high yield
+  citation: FINRA 4210(e)(2)(C)(ii)
+  source_quote: >-
+    (ii) 20 percent of the current market value or 7 percent of the principal amount, whichever amount
+    is greater, in the case of all other listed non-equity securities, and all other margin eligible non-equity
+    securities as defined in paragraph (a)(16) of this Rule.
+  conditions:
+    security_type: corporate_bond
+    position_side: short
+    investment_grade: false
+    convertible: true
+  formula:
+    type: percentage_of_market_value
+    rate: 0.3
+  notes: >
+    Short HY convertible bonds carry a base rate of 20% under 4210(e)(2)(C)(ii), but the conversion feature
+    creates equity short risk. The equity short maintenance rate of 30% per 4210(c)(3) is higher, so 30%
+    applies.
+- id: 4210_short_bond_general
+  description: Short bond — general floor (overridden by (e)(2) for specific bond types)
+  citation: FINRA 4210(c)(4)
+  source_quote: >
+    5 percent of the principal amount or 30 percent of the current market value, whichever amount is greater,
+    of each bond "short" in the account.
+  conditions:
+    security_type: bond
+    position_side: short
+  formula:
+    type: percentage_of_market_value
+    rate: 0.3
+  minimum:
+    type: percentage_of_principal
+    amount: 0.05
+  notes: >
+    Per 4210(c)(4): "5 percent of the principal amount or 30 percent of the current market value, whichever
+    amount is greater, of each bond 'short' in the account." This is the general short bond floor. However,
+    the preamble to section (c) states "except as set forth in paragraph (e), (f) or (g)." All specific
+    bond types (corporate, municipal, treasury, agency) are covered by subsections of (e)(2), which override
+    this general provision.

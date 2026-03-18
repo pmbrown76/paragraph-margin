@@ -1,0 +1,136 @@
+rule_set:
+  regulation: "FINRA Short Interest and Trade Reporting"
+  authority: "Financial Industry Regulatory Authority"
+  cfr: ""
+  section: "Rules 4560, 6182, 6624"
+  description: "Short interest reporting obligations and trade reporting requirements for short sales"
+  effective_date: "2008-12-15"
+  last_amended: "2023-10-13"
+  notes: "FINRA Rule 4560 governs bi-monthly short interest reporting. Rules 6182/6624 govern short sale trade reporting indicators."
+
+rules:
+  - id: "finra_4560_short_interest_reporting"
+    description: "Bi-monthly short interest reporting — report all short positions to FINRA"
+    citation: "FINRA Rule 4560(a)"
+    rule_category: "reporting"
+    rule_group: "short_selling"
+    source_quote: >
+      Each member shall maintain a record of total 'short' positions in all
+      customer and proprietary firm accounts in all equity securities and shall
+      regularly report such information to FINRA in such a manner as may be
+      prescribed by FINRA.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "equity"
+      has_short_positions: true
+    formula:
+      type: "reporting_requirement"
+      description: "Report total short positions in all customer and proprietary accounts, gross per account, twice monthly"
+    notes: >
+      Reports due no later than the second business day after the FINRA-designated
+      reporting settlement date. Positions reported on a 'gross' basis (not netted
+      across accounts). Two reporting dates per month designated by FINRA.
+
+  - id: "finra_4560_short_interest_exceptions"
+    description: "Short interest reporting exceptions"
+    citation: "FINRA Rule 4560(b)"
+    rule_category: "reporting"
+    rule_group: "short_selling"
+    source_quote: >
+      The report shall not include: (1) any sale by any person for an account in
+      which such person has an interest, where such person, at the time of such
+      order, owns the security, if it is reasonably expected that the security will
+      be delivered as soon as possible without undue inconvenience or expense.
+    conditions:
+      applies_to: "broker_dealer"
+    formula:
+      type: "exemption"
+      description: "Exclude sales by owners who intend to deliver and overallotment sales by underwriters/syndicate members"
+    notes: >
+      Two exceptions: (1) sales by persons who own the security and intend to deliver
+      promptly; (2) overallotment sales by underwriters or syndicate members in
+      connection with an offering of securities.
+
+  - id: "finra_6182_trade_reporting_short_indicator"
+    description: "Trade reporting — short sale indicator required on ADF/TRF reports"
+    citation: "FINRA Rule 6182(a)"
+    rule_category: "reporting"
+    rule_group: "short_selling"
+    source_quote: >
+      Members that are required to report transactions in NMS stocks to the ADF
+      or a TRF shall indicate on their transaction reports whether the transaction
+      involves a 'short' sale or 'short exempt' sale.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "nms_stock"
+      reporting_facility_in:
+        - "ADF"
+        - "TRF"
+    formula:
+      type: "reporting_requirement"
+      description: "Indicate 'short' or 'short exempt' on trade reports submitted to ADF or TRF"
+    notes: >
+      Applies to all OTC transactions in NMS stocks reported through FINRA trade
+      reporting facilities. The indicator must match the order marking under
+      Reg SHO Rule 200(g).
+
+  - id: "finra_6624_trade_reporting_otc_short"
+    description: "Trade reporting — short sale indicator for OTC equity securities"
+    citation: "FINRA Rule 6624(a)"
+    rule_category: "reporting"
+    rule_group: "short_selling"
+    source_quote: >
+      Members that are required to report transactions in OTC Equity Securities
+      shall indicate on their transaction reports whether the transaction involves
+      a 'short' sale or 'short exempt' sale.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "otc_equity"
+      reporting_facility: "ORF"
+    formula:
+      type: "reporting_requirement"
+      description: "Indicate 'short' or 'short exempt' on OTC equity trade reports submitted to ORF"
+    notes: >
+      Parallel to Rule 6182 but applies to OTC equity securities (bulletin board,
+      pink sheets) reported through the OTC Reporting Facility.
+
+  - id: "finra_3110_short_sale_supervision"
+    description: "Supervisory procedures — written supervisory procedures for short selling"
+    citation: "FINRA Rule 3110(a)-(b)"
+    rule_category: "supervision"
+    rule_group: "short_selling"
+    source_quote: >
+      Each member shall establish and maintain a system to supervise the activities
+      of each associated person that is reasonably designed to achieve compliance
+      with applicable securities laws and regulations, and with applicable FINRA rules.
+    conditions:
+      applies_to: "broker_dealer"
+      activity_type: "short_selling"
+    formula:
+      type: "compliance_requirement"
+      description: "Written supervisory procedures covering locate compliance, order marking, close-out, and short interest reporting"
+    notes: >
+      Firms must have specific WSPs for: (1) order marking accuracy; (2) locate
+      documentation and retention; (3) Reg SHO close-out compliance; (4) threshold
+      securities monitoring; (5) short interest reporting timeliness; (6) easy-to-borrow
+      list maintenance and currency.
+
+  - id: "finra_4311_carrying_agreement_regsho"
+    description: "Carrying agreements — allocation of Reg SHO responsibilities in prime brokerage"
+    citation: "FINRA Rule 4311(b)"
+    rule_category: "supervision"
+    rule_group: "short_selling"
+    source_quote: >
+      Members entering into carrying agreements must allocate responsibility for
+      compliance with all applicable financial responsibility rules.
+    conditions:
+      applies_to: "broker_dealer"
+      arrangement_type: "carrying_agreement"
+    formula:
+      type: "compliance_requirement"
+      description: "Carrying agreement must specify which party (introducing or carrying) is responsible for locate, close-out, and reporting"
+    notes: >
+      In prime brokerage arrangements, short positions may be executed through one
+      firm and carried by another. The carrying agreement must clearly specify which
+      firm handles: locate obligations, order marking, close-out compliance, short
+      interest reporting, and threshold securities monitoring.

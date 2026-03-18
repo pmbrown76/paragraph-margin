@@ -1,0 +1,1143 @@
+## Option Strategy Margin Recognition Waterfall
+##
+## The order in which option strategies are recognized determines margin
+## efficiency. Neither FINRA 4210 nor Reg T mandates a specific waterfall,
+## but the regulatory standard (per CBOE margin manual) is to pair positions
+## to produce the lowest total margin for the customer. In practice, a greedy
+## algorithm from most-constrained to least-constrained approximates the
+## global optimum.
+##
+## Sources:
+##   - FINRA Rule 4210(f) -- Options
+##   - Reg T 220.12(c) -- defers to SRO rules
+##   - CBOE Margin Manual (2021)
+##   - CBOE Strategy-Based Margin reference
+##   - FINRA Regulatory Notice 12-44
+
+categories:
+
+  - priority: 0
+    name: Protected Index Options
+    rationale: >-
+      Short index options or warrants hedged by index-tracking ETFs, mutual
+      funds, or stock baskets. Per RN 24-08 (effective 2024), these receive
+      the lowest margin of any strategy when protection is at or above 95%
+      of index value.
+    citation: "FINRA 4210(f)(2)(H)(v)(f)"
+    strategies:
+
+      - name: Protected Short Index Call
+        rule_id: "4210_strategy_protected_index_call"
+        section: "4210(f)(2)(H)(v)(f)"
+        finra_category: Protected Option
+        legs:
+          - Short index call option(s) or warrant(s)
+          - Long position in index-tracking ETF, mutual fund, or stock basket
+        constraints: >-
+          Protection value >= 95% of aggregate current index value.
+          Does not apply to leveraged instruments.
+          Must track the same index as the short option/warrant.
+        definition: >-
+          A short index call option or warrant hedged by a long position in
+          a product that tracks the same index. Established by FINRA RN 24-08
+          (SR-FINRA-2023-010), effective March 2024. Margin is reduced when
+          the hedging position provides substantial coverage of the short
+          option obligation.
+        margin: >-
+          Greater of: (a) amount by which aggregate index value exceeds
+          exercise price, or (b) amount protection falls below 100% of
+          aggregate index value
+        formula_detail: |
+          ── FINRA 4210 Maintenance (RN 24-08) ──
+          Aggregate index value: index_level × multiplier × contracts
+          Exercise value: strike × multiplier × contracts
+          ITM amount: max(aggregate_index_value − exercise_value, 0)
+          Protection value: market_value_of_hedge
+          Protection shortfall: max(aggregate_index_value − protection_value, 0)
+
+          FINRA maintenance: max(ITM_amount, protection_shortfall)
+
+          Condition: protection_value >= 0.95 × aggregate_index_value
+
+      - name: Protected Short Index Put
+        rule_id: "4210_strategy_protected_index_put"
+        section: "4210(f)(2)(H)(v)(f)"
+        finra_category: Protected Option
+        legs:
+          - Short index put option(s) or warrant(s)
+          - Short position in index-tracking ETF or equivalent hedge
+        constraints: >-
+          Protection value >= 95% of aggregate current index value.
+          Does not apply to leveraged instruments.
+        definition: >-
+          A short index put option or warrant hedged by a short position in
+          a product that tracks the same index. Same RN 24-08 framework
+          as protected calls.
+        margin: >-
+          Greater of: (a) amount by which exercise price exceeds aggregate
+          index value, or (b) amount protection falls below 100% of
+          aggregate index value
+        formula_detail: |
+          ── FINRA 4210 Maintenance (RN 24-08) ──
+          Aggregate index value: index_level × multiplier × contracts
+          Exercise value: strike × multiplier × contracts
+          ITM amount: max(exercise_value − aggregate_index_value, 0)
+          Protection value: market_value_of_hedge
+          Protection shortfall: max(aggregate_index_value − protection_value, 0)
+
+          FINRA maintenance: max(ITM_amount, protection_shortfall)
+
+          Condition: protection_value >= 0.95 × aggregate_index_value
+
+  - priority: 1
+    name: Conversions & Synthetics
+    rationale: >-
+      Fully hedged stock + option combinations at the same strike.
+      Near-zero net risk produces the lowest margin of any strategy.
+    citation: "FINRA 4210(f)(2)(H)(v)"
+    strategies:
+
+      - name: Conversion
+        rule_id: "4210_strategy_conversion"
+        section: "4210(f)(2)(H)(v)(b)"
+        finra_category: Conversions
+        legs:
+          - Long 100 shares of underlying
+          - Long 1 put (strike K, expiry T)
+          - Short 1 call (strike K, expiry T)
+        constraints: All legs same strike and same expiry
+        definition: >-
+          A risk-neutral position combining long stock with a synthetic short
+          stock (long put + short call at the same strike and expiry). The
+          position is fully hedged -- the long stock delivers into the short
+          call or is protected by the long put at the same exercise price.
+        margin: 10% of the exercise price plus any out-of-the-money amount
+        formula_detail: |
+          ── Reg T Initial (220.12(c)(1)) ──
+          Short equity initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          Aggregate exercise price: strike × multiplier × contracts
+          10% of aggregate exercise: 0.10 × aggregate_exercise_price
+          $250 per contract minimum: $250 × contracts
+          FINRA maintenance: max(10% of aggregate exercise, $250 × contracts)
+
+      - name: Reverse Conversion (Reversal)
+        rule_id: "4210_strategy_reverse_conversion"
+        section: "4210(f)(2)(H)(v)(c)"
+        finra_category: Reverse Conversions
+        legs:
+          - Short 100 shares of underlying
+          - Short 1 put (strike K, expiry T)
+          - Long 1 call (strike K, expiry T)
+        constraints: All legs same strike and same expiry
+        definition: >-
+          Mirror of a conversion. Short stock combined with a synthetic long
+          stock (short put + long call at the same strike and expiry). The
+          short stock is offset by the obligation to buy at the put strike
+          or the right to buy at the call strike.
+        margin: 10% of the exercise price plus any out-of-the-money amount
+        formula_detail: |
+          ── Reg T Initial (220.12(c)(1)) ──
+          Short equity initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          Aggregate exercise price: strike × multiplier × contracts
+          10% of aggregate exercise: 0.10 × aggregate_exercise_price
+          $250 per contract minimum: $250 × contracts
+          FINRA maintenance: max(10% of aggregate exercise, $250 × contracts)
+
+  - priority: 2
+    name: Collars
+    rationale: >-
+      Stock plus a protective put and a covered call at different strikes.
+      Risk is bounded between the two strikes, producing low margin.
+    citation: "FINRA 4210(f)(2)(H)(v)"
+    strategies:
+
+      - name: Collar (Long)
+        rule_id: "4210_strategy_collar"
+        section: "4210(f)(2)(H)(v)(d)"
+        finra_category: Collars
+        legs:
+          - Long 100 shares of underlying
+          - Long 1 put (lower strike A, expiry T)
+          - Short 1 call (higher strike B, expiry T)
+        constraints: Put strike < Call strike, same expiry
+        definition: >-
+          A hedged equity position where a long put protects the downside
+          and a short call finances the hedge by capping the upside.
+          Maximum loss is limited to stock price minus put strike.
+        margin: Downside risk (stock price minus put strike)
+        formula_detail: |
+          ── Reg T Initial ──
+          Reg T initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          Put OTM amount: max(underlying_price − put_strike, 0) × multiplier × contracts
+          FINRA maintenance: put_OTM_amount
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Long 10,000 AAPL @ $127.83
+          Long 100 AAPL Mar 125 Puts @ $6.33
+          Short 100 AAPL Mar 135 Calls @ $4.75
+          Strategy margin: $654,950
+
+  - priority: 3
+    name: Box Spreads
+    rationale: >-
+      Four-leg option-only positions that synthesize a risk-free loan.
+      The combined position has a fixed payoff at expiration regardless
+      of the underlying price.
+    citation: "FINRA 4210(f)(2)(A)(vi)"
+    strategies:
+
+      - name: Long Box Spread
+        rule_id: "4210_strategy_box_spread"
+        section: "4210(f)(2)(A)(vi) / (H)(v)(e)"
+        finra_category: Box Spread
+        legs:
+          - Long 1 call (lower strike A, expiry T)
+          - Short 1 call (higher strike B, expiry T)
+          - Long 1 put (higher strike B, expiry T)
+          - Short 1 put (lower strike A, expiry T)
+        constraints: Two pairs at strikes A and B, all same expiry
+        definition: >-
+          Combines a bull call spread (long call A, short call B) with a
+          bear put spread (long put B, short put A). The position always
+          settles at the strike width (B - A) at expiration, making it
+          equivalent to a risk-free loan.
+        margin: Net debit paid (typically near the present value of strike width)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net cost: total_long_premiums − total_short_premiums
+          FINRA maintenance: max(net_cost, 0)
+
+      - name: Short Box Spread
+        rule_id: "4210_strategy_box_spread"
+        section: "4210(f)(2)(A)(vi) / (H)(v)(e)"
+        finra_category: Box Spread
+        legs:
+          - Short 1 call (lower strike A, expiry T)
+          - Long 1 call (higher strike B, expiry T)
+          - Short 1 put (higher strike B, expiry T)
+          - Long 1 put (lower strike A, expiry T)
+        constraints: Two pairs at strikes A and B, all same expiry
+        definition: >-
+          Reverse of a long box. Combines a bear call spread with a bull
+          put spread. The position always costs the strike width at
+          expiration, so the trader receives a credit upfront.
+        margin: Strike width minus net credit received
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Strike width: (strike_B − strike_A) × multiplier × contracts
+          Net credit: total_short_premiums − total_long_premiums
+          FINRA maintenance: strike_width − net_credit
+
+  - priority: 4
+    name: Covered Positions
+    rationale: >-
+      Stock offsets a single short option. FINRA 4210(f)(2)(F)(ii) states
+      "no margin need be required on any covered put or call." These must
+      be recognized before spreads because they have zero additional option
+      margin, freeing remaining options for spread pairing.
+    citation: "FINRA 4210(f)(2)(F)(ii), 4210(f)(2)(G)"
+    strategies:
+
+      - name: Covered Call (Buy-Write)
+        rule_id: "4210_strategy_covered_call"
+        section: "4210(f)(2)(F)"
+        finra_category: Covered
+        legs:
+          - Long 100 shares of underlying
+          - Short 1 call (any strike, any expiry)
+        constraints: Must hold sufficient shares to deliver if assigned
+        definition: >-
+          Long stock position with a short call written against it. If the
+          call is assigned, the holder delivers the shares at the strike
+          price. No additional option margin is required because the stock
+          serves as collateral for the short call obligation.
+        margin: No option margin; standard equity margin on the stock position
+        formula_detail: |
+          ── Reg T Initial ──
+          Reg T initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          No option margin required (call covered by long stock)
+          FINRA maintenance: 25% × stock_market_value
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Long 10,000 AAPL @ $127.83
+          Short 100 AAPL Mar 130 Calls @ $6.65
+          No option margin (call covered by long stock)
+          Equity margin: 25% × $127.83 × 10,000 = $319,575
+          Strategy margin: $572,650
+
+      - name: Covered Put
+        rule_id: "4210_strategy_covered_put"
+        section: "4210(f)(2)(F)"
+        finra_category: Covered
+        legs:
+          - Short 100 shares of underlying
+          - Short 1 put (any strike, any expiry)
+        constraints: Must hold sufficient short shares
+        definition: >-
+          Short stock position with a short put written against it. If the
+          put is assigned, the holder buys shares at the strike price,
+          closing the short stock. The short stock serves as collateral.
+        margin: No option margin; standard equity margin on the short stock
+        formula_detail: |
+          ── Reg T Initial ──
+          Reg T initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          No option margin required (put covered by short stock)
+          FINRA maintenance: 30% × stock_market_value
+
+      - name: Protective Put (Married Put)
+        rule_id: "4210_strategy_protective_put"
+        section: "4210(f)(2)(H)(v)(a)"
+        finra_category: Long Option Offset
+        legs:
+          - Long 100 shares of underlying
+          - Long 1 put (any strike, any expiry)
+        constraints: Put must be paid in full
+        definition: >-
+          Long stock position with a long put purchased as insurance. The
+          put guarantees the ability to sell at the strike price, limiting
+          downside risk to (stock price - put strike + put premium).
+        margin: Stock margin reduced by the in-the-money amount of the put
+        formula_detail: |
+          ── Reg T Initial ──
+          Reg T initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          Put OTM amount: max(underlying_price − put_strike, 0) × multiplier × contracts
+          Exercise value: put_strike × multiplier × contracts
+          10% floor: 0.10 × exercise_value
+          FINRA maintenance: max(put_OTM_amount, 10%_floor)
+
+      - name: Protective Call
+        rule_id: "4210_strategy_protective_call"
+        section: "4210(f)(2)(H)(v)(a)"
+        finra_category: Long Option Offset
+        legs:
+          - Short 100 shares of underlying
+          - Long 1 call (any strike, any expiry)
+        constraints: Call must be paid in full
+        definition: >-
+          Short stock position with a long call purchased as insurance. The
+          call guarantees the ability to buy at the strike price, capping
+          the loss on a short stock rally.
+        margin: Short stock margin reduced by the in-the-money amount of the call
+        formula_detail: |
+          ── Reg T Initial ──
+          Reg T initial: 50% × stock_market_value
+
+          ── FINRA 4210 Maintenance ──
+          Call OTM amount: max(call_strike − underlying_price, 0) × multiplier × contracts
+          Exercise value: call_strike × multiplier × contracts
+          10% floor: 0.10 × exercise_value
+          FINRA maintenance: max(call_OTM_amount, 10%_floor)
+
+  - priority: 5
+    name: Iron Strategies
+    rationale: >-
+      Four-leg option-only strategies with bounded risk on both sides.
+      Combining two vertical spreads (one call, one put) creates a
+      position where max loss is known at entry.
+    citation: "FINRA 4210(f)(2)(H)"
+    strategies:
+
+      - name: Short Iron Condor
+        rule_id: "4210_strategy_iron_condor"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (strike A)
+          - Short 1 put (strike B)
+          - Short 1 call (strike C)
+          - Long 1 call (strike D)
+        constraints: A < B < C < D, all same expiry
+        definition: >-
+          A credit strategy combining a bull put spread (short put B, long
+          put A) with a bear call spread (short call C, long call D). Profits
+          if the underlying stays between strikes B and C. Max loss is the
+          wider of the two spread widths minus the net credit.
+        margin: Greater of the two vertical spread margins (not the sum)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Put spread width: (short_put_strike − long_put_strike) × multiplier × contracts
+          Put net credit: short_put_premium − long_put_premium
+          Put spread margin: max(put_spread_width − put_net_credit, 0)
+
+          Call spread width: (long_call_strike − short_call_strike) × multiplier × contracts
+          Call net credit: short_call_premium − long_call_premium
+          Call spread margin: max(call_spread_width − call_net_credit, 0)
+
+          FINRA maintenance: max(put_spread_margin, call_spread_margin)
+
+          ── Cboe Worked Example (AAPL @ $127.83, 5-pt wings) ──
+          Long 100 AAPL Mar 120 Puts @ $4.30
+          Short 100 AAPL Mar 125 Puts @ $6.33
+          Short 100 AAPL Mar 130 Calls @ $6.65
+          Long 100 AAPL Mar 135 Calls @ $4.75
+          Put spread width: ($125 − $120) × 100 × 100 = $50,000
+          Call spread width: ($135 − $130) × 100 × 100 = $50,000
+          Strategy margin: $10,700
+
+      - name: Long Iron Condor
+        rule_id: "4210_strategy_long_iron_condor"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short 1 put (strike A)
+          - Long 1 put (strike B)
+          - Long 1 call (strike C)
+          - Short 1 call (strike D)
+        constraints: A < B < C < D, all same expiry
+        definition: >-
+          A debit strategy that is the reverse of a short iron condor.
+          Profits if the underlying moves significantly in either direction
+          beyond the inner strikes.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: total_long_premiums − total_short_premiums
+          FINRA maintenance: max(net_debit, 0)
+
+      - name: Short Iron Butterfly
+        rule_id: "4210_strategy_iron_butterfly"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (strike A)
+          - Short 1 put (strike B)
+          - Short 1 call (strike B)
+          - Long 1 call (strike C)
+        constraints: A < B < C, short strikes equal, all same expiry
+        definition: >-
+          Special case of an iron condor where both short options share the
+          same strike (B). Combines a bull put spread with a bear call spread
+          meeting at the center strike. Maximum profit at expiry if underlying
+          is exactly at strike B.
+        margin: Wider wing width minus net credit received
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Put spread width: (short_put_strike − long_put_strike) × multiplier × contracts
+          Put net credit: short_put_premium − long_put_premium
+          Put spread margin: max(put_spread_width − put_net_credit, 0)
+
+          Call spread width: (long_call_strike − short_call_strike) × multiplier × contracts
+          Call net credit: short_call_premium − long_call_premium
+          Call spread margin: max(call_spread_width − call_net_credit, 0)
+
+          FINRA maintenance: max(put_spread_margin, call_spread_margin)
+
+      - name: Long Iron Butterfly
+        rule_id: "4210_strategy_long_iron_butterfly"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short 1 put (strike A)
+          - Long 1 put (strike B)
+          - Long 1 call (strike B)
+          - Short 1 call (strike C)
+        constraints: A < B < C, long strikes equal, all same expiry
+        definition: >-
+          Reverse of a short iron butterfly. A debit strategy that profits
+          from large moves away from the center strike in either direction.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: total_long_premiums − total_short_premiums
+          FINRA maintenance: max(net_debit, 0)
+
+  - priority: 6
+    name: Butterfly & Condor Spreads
+    rationale: >-
+      Three- or four-leg positions using options of a single type (all calls
+      or all puts) with bounded risk. Distinguished from iron strategies by
+      using only one option type.
+    citation: "FINRA 4210(f)(2)(H)"
+    strategies:
+
+      - name: Long Call Butterfly
+        rule_id: "4210_strategy_long_call_butterfly"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (lower strike A)
+          - Short 2 calls (middle strike B)
+          - Long 1 call (upper strike C)
+        constraints: A < B < C, equidistant strikes (B-A = C-B), all same expiry
+        definition: >-
+          A neutral strategy that profits when the underlying expires near
+          the middle strike. The two short calls are offset by long calls
+          on both wings, bounding the risk to the net debit paid.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: total_long_premiums − total_short_premiums
+          FINRA maintenance: net_debit (max loss)
+
+      - name: Short Call Butterfly
+        rule_id: "4210_strategy_short_call_butterfly"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short 1 call (lower strike A)
+          - Long 2 calls (middle strike B)
+          - Short 1 call (upper strike C)
+        constraints: A < B < C, equidistant strikes, all same expiry
+        definition: >-
+          Reverse of a long call butterfly. A credit strategy that profits
+          when the underlying moves significantly away from the middle strike.
+        margin: Wing width minus net credit received
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Wing width: (high_strike − low_strike) / 2 × multiplier × contracts
+          Net credit: total_short_premiums − total_long_premiums
+          FINRA maintenance: max(wing_width − net_credit, 0)
+
+      - name: Long Put Butterfly
+        rule_id: "4210_strategy_long_put_butterfly"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (lower strike A)
+          - Short 2 puts (middle strike B)
+          - Long 1 put (upper strike C)
+        constraints: A < B < C, equidistant strikes, all same expiry
+        definition: >-
+          Put equivalent of a long call butterfly. Profits when the
+          underlying expires near the middle strike.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: total_long_premiums − total_short_premiums
+          FINRA maintenance: net_debit (max loss)
+
+      - name: Short Put Butterfly
+        rule_id: "4210_strategy_short_put_butterfly"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short 1 put (lower strike A)
+          - Long 2 puts (middle strike B)
+          - Short 1 put (upper strike C)
+        constraints: A < B < C, equidistant strikes, all same expiry
+        definition: >-
+          Reverse of a long put butterfly. Profits from large underlying
+          movement away from the middle strike.
+        margin: Wing width minus net credit received
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Wing width: (high_strike − low_strike) / 2 × multiplier × contracts
+          Net credit: total_short_premiums − total_long_premiums
+          FINRA maintenance: max(wing_width − net_credit, 0)
+
+      - name: Long Call Condor
+        rule_id: "4210_strategy_long_call_condor"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (strike A)
+          - Short 1 call (strike B)
+          - Short 1 call (strike C)
+          - Long 1 call (strike D)
+        constraints: A < B < C < D, all same expiry
+        definition: >-
+          Similar to a butterfly but with the two short strikes at different
+          levels, creating a wider profit zone. Profits when the underlying
+          stays between the two short strikes.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: total_long_premiums − total_short_premiums
+          FINRA maintenance: net_debit (max loss)
+
+      - name: Long Put Condor
+        rule_id: "4210_strategy_long_put_condor"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (strike A)
+          - Short 1 put (strike B)
+          - Short 1 put (strike C)
+          - Long 1 put (strike D)
+        constraints: A < B < C < D, all same expiry
+        definition: >-
+          Put equivalent of a long call condor. Profits when the underlying
+          stays between the two short strikes.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: total_long_premiums − total_short_premiums
+          FINRA maintenance: net_debit (max loss)
+
+  - priority: 7
+    name: Ratio Spreads
+    rationale: >-
+      Unequal leg quantities create partially hedged positions. The matched
+      portion is margined as a spread; the excess short legs are margined
+      as naked options.
+    citation: "FINRA 4210(f)(2)(H)"
+    strategies:
+
+      - name: Ratio Call Spread (Front Spread)
+        rule_id: "4210_strategy_ratio_call_spread"
+        section: "4210(f)(2)(H)(i) + (E)"
+        finra_category: Spread + Naked
+        legs:
+          - Long N calls (lower strike A)
+          - Short M calls (higher strike B), where M > N
+        constraints: Same expiry, M > N (typically 1:2 ratio)
+        definition: >-
+          More calls are sold than purchased. The matched N contracts form a
+          bull call spread; the excess (M-N) short calls are uncovered. Profits
+          if the underlying rises moderately to strike B but not beyond.
+        margin: Spread margin on matched portion + naked margin on (M-N) excess short calls
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Matched contracts: min(long_qty, short_qty)
+          Excess short contracts: short_qty − matched
+
+          Spread portion (matched):
+            Strike width: |short_strike − long_strike| × multiplier × matched
+            Net credit: (short_premium − long_premium) × multiplier × matched
+            Spread margin: max(strike_width − net_credit, 0)
+
+          Naked portion (excess):
+            Naked margin per contract from FINRA 4210(f)(2)(E)
+            Naked margin: naked_per_contract × excess_contracts
+
+          FINRA maintenance: spread_margin + naked_margin
+
+      - name: Ratio Put Spread (Front Spread)
+        rule_id: "4210_strategy_ratio_put_spread"
+        section: "4210(f)(2)(H)(i) + (E)"
+        finra_category: Spread + Naked
+        legs:
+          - Long N puts (higher strike B)
+          - Short M puts (lower strike A), where M > N
+        constraints: Same expiry, M > N
+        definition: >-
+          More puts are sold than purchased. The matched N contracts form a
+          bear put spread; the excess (M-N) short puts are uncovered.
+        margin: Spread margin on matched portion + naked margin on (M-N) excess short puts
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Matched contracts: min(long_qty, short_qty)
+          Excess short contracts: short_qty − matched
+
+          Spread portion (matched):
+            Strike width: |short_strike − long_strike| × multiplier × matched
+            Net credit: (short_premium − long_premium) × multiplier × matched
+            Spread margin: max(strike_width − net_credit, 0)
+
+          Naked portion (excess):
+            Naked margin per contract from FINRA 4210(f)(2)(E)
+            Naked margin: naked_per_contract × excess_contracts
+
+          FINRA maintenance: spread_margin + naked_margin
+
+      - name: Call Backspread (Reverse Ratio)
+        rule_id: "4210_strategy_call_backspread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short N calls (lower strike A)
+          - Long M calls (higher strike B), where M > N
+        constraints: Same expiry, M > N
+        definition: >-
+          More calls are bought than sold. The matched portion forms a bear
+          call spread; excess long calls provide unlimited upside. A bullish
+          volatility strategy.
+        margin: Spread margin on matched portion; excess long calls paid in full
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Matched contracts: min(long_qty, short_qty)
+          Excess long contracts: long_qty − matched
+
+          Spread portion (matched):
+            Strike width: |short_strike − long_strike| × multiplier × matched
+            Net credit: (short_premium − long_premium) × multiplier × matched
+            Spread margin: max(strike_width − net_credit, 0)
+
+          Long portion (excess):
+            Long cost: long_premium × multiplier × excess_contracts
+
+          FINRA maintenance: spread_margin + long_cost
+
+      - name: Put Backspread (Reverse Ratio)
+        rule_id: "4210_strategy_put_backspread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short N puts (higher strike B)
+          - Long M puts (lower strike A), where M > N
+        constraints: Same expiry, M > N
+        definition: >-
+          More puts are bought than sold. The matched portion forms a bull
+          put spread; excess long puts provide downside profit potential.
+          A bearish volatility strategy.
+        margin: Spread margin on matched portion; excess long puts paid in full
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Matched contracts: min(long_qty, short_qty)
+          Excess long contracts: long_qty − matched
+
+          Spread portion (matched):
+            Strike width: |short_strike − long_strike| × multiplier × matched
+            Net credit: (short_premium − long_premium) × multiplier × matched
+            Spread margin: max(strike_width − net_credit, 0)
+
+          Long portion (excess):
+            Long cost: long_premium × multiplier × excess_contracts
+
+          FINRA maintenance: spread_margin + long_cost
+
+  - priority: 8
+    name: Vertical Spreads
+    rationale: >-
+      Two-leg, same-type, same-expiry positions at different strikes.
+      Risk is bounded by the strike width. The most common option spread
+      structure.
+    citation: "FINRA 4210(f)(2)(H)(i)"
+    strategies:
+
+      - name: Bull Call Spread (Debit Call Spread)
+        rule_id: "4210_strategy_bull_call_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (lower strike A)
+          - Short 1 call (higher strike B)
+        constraints: Same expiry, A < B
+        definition: >-
+          A moderately bullish strategy. Buying the lower-strike call and
+          selling the higher-strike call reduces the cost of the long call.
+          Max profit = strike width minus net debit. Max loss = net debit.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Strike width: |short_strike − long_strike| × multiplier × contracts
+          Net debit: (long_premium − short_premium) × multiplier × contracts
+          FINRA maintenance: min(net_debit, strike_width)
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Long 100 AAPL Mar 125 Calls @ $9.05
+          Short 100 AAPL Mar 135 Calls @ $4.75
+          Net debit: ($9.05 − $4.75) × 100 × 100 = $43,000
+          Strategy margin: $43,000
+
+      - name: Bear Call Spread (Credit Call Spread)
+        rule_id: "4210_strategy_bear_call_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short 1 call (lower strike A)
+          - Long 1 call (higher strike B)
+        constraints: Same expiry, A < B
+        definition: >-
+          A moderately bearish to neutral strategy. Selling the lower-strike
+          call and buying the higher-strike call as protection. Max profit =
+          net credit. Max loss = strike width minus net credit.
+        margin: Strike width minus net credit received
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Strike width: |short_strike − long_strike| × multiplier × contracts
+          Net credit: (short_premium − long_premium) × multiplier × contracts
+          FINRA maintenance: max(strike_width − net_credit, 0)
+
+      - name: Bear Put Spread (Debit Put Spread)
+        rule_id: "4210_strategy_bear_put_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (higher strike B)
+          - Short 1 put (lower strike A)
+        constraints: Same expiry, A < B
+        definition: >-
+          A moderately bearish strategy. Buying the higher-strike put and
+          selling the lower-strike put reduces the cost. Max profit = strike
+          width minus net debit. Max loss = net debit.
+        margin: Net debit paid
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Strike width: |short_strike − long_strike| × multiplier × contracts
+          Net debit: (long_premium − short_premium) × multiplier × contracts
+          FINRA maintenance: min(net_debit, strike_width)
+
+      - name: Bull Put Spread (Credit Put Spread)
+        rule_id: "4210_strategy_bull_put_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Short 1 put (higher strike B)
+          - Long 1 put (lower strike A)
+        constraints: Same expiry, A < B
+        definition: >-
+          A moderately bullish to neutral strategy. Selling the higher-strike
+          put and buying the lower-strike put as protection. Max profit =
+          net credit. Max loss = strike width minus net credit.
+        margin: Strike width minus net credit received
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Strike width: |short_strike − long_strike| × multiplier × contracts
+          Net credit: (short_premium − long_premium) × multiplier × contracts
+          FINRA maintenance: max(strike_width − net_credit, 0)
+
+  - priority: 9
+    name: Straddles & Strangles
+    rationale: >-
+      Two-leg positions using one call and one put on the same underlying.
+      Short straddles/strangles carry significant risk as both sides can
+      be assigned; margin is based on the greater of the two naked
+      requirements plus the other side's premium.
+    citation: "FINRA 4210(f)(2)(G)"
+    strategies:
+
+      - name: Long Straddle
+        rule_id: "4210_strategy_long_straddle"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (strike K, expiry T)
+          - Long 1 put (strike K, expiry T)
+        constraints: Same strike, same expiry
+        definition: >-
+          A volatility strategy that profits from large moves in either
+          direction. Both options are purchased, so no margin is required
+          beyond the total premium paid.
+        margin: Total premium paid (both options paid in full)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Long options must be paid in full — no margin requirement
+          Total premium: call_premium + put_premium
+          FINRA maintenance: $0
+
+      - name: Short Straddle
+        rule_id: "4210_strategy_short_straddle"
+        section: "4210(f)(2)(G)(i)"
+        finra_category: Short Put and Call
+        legs:
+          - Short 1 call (strike K, expiry T)
+          - Short 1 put (strike K, expiry T)
+        constraints: Same strike, same expiry
+        definition: >-
+          A neutral strategy that profits when the underlying stays near
+          the strike. Carries significant risk as losses are theoretically
+          unlimited on the call side. Margin is the greater of the two
+          naked requirements plus the premium of the other option.
+        margin: Greater of naked call or naked put margin + the other side's premium
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Naked call margin: per FINRA 4210(f)(2)(E)(i)
+            = call_premium + max(20% × underlying − OTM_amount, 10% × underlying + call_premium)
+          Naked put margin: per FINRA 4210(f)(2)(E)(i)
+            = put_premium + max(20% × underlying − OTM_amount, 10% × strike + put_premium)
+
+          If call_margin ≥ put_margin:
+            FINRA maintenance: naked_call_margin + put_premium
+          Else:
+            FINRA maintenance: naked_put_margin + call_premium
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Short 100 AAPL Mar 130 Calls @ $6.65
+          Short 100 AAPL Mar 130 Puts @ $8.94
+          Naked call margin: $233,960
+          Naked put margin: $255,660
+          Put margin > Call margin
+          Strategy margin: $255,660 (put margin, the greater side)
+
+      - name: Long Strangle
+        rule_id: "4210_strategy_long_strangle"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (lower strike A, expiry T)
+          - Long 1 call (higher strike B, expiry T)
+        constraints: Put strike < Call strike, same expiry
+        definition: >-
+          Similar to a long straddle but with out-of-the-money options,
+          reducing cost but requiring a larger move to profit.
+        margin: Total premium paid (both options paid in full)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Long options must be paid in full — no margin requirement
+          Total premium: call_premium + put_premium
+          FINRA maintenance: $0
+
+      - name: Short Strangle
+        rule_id: "4210_strategy_short_strangle"
+        section: "4210(f)(2)(G)(i)"
+        finra_category: Short Put and Call
+        legs:
+          - Short 1 put (lower strike A, expiry T)
+          - Short 1 call (higher strike B, expiry T)
+        constraints: Put strike < Call strike, same expiry
+        definition: >-
+          Similar to a short straddle but with out-of-the-money options,
+          creating a wider profit zone between the two strikes.
+        margin: Greater of naked call or naked put margin + the other side's premium
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Naked call margin: per FINRA 4210(f)(2)(E)(i)
+            = call_premium + max(20% × underlying − OTM_amount, 10% × underlying + call_premium)
+          Naked put margin: per FINRA 4210(f)(2)(E)(i)
+            = put_premium + max(20% × underlying − OTM_amount, 10% × strike + put_premium)
+
+          If call_margin ≥ put_margin:
+            FINRA maintenance: naked_call_margin + put_premium
+          Else:
+            FINRA maintenance: naked_put_margin + call_premium
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Short 100 AAPL Mar 125 Puts @ $6.33
+          Short 100 AAPL Mar 135 Calls @ $4.75
+          Strategy margin: $227,360
+
+  - priority: 10
+    name: Time Spreads
+    rationale: >-
+      Two-leg positions with different expiration dates. Calendar spreads
+      use the same strike; diagonal spreads use different strikes. The long
+      option must expire on or after the short option for spread treatment.
+    citation: "FINRA 4210(f)(2)(H)"
+    strategies:
+
+      - name: Call Calendar Spread (Horizontal Spread)
+        rule_id: "4210_strategy_calendar_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (strike K, far expiry T2)
+          - Short 1 call (strike K, near expiry T1)
+        constraints: Same strike, T2 >= T1
+        definition: >-
+          Profits from time decay differential -- the near-term short call
+          decays faster than the far-term long call. The long call provides
+          coverage for the short call obligation.
+        margin: Net debit paid (if long expires on or after short)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: long_premium − short_premium
+          FINRA maintenance: net_debit (if long expires on or after short)
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Long 100 AAPL Jun 130 Calls @ $11.15
+          Short 100 AAPL Mar 130 Calls @ $6.65
+          Net debit: ($11.15 − $6.65) × 100 × 100 = $45,000
+          Strategy margin: $45,000
+
+      - name: Put Calendar Spread (Horizontal Spread)
+        rule_id: "4210_strategy_calendar_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (strike K, far expiry T2)
+          - Short 1 put (strike K, near expiry T1)
+        constraints: Same strike, T2 >= T1
+        definition: >-
+          Put equivalent of a call calendar. Profits from faster time decay
+          on the near-term short put relative to the far-term long put.
+        margin: Net debit paid (if long expires on or after short)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: long_premium − short_premium
+          FINRA maintenance: net_debit (if long expires on or after short)
+
+      - name: Call Diagonal Spread
+        rule_id: "4210_strategy_diagonal_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (strike K2, far expiry T2)
+          - Short 1 call (strike K1, near expiry T1)
+        constraints: Different strikes and expiries, T2 >= T1
+        definition: >-
+          Combines elements of a vertical spread (different strikes) and a
+          calendar spread (different expiries). Offers more flexibility in
+          strike selection while maintaining time decay advantage.
+        margin: >-
+          If long expires on or after short: treated as spread (max loss
+          calculation applies). Otherwise both legs margined independently.
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: long_premium − short_premium
+          FINRA maintenance: net_debit (if long expires on or after short)
+
+      - name: Put Diagonal Spread
+        rule_id: "4210_strategy_diagonal_spread"
+        section: "4210(f)(2)(H)(i)"
+        finra_category: Spread
+        legs:
+          - Long 1 put (strike K2, far expiry T2)
+          - Short 1 put (strike K1, near expiry T1)
+        constraints: Different strikes and expiries, T2 >= T1
+        definition: >-
+          Put equivalent of a call diagonal spread.
+        margin: Same as call diagonal
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Net debit: long_premium − short_premium
+          FINRA maintenance: net_debit (if long expires on or after short)
+
+  - priority: 11
+    name: Synthetics
+    rationale: >-
+      Option-only combinations that replicate stock exposure. Margined
+      as if holding the equivalent stock position.
+    citation: "FINRA 4210(f)(2)(H)"
+    strategies:
+
+      - name: Synthetic Long Stock
+        rule_id: "4210_strategy_synthetic_long"
+        section: "4210(f)(2)(D)"
+        finra_category: Spread
+        legs:
+          - Long 1 call (strike K, expiry T)
+          - Short 1 put (strike K, expiry T)
+        constraints: Same strike, same expiry
+        definition: >-
+          Replicates a long stock position using options only. The long call
+          captures upside while the short put creates the obligation to buy
+          at the strike. Profit/loss tracks the underlying 1:1 above/below
+          the strike.
+        margin: Margined as equivalent long stock position
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Notional value: strike × multiplier × contracts
+          Margined as equivalent long stock position
+          FINRA maintenance: 25% × notional_value
+
+      - name: Synthetic Short Stock
+        rule_id: "4210_strategy_synthetic_short"
+        section: "4210(f)(2)(D)"
+        finra_category: Spread
+        legs:
+          - Short 1 call (strike K, expiry T)
+          - Long 1 put (strike K, expiry T)
+        constraints: Same strike, same expiry
+        definition: >-
+          Replicates a short stock position using options only. The short
+          call creates the obligation to deliver at the strike while the
+          long put captures downside profit. Profit/loss tracks the
+          underlying inversely.
+        margin: Margined as equivalent short stock position
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Notional value: strike × multiplier × contracts
+          Margined as equivalent short stock position
+          FINRA maintenance: 30% × notional_value
+
+  - priority: 12
+    name: Naked Options
+    rationale: >-
+      Unmatched positions remaining after all higher-priority strategies
+      have consumed their legs. Short naked options carry the highest
+      margin requirements. Long options must be paid in full.
+    citation: "FINRA 4210(f)(2)(E), 4210(f)(2)(F)(i)"
+    strategies:
+
+      - name: Naked Short Call
+        rule_id: "4210_strategy_naked_call"
+        section: "4210(f)(2)(E)(i)"
+        finra_category: Short Options
+        legs:
+          - Short 1 call, no offsetting position
+        constraints: No stock or long call offsets remaining
+        definition: >-
+          An uncovered short call with theoretically unlimited loss potential.
+          The writer is obligated to deliver shares at the strike price if
+          assigned, regardless of how high the underlying rises.
+        margin: >-
+          20% of underlying market value + premium - out-of-the-money amount
+          (minimum: 10% of underlying + premium for equity options;
+          15% of underlying + premium for broad-based index options)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Premium: call_market_value
+          Base amount: 20% × underlying_price × multiplier × contracts
+          OTM deduction: max(strike − underlying_price, 0) × multiplier × contracts
+          Minimum (equity): 10% × underlying_price × multiplier × contracts + premium
+          Minimum (broad index): 15% × underlying_price × multiplier × contracts + premium
+
+          FINRA maintenance: premium + max(base − OTM_deduction, minimum)
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Short 100 AAPL Mar 130 Calls @ $6.65
+          Premium: $6.65 × 100 × 100 = $66,500
+          Base: 20% × $127.83 × 100 × 100 = $255,660
+          OTM: ($130.00 − $127.83) × 100 × 100 = $21,700
+          Minimum (10%): 10% × $127.83 × 100 × 100 + $66,500 = $194,330
+          Margin: $66,500 + max($255,660 − $21,700, $194,330) = $300,460
+          Strategy margin: $233,960
+
+      - name: Naked Short Put
+        rule_id: "4210_strategy_naked_put"
+        section: "4210(f)(2)(E)(i)"
+        finra_category: Short Options
+        legs:
+          - Short 1 put, no offsetting position
+        constraints: No stock or long put offsets remaining
+        definition: >-
+          An uncovered short put obligating the writer to purchase shares at
+          the strike price if assigned. Maximum loss occurs if the underlying
+          falls to zero.
+        margin: >-
+          20% of underlying market value + premium - out-of-the-money amount
+          (minimum: 10% of strike price + premium for equity options;
+          15% of underlying + premium for broad-based index options)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Premium: put_market_value
+          Base amount: 20% × underlying_price × multiplier × contracts
+          OTM deduction: max(underlying_price − strike, 0) × multiplier × contracts
+          Minimum (equity): 10% × strike_price × multiplier × contracts + premium
+          Minimum (broad index): 15% × underlying_price × multiplier × contracts + premium
+
+          FINRA maintenance: premium + max(base − OTM_deduction, minimum)
+
+          ── Cboe Worked Example (AAPL @ $127.83) ──
+          Short 100 AAPL Mar 130 Puts @ $8.94
+          Premium: $8.94 × 100 × 100 = $89,400
+          Base: 20% × $127.83 × 100 × 100 = $255,660
+          OTM: ($130.00 − $127.83) = ITM, so $0
+          Minimum (10%): 10% × $130.00 × 100 × 100 + $89,400 = $219,400
+          Margin: $89,400 + max($255,660 − $0, $219,400) = $345,060
+          Strategy margin: $255,660
+
+      - name: Long Call (Unmatched)
+        section: "4210(f)(2)(B)"
+        finra_category: Long Options
+        legs:
+          - Long 1 call, no other legs
+        constraints: Not consumed by any higher-priority strategy
+        definition: >-
+          An outright long call position. No margin extension is permitted
+          on long options -- the full premium must be paid at purchase.
+        margin: Must be paid in full (no margin extension)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Long options: must be paid in full
+          No margin extension permitted per 4210(f)(2)(B)
+          FINRA maintenance: $0 (premium already paid)
+
+      - name: Long Put (Unmatched)
+        section: "4210(f)(2)(B)"
+        finra_category: Long Options
+        legs:
+          - Long 1 put, no other legs
+        constraints: Not consumed by any higher-priority strategy
+        definition: >-
+          An outright long put position. No margin extension is permitted
+          on long options -- the full premium must be paid at purchase.
+        margin: Must be paid in full (no margin extension)
+        formula_detail: |
+          ── FINRA 4210 Maintenance ──
+          Long options: must be paid in full
+          No margin extension permitted per 4210(f)(2)(B)
+          FINRA maintenance: $0 (premium already paid)

@@ -1,0 +1,292 @@
+## Regulatory Timeline — Regulation T (12 CFR Part 220)
+##
+## Maps each cited Reg T section to its original rule text, amendments,
+## and current interpretation. Used by the waterfall UI to show lineage
+## when a user clicks a Reg T citation.
+
+sections:
+
+  "220.1":
+    title: Authority, Purpose, and Scope
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        Regulation T is prescribed by the Board of Governors of the Federal
+        Reserve System pursuant to the Securities Exchange Act of 1934. It
+        governs the extension of credit by brokers, dealers, and members
+        of national securities exchanges for the purchase of securities.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Modernization of Regulation T. Simplified structure, removed
+          obsolete provisions, and reorganized into current format.
+    current_interpretation: >-
+      Regulation T establishes the framework for credit extension by
+      broker-dealers to customers for securities transactions. It sets
+      initial margin requirements at the time of trade. Ongoing
+      maintenance margin is governed by SRO rules (FINRA 4210).
+
+  "220.2":
+    title: Definitions
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        Defines key terms including: margin security, exempted security,
+        creditor, customer, margin account, good faith, and current
+        market value.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Updated definitions to reflect modern market structure. Added
+          definitions for security futures and revised margin security
+          criteria.
+    current_interpretation: >-
+      Section 220.2 establishes the vocabulary for all of Regulation T.
+      Key definitions include "margin security" (a security listed on
+      a national exchange or meeting OTC margin criteria), "exempted
+      security" (US government, agency, and municipal obligations),
+      and "current market value" (the most recent closing price).
+
+  "220.4":
+    title: Margin Account Requirements
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        A creditor shall not extend credit to a customer in a margin
+        account unless the creditor obtains margin as required by this
+        part. The initial margin required for purchases is specified
+        in Section 220.12.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Simplified margin account provisions. Consolidated requirements
+          from multiple predecessor sections.
+    current_interpretation: >-
+      Section 220.4 is the master provision requiring initial margin
+      before credit extension. It interacts with 220.12 (the margin
+      schedule) and 220.5 (SMA) to form the complete Reg T margin
+      framework.
+
+  "220.4(c)(2)":
+    title: Non-Marginable Securities
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        Securities that are not margin securities as defined in
+        Section 220.2 may not receive credit extension. The customer
+        must deposit 100% of the purchase price.
+    amendments: []
+    current_interpretation: >-
+      Non-marginable securities require 100% payment. No credit may
+      be extended. This includes OTC bulletin board stocks, penny stocks
+      (under $5 per share), and securities designated by the firm as
+      non-marginable. The list of non-marginable securities is
+      effectively determined by the SRO eligibility criteria.
+
+  "220.5":
+    title: Special Memorandum Account (SMA)
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        A special memorandum account shall be maintained for each margin
+        account to record entries that do not immediately affect the
+        margin required or the equity of the account. The SMA balance
+        represents available credit that may be used for withdrawals
+        or new purchases.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Simplified SMA provisions. Clarified the high-water mark
+          mechanism and interaction with maintenance margin.
+    current_interpretation: >-
+      The SMA is a ledger account that tracks the customer's available
+      Reg T buying power. Key features: (1) SMA increases with cash
+      deposits, security deposits, and market appreciation; (2) SMA
+      decreases with withdrawals and new purchases; (3) SMA operates
+      as a high-water mark — market depreciation does NOT reduce SMA;
+      (4) SMA is checked at the time of any new transaction.
+
+  "220.8":
+    title: Cash Account
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        A creditor may establish a cash account for a customer in which
+        securities are purchased and paid for in full. No credit may
+        be extended in a cash account.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Modernized cash account provisions. Clarified good faith
+          violation rules and free-riding prohibitions.
+    current_interpretation: >-
+      Cash accounts require full payment by settlement date. No margin
+      credit is extended. Free-riding (selling before payment) triggers
+      a 90-day restriction. Certain options strategies (covered calls,
+      European-style spreads) may be held in cash accounts per SRO rules.
+
+  "220.12":
+    title: Margin Schedule (Supplement)
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        The initial margin required for the purchase or short sale of
+        margin securities shall be 50 percent of the current market
+        value. Special provisions apply to options, security futures,
+        and exempted securities.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Reorganized margin schedule. Consolidated option provisions
+          into 220.12(c). Added security futures provisions in 220.12(f).
+    current_interpretation: >-
+      The 50% initial margin rate for equity securities has been in
+      effect since 1974. The margin schedule is technically a supplement
+      to Regulation T that the Federal Reserve Board can adjust, though
+      the 50% rate has not changed in over 50 years.
+
+  "220.12(c)":
+    title: Options
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        No credit shall be extended for the purchase of any put or call
+        option contract. Long options must be paid for in full. For
+        written (short) option contracts, the creditor shall obtain
+        such margin as is required by the applicable self-regulatory
+        organization.
+    amendments:
+      - date: "1998-04-01"
+        source: "63 FR 2806"
+        change: >-
+          Formalized the SRO deferral for written option margin.
+          Clarified that Reg T sets no independent rate for short
+          options — FINRA 4210(f) controls.
+    current_interpretation: >-
+      The SRO deferral in 220.12(c) is the bridge between Reg T and
+      FINRA 4210(f) for option margin. Long options: 100% payment
+      (no credit). Short options: deferred to FINRA 4210(f)(2)(E)
+      for naked options and 4210(f)(2)(F)-(I) for strategy-based
+      margin. LEAPS (>9 months) may receive 75% initial margin.
+      This deferral means Reg T does NOT provide strategy margin —
+      all 43 recognized strategy types are governed by FINRA 4210(f).
+
+  "220.12(f)":
+    title: Security Futures
+    original:
+      date: "2002-08-01"
+      source: "SEC Rule 403(b)(2) / Federal Reserve Board"
+      text: >-
+        The initial margin for security futures products shall be
+        20 percent of the current market value of the security future.
+    amendments: []
+    current_interpretation: >-
+      Security futures require 20% initial margin under both Reg T
+      and SEC Rule 403(b)(2). This rate is harmonized with FINRA
+      4210(c)(7) to ensure consistent margin across the regulatory
+      framework. Single-stock futures and narrow-based index futures
+      are both covered.
+
+  "220.18":
+    title: Exempted Securities
+    original:
+      date: "1974-01-03"
+      source: "Federal Reserve Board — Regulation T Codification"
+      text: >-
+        A creditor may extend credit for the purchase of exempted
+        securities as defined in Section 3(a)(12) of the Securities
+        Exchange Act upon a good-faith deposit. Exempted securities
+        include obligations of the United States, government agencies,
+        and municipal bonds.
+    amendments: []
+    current_interpretation: >-
+      Section 220.18 provides the good-faith framework for exempt
+      securities (Treasuries, agencies, municipals). Reg T does not
+      prescribe a specific percentage — it defers to the creditor's
+      good-faith judgment and in practice to FINRA 4210(e)(2) rates.
+      US Treasuries: 1%-6% by maturity; agencies: 2%-6%; municipals:
+      7%. The good-faith provision predates the specific SRO rates but
+      the SRO rates have become the de facto standard.
+
+cross_cutting_amendments:
+
+  - id: "FRB_1974"
+    date: "1974-01-03"
+    title: "Regulation T Codification"
+    source: "Federal Reserve Board"
+    impact: >-
+      Original codification of Regulation T as 12 CFR Part 220.
+      Established the 50% initial margin rate for equity securities,
+      the SMA framework, cash account rules, and the good-faith
+      provision for exempt securities. All current Reg T sections
+      trace back to this codification.
+
+  - id: "FRB_1998"
+    date: "1998-04-01"
+    title: "Regulation T Modernization (63 FR 2806)"
+    source: "Federal Reserve Board — 63 FR 2806"
+    impact: >-
+      Comprehensive modernization of Regulation T. Simplified structure,
+      removed obsolete provisions (e.g., time-price differential),
+      consolidated option provisions into 220.12(c), and formalized
+      the SRO deferral for written option margin. Most current section
+      numbering dates from this modernization.
+
+  - id: "SEC_403"
+    date: "2002-08-01"
+    title: "Security Futures Margin — SEC Rule 403(b)(2)"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Established 20% margin for security futures products. Created
+      harmonized margin framework between Reg T 220.12(f), SEC Rule
+      403(b)(2), and FINRA 4210(c)(7). Applies to single-stock futures
+      and narrow-based index futures.
+
+  - id: "FRB_T1"
+    date: "2024-05-28"
+    title: "T+1 Settlement Adjustment"
+    source: "Federal Reserve Board"
+    impact: >-
+      Amended 220.4(c)(1) to align the Reg T payment period with the
+      SEC's T+1 settlement cycle (effective May 28, 2024). Reduced the
+      payment period from T+2 to T+1. Customers must now deposit
+      initial margin one business day after trade date.
+
+reference_sources:
+
+  - id: "FRB_REG_T_TEXT"
+    title: "12 CFR Part 220 — Current Full Text"
+    version: "As amended through 2024"
+    role: >-
+      The authoritative text of Regulation T as published in the Code
+      of Federal Regulations. All Reg T margin requirements derive
+      from this source.
+
+  - id: "FRB_1998_FR"
+    title: "63 FR 2806 — Regulation T Modernization"
+    date: "1998-04-01"
+    role: >-
+      Federal Register publication of the 1998 Regulation T modernization.
+      Provides the legislative history and rationale for the current
+      section structure.
+
+  - id: "SEC_RULE_403"
+    title: "SEC Rule 403(b)(2) — Security Futures"
+    date: "2002-08-01"
+    role: >-
+      SEC rule establishing 20% margin for security futures, harmonized
+      with Reg T 220.12(f) and FINRA 4210(c)(7).

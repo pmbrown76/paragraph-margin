@@ -1,0 +1,432 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(g) Interpretations
+  description: Portfolio margin account requirements and procedures
+  effective_date: '2024-01-01'
+  notes: >
+    These interpretations provide guidance on portfolio margin account administration, including real-time
+    monitoring, trades executed away, concentrated positions, auditing, eligibility, deficiency handling,
+    and day trading in PM accounts.
+rules:
+- id: 4210_interp_pm_intraday_monitoring
+  description: Portfolio margin — intra-day monitoring requirements
+  citation: FINRA 4210(g)(1)(C)/01
+  source_quote: >-
+    4210(g)(1)(C)/01 Intra-Day Monitoring Although an introducing broker-dealer may have the capability
+    to monitor accounts intra-day, the clearing broker-dealer is ultimately responsible for monitoring
+    the accounts of the introducing broker-dealer and cannot solely rely on the introducing broker-dealer's
+    intra-day monitoring.
+  conditions:
+    security_type: pm_intraday_monitoring_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(1)(C)/01: members must monitor portfolio margin accounts on an intra-day basis. Real-time
+    or near-real-time monitoring is required for accounts with unlisted derivatives or those with PM minimums
+    below $500,000. Members must have systems to detect maintenance excess deficiencies promptly.
+- id: 4210_interp_pm_trades_away
+  description: Portfolio margin — trades executed away
+  citation: FINRA 4210(g)(1)(C)/02
+  source_quote: >-
+    4210(g)(1)(C)/02 Trades Executed Away In accounts where trades are executed away (e.g., prime brokerage
+    accounts), FINRA members should attempt to obtain real-time drop copies of the trades and analyze
+    such accounts at least once per day, after the markets close. Members should also include in their
+    intraday monitoring process any other real-time account activity, such as cash deposits and withdrawals,
+    deliveries and receipts of securities, check writing activity, debit card activity, etc.
+  conditions:
+    security_type: pm_trades_away_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(1)(C)/02: for PM accounts where trades are executed at other broker-dealers (e.g., prime
+    brokerage arrangements), the carrying member must obtain real-time drop files or other prompt notification
+    of executed trades to maintain accurate intra-day margin computations. If real-time info is not available,
+    higher minimum equity may be required per 4210(b)(4)/034.
+- id: 4210_interp_pm_audit_schedule
+  description: Portfolio margin — schedule of audit
+  citation: FINRA 4210(g)(1)(E)/01
+  source_quote: >-
+    4210(g)(1)(E)/01 Schedule of Audit Members that are approved for portfolio margin must conduct an
+    audit review of all of their portfolio margin policies and procedures within the first year after
+    opening their first portfolio margin account. A member’s regular audit schedule can be resumed thereafter.
+  conditions:
+    security_type: pm_audit_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(1)(E)/01: members must establish and maintain a schedule of audits for their portfolio
+    margin program. Audits must review the adequacy of the risk analysis methodology, the accuracy of
+    margin computations, and compliance with portfolio margin policies.
+- id: 4210_interp_pm_concentrated
+  description: Portfolio margin — concentrated positions
+  citation: FINRA 4210(g)(1)(I)/01
+  source_quote: >-
+    4210(g)(1)(I)/01 Concentrated Positions Members must have procedures that describe the identification
+    and monitoring of concentrated positions within individual portfolio margin accounts and across all
+    portfolio margin accounts, including what department is responsible for the daily monitoring of such
+    positions, what the escalation procedures are, and a detailed description of what additional margin
+    requirements, if any, are applied to concentrated positions.
+  conditions:
+    security_type: pm_concentrated_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(1)(I)/01: members must identify and monitor concentrated positions in portfolio margin
+    accounts. A concentrated position exists when a single security or group of related securities represents
+    a disproportionate share of the account's value. Members must apply appropriate stress tests and may
+    require additional margin for concentration risk.
+- id: 4210_interp_pm_concentrated_house
+  description: Portfolio margin — higher house margin on concentrated positions
+  citation: FINRA 4210(g)(1)(I)/02
+  source_quote: >-
+    4210(g)(1)(I)/02 Higher House Margin on Concentrated Positions Members’ procedures for positions that;
+    represent of a relatively large amount of the overall exposure market within individual portfolio
+    margin accounts; either individually or when aggregated by accounts under common control, represent
+    a relatively large exposure to an issuer’s market capitalization or daily trading volume; should include
+    higher house margin requirements on those positions. represent of a relatively large amount of the
+    overall exposure market within individual portfolio margin accounts; either individually or when aggregated
+    by accounts under common control, represent a relatively large exposure to an issuer’s market capitalization
+    or daily trading volume;
+  conditions:
+    security_type: pm_concentrated_house_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(1)(I)/02: members should require higher house margin on concentrated positions in PM accounts.
+    The additional margin should reflect the increased risk from lack of diversification. Members' risk
+    analysis methodology must address concentration risk and document the basis for house margin requirements.
+- id: 4210_interp_pm_omnibus
+  description: Portfolio margin — omnibus credit accounts
+  citation: FINRA 4210(g)(4)(A)/01
+  source_quote: >
+    An omnibus credit account described in Section 220.7(f) of Regulation T is a margin account for purposes
+    of Rule 4210 and subject to the $2,000 minimum equity requirement, except for an omnibus credit account
+    that is maintained as a portfolio margin account.
+  conditions:
+    security_type: pm_omnibus_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(4)(A)/01: omnibus credit accounts may be maintained as portfolio margin accounts. PM omnibus
+    accounts are subject to minimum equity set by the member's PM Policies per 4210(g)(1), not the standard
+    $2,000 minimum. Specialist/market maker accounts per 4210(e)(5) have no minimum. BD proprietary accounts
+    per 4210(e)(6)(A) may not carry negative equity. JBO arrangements require $1 million minimum liquidating
+    equity.
+- id: 4210_interp_pm_uncovered_option_approval
+  description: Portfolio margin — uncovered option writing approval
+  citation: FINRA 4210(g)(4)(C)/01
+  source_quote: >-
+    4210(g)(4)(C)/01 Uncovered Option Approval To qualify for portfolio margin, the account of a registered
+    broker-dealer or futures commission merchant does not need to be approved for uncovered short options.
+    In addition, customers that cannot trade options because they are not legally permitted to do so need
+    not be approved for uncovered options. However, FINRA expects members to continue to exercise due
+    diligence when reviewing these customers to ensure that they possess a level of trading experience
+    and sophistication equivalent to that required for uncovered short options approval. Members that
+    have not documented their procedures for approving these customers in their portfolio margin applications
+    must amend their application to document those procedures before opening portfolio margin accounts
+    for customers who have not been approved for uncovered options.
+  conditions:
+    security_type: pm_uncovered_approval_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(4)(C)/01: PM accounts that write uncovered options must be approved for uncovered option
+    writing per FINRA Rule 2360. The PM approval does not substitute for the separate uncovered option
+    suitability and approval requirements.
+- id: 4210_interp_pm_minimum_equity
+  description: Portfolio margin — minimum equity per customer type
+  citation: FINRA 4210(g)(4)(C)/02
+  source_quote: >-
+    4210(g)(4)(C)/02 Minimum Equity Customers may not use collateral held at a foreign affiliate for minimum
+    equity purposes. A customer can only use collateral held at an affiliate that is governed by the SEC
+    or the CFTC. For example, an account held at a bank affiliate cannot be considered for the purposes
+    of meeting the minimum equity requirement. 4210(g)(6)(B)(i)a./01 Non-Marginable Equity Security —
+    (Rescinded) 4210(g)(6)(B)(i)a./02 Equity Security — (Rescinded) 4210(g)(6)(B)(i)d./01 Unlisted Derivative
+    An unlisted derivative that has a non-margin equity security as its underlier is not eligible for
+    portfolio margin. 4210(g)(6)(B)(i)e./01 Margin Eligible Warrants Exchange-traded warrants (and other
+    warrants that qualify as margin equity securities) are eligible for portfolio margin if they are included
+    in an approved theoretical pricing model. Warrants that qualify as margin equity securities, but are
+    not included in an approved theoretical pricing model, may be carried in a portfolio margin account
+    provided that the member applies the applicable strategy-based margin requirements of Rule 4210 to
+    those positions.
+  conditions:
+    security_type: pm_min_equity_customer_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(4)(C)/02: PM minimum equity varies by customer type and the member's monitoring capabilities.
+    See 4210(b)(4)/034 for the tiered minimum equity schedule ($100,000 to $5 million depending on monitoring
+    capability and position types).
+- id: 4210_interp_pm_convertible_bonds
+  description: Portfolio margin — convertible bond treatment
+  citation: FINRA 4210(g)(8)(E)/01
+  source_quote: >-
+    4210(g)(8)(E)/01 Convertible Bonds Debt securities convertible into margin equity securities are margin
+    equity securities and therefore portfolio margin eligible products. To compute the margin requirement
+    on a portfolio that includes such debt securities: Calculate the theoretical gains and losses and
+    offsets as described above on the assumption that the debt securities have been converted into the
+    margin equity securities; and Increase the margin requirement by 15% of the excess (if any) of the
+    value of the convertible debt securities (plus any payment that would be required to effect the conversion),
+    over the value of the margin equity securities into which the securities are convertible.
+  conditions:
+    security_type: pm_convertible_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(8)(E)/01: convertible bonds in PM accounts may be included in the same product group as
+    the underlying equity for netting purposes. The theoretical pricing model must account for the conversion
+    feature, credit spread, and interest rate sensitivity of the bond.
+- id: 4210_interp_pm_baskets
+  description: Portfolio margin — basket treatment
+  citation: FINRA 4210(g)(8)(E)/02
+  source_quote: >-
+    4210(g)(8)(E)/02 Baskets The margin requirement for baskets will be equal to the haircuts required
+    in SEA Rule 15c3-1, Appendix A, provided the basket meets the definition of a qualified stock basket,
+    pursuant to SEA Rule 15c3-1a(b)(1)(i)(D) and the capitalization requirements are met.
+  conditions:
+    security_type: pm_baskets_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(8)(E)/02: index baskets (portfolios of securities that replicate an index) may be treated
+    as a single position for PM computation purposes. The basket must closely track the index for the
+    netting benefit to apply.
+- id: 4210_interp_pm_deficiency
+  description: Portfolio margin — satisfaction of deficiency
+  citation: FINRA 4210(g)(10)(A)/01
+  source_quote: >-
+    4210(g)(10)(A)/01 Satisfaction of Portfolio Margin Deficiency If a customer has a strategy-based margin
+    account and a portfolio margin account with the same legal name and tax ID, collateral does not have
+    to be transferred from the strategy-based margin account to satisfy a margin deficiency in the portfolio
+    margin account. As long as the strategy-based margin account has sufficient maintenance excess, the
+    margin deficiency in the portfolio margin account can be considered satisfied. However, the Special
+    Memorandum Account (SMA) in the strategy-based margin account must be reduced by the amount of the
+    portfolio margin deficiency in order to prevent a customer from utilizing the available excess for
+    additional transactions in the strategy-based margin account. In the event a customer has an account
+    directly with a clearing and carrying member, and another account with an introducing broker-dealer
+    that clears through the same carrying and clearing member, then funds and/or securities must be transferred
+    between the two accounts.
+  conditions:
+    security_type: pm_deficiency_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(A)/01: portfolio margin deficiencies must be met within the time frames established
+    by the member's PM Policies. Members must issue margin calls promptly when a PM deficiency is detected.
+    The deficiency is the amount by which the account's theoretical loss exceeds the account's net liquidating
+    equity.
+- id: 4210_interp_pm_house_deficiency
+  description: Portfolio margin — house margin deficiency
+  citation: FINRA 4210(g)(10)(A)/02
+  source_quote: >-
+    4210(g)(10)(A)/02 House Margin Deficiency The “margin required” for purposes of Rule 4210(g)(10) is
+    the margin required by Rule 4210(g)(7) (including the margin required by Rule 4210(g)(7)(D) or (E)
+    for positions in portfolio margin accounts that are not portfolio margin eligible products). A portfolio
+    margin account that contains the equity required by Rule 4210(g)(7) does not have a portfolio margin
+    deficiency, even if the account has less equity than the “house margin” required by the member's portfolio
+    margin procedures. Members, however, must maintain and follow procedures for the effective enforcement
+    of their house margin requirements.
+  conditions:
+    security_type: pm_house_deficiency_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(A)/02: members may set house margin requirements above the minimum PM requirements.
+    House margin deficiencies must also be addressed, though the member has discretion in the time frame
+    and method of resolution.
+- id: 4210_interp_pm_capital_charge
+  description: Portfolio margin — capital charge timing
+  citation: FINRA 4210(g)(10)(B)/01
+  source_quote: >-
+    4210(g)(10)(B)/01 Capital Charge Timing A capital charge required by Rule 4210(g)(10)(B) shall be
+    taken as of the close of business on the next business day after the portfolio margin deficiency arises.
+    For example, if a portfolio margin deficiency arises on a Monday and is not eliminated by the close
+    of business on the next business day (Tuesday), then a capital charge for such deficiency would be
+    taken as of the close of business on Tuesday.
+  conditions:
+    security_type: pm_capital_charge_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(B)/01: members are not permitted to deduct PM deficiency amounts from net capital
+    immediately. The member must take a net capital charge if the PM deficiency is not resolved within
+    the established time frame.
+- id: 4210_interp_pm_additional_time
+  description: Portfolio margin — requests for additional time
+  citation: FINRA 4210(g)(10)(D)/01
+  source_quote: >-
+    4210(g)(10)(D)/01 Requests for Additional Time FINRA will only grant additional time upon written
+    request filed in the Regulatory Extension (REX) system under reason code 069, which must fully explain
+    the reason for the request. Where appropriate, the request should also explain how and when the deficiency
+    is expected to be resolved and how the member will be adequately protected against credit and market
+    risk until the deficiency is resolved. In general, FINRA will only consider those situations involving
+    concentrations of a security which is difficult to liquidate, large volatile positions that would
+    affect the market or price of the security and other similar conditions as the basis for approving
+    a request for additional time. See Extension Reason Codes for guidance.
+  conditions:
+    security_type: pm_additional_time_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(D)/01: members may request additional time from FINRA to resolve PM deficiencies in
+    extraordinary circumstances.
+- id: 4210_interp_pm_adverse_market
+  description: Portfolio margin — adverse market movements
+  citation: FINRA 4210(g)(10)(E)/01
+  source_quote: >-
+    4210(g)(10)(E)/01 Adverse Market Movements Members that cannot distinguish between adverse market
+    movements and new transactions should take a conservative view and consider all margin deficiencies
+    as resulting from the account holder's trading activities.
+  conditions:
+    security_type: pm_adverse_market_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(E)/01: during adverse market movements, members must be especially vigilant in monitoring
+    PM accounts. Additional intra-day margin calls may be required. Members should stress test PM accounts
+    more frequently during volatile periods.
+- id: 4210_interp_pm_practice_liquidating
+  description: Portfolio margin — practice of liquidating
+  citation: FINRA 4210(g)(10)(E)/02
+  source_quote: >-
+    4210(g)(10)(E)/02 Practice of Liquidating If a customer has three liquidations within a rolling 12-month
+    period, FINRA expects the member to restrict the account to funds on hand for 90 calendar days. However,
+    if upon internal review the member does not restrict an account after the third liquidation, then
+    a waiver of the restriction must be granted, in writing, by two officers of the member and maintained
+    for audit purposes. Members should also be aware that granting waivers as a practice may be regarded
+    as a circumvention of FINRA rules.
+  conditions:
+    security_type: pm_practice_liq_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(E)/02: members may not permit PM customers to make a practice of meeting margin calls
+    by liquidating positions. Repeated liquidations to meet PM margin calls should result in account restrictions
+    or additional margin requirements.
+- id: 4210_interp_pm_intraday_liquidation
+  description: Portfolio margin — intra-day liquidation
+  citation: FINRA 4210(g)(10)(E)/03
+  source_quote: >-
+    4210(g)(10)(E)/03 Intra-Day Liquidation If a member captures a margin deficiency intra-day, and the
+    customer executes a risk-reducing transaction and eliminates the deficiency intra- day, the risk-reducing
+    transaction is not considered a liquidation.
+  conditions:
+    security_type: pm_intraday_liq_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(10)(E)/03: members must have the ability to liquidate PM positions intra-day when the
+    account's maintenance excess falls below zero and the customer cannot meet the margin call promptly.
+    Members should not wait until end-of-day to address significant PM deficiencies.
+- id: 4210_interp_pm_requirements
+  description: Portfolio margin — computation requirements
+  citation: FINRA 4210(g)(12)(A)/01
+  source_quote: >-
+    4210(g)(12)(A)/01 Portfolio Margin Requirements The “portfolio margin requirements” aggregated for
+    purposes of Rule 4210(g)(12) are the amounts of margin required by Rule 4210(g)(7)(A) or 4210(g)(7)(A)(B)
+    on portfolio margin eligible products (including portfolio margin eligible products, such as foreign
+    margin stock, that are not included in the OCC’s TIMS files) in the member’s portfolio margin accounts.
+    They do not include the margin requirements under Rule 4210(g)(7)(D) or 4210(g)(7)(D)(E) for positions
+    in portfolio margin accounts that are not portfolio margin eligible products, nor do they include
+    any “house” margin requirements in excess of the margin requirements under Rule 4210(g)(7).
+  conditions:
+    security_type: pm_computation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(12)(A)/01: portfolio margin requirements are computed using a theoretical pricing model
+    (e.g., OCC TIMS) that evaluates the maximum theoretical loss across a range of underlying price movements
+    (typically +/- 15% for broad-based indices, +/- 10% for other products). Cross-product netting is
+    permitted within the same product group. Concentration charges apply.
+- id: 4210_interp_pm_equity_5m
+  description: Portfolio margin — equity less than $5 million restrictions
+  citation: FINRA 4210(g)(13)/01
+  source_quote: >-
+    4210(g)(13)/01 Equity Less than $5 Million If a portfolio margin account has less than $5 million
+    in equity, day trading can still occur, provided the member has the ability to apply the appropriate
+    day trading requirements promulgated under Rule 4210(f)(8). If the securities subject to day trading
+    are a part of a hedge strategy, then FINRA does not consider the collective transactions as day trades
+    and therefore it would not subject the customer to the day trading requirements. A "hedge strategy"
+    for this purpose means a transaction or series of transactions that reduce or offset a material portion
+    of the risk in a portfolio.
+  conditions:
+    security_type: pm_equity_5m_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(13)/01: PM accounts with equity less than $5 million may not maintain positions in unlisted
+    derivatives unless the account is for a registered broker-dealer or member of a national futures exchange
+    per 4210(g)(4)(C). Accounts below $5 million are limited to listed options, index options, and equity
+    positions.
+- id: 4210_interp_pm_day_trading
+  description: Portfolio margin — day trading provisions
+  citation: FINRA 4210(g)(13)/02
+  source_quote: >-
+    4210(g)(13)/02 Day Trading For equity securities, the day trading requirement is 15 percent of the
+    market value, calculated using the same methodology as in strategy-based margin accounts. The option
+    day trade requirement for non-pattern day traders is 100 percent of the premium on the long or short
+    transaction, whichever occurred first. For pattern day traders, if the member can substantiate that
+    the purchase transaction took place prior to the sell transaction, then the day trade requirement
+    is also 100 percent of the premium of the purchase transaction. Otherwise, members should apply the
+    highest TIMS valuation point that is applicable to the short option involved in the day trade as the
+    requirement. The highest valuation point shall be 8 percent of the underlying market value for high
+    capitalization, broad-based market index options, 10 percent of the underlying market value for non-high
+    capitalization, broad-based market index options, and 15 percent for equity options and narrow-based
+    index options. However, the requirement shall not be less than the $37.50 per standard contract minimum.
+    In addition, when a portfolio margin customer, who is a pattern day trader, incurs a day trading call,
+    its account is subject to the limitations imposed by Rule 4210(f)(8)(B)(iv)c.
+  conditions:
+    security_type: pm_day_trading_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(13)/02: day trading in PM accounts is permitted but subject to either (a) the standard
+    PDT rules of 4210(f)(8)(B) with $25,000 minimum equity, or (b) the PM day trading exemption with $5
+    million minimum equity per 4210(b)(4)/034. Hedge strategy trades (as defined in 4210(g)(13)) are excluded
+    from day trade counting in PM accounts.
+- id: 4210_interp_pm_intraday_maintenance
+  description: Portfolio margin — intra-day maintenance excess
+  citation: FINRA 4210(g)(13)/03
+  source_quote: >-
+    4210(g)(13)/03 Intra-Day Maintenance Excess A member can use intraday maintenance excess to calculate
+    day trading requirements provided the member has the intraday capability to re-price and recalculate
+    the account to determine if there is sufficient excess equity in the account at the time an order
+    is received, and to automatically block the order if there is insufficient excess equity. • • • Supplementary
+    Material: -------------- .01 The following tables are given to illustrate the method of computing
+    the number of elapsed days in conformity with paragraph (f)(2)(A)(ii): .02 Guaranteed. For purposes
+    of paragraph (e)(2)(H) of this Rule, a member is deemed to have “guaranteed” a transaction if such
+    member has become liable for the performance of either party’s obligations under such transaction.
+    .03 Risk Limit Determination. For purposes of any risk limit determination pursuant to paragraphs
+    (e)(2)(F), (e)(2)(G) or (e)(2)(H) of this Rule: .04 Reserved. .05 Reserved. .06 Good Faith Account.
+    A Regulation T good faith account, other than a non-securities account, is a margin account for purposes
+    of Rule 4210.
+  conditions:
+    security_type: pm_intraday_excess_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(g)(13)/03: intra-day maintenance excess for PM accounts is computed using real-time position
+    and pricing data. The maintenance excess equals the account's net liquidating equity minus the PM
+    margin requirement. Day-trading buying power in PM accounts is based on this intra-day maintenance
+    excess.

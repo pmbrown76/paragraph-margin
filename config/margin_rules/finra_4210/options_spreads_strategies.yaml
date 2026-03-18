@@ -1,0 +1,416 @@
+# FINRA Rule 4210(f)(2)(H) — Option Spreads, Combinations & Strategy Margin
+# =========================================================================
+# Defines margin requirements for multi-leg option strategies including
+# spreads, conversions, reverse conversions, collars, box spreads, and
+# protected options.
+#
+# These rules are evaluated by the strategy margin calculator
+# (src/engine/finra_4210/strategy_margin.py) which builds strategy-specific
+# context and evaluates the formula against it.
+
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(f)(2)(H)"
+  description: "Margin requirements for option spreads, combinations, and strategy positions"
+  effective_date: "2024-01-01"
+
+rules:
+  # --- (H)(i): Spread margin — lesser of naked or max loss ---
+
+  - id: "4210_f_2_H_i"
+    description: "Spread margin: lesser of naked margin or maximum potential loss"
+    citation: "FINRA 4210(f)(2)(H)(i)"
+    source_quote: >-
+      (H)(i) For spreads as defined in paragraph (f)(2)(A)(xxxii) of this Rule, the margin required on the
+      "short" options shall be the lesser of:
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "spread"
+    formula:
+      type: "spread_max_loss"
+      description: "Spread margin = lesser of (a) naked margin per (f)(2)(E) or (b) maximum potential loss"
+
+  # --- Debit spreads (bull call, bear put, long straddle, long strangle, butterflies, calendar, diagonal) ---
+
+  - id: "4210_strategy_debit_spread"
+    description: "Debit spread/strategy — margin = net debit paid (maximum loss)"
+    citation: "FINRA 4210(f)(2)(H)(i)(b.)"
+    source_quote: >-
+      b. The maximum potential loss. The maximum potential loss is determined by computing the intrinsic
+      value of the options at price points for the underlying security or instrument that are set to correspond
+      to every exercise price present in the spread. The intrinsic values are netted at each price point.
+      The maximum potential loss is the greatest loss, if any. "Long" options must be paid for in full.
+      The proceeds of the "short" options may be applied towards the cost of the "long" options and/or any
+      margin requirement.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "debit_spread"
+    formula:
+      type: "debit_spread"
+      description: "Margin = net debit paid (max loss on debit spread)"
+
+  # --- Credit spreads (bear call, bull put) ---
+
+  - id: "4210_strategy_credit_spread"
+    description: "Credit spread — margin = strike width minus net credit"
+    citation: "FINRA 4210(f)(2)(H)(i)"
+    source_quote: >-
+      (H)(i) For spreads as defined in paragraph (f)(2)(A)(xxxii) of this Rule, the margin required on the
+      "short" options shall be the lesser of:
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "credit_spread"
+    formula:
+      type: "credit_spread"
+      description: "Margin = (strike width x multiplier x contracts) - net credit received"
+
+  # --- Short straddle / short strangle ---
+
+  - id: "4210_strategy_short_vol"
+    description: "Short straddle/strangle — max(naked call, naked put) + other premium"
+    citation: "FINRA 4210(f)(2)(E)(i)"
+    source_quote: >-
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "short_vol"
+    formula:
+      type: "short_straddle_strangle"
+      description: "Margin = max(naked call margin, naked put margin) + other side premium"
+
+  # --- Iron condor / iron butterfly ---
+
+  - id: "4210_strategy_iron_condor"
+    description: "Iron condor/butterfly — max wing width minus net credit"
+    citation: "FINRA 4210(f)(2)(H)(i)"
+    source_quote: >-
+      (H)(i) For spreads as defined in paragraph (f)(2)(A)(xxxii) of this Rule, the margin required on the
+      "short" options shall be the lesser of:
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "iron_condor"
+    formula:
+      type: "iron_condor"
+      description: "Margin = max(put spread width, call spread width) x multiplier x contracts - net credit"
+
+  # --- (H)(v)(a): Protective put/call — long option offset ---
+
+  - id: "4210_f_2_H_v_a"
+    description: "Long option/warrant offset — 10% exercise price + OTM amount"
+    citation: "FINRA 4210(f)(2)(H)(v)(a.)"
+    source_quote: >-
+      a. "Long" Option or Warrant Offset. When a component underlying an option or warrant is carried "long"
+      ("short") in the same account as a "long" put (call) or warrant specifying equivalent units of the
+      underlying component, the minimum amount of margin that must be maintained on the underlying component
+      is 10 percent of the aggregate option/warrant exercise price plus the "out-of-the-money" amount, not
+      to exceed the minimum maintenance required pursuant to paragraph (c) of this Rule.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "protective"
+    formula:
+      type: "protective_equity"
+      rate: 0.25
+      floor_rate: 0.10
+      description: "Margin = max(equity_rate x stock MV - intrinsic, 10% x strike x contracts)"
+
+  # --- Covered call ---
+
+  - id: "4210_strategy_covered_call"
+    description: "Covered call — equity margin on long stock only"
+    citation: "FINRA 4210(c)(1)"
+    source_quote: >-
+      25 percent of the current market value of all margin securities, as
+      defined in Section 220.2 of Regulation T, except for security futures
+      contracts, "long" in the account.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "covered_call"
+    formula:
+      type: "covered_equity"
+      rate: 0.25
+      description: "Covered call: call is covered by long stock; 25% maintenance on stock MV"
+
+  # --- Covered put ---
+
+  - id: "4210_strategy_covered_put"
+    description: "Covered put — equity margin on short stock only"
+    citation: "FINRA 4210(c)(1)"
+    source_quote: >-
+      30 percent of the current market value of all securities "short"
+      in the account.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "covered_put"
+    formula:
+      type: "covered_equity"
+      rate: 0.30
+      description: "Covered put: put is covered by short stock; 30% maintenance on stock MV"
+
+  # --- Collar (treated as protective put per (H)(v)(d)) ---
+
+  - id: "4210_f_2_H_v_d"
+    description: "Collar — lesser of 10% put exercise + OTM or 25% call exercise"
+    citation: "FINRA 4210(f)(2)(H)(v)(d.)"
+    source_quote: >-
+      d. Collars. When a call or warrant carried in a "short" position is covered by a "long" position in
+      equivalent units of the underlying component and there is carried in the same account a "long" put
+      or warrant specifying equivalent units of the same underlying component and having a lower exercise
+      price and the same expiration date as the "short" call/warrant, the minimum amount of margin that
+      must be maintained for the underlying component shall be the lesser of 10 percent of the aggregate
+      exercise price of the put plus the put "out-of-the-money" amount or 25 percent of the call aggregate
+      exercise price.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "collar"
+    formula:
+      type: "protective_equity"
+      rate: 0.25
+      floor_rate: 0.10
+      description: "Collar: treated as protective put; margin = max(25% stock MV - intrinsic, 10% strike)"
+
+  # --- (H)(v)(b): Conversion ---
+
+  - id: "4210_f_2_H_v_b"
+    description: "Conversion — 10% of aggregate exercise price"
+    citation: "FINRA 4210(f)(2)(H)(v)(b.)"
+    source_quote: >-
+      b. Conversions. When a call or warrant carried in a "short" position is covered by a "long" position
+      in equivalent units of the underlying component and there is carried in the same account a "long"
+      put or warrant specifying equivalent units of the same underlying component and having the same exercise
+      price and expiration date as the short call or warrant, the minimum amount of margin that must be
+      maintained for the underlying component shall be 10 percent of the aggregate exercise price.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "conversion"
+    formula:
+      type: "conversion"
+      rate: 0.10
+      per_contract_minimum: 250
+      description: "Conversion margin = max(10% x strike x multiplier x contracts, $250 x contracts)"
+
+  # --- (H)(v)(c): Reverse conversion ---
+
+  - id: "4210_f_2_H_v_c"
+    description: "Reverse conversion — 10% exercise price + ITM amount"
+    citation: "FINRA 4210(f)(2)(H)(v)(c.)"
+    source_quote: >-
+      c. Reverse Conversions. When a put or warrant carried in a "short" position is covered by a "short"
+      position in equivalent units of the underlying component and there is carried in the same account
+      a "long" call or warrant specifying equivalent units of the same underlying component and having the
+      same exercise price and expiration date as the "short" put or warrant, the minimum amount of margin
+      that must be maintained for the underlying component shall be 10 percent of the aggregate exercise
+      price plus the amount by which the exercise price of the put exceeds the current market value of the
+      underlying, if any.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "reverse_conversion"
+    formula:
+      type: "conversion"
+      rate: 0.10
+      per_contract_minimum: 250
+      description: "Reverse conversion margin = max(10% x strike x multiplier x contracts, $250 x contracts)"
+
+  # ======================================================================
+  # Reference rules (informational — text captured for cross-referencing)
+  # ======================================================================
+
+  - id: "4210_f_2_H_i_a"
+    description: "Spread margin component (a): naked option margin per (f)(2)(E)"
+    citation: "FINRA 4210(f)(2)(H)(i)(a.)"
+    source_quote: "a. The margin required pursuant to paragraph (f)(2)(E); or"
+    produces_calculation: false
+    calculation_status: "informational"
+    conditions:
+      security_type: "option"
+      strategy_type: "spread"
+    formula:
+      type: "informational"
+      description: "Naked option margin as computed under (f)(2)(E)"
+
+  - id: "4210_f_2_H_ii"
+    description: "Currency/index warrant vs listed call option spread"
+    citation: "FINRA 4210(f)(2)(H)(ii)"
+    source_quote: >-
+      (ii) Where a call warrant issued on an underlying currency, index currency group or index stock group
+      is carried "long" for a customer's account and the account is also "short" a listed call option, or
+      index stock group, which "short" call position(s) expire on or before the date of expiration of the
+      "long" call position and specify the same number of units of the same underlying currency or the same
+      index multiplier for the same index currency group or index stock group, as the case may be, the margin
+      required on the "short" call(s) shall be the requirement pursuant to paragraph (f)(2)(H)(i) above.
+    produces_calculation: false
+    calculation_status: "informational"
+    conditions:
+      security_type: "option"
+      strategy_type: "warrant_spread"
+    formula:
+      type: "informational"
+      description: "Margin per (f)(2)(H)(i) spread rules when long warrant offsets short call"
+
+  - id: "4210_f_2_H_iii"
+    description: "GNMA option spread margin"
+    citation: "FINRA 4210(f)(2)(H)(iii)"
+    source_quote: >-
+      (iii)a. For spreads as defined in paragraph (f)(2)(A)(xxxii) of this Rule, that are written on the
+      same GNMA obligation in the principal amount of $100,000, the margin required on the "short" options
+      shall be the lower of:
+    produces_calculation: false
+    calculation_status: "informational"
+    conditions:
+      security_type: "option"
+      underlying_type: "gnma"
+    formula:
+      type: "informational"
+      description: "GNMA spread margin = lower of naked margin or max loss x multiplier factor"
+
+  - id: "4210_f_2_H_iv"
+    description: "OTC option spread — same carrying broker-dealer requirement"
+    citation: "FINRA 4210(f)(2)(H)(iv)"
+    source_quote: >-
+      (iv) The "long" and "short" OTC option contracts that comprise a spread as defined in paragraph (f)(2)(A)(xxxii)
+      must be issued and guaranteed by the same carrying broker-dealer and the carrying broker-dealer must
+      also be a FINRA member. If the "long" and "short" OTC option contracts are not issued and guaranteed
+      by the same carrying broker-dealer, or if the carrying broker-dealer is not a FINRA member, then the
+      "short" option contracts must be margined separately pursuant to paragraph (f)(2)(E)(iii) or (E)(iv)
+      above.
+    produces_calculation: false
+    calculation_status: "informational"
+    conditions:
+      security_type: "option"
+      strategy_type: "otc_spread"
+    formula:
+      type: "informational"
+      description: "OTC spread legs must be issued by same FINRA-member BD; otherwise margin short naked"
+
+  - id: "4210_f_2_H_v"
+    description: "Option/warrant + underlying component strategy margin"
+    citation: "FINRA 4210(f)(2)(H)(v)"
+    source_quote: >-
+      (v) The following requirements set forth the minimum amount of margin that must be maintained in margin
+      accounts of customers having positions in components underlying options, and stock index warrants,
+      when such components are held in conjunction with certain positions in the overlying option or warrant.
+      The option or warrant must be listed or OTC (as defined in this Rule). In the case of a call or warrant
+      carried in a short position, a related long position in the underlying component shall be valued at
+      no more than the call/warrant exercise price for margin equity purposes.
+    produces_calculation: false
+    calculation_status: "informational"
+    conditions:
+      security_type: "option"
+      strategy_type: "component_strategy"
+    formula:
+      type: "informational"
+      description: "Minimum margin for underlying held with overlying option/warrant positions"
+
+  - id: "4210_f_2_H_v_e"
+    description: "Long box spread (European) — net cost of the box"
+    citation: "FINRA 4210(f)(2)(H)(v)(e.)"
+    source_quote: >-
+      e. "Long" Box Spread in European-Style Options. With respect to a "long" box spread as defined in
+      paragraph (f)(2)(A) of this Rule, in which all component options have a European-style exercise provision
+      and are listed or OTC (as defined in this Rule), margin must be deposited and maintained equal to
+      at least 50 percent of the aggregate difference in the exercise prices. The net proceeds from the
+      sale of "short" option components may be applied to the requirement. For margin purposes, the "long"
+      box spread may be valued at an amount not to exceed 100 percent of the aggregate difference in the
+      exercise prices.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "box_spread"
+    formula:
+      type: "box_spread"
+      description: "Box spread margin = net cost of the box"
+
+  # --- Ratio spreads and backspreads ---
+
+  - id: "4210_strategy_ratio_spread"
+    description: "Ratio spread — spread margin on matched + naked on excess"
+    citation: "FINRA 4210(f)(2)(H)(i)"
+    source_quote: >-
+      (H)(i) For spreads as defined in paragraph (f)(2)(A)(xxxii) of this Rule, the margin required on the
+      "short" options shall be the lesser of:
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "ratio_spread"
+    formula:
+      type: "ratio_spread"
+      description: "Spread margin on matched contracts + naked margin on excess short contracts"
+
+  # --- Synthetic long / short ---
+
+  - id: "4210_strategy_synthetic_long"
+    description: "Synthetic long stock — margined as equivalent long equity position"
+    citation: "FINRA 4210(f)(2)(H)"
+    source_quote: >-
+      Synthetic stock positions (long call + short put or short call + long put at same strike)
+      are margined as if holding the equivalent stock position.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "synthetic_long"
+    formula:
+      type: "synthetic_stock"
+      rate: 0.25
+      description: "Synthetic long stock: 25% FINRA maintenance on notional (strike x multiplier)"
+
+  - id: "4210_strategy_synthetic_short"
+    description: "Synthetic short stock — margined as equivalent short equity position"
+    citation: "FINRA 4210(f)(2)(H)"
+    source_quote: >-
+      Synthetic stock positions (long call + short put or short call + long put at same strike)
+      are margined as if holding the equivalent stock position.
+    produces_calculation: true
+    calculation_status: "active"
+    conditions:
+      security_type: "option"
+      strategy_type: "synthetic_short"
+    formula:
+      type: "synthetic_stock"
+      rate: 0.30
+      description: "Synthetic short stock: 30% FINRA maintenance on notional (strike x multiplier)"
+
+  - id: "4210_f_2_H_v_f"
+    description: "Protected options — index option hedged by underlying basket/ETF"
+    citation: "FINRA 4210(f)(2)(H)(v)(f.)"
+    source_quote: >-
+      f. Protected Options. When an index call (put) option or warrant is carried "short" (the "protected
+      option or warrant position") and there is carried in the same account a long (short) position in an
+      underlying stock basket, non-leveraged index mutual fund or non-leveraged exchange-traded fund (each,
+      the "protection") that is based on the same index underlying the index option or warrant, the protected
+      option or warrant position is not subject to the requirements set forth in paragraphs (f)(2)(E)(i)
+      and (f)(2)(E)(iii) of this Rule if the following conditions are met:
+    produces_calculation: false
+    calculation_status: "informational"
+    conditions:
+      security_type: "option"
+      strategy_type: "protected_option"
+    formula:
+      type: "informational"
+      description: "Short index option exempt from naked margin when hedged by equivalent underlying basket/ETF"

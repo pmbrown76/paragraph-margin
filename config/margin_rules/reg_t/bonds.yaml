@@ -1,0 +1,162 @@
+rule_set:
+  regulation: "Regulation T"
+  authority: "Federal Reserve Board"
+  cfr: "12 CFR Part 220"
+  section: "220.12, 220.18"
+  description: "Reg T initial margin for debt securities (corporate bonds, municipal bonds)"
+  effective_date: "1974-01-03"
+  last_amended: "2024-05-28"
+  notes: >
+    Under Reg T, nonexempted debt securities (corporate bonds) carry a good-faith margin
+    determined by the creditor, subject to FINRA minimums. Municipal bonds are exempt securities
+    under Section 3(a)(2) of the Securities Exchange Act. Exempt securities generally receive
+    good-faith margin treatment under Reg T Section 220.18.
+
+rules:
+  # --- Corporate Bonds (Nonexempted Securities) ---
+  - id: "reg_t_corporate_bond_ig_long"
+    description: "Long investment-grade corporate bond - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith or the percentage set by the regulatory authority where
+      the trade occurs, whichever is greater.
+    conditions:
+      security_type: "corporate_bond"
+      position_side: "long"
+      investment_grade: true
+      convertible: false
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.20
+    notes: >
+      Good-faith margin for IG corporate bonds. While Reg T does not prescribe a specific rate
+      for debt securities, the industry standard for IG corporates is 20% initial, aligned with
+      FINRA requirements. Creditors may set higher rates.
+
+  - id: "reg_t_corporate_bond_hy_long"
+    description: "Long high-yield corporate bond - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith or the percentage set by the regulatory authority where
+      the trade occurs, whichever is greater.
+    conditions:
+      security_type: "corporate_bond"
+      position_side: "long"
+      investment_grade: false
+      convertible: false
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.30
+    notes: >
+      Good-faith margin for HY corporate bonds. Higher rate reflects greater credit risk.
+      Non-rated bonds treated as high-yield.
+
+  - id: "reg_t_corporate_bond_ig_short"
+    description: "Short investment-grade corporate bond - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith or the percentage set by the regulatory authority where
+      the trade occurs, whichever is greater.
+    conditions:
+      security_type: "corporate_bond"
+      position_side: "short"
+      investment_grade: true
+      convertible: false
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.20
+    notes: "Short sale of IG corporate bond. Proceeds plus margin must be deposited."
+
+  - id: "reg_t_corporate_bond_hy_short"
+    description: "Short high-yield corporate bond - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith or the percentage set by the regulatory authority where
+      the trade occurs, whichever is greater.
+    conditions:
+      security_type: "corporate_bond"
+      position_side: "short"
+      investment_grade: false
+      convertible: false
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.30
+    notes: "Short sale of HY corporate bond."
+
+  # --- Convertible Bonds ---
+  - id: "reg_t_convertible_bond_long"
+    description: "Long convertible corporate bond - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith or the percentage set by the regulatory authority where
+      the trade occurs, whichever is greater.
+    conditions:
+      security_type: "corporate_bond"
+      position_side: "long"
+      convertible: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.50
+    notes: >
+      Convertible bonds are treated as equity-equivalent for Reg T purposes when
+      trading at or above conversion parity. Conservative approach: apply 50% equity rate.
+
+  - id: "reg_t_convertible_bond_short"
+    description: "Short convertible corporate bond - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith or the percentage set by the regulatory authority where
+      the trade occurs, whichever is greater.
+    conditions:
+      security_type: "corporate_bond"
+      position_side: "short"
+      convertible: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.50
+    notes: "Short convertible bond margined at equity rate."
+
+  # --- Municipal Bonds (Exempt Securities) ---
+  - id: "reg_t_municipal_bond_long"
+    description: "Long municipal bond - initial margin (exempt security)"
+    citation: "Reg T 220.18"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith.
+    conditions:
+      security_type: "municipal_bond"
+      position_side: "long"
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.15
+    notes: >
+      Municipal bonds are exempt securities under Reg T. Good-faith margin applies.
+      Industry standard is 15% for investment-grade municipal bonds.
+
+  - id: "reg_t_municipal_bond_short"
+    description: "Short municipal bond - initial margin (exempt security)"
+    citation: "Reg T 220.18"
+    source_quote: >
+      Exempted security, non-equity security, money market mutual fund or
+      exempted securities mutual fund: The margin required by the creditor
+      in good faith.
+    conditions:
+      security_type: "municipal_bond"
+      position_side: "short"
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.15
+    notes: "Short sale of municipal bond."

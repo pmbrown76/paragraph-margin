@@ -1,0 +1,657 @@
+## Regulation T — Options Margin Waterfall
+##
+## Determines the INITIAL margin requirement for option positions under
+## 12 CFR Part 220 (Regulation T). Section 220.12(c) is the controlling
+## provision: long options must be paid in full; for short (written)
+## options, Reg T defers to the SRO (FINRA 4210(f)) for specific margin
+## formulas. This "SRO deferral" is the key Reg T mechanism for options.
+##
+## Sources:
+##   - 12 CFR 220.12(c)(1) — Long options: full payment required
+##   - 12 CFR 220.12(c) — Short options: defers to SRO rules
+##   - 12 CFR 220.12 Supplement — LEAPS reduced rate (75%)
+##   - 12 CFR 220.12(f) — Security futures
+##   - FINRA RN 09-53 — Leveraged ETF option adjustments
+
+categories:
+
+  # ═══════════════════════════════════════════════════════════════
+  # LONG OPTIONS — 220.12(c)(1)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 1
+    name: Long Options (Full Payment)
+    rationale: >-
+      Under 220.12(c)(1), no credit may be extended for the purchase of
+      option contracts. Long options must be paid in full — 100% of the
+      premium. This is the most fundamental Reg T option rule and applies
+      to all listed equity, index, and OCC-cleared OTC options.
+    citation: "220.12(c)(1)"
+    rules:
+
+      - rule_id: "reg_t_long_call"
+        name: "Long Call — Full Payment"
+        section: "220.12(c)(1)"
+        position_side: "long"
+        formula_type: "full_payment"
+        formula_detail: |
+          Reg T initial: 100% × option_premium
+          No credit extension on option purchases.
+        reg_t_initial: 1.00
+        finra_maintenance: "n/a — no maintenance on long options"
+        conditions:
+          - security_type = option
+          - option_type = call
+          - position_side = long
+        definition: >-
+          Per 220.12(c)(1), the purchase of any put or call option contract
+          must be paid for in full. No margin credit may be extended.
+
+      - rule_id: "reg_t_long_put"
+        name: "Long Put — Full Payment"
+        section: "220.12(c)(1)"
+        position_side: "long"
+        formula_type: "full_payment"
+        formula_detail: |
+          Reg T initial: 100% × option_premium
+          No credit extension on option purchases.
+        reg_t_initial: 1.00
+        finra_maintenance: "n/a — no maintenance on long options"
+        conditions:
+          - security_type = option
+          - option_type = put
+          - position_side = long
+        definition: >-
+          Per 220.12(c)(1), long put options must be paid for in full.
+          No credit extension is permitted.
+
+      - rule_id: "reg_t_long_call_index"
+        name: "Long Index Call — Full Payment"
+        section: "220.12(c)(1)"
+        position_side: "long"
+        formula_type: "full_payment"
+        formula_detail: |
+          Reg T initial: 100% × option_premium
+        reg_t_initial: 1.00
+        finra_maintenance: "n/a"
+        conditions:
+          - security_type = index_option
+          - option_type = call
+          - position_side = long
+        definition: >-
+          Long index call options must be paid in full under 220.12(c)(1).
+          This applies to both broad-based and narrow-based index options.
+
+      - rule_id: "reg_t_long_put_index"
+        name: "Long Index Put — Full Payment"
+        section: "220.12(c)(1)"
+        position_side: "long"
+        formula_type: "full_payment"
+        formula_detail: |
+          Reg T initial: 100% × option_premium
+        reg_t_initial: 1.00
+        finra_maintenance: "n/a"
+        conditions:
+          - security_type = index_option
+          - option_type = put
+          - position_side = long
+        definition: >-
+          Long index put options must be paid in full under 220.12(c)(1).
+
+  - priority: 2
+    name: Long LEAPS (>9 Months)
+    rationale: >-
+      Long-term equity anticipation securities (LEAPS) with more than 9
+      months to expiration may receive reduced initial margin of 75% under
+      the 220.12 Supplement. This recognizes the time-value component of
+      long-dated options while still requiring substantial payment.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_long_call_leaps"
+        name: "Long LEAPS Call (>9 months) — 75% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 75% × option_premium
+          Applies to listed options with >9 months to expiration.
+        reg_t_initial: 0.75
+        finra_maintenance: "n/a — no maintenance on long options"
+        conditions:
+          - security_type = option
+          - option_type = call
+          - position_side = long
+          - time_to_expiration > 9 months
+        definition: >-
+          Per the 220.12 Supplement, long equity options (LEAPS) with more
+          than 9 months to expiration may be purchased with 75% initial
+          margin instead of 100%. This reduced rate recognizes the
+          significant time value in long-dated options.
+
+      - rule_id: "reg_t_long_put_leaps"
+        name: "Long LEAPS Put (>9 months) — 75% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 75% × option_premium
+          Applies to listed options with >9 months to expiration.
+        reg_t_initial: 0.75
+        finra_maintenance: "n/a — no maintenance on long options"
+        conditions:
+          - security_type = option
+          - option_type = put
+          - position_side = long
+          - time_to_expiration > 9 months
+        definition: >-
+          Long LEAPS puts with more than 9 months to expiration receive
+          75% initial margin under the 220.12 Supplement.
+
+  # ═══════════════════════════════════════════════════════════════
+  # NAKED SHORT OPTIONS — 220.12(c) → SRO Deferral
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 3
+    name: Naked Equity Options
+    rationale: >-
+      Section 220.12(c) defers margin on short (written) options to
+      the applicable SRO. For FINRA members, this means FINRA 4210(f)(2)(E)
+      controls: 20% of underlying + premium - OTM amount, with a 10%
+      minimum. Reg T does not independently set a short option rate.
+    citation: "220.12(c) → FINRA 4210(f)(2)(E)"
+    rules:
+
+      - rule_id: "reg_t_naked_call_equity"
+        name: "Naked Equity Call — SRO Deferral (20%)"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Reg T defers to FINRA 4210(f)(2)(E):
+          Premium + max(20% underlying - OTM, 10% underlying + premium)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "20% + premium - OTM (10% min)"
+        conditions:
+          - security_type = option
+          - option_type = call
+          - position_side = short
+          - underlying_type = equity
+          - covered = false
+        definition: >-
+          Per 220.12(c), Reg T defers to the SRO for margin on written
+          option contracts. FINRA 4210(f)(2)(E)(i) requires: 100% of
+          option market value + 20% of underlying - OTM amount, with a
+          minimum of premium + 10% of underlying for equity options.
+
+      - rule_id: "reg_t_naked_put_equity"
+        name: "Naked Equity Put — SRO Deferral (20%)"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Reg T defers to FINRA 4210(f)(2)(E):
+          Premium + max(20% underlying - OTM, 10% underlying + premium)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "20% + premium - OTM (10% min)"
+        conditions:
+          - security_type = option
+          - option_type = put
+          - position_side = short
+          - underlying_type = equity
+          - covered = false
+        definition: >-
+          Naked equity put margin deferred to FINRA 4210(f)(2)(E)(i)
+          via 220.12(c). Same formula as naked calls.
+
+  - priority: 4
+    name: Naked Broad-Based Index Options
+    rationale: >-
+      Broad-based index options (e.g., SPX, NDX, RUT) use a 15% base
+      rate instead of 20% for equity options, reflecting the
+      diversification benefit of a broad index. Cash-settled index
+      options have no exercise/assignment risk.
+    citation: "220.12(c) → FINRA 4210(f)(2)(E)"
+    rules:
+
+      - rule_id: "reg_t_naked_call_broad_index"
+        name: "Naked Broad-Based Index Call — SRO Deferral (15%)"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Reg T defers to FINRA 4210(f)(2)(E):
+          Premium + max(15% underlying - OTM, 10% underlying + premium)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "15% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = broad_based
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Naked broad-based index call options: Reg T defers to FINRA
+          4210(f)(2)(E). 15% of underlying index value + premium - OTM,
+          with a 10% + premium minimum. The lower rate vs equity options
+          reflects index diversification.
+
+      - rule_id: "reg_t_naked_put_broad_index"
+        name: "Naked Broad-Based Index Put — SRO Deferral (15%)"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Reg T defers to FINRA 4210(f)(2)(E):
+          Premium + max(15% underlying - OTM, 10% underlying + premium)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "15% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = broad_based
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Naked broad-based index put options receive 15% base rate
+          treatment deferred to FINRA 4210(f)(2)(E) via 220.12(c).
+
+      - rule_id: "reg_t_naked_call_broad_index_cash_settled"
+        name: "Naked Broad-Based Index Call (Cash-Settled) — 15%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Same as physical: 15% underlying + premium - OTM (10% min)
+          Cash settlement eliminates delivery risk.
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "15% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = broad_based
+          - settlement = cash
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Cash-settled broad-based index options receive the same 15%
+          base rate. Cash settlement removes physical delivery risk but
+          does not affect the margin formula.
+
+      - rule_id: "reg_t_naked_put_broad_index_cash_settled"
+        name: "Naked Broad-Based Index Put (Cash-Settled) — 15%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Same as physical: 15% underlying + premium - OTM (10% min)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "15% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = broad_based
+          - settlement = cash
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Cash-settled broad-based index puts: 15% base rate per FINRA
+          4210(f)(2)(E), deferred from Reg T 220.12(c).
+
+  - priority: 5
+    name: Naked Narrow-Based Index Options
+    rationale: >-
+      Narrow-based index options (e.g., sector indices) use the 20%
+      equity rate rather than the 15% broad-based rate, because narrow
+      indices lack the diversification benefit that justifies a lower rate.
+    citation: "220.12(c) → FINRA 4210(f)(2)(E)"
+    rules:
+
+      - rule_id: "reg_t_naked_call_narrow_index"
+        name: "Naked Narrow-Based Index Call — SRO Deferral (20%)"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Reg T defers to FINRA 4210(f)(2)(E):
+          Premium + max(20% underlying - OTM, 10% underlying + premium)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "20% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = narrow_based
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Narrow-based index options use the 20% equity rate for naked
+          option margin, as narrow indices lack the diversification
+          benefit of broad-based indices. Deferred to FINRA 4210(f)(2)(E)
+          via 220.12(c).
+
+      - rule_id: "reg_t_naked_put_narrow_index"
+        name: "Naked Narrow-Based Index Put — SRO Deferral (20%)"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          Reg T defers to FINRA 4210(f)(2)(E):
+          Premium + max(20% underlying - OTM, 10% underlying + premium)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "20% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = narrow_based
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Naked narrow-based index puts use the 20% equity rate deferred
+          to FINRA 4210(f)(2)(E).
+
+      - rule_id: "reg_t_naked_call_narrow_index_cash_settled"
+        name: "Naked Narrow-Based Index Call (Cash-Settled) — 20%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          20% underlying + premium - OTM (10% min)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "20% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = narrow_based
+          - settlement = cash
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Cash-settled narrow-based index calls: 20% base rate per FINRA
+          4210(f)(2)(E), deferred from 220.12(c).
+
+      - rule_id: "reg_t_naked_put_narrow_index_cash_settled"
+        name: "Naked Narrow-Based Index Put (Cash-Settled) — 20%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          20% underlying + premium - OTM (10% min)
+        reg_t_initial: "SRO — see FINRA 4210(f)(2)(E)"
+        finra_maintenance: "20% + premium - OTM (10% min)"
+        conditions:
+          - security_type = index_option
+          - index_type = narrow_based
+          - settlement = cash
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Cash-settled narrow-based index puts: 20% rate deferred via 220.12(c).
+
+  # ═══════════════════════════════════════════════════════════════
+  # NAKED ETF OPTIONS — 220.12(c) + RN 09-53 Leverage Scaling
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 6
+    name: Naked 1x ETF Options
+    rationale: >-
+      Options on standard (1x) ETFs use the standard 20% equity rate.
+    citation: "220.12(c) + RN 09-53"
+    rules:
+
+      - rule_id: "reg_t_naked_call_etf_1x"
+        name: "Naked 1x ETF Call — 20%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          20% underlying + premium - OTM (10% min)
+          Standard equity rate for non-leveraged ETF options.
+        reg_t_initial: "SRO — 20%"
+        finra_maintenance: "20% + premium - OTM"
+        leverage_factor: 1.0
+        conditions:
+          - security_type = option
+          - underlying_type = etf
+          - leverage_factor = 1
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Naked options on non-leveraged ETFs use the standard 20% equity
+          rate under FINRA 4210(f)(2)(E), deferred from 220.12(c).
+
+      - rule_id: "reg_t_naked_put_etf_1x"
+        name: "Naked 1x ETF Put — 20%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          20% underlying + premium - OTM (10% min)
+        reg_t_initial: "SRO — 20%"
+        finra_maintenance: "20% + premium - OTM"
+        leverage_factor: 1.0
+        conditions:
+          - security_type = option
+          - underlying_type = etf
+          - leverage_factor = 1
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Naked puts on non-leveraged ETFs: standard 20% rate.
+
+  - priority: 7
+    name: Naked 2x Leveraged ETF Options
+    rationale: >-
+      Per RN 09-53, options on leveraged ETFs scale the base rate by the
+      leverage factor. 2x ETF options use 40% (20% × 2) base rate.
+    citation: "220.12(c) + RN 09-53"
+    rules:
+
+      - rule_id: "reg_t_naked_call_etf_2x"
+        name: "Naked 2x ETF Call — 40%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          40% underlying + premium - OTM (20% min)
+          Base 20% × 2x leverage factor per RN 09-53.
+        reg_t_initial: "SRO — 40%"
+        finra_maintenance: "40% + premium - OTM"
+        leverage_factor: 2.0
+        conditions:
+          - security_type = option
+          - underlying_type = etf
+          - leverage_factor = 2
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Naked calls on 2x leveraged ETFs: 40% base rate (20% × 2) per
+          RN 09-53 leverage adjustment, deferred from 220.12(c).
+
+      - rule_id: "reg_t_naked_put_etf_2x"
+        name: "Naked 2x ETF Put — 40%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          40% underlying + premium - OTM (20% min)
+        reg_t_initial: "SRO — 40%"
+        finra_maintenance: "40% + premium - OTM"
+        leverage_factor: 2.0
+        conditions:
+          - security_type = option
+          - underlying_type = etf
+          - leverage_factor = 2
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Naked puts on 2x leveraged ETFs: 40% base rate.
+
+  - priority: 8
+    name: Naked 3x Leveraged ETF Options
+    rationale: >-
+      3x leveraged ETF options require 60% base rate (20% × 3) per
+      RN 09-53 leverage adjustment.
+    citation: "220.12(c) + RN 09-53"
+    rules:
+
+      - rule_id: "reg_t_naked_call_etf_3x"
+        name: "Naked 3x ETF Call — 60%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          60% underlying + premium - OTM (30% min)
+          Base 20% × 3x leverage factor per RN 09-53.
+        reg_t_initial: "SRO — 60%"
+        finra_maintenance: "60% + premium - OTM"
+        leverage_factor: 3.0
+        conditions:
+          - security_type = option
+          - underlying_type = etf
+          - leverage_factor = 3
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Naked calls on 3x leveraged ETFs: 60% base rate (20% × 3).
+
+      - rule_id: "reg_t_naked_put_etf_3x"
+        name: "Naked 3x ETF Put — 60%"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          60% underlying + premium - OTM (30% min)
+        reg_t_initial: "SRO — 60%"
+        finra_maintenance: "60% + premium - OTM"
+        leverage_factor: 3.0
+        conditions:
+          - security_type = option
+          - underlying_type = etf
+          - leverage_factor = 3
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Naked puts on 3x leveraged ETFs: 60% base rate.
+
+  - priority: 9
+    name: Naked ETP (ETN) Options
+    rationale: >-
+      Per RN 19-21, options on exchange-traded notes use the same
+      leverage-adjusted rates as ETF options. ETN options are excluded
+      from portfolio margin eligibility.
+    citation: "220.12(c) + RN 19-21"
+    rules:
+
+      - rule_id: "reg_t_naked_call_etp"
+        name: "Naked ETN Call — Leverage-Adjusted"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          20% × leverage_factor + premium - OTM
+          Per RN 19-21, ETN options excluded from portfolio margin.
+        reg_t_initial: "SRO — leverage-adjusted"
+        finra_maintenance: "leverage-adjusted + premium - OTM"
+        conditions:
+          - security_type = option
+          - underlying_type = etn
+          - option_type = call
+          - position_side = short
+        definition: >-
+          Naked calls on ETN underlyings: leverage-adjusted rates per
+          RN 19-21. ETN options are explicitly excluded from portfolio
+          margin eligibility. Deferred from 220.12(c) to FINRA 4210(f).
+
+      - rule_id: "reg_t_naked_put_etp"
+        name: "Naked ETN Put — Leverage-Adjusted"
+        section: "220.12(c)"
+        position_side: "short"
+        formula_type: "naked_option"
+        formula_detail: |
+          20% × leverage_factor + premium - OTM
+        reg_t_initial: "SRO — leverage-adjusted"
+        finra_maintenance: "leverage-adjusted + premium - OTM"
+        conditions:
+          - security_type = option
+          - underlying_type = etn
+          - option_type = put
+          - position_side = short
+        definition: >-
+          Naked puts on ETN underlyings: leverage-adjusted per RN 19-21.
+
+  # ═══════════════════════════════════════════════════════════════
+  # SRO DEFERRAL — 220.12(c) Informational
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 10
+    name: SRO Deferral (Strategies)
+    rationale: >-
+      Regulation T does NOT independently set margin for option strategies
+      (spreads, straddles, covered positions, etc.). Section 220.12(c)
+      defers all strategy-based margin to the applicable SRO — for FINRA
+      members, this is FINRA 4210(f). This entry exists for completeness
+      to document the deferral mechanism.
+    citation: "220.12(c)"
+    rules:
+
+      - rule_id: "reg_t_sro_deferral_strategies"
+        name: "SRO Deferral — All Option Strategies"
+        section: "220.12(c)"
+        position_side: "any"
+        formula_type: "informational"
+        formula_detail: |
+          No Reg T formula — defers entirely to FINRA 4210(f).
+          All 43 recognized strategy types are governed by 4210(f)(2)(B)-(I).
+        reg_t_initial: "n/a — SRO deferral"
+        finra_maintenance: "see FINRA 4210(f)"
+        conditions:
+          - security_type = option
+          - strategy = any_recognized_strategy
+        definition: >-
+          Per 220.12(c), Reg T defers to the self-regulatory organization
+          for margin on written option contracts and option strategies.
+          For FINRA members, FINRA 4210(f) is the controlling rule for all
+          43 recognized strategy types including spreads (vertical, calendar,
+          diagonal, butterfly, condor), straddles/strangles, covered
+          positions, conversions, collars, box spreads, and protected
+          index positions. Reg T does NOT provide independent strategy margin.
+
+  # ═══════════════════════════════════════════════════════════════
+  # SECURITY FUTURES — 220.12(f)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 11
+    name: Security Futures
+    rationale: >-
+      Section 220.12(f) addresses security futures products with a 20%
+      margin requirement, harmonized with SEC Rule 403(b)(2) and FINRA
+      4210(c)(7).
+    citation: "220.12(f)"
+    rules:
+
+      - rule_id: "reg_t_security_future_long"
+        name: "Security Future Long — 20%"
+        section: "220.12(f)"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 20% × notional_value
+          Per SEC Rule 403(b)(2), harmonized with FINRA 4210(c)(7).
+        reg_t_initial: 0.20
+        finra_maintenance: "see FINRA 4210(c)(7) — 20%"
+        conditions:
+          - security_type = security_future
+          - position_side = long
+        definition: >-
+          Per 220.12(f) and SEC Rule 403(b)(2), security futures require
+          20% initial margin on the notional contract value. This rate is
+          harmonized across Reg T and FINRA 4210(c)(7).
+
+      - rule_id: "reg_t_security_future_short"
+        name: "Security Future Short — 20%"
+        section: "220.12(f)"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 20% × notional_value
+        reg_t_initial: 0.20
+        finra_maintenance: "see FINRA 4210(c)(7) — 20%"
+        conditions:
+          - security_type = security_future
+          - position_side = short
+        definition: >-
+          Short security futures require 20% initial margin, same as
+          long positions, per 220.12(f) and SEC Rule 403(b)(2).

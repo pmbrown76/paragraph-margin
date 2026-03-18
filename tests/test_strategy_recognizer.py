@@ -5,7 +5,7 @@ from decimal import Decimal
 
 import pytest
 
-from margin_calc_engine import (
+from paragraph_margin import (
     Equity,
     Option,
     Position,

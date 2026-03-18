@@ -1,0 +1,860 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_e_2
+  description: (2) Exempted Securities, Non-equity Securities and Baskets
+  citation: FINRA 4210(e)(2)
+  source_quote: (2) Exempted Securities, Non-equity Securities and Baskets
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_E
+  description: (E) Special Provisions
+  citation: FINRA 4210(e)(2)(E)
+  source_quote: '(E) Special Provisions Notwithstanding the foregoing in this paragraph (e)(2):'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(E)
+- id: 4210_e_2_E_i
+  description: '(i) A member may, at its discretion, permit the use of accrued interest as an offset to the maintenance margin
+    required '
+  citation: FINRA 4210(e)(2)(E)(i)
+  source_quote: (i) A member may, at its discretion, permit the use of accrued interest as an offset to the maintenance margin
+    required to be maintained; and
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_2_E_ii
+  description: (ii) FINRA, upon written application, may permit lower margin requirements on a case-by-case basis.
+  citation: FINRA 4210(e)(2)(E)(ii)
+  source_quote: (ii) FINRA, upon written application, may permit lower margin requirements on a case-by-case basis.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_i
+  description: (i) Definitions
+  citation: FINRA 4210(e)(2)(H)(i)
+  source_quote: '(i) Definitions For purposes of paragraphs (e)(2)(H) and (e)(2)(I) of this Rule:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)
+- id: 4210_e_2_H_i_a._a
+  description: 'a. The term "counterparty" means any person, including any "customer" as defined in paragraph (a)(3) of this
+    Rule, that '
+  citation: FINRA 4210(e)(2)(H)(i)(a.)
+  source_quote: a. The term "counterparty" means any person, including any "customer" as defined in paragraph (a)(3) of this
+    Rule, that is a party to a Covered Agency Transaction with, or guaranteed by, a member.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(a.)
+- id: 4210_e_2_H_i_b._b
+  description: 'b. The term "Covered Agency Transaction" means:'
+  citation: FINRA 4210(e)(2)(H)(i)(b.)
+  source_quote: 'b. The term "Covered Agency Transaction" means:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(b.)
+- id: 4210_e_2_H_i_b._1._b_1
+  description: 1. To Be Announced ("TBA") transactions, as defined in Rule 6710(u), inclusive of adjustable rate mortgage
+    ("ARM") trans
+  citation: FINRA 4210(e)(2)(H)(i)(b.)(1.)
+  source_quote: 1. To Be Announced ("TBA") transactions, as defined in Rule 6710(u), inclusive of adjustable rate mortgage
+    ("ARM") transactions, for which the difference between the trade date and contractual settlement date is greater than
+    one business day;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(b.)(1.)
+- id: 4210_e_2_H_i_b._2._b_2
+  description: 2. Specified Pool Transactions, as defined in Rule 6710(x), for which the difference between the trade date
+    and contract
+  citation: FINRA 4210(e)(2)(H)(i)(b.)(2.)
+  source_quote: 2. Specified Pool Transactions, as defined in Rule 6710(x), for which the difference between the trade date
+    and contractual settlement date is greater than one business day; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(b.)(2.)
+- id: 4210_e_2_H_i_b._3._b_3
+  description: '3. Transactions in Collateralized Mortgage Obligations ("CMOs"), as defined in Rule 6710(dd), issued in conformity
+    with '
+  citation: FINRA 4210(e)(2)(H)(i)(b.)(3.)
+  source_quote: 3. Transactions in Collateralized Mortgage Obligations ("CMOs"), as defined in Rule 6710(dd), issued in conformity
+    with a program of an Agency, as defined in Rule 6710(k), or a Government-Sponsored Enterprise, as defined in Rule 6710(n),
+    for which the difference between the trade date and contractual settlement date is greater than three business days.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_i_c._c
+  description: 'c. A counterparty’s “excess net mark to market loss” means such counterparty’s net mark to market loss to
+    the extent it '
+  citation: FINRA 4210(e)(2)(H)(i)(c.)
+  source_quote: c. A counterparty’s “excess net mark to market loss” means such counterparty’s net mark to market loss to
+    the extent it exceeds $250,000.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(c.)
+- id: 4210_e_2_H_i_d._d
+  description: 'd. A counterparty’s “net mark to market loss” means:'
+  citation: FINRA 4210(e)(2)(H)(i)(d.)
+  source_quote: 'd. A counterparty’s “net mark to market loss” means:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(d.)
+- id: 4210_e_2_H_i_d._1._d_1
+  description: 1. the sum of such counterparty’s losses, if any, resulting from marking to market the counterparty’s Covered
+    Agency Tra
+  citation: FINRA 4210(e)(2)(H)(i)(d.)(1.)
+  source_quote: 1. the sum of such counterparty’s losses, if any, resulting from marking to market the counterparty’s Covered
+    Agency Transactions with the member, or guaranteed to a third party by the member, reduced to the extent of the member’s
+    legally enforceable right of offset or security by;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(d.)(1.)
+- id: 4210_e_2_H_i_d._2._d_2
+  description: '2. the sum of such counterparty’s gains, if any, resulting from:'
+  citation: FINRA 4210(e)(2)(H)(i)(d.)(2.)
+  source_quote: '2. the sum of such counterparty’s gains, if any, resulting from: A. marking to market the counterparty’s
+    Covered Agency Transactions with the member, guaranteed to the counterparty by the member, cleared by the member through
+    a registered clearing agency, or in which the member has a first-priority perfected security interest; and B. any “in
+    the money,” as defined in paragraph (f)(2)(E)(iii) of this Rule, amounts of the counterparty’s long standby transactions
+    written by the member, guaranteed to the counterparty by the member, cleared by the member through a registered clearing
+    agency, or in which the member has a first-priority perfected security interest.'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(d.)(2.)
+- id: 4210_e_2_H_i_e._e
+  description: 'e. A counterparty is a “non-margin counterparty” if:'
+  citation: FINRA 4210(e)(2)(H)(i)(e.)
+  source_quote: 'e. A counterparty is a “non-margin counterparty” if:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_i_e._1._e_1
+  description: '1. the counterparty is not a small cash counterparty, registered clearing agency, Federal banking agency,
+    as defined in '
+  citation: FINRA 4210(e)(2)(H)(i)(e.)(1.)
+  source_quote: 1. the counterparty is not a small cash counterparty, registered clearing agency, Federal banking agency,
+    as defined in 12 U.S.C. 1813(z), central bank, multinational central bank, foreign sovereign, multilateral development
+    bank, or the Bank for International Settlements; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(e.)(1.)
+- id: 4210_e_2_H_i_e._2._e_2
+  description: '2. the member:'
+  citation: FINRA 4210(e)(2)(H)(i)(e.)(2.)
+  source_quote: '2. the member: A. does not have a right under a written agreement or otherwise to collect margin for such
+    counterparty’s excess net mark to market loss and to liquidate such counterparty’s Covered Agency Transactions if any
+    such excess net mark to market loss is not margined or eliminated within five business days from the date it arises; or
+    B. does not regularly collect margin for such counterparty’s excess net mark to market loss.'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_i_f._f
+  description: f. The term “registered clearing agency” has the meaning as defined in paragraph (f)(2)(A)(xxviii) of this
+    Rule.
+  citation: FINRA 4210(e)(2)(H)(i)(f.)
+  source_quote: f. The term “registered clearing agency” has the meaning as defined in paragraph (f)(2)(A)(xxviii) of this
+    Rule.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(f.)
+- id: 4210_e_2_H_i_g._g
+  description: g. The term "round robin" trade means any transaction or transactions resulting in equal and offsetting positions
+    by one
+  citation: FINRA 4210(e)(2)(H)(i)(g.)
+  source_quote: g. The term "round robin" trade means any transaction or transactions resulting in equal and offsetting positions
+    by one customer with two separate dealers for the purpose of eliminating a turnaround delivery obligation by the customer.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(g.)
+- id: 4210_e_2_H_i_h._h
+  description: 'h. A counterparty is a “small cash counterparty” if:'
+  citation: FINRA 4210(e)(2)(H)(i)(h.)
+  source_quote: 'h. A counterparty is a “small cash counterparty” if:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(h.)
+- id: 4210_e_2_H_i_h._1._h_1
+  description: '1. the absolute dollar value of all of such counterparty’s open Covered Agency Transactions with, or guaranteed
+    by, the '
+  citation: FINRA 4210(e)(2)(H)(i)(h.)(1.)
+  source_quote: 1. the absolute dollar value of all of such counterparty’s open Covered Agency Transactions with, or guaranteed
+    by, the member is $10 million or less in the aggregate, when computed net of any settled position of the counterparty
+    held at the member that is deliverable under such open Covered Agency Transactions and which the counterparty intends
+    to deliver;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(h.)(1.)
+- id: 4210_e_2_H_i_h._2._h_2
+  description: 2. the original contractual settlement date for all such open Covered Agency Transactions is in the month of
+    the trade d
+  citation: FINRA 4210(e)(2)(H)(i)(h.)(2.)
+  source_quote: 2. the original contractual settlement date for all such open Covered Agency Transactions is in the month
+    of the trade date for such transactions or in the month succeeding the trade date for such transactions;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(h.)(2.)
+- id: 4210_e_2_H_i_h._3._h_3
+  description: '3. the counterparty regularly settles its Covered Agency Transactions on a Delivery Versus Payment (“DVP”)
+    basis or for '
+  citation: FINRA 4210(e)(2)(H)(i)(h.)(3.)
+  source_quote: 3. the counterparty regularly settles its Covered Agency Transactions on a Delivery Versus Payment (“DVP”)
+    basis or for “cash”; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(h.)(3.)
+- id: 4210_e_2_H_i_h._4._h_4
+  description: 4. the counterparty does not, in connection with its Covered Agency Transactions with, or guaranteed by, the
+    member, eng
+  citation: FINRA 4210(e)(2)(H)(i)(h.)(4.)
+  source_quote: 4. the counterparty does not, in connection with its Covered Agency Transactions with, or guaranteed by, the
+    member, engage in dollar rolls, as defined in Rule 6710(z), or round robin trades, or use other financing techniques.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(h.)(4.)
+- id: 4210_e_2_H_i_i._i
+  description: 'i. A member’s “specified net capital deductions” are the net capital deductions required by paragraph (e)(2)(H)(ii)d.1. '
+  citation: FINRA 4210(e)(2)(H)(i)(i.)
+  source_quote: i. A member’s “specified net capital deductions” are the net capital deductions required by paragraph (e)(2)(H)(ii)d.1.
+    of this Rule with respect to all unmargined excess net mark to market losses of its counterparties, except to the extent
+    that the member, in good faith, expects such excess net mark to market losses to be margined by the close of business
+    on the fifth business day after they arose.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_2_H_i_j._j
+  description: j. The term "standby" means contracts that are put options that trade OTC, as defined in paragraph (f)(2)(A)(xxvii)
+    of t
+  citation: FINRA 4210(e)(2)(H)(i)(j.)
+  source_quote: j. The term "standby" means contracts that are put options that trade OTC, as defined in paragraph (f)(2)(A)(xxvii)
+    of this Rule, with initial and final confirmation procedures similar to those on forward transactions.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(i)(j.)
+- id: 4210_e_2_H_ii
+  description: (ii) Margin Requirements for Covered Agency Transactions
+  citation: FINRA 4210(e)(2)(H)(ii)
+  source_quote: (ii) Margin Requirements for Covered Agency Transactions
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_ii_a._a
+  description: 'a. Scope and Exceptions: All Covered Agency Transactions with any counterparty, regardless of the type of
+    account to whi'
+  citation: FINRA 4210(e)(2)(H)(ii)(a.)
+  source_quote: 'a. Scope and Exceptions: All Covered Agency Transactions with any counterparty, regardless of the type of
+    account to which booked, shall be subject to the provisions of paragraph (e)(2)(H) of this Rule, except:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(ii)(a.)
+- id: 4210_e_2_H_ii_a._1._a_1
+  description: 1. a member is not required to collect margin, or to take capital charges in lieu of collecting such margin,
+    for a count
+  citation: FINRA 4210(e)(2)(H)(ii)(a.)(1.)
+  source_quote: 1. a member is not required to collect margin, or to take capital charges in lieu of collecting such margin,
+    for a counterparty’s excess net mark to market loss if such counterparty is a small cash counterparty, registered clearing
+    agency, Federal banking agency, as defined in 12 U.S.C. 1813(z), central bank, multinational central bank, foreign sovereign,
+    multilateral development bank, or the Bank for International Settlements; and
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_2_H_ii_a._2._a_2
+  description: 2. a member is not required to include a counterparty's Covered Agency Transactions in multifamily housing
+    securities or
+  citation: FINRA 4210(e)(2)(H)(ii)(a.)(2.)
+  source_quote: 2. a member is not required to include a counterparty's Covered Agency Transactions in multifamily housing
+    securities or project loan program securities in the computation of such counterparty’s net mark to market loss, provided
+    such securities are issued in conformity with a program of an Agency, as defined in Rule 6710(k), or a Government-Sponsored
+    Enterprise, as defined in Rule 6710(n), and are documented as Freddie Mac K Certificates, Fannie Mae Delegated Underwriting
+    and Servicing bonds, or Ginnie Mae Construction Loan or Project Loan Certificates, as commonly known to the trade, or
+    are such other multifamily housing securities or project loan program securities with substantially similar characteristics,
+    issued in conformity with a program of an Agency or a Government-Sponsored Enterprise, as FINRA may designate by Regulatory
+    Notice or similar communication.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(H)(ii)(a.)(2.)
+- id: 4210_e_2_H_ii_b._b
+  description: 'b. Written Risk Limits: A member that engages in Covered Agency Transactions with any counterparty shall make
+    a determin'
+  citation: FINRA 4210(e)(2)(H)(ii)(b.)
+  source_quote: 'b. Written Risk Limits: A member that engages in Covered Agency Transactions with any counterparty shall
+    make a determination in writing of a risk limit for each such counterparty, including any counterparty specified in paragraph
+    (e)(2)(H)(ii)a.1. of this Rule, that the member shall enforce. The risk limit for a counterparty shall cover all of the
+    counterparty’s Covered Agency Transactions with the member or guaranteed to a third party by the member, including Covered
+    Agency Transactions specified in paragraph (e)(2)(H)(ii)a.2. of this Rule. The risk limit determination shall be made
+    by a designated credit risk officer or credit risk committee in accordance with the member''s written risk policies and
+    procedures.'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_ii_c._c
+  description: 'c. Mark to Market Margin: Members shall collect margin for each counterparty’s excess net mark to market loss,
+    unless ot'
+  citation: FINRA 4210(e)(2)(H)(ii)(c.)
+  source_quote: 'c. Mark to Market Margin: Members shall collect margin for each counterparty’s excess net mark to market
+    loss, unless otherwise provided under paragraph (e)(2)(H)(ii)d. of this Rule. Members are not required to collect margin,
+    or take capital charges, for counterparties’ mark to market losses on Covered Agency Transactions other than excess net
+    mark to market losses.'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_2_H_ii_d._d
+  description: 'd. Capital Charge in lieu of Margin: A member need not collect margin for a counterparty’s excess net mark
+    to market los'
+  citation: FINRA 4210(e)(2)(H)(ii)(d.)
+  source_quote: 'd. Capital Charge in lieu of Margin: A member need not collect margin for a counterparty’s excess net mark
+    to market loss under paragraph (e)(2)(H)(ii)c. of this Rule, provided that:'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_2_H_ii_d._1._d_1
+  description: '1. the member shall deduct the amount of the counterparty’s unmargined excess net mark to market loss from
+    the member’s '
+  citation: FINRA 4210(e)(2)(H)(ii)(d.)(1.)
+  source_quote: 1. the member shall deduct the amount of the counterparty’s unmargined excess net mark to market loss from
+    the member’s net capital computed as provided in SEA Rule 15c3-1, if the counterparty is a non-margin counterparty or
+    if the excess net mark to market loss has not been margined or eliminated by the close of business on the next business
+    day after the business day on which such excess net mark to market loss arises;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_2_H_ii_d._4._d_4
+  description: 4. the member shall submit to FINRA such information regarding its unmargined net mark to market losses, non-margin
+    coun
+  citation: FINRA 4210(e)(2)(H)(ii)(d.)(4.)
+  source_quote: 4. the member shall submit to FINRA such information regarding its unmargined net mark to market losses, non-margin
+    counterparties and related capital charges, in such form and manner, as FINRA shall prescribe by Regulatory Notice or
+    similar communication.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_2_I_ii
+  description: (ii) such excess as calculated in paragraph (e)(2)(I)(i) of this Rule continues to exist on the fifth business
+    day after
+  citation: FINRA 4210(e)(2)(I)(ii)
+  source_quote: (ii) such excess as calculated in paragraph (e)(2)(I)(i) of this Rule continues to exist on the fifth business
+    day after it was incurred; the member shall give prompt written notice to FINRA and shall not enter into any new transaction(s)
+    subject to the provisions of paragraphs (e)(2)(F), (e)(2)(G) or (e)(2)(H) of this Rule that would result in an increase
+    in the amount of such excess.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(2)(I)(ii)
+- id: 4210_e_3
+  description: (3) Joint Accounts in Which the Carrying Member or a Partner or Stockholder Therein Has an Interest
+  citation: FINRA 4210(e)(3)
+  source_quote: '(3) Joint Accounts in Which the Carrying Member or a Partner or Stockholder Therein Has an Interest In the
+    case of a joint account carried by a member in which such member, or any partner, or stockholder (other than a holder
+    of freely transferable stock only) of such member participates with others, each participant other than the carrying member
+    shall maintain an equity with respect to such interest pursuant to the margin provisions of this paragraph as if such
+    interest were in a separate account. Pursuant to the Rule 9600 Series, FINRA may grant an exemption from the provisions
+    of this paragraph (e)(3), if the account is confined exclusively to transactions and positions in exempted securities.
+    In the case of an account conforming to the conditions described in this paragraph (e)(3), the exemption application shall
+    also include the following information as of the date of the request:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_3_A
+  description: (A) complete description of the security;
+  citation: FINRA 4210(e)(3)(A)
+  source_quote: (A) complete description of the security;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(3)(A)
+- id: 4210_e_3_B
+  description: (B) cost price, offering price and principal amount of obligations which have been purchased or may be required
+    to be pu
+  citation: FINRA 4210(e)(3)(B)
+  source_quote: (B) cost price, offering price and principal amount of obligations which have been purchased or may be required
+    to be purchased;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(3)(B)
+- id: 4210_e_3_C
+  description: (C) date on which the security is to be purchased or on which there will be a contingent commitment to purchase
+    the secu
+  citation: FINRA 4210(e)(3)(C)
+  source_quote: (C) date on which the security is to be purchased or on which there will be a contingent commitment to purchase
+    the security;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(3)(C)
+- id: 4210_e_3_D
+  description: (D) approximate aggregate indebtedness;
+  citation: FINRA 4210(e)(3)(D)
+  source_quote: (D) approximate aggregate indebtedness;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(3)(D)
+- id: 4210_e_3_E
+  description: (E) approximate net capital; and
+  citation: FINRA 4210(e)(3)(E)
+  source_quote: (E) approximate net capital; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(3)(E)
+- id: 4210_e_3_F
+  description: (F) approximate total market value of all readily marketable securities (i) exempted and (ii) non-exempted,
+    held in memb
+  citation: FINRA 4210(e)(3)(F)
+  source_quote: (F) approximate total market value of all readily marketable securities (i) exempted and (ii) non-exempted,
+    held in member accounts, partners' capital accounts, partners' individual accounts covered by approved agreements providing
+    for their inclusion as partnership property, accounts covered by subordination agreements approved by FINRA and customers'
+    accounts in deficit.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(3)(F)
+- id: 4210_e_4
+  description: (4) International Arbitrage Accounts
+  citation: FINRA 4210(e)(4)
+  source_quote: (4) International Arbitrage Accounts International arbitrage accounts for non-member foreign brokers or dealers
+    who are members of a foreign securities exchange shall not be subject to this Rule. The amount of any deficiency between
+    the equity in such an account and the margin required by the other provisions of this Rule shall be charged against the
+    member's net capital when computing net capital under SEA Rule 15c3-1 and, if applicable, Rule 4110(a).
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_5
+  description: (5) Specialists' and Market Makers' Accounts
+  citation: FINRA 4210(e)(5)
+  source_quote: (5) Specialists' and Market Makers' Accounts
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(5)
+- id: 4210_e_5_A
+  description: (A) A member may carry the account of an "approved specialist" or "approved market maker," which account is
+    limited to s
+  citation: FINRA 4210(e)(5)(A)
+  source_quote: '(A) A member may carry the account of an "approved specialist" or "approved market maker," which account
+    is limited to specialist or market making transactions, upon a margin basis which is satisfactory to both parties. The
+    amount of any deficiency between the equity in the account and the haircut requirements pursuant to SEA Rule 15c3-1 and,
+    if applicable, Rule 4110(a), shall be charged against the member''s net capital when computing net capital under SEA Rule
+    15c3-1 and Rule 4110(a). However, when computing charges against net capital for transactions in securities covered by
+    paragraphs (e)(2)(F) and (e)(2)(G) of this Rule, absent a greater haircut requirement that may have been imposed on such
+    securities pursuant to Rule 4110(a), the respective requirements of those paragraphs may be used, rather than the haircut
+    requirements of SEA Rule 15c3-1. For the purpose of this paragraph (e)(5)(A), the term "approved specialist" or "approved
+    market maker" means either:'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_5_A_i
+  description: (i) a specialist or market maker, who is deemed a specialist for all purposes under the Exchange Act and who
+    is register
+  citation: FINRA 4210(e)(5)(A)(i)
+  source_quote: (i) a specialist or market maker, who is deemed a specialist for all purposes under the Exchange Act and who
+    is registered pursuant to the rules of a national securities exchange; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(5)(A)(i)
+- id: 4210_e_5_A_ii
+  description: (ii) an OTC market maker or third market maker, who meets the requirements of Section 220.7(g)(5) of Regulation
+    T.
+  citation: FINRA 4210(e)(5)(A)(ii)
+  source_quote: (ii) an OTC market maker or third market maker, who meets the requirements of Section 220.7(g)(5) of Regulation
+    T.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_5_B
+  description: (B) In the case of a joint account carried by a member in accordance with subparagraph (i) above in which the
+    member par
+  citation: FINRA 4210(e)(5)(B)
+  source_quote: (B) In the case of a joint account carried by a member in accordance with subparagraph (i) above in which
+    the member participates, the equity maintained in the account by the other participants may be in any amount which is
+    mutually satisfactory. The amount of any deficiency between the equity maintained in the account by the other participants
+    and their proportionate share of the haircut requirements pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a),
+    shall be charged against the member's net capital when computing net capital under SEA Rule 15c3-1 and Rule 4110(a). However,
+    when computing charges against net capital for transactions in securities covered by paragraphs (e)(2)(F) and (e)(2)(G)
+    of this Rule, absent a greater haircut requirement that may have been imposed on such securities pursuant to Rule 4110(a),
+    the respective requirements of those paragraphs may be used, rather than the haircut requirements of SEA Rule 15c3-1.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_6
+  description: (6) Broker-Dealer Accounts
+  citation: FINRA 4210(e)(6)
+  source_quote: (6) Broker-Dealer Accounts
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(6)
+- id: 4210_e_6_A
+  description: (A) A member may carry the proprietary account of another broker-dealer, which is registered with the SEC,
+    upon a margin
+  citation: FINRA 4210(e)(6)(A)
+  source_quote: (A) A member may carry the proprietary account of another broker-dealer, which is registered with the SEC,
+    upon a margin basis which is satisfactory to both parties, provided the requirements of Regulation T and Rules 400 through
+    406 of SEC Customer Margin Requirements for Security Futures and Rules 41.42 through 41.49 under the CEA are adhered to
+    and the account is not carried in a deficit equity condition. The amount of any deficiency between the equity maintained
+    in the account and the haircut requirements pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a), shall be charged
+    against the member's net capital when computing net capital under SEA Rule 15c3-1 and Rule 4110(a). However, when computing
+    charges against net capital for transactions in securities covered by paragraphs (e)(2)(F) and (e)(2)(G) of this Rule,
+    absent a greater haircut requirement that may have been imposed on such securities pursuant to Rule 4110(a), the respective
+    requirements of those paragraphs may be used, rather than the haircut requirements of SEA Rule 15c3-1.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_6_B
+  description: (B) Joint Back Office Arrangements
+  citation: FINRA 4210(e)(6)(B)
+  source_quote: (B) Joint Back Office Arrangements An arrangement may be established between two or more registered broker-dealers
+    pursuant to Regulation T Section 220.7, to form a joint back office ("JBO") arrangement for carrying and clearing or carrying
+    accounts of participating broker-dealers. Members must provide written notification to FINRA prior to establishing a JBO
+    arrangement.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(6)(B)
+- id: 4210_e_6_B_i
+  description: '(i) A carrying and clearing, or carrying member must:'
+  citation: FINRA 4210(e)(6)(B)(i)
+  source_quote: '(i) A carrying and clearing, or carrying member must:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(6)(B)(i)
+- id: 4210_e_6_B_i_b._b
+  description: b. maintain a written risk analysis methodology for assessing the amount of credit extended to participating
+    broker-deal
+  citation: FINRA 4210(e)(6)(B)(i)(b.)
+  source_quote: b. maintain a written risk analysis methodology for assessing the amount of credit extended to participating
+    broker-dealers which shall be made available to FINRA on request; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_6_B_i_c._c
+  description: c. deduct from net capital haircut requirements pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a),
+    amounts in
+  citation: FINRA 4210(e)(6)(B)(i)(c.)
+  source_quote: c. deduct from net capital haircut requirements pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a),
+    amounts in excess of the equity maintained in the accounts of participating broker-dealers. However, when computing charges
+    against net capital for transactions in securities covered by paragraphs (e)(2)(F) and (e)(2)(G) of this Rule, absent
+    a greater haircut requirement that may have been imposed on such securities pursuant to Rule 4110(a), the respective requirements
+    of those paragraphs may be used, rather than the haircut requirements of SEA Rule 15c3-1.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_e_6_B_ii
+  description: '(ii) A participating broker-dealer must:'
+  citation: FINRA 4210(e)(6)(B)(ii)
+  source_quote: '(ii) A participating broker-dealer must:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(6)(B)(ii)
+- id: 4210_e_6_B_ii_a._a
+  description: a. be a registered broker-dealer subject to the SEC's net capital requirements and, if applicable, Rule 4110(a);
+  citation: FINRA 4210(e)(6)(B)(ii)(a.)
+  source_quote: a. be a registered broker-dealer subject to the SEC's net capital requirements and, if applicable, Rule 4110(a);
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_6_B_ii_b._b
+  description: b. maintain an ownership interest in the carrying/clearing member pursuant to Regulation T of the Federal Reserve
+    Board,
+  citation: FINRA 4210(e)(6)(B)(ii)(b.)
+  source_quote: b. maintain an ownership interest in the carrying/clearing member pursuant to Regulation T of the Federal
+    Reserve Board, Section 220.7; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(6)(B)(ii)(b.)
+- id: 4210_e_7_A
+  description: (A) the account is recorded separately and confined to the transactions and relations specifically authorized
+    by Regulat
+  citation: FINRA 4210(e)(7)(A)
+  source_quote: (A) the account is recorded separately and confined to the transactions and relations specifically authorized
+    by Regulation T;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_7_B
+  description: (B) the account is not used in any way for the purpose of evading or circumventing any regulation of FINRA
+    or of the Boa
+  citation: FINRA 4210(e)(7)(B)
+  source_quote: (B) the account is not used in any way for the purpose of evading or circumventing any regulation of FINRA
+    or of the Board of Governors of the Federal Reserve System and Rules 400 through 406 of SEC Customer Margin Requirements
+    for Security Futures and Rules 41.42 through 41.49 under the CEA; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_8
+  description: (8) Shelf-Registered and Other Control and Restricted Securities
+  citation: FINRA 4210(e)(8)
+  source_quote: (8) Shelf-Registered and Other Control and Restricted Securities
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)
+- id: 4210_e_8_A_i
+  description: (i) obtains a current prospectus in effect with the SEC, meeting the requirements of Section 10 of the Securities
+    Act, c
+  citation: FINRA 4210(e)(8)(A)(i)
+  source_quote: (i) obtains a current prospectus in effect with the SEC, meeting the requirements of Section 10 of the Securities
+    Act, covering such securities;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_8_A_ii
+  description: (ii) has no reason to believe the Registration Statement is not in effect or that the issuer has been delinquent
+    in fili
+  citation: FINRA 4210(e)(8)(A)(ii)
+  source_quote: (ii) has no reason to believe the Registration Statement is not in effect or that the issuer has been delinquent
+    in filing such periodic reports as may be required of it with the SEC and is satisfied that such registration will be
+    kept in effect and that the prospectus will be maintained on a current basis; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(A)(ii)
+- id: 4210_e_8_A_iii
+  description: (iii) retains a copy of such Registration Statement, including the prospectus, in an easily accessible place
+    in its file
+  citation: FINRA 4210(e)(8)(A)(iii)
+  source_quote: (iii) retains a copy of such Registration Statement, including the prospectus, in an easily accessible place
+    in its files. Shelf-registered securities which do not meet all the conditions prescribed above shall have no value for
+    purposes of this Rule. Also see subparagraph (C) below.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(A)(iii)
+- id: 4210_e_8_B_i
+  description: '(i) in computing net capital under SEA Rule 15c3-1 and, if applicable, Rule 4110(a), deducts any margin deficiencies
+    in '
+  citation: FINRA 4210(e)(8)(B)(i)
+  source_quote: (i) in computing net capital under SEA Rule 15c3-1 and, if applicable, Rule 4110(a), deducts any margin deficiencies
+    in customers' accounts based upon a margin requirement as specified in subparagraph (C)(iv) below for such securities
+    and values only that amount of such securities which are then saleable under Securities Act Rule 144(b)(2) or 145(d)(2)(i)
+    in conformity with all of the applicable terms and conditions thereof, for purposes of determining such deficiencies;
+    and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_8_B_ii
+  description: (ii) makes volume computations necessary to determine the amount of securities then saleable under Securities
+    Act Rule 1
+  citation: FINRA 4210(e)(8)(B)(ii)
+  source_quote: (ii) makes volume computations necessary to determine the amount of securities then saleable under Securities
+    Act Rule 144(b)(2) or 145(d)(2)(i) on a weekly basis or at such frequency as the member and/or FINRA may deem appropriate
+    under the circumstances. See also subparagraph (C) below.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(B)(ii)
+- id: 4210_e_8_C
+  description: (C) Additional Requirements on Shelf-Registered Securities and Other Control and Restricted Securities — Except
+    as provi
+  citation: FINRA 4210(e)(8)(C)
+  source_quote: '(C) Additional Requirements on Shelf-Registered Securities and Other Control and Restricted Securities —
+    Except as provided in subparagraph (D) below, a member extending credit on shelf-registered and other control and restricted
+    securities in margin accounts of customers shall be subject to the following additional requirements:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_8_C_i
+  description: '(i) FINRA may at any time require reports from members showing relevant information as to the amount of credit
+    extended '
+  citation: FINRA 4210(e)(8)(C)(i)
+  source_quote: (i) FINRA may at any time require reports from members showing relevant information as to the amount of credit
+    extended on shelf-registered, and other control and restricted securities and the amount, if any, deducted from net capital
+    due to such security positions.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_8_C_iii
+  description: '(iii) The aggregate credit extended to all customers on all control and restricted securities (reduced by
+    the amount of '
+  citation: FINRA 4210(e)(8)(C)(iii)
+  source_quote: (iii) The aggregate credit extended to all customers on all control and restricted securities (reduced by
+    the amount of such aggregate credit which has been deducted in computing net capital under SEA Rule 15c3-1 and, if applicable,
+    Rule 4110(a)), shall be deducted from net capital on the following basis for purposes of determining a member's status
+    under Rule 4120.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_e_8_C_iv
+  description: (iv) Concentration Reduction. A concentration exists whenever the aggregate position in control and restricted
+    securitie
+  citation: FINRA 4210(e)(8)(C)(iv)
+  source_quote: '(iv) Concentration Reduction. A concentration exists whenever the aggregate position in control and restricted
+    securities of any one issue, excluding excess securities (as defined below), exceeds:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(C)(iv)
+- id: 4210_e_8_D
+  description: '(D) Certain Restricted Securities — Securities either:'
+  citation: FINRA 4210(e)(8)(D)
+  source_quote: '(D) Certain Restricted Securities — Securities either:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(D)
+- id: 4210_e_8_D_i
+  description: (i) then saleable pursuant to the terms and conditions of Securities Act Rule 144(b)(1), or
+  citation: FINRA 4210(e)(8)(D)(i)
+  source_quote: (i) then saleable pursuant to the terms and conditions of Securities Act Rule 144(b)(1), or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(D)(i)
+- id: 4210_e_8_D_ii
+  description: (ii) then saleable pursuant to the terms and conditions of Securities Act Rule 145(d)(2), shall not be subject
+    to the pr
+  citation: FINRA 4210(e)(8)(D)(ii)
+  source_quote: (ii) then saleable pursuant to the terms and conditions of Securities Act Rule 145(d)(2), shall not be subject
+    to the provisions of paragraph (e)(8) of this Rule.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (e)(8)(D)(ii)
+- id: 4210_e_9
+  description: (9) Security-Based Swaps; SBS Offsets
+  citation: FINRA 4210(e)(9)
+  source_quote: (9) Security-Based Swaps; SBS Offsets Except for SBS carried by a member in a portfolio margin account subject
+    to the requirements of Rule 4210(g), margin requirements on SBS and positions in Uncleared SBS Accounts are determined
+    by Rule 4240, rather than Rule 4210. When one or more securities or options positions in a customer’s margin account are
+    included in a combination of SBS, securities or options positions on which an Initial Margin Requirement is computed under
+    paragraph (b)(2)(A)(i) or (b)(2)(A)(ii) of Rule 4240, and the Initial Margin Requirement computed on the combination is
+    less than the aggregate margin requirement on such securities or options positions under other provisions of this Rule,
+    the aggregate margin requirement on such margin account positions shall be reduced to the Initial Margin Requirement computed
+    on the combination. For purposes of this paragraph (e)(9), the terms “SBS,” “Uncleared SBS Account,” and “Initial Margin
+    Requirement” have the meanings given them in Rule 4240.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation

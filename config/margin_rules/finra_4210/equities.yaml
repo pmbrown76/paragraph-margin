@@ -1,0 +1,108 @@
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(c)"
+  description: "Equity securities maintenance margin requirements"
+  effective_date: "2024-01-01"
+
+rules:
+  - id: "4210_equity_long_standard"
+    description: "Long margin-eligible equity - standard maintenance"
+    citation: "FINRA 4210(c)(1)"
+    source_quote: >
+      25 percent of the current market value of all margin securities, as
+      defined in Section 220.2 of Regulation T, except for security futures
+      contracts, "long" in the account.
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      marginable: true
+      concentrated: false
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+    minimum:
+      type: "fixed_per_share"
+      amount: 2.50
+    notes: >
+      Per 4210(c)(1): "25 percent of the current market value of all margin
+      securities... 'long' in the account."
+
+  - id: "4210_equity_long_nonmarginable"
+    description: "Long non-marginable equity"
+    citation: "FINRA 4210(c)(6)"
+    source_quote: >
+      100 percent of the current market value for each non-margin eligible
+      equity security held "long" in the account.
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      marginable: false
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.00
+    notes: >
+      Per 4210(c)(6): "100 percent of the current market value for each non-margin
+      eligible equity security held 'long' in the account." No credit extension
+      permitted for non-marginable securities.
+
+  - id: "4210_equity_short_standard"
+    description: "Short equity - price >= $5.00"
+    citation: "FINRA 4210(c)(3)"
+    source_quote: >
+      $5.00 per share or 30 percent of the current market value, whichever
+      amount is greater, of each stock "short" in the account selling at
+      $5.00 per share or above.
+    conditions:
+      security_type: "equity"
+      position_side: "short"
+      price_gte: 5.00
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.30
+    minimum:
+      type: "fixed_per_share"
+      amount: 5.00
+    notes: >
+      Per 4210(c)(3): "$5.00 per share or 30 percent of the current market value,
+      whichever amount is greater, of each stock 'short' in the account selling
+      at $5.00 per share or above."
+
+  - id: "4210_equity_short_low_price"
+    description: "Short equity - price < $5.00"
+    citation: "FINRA 4210(c)(2)"
+    source_quote: >
+      $2.50 per share or 100 percent of the current market value, whichever
+      amount is greater, of each stock "short" in the account selling at
+      less than $5.00 per share.
+    conditions:
+      security_type: "equity"
+      position_side: "short"
+      price_lt: 5.00
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.00
+    minimum:
+      type: "fixed_per_share"
+      amount: 2.50
+    notes: >
+      Per 4210(c)(2): "$2.50 per share or 100 percent of the current market value,
+      whichever amount is greater, of each stock 'short' in the account selling
+      at less than $5.00 per share."
+
+  - id: "4210_equity_concentrated_long"
+    description: "Concentrated long equity position"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      marginable: true
+      concentrated: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.40
+    notes: >
+      Per FINRA Interpretive Material IM-4210-2, positions that represent a
+      significant portion of account equity require additional margin. Applies
+      when position exceeds 10% of outstanding shares or 100% of average weekly
+      trading volume. Rate can be escalated up to 100% at firm discretion.

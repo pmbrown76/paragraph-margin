@@ -1,0 +1,1854 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_f
+  description: (f) Other Provisions
+  citation: FINRA 4210(f)
+  source_quote: (f) Other Provisions
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)
+- id: 4210_f_10
+  description: (10) Customer Margin Rules Relating to Security Futures
+  citation: FINRA 4210(f)(10)
+  source_quote: (10) Customer Margin Rules Relating to Security Futures
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_A
+  description: (A) Applicability
+  citation: FINRA 4210(f)(10)(A)
+  source_quote: (A) Applicability No member may effect a transaction involving, or carry an account containing, a security
+    futures contract with or for a customer in a margin account, without obtaining proper and adequate margin as set forth
+    in this subparagraph.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_B
+  description: (B) Amount of customer margin
+  citation: FINRA 4210(f)(10)(B)
+  source_quote: (B) Amount of customer margin
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_B_ii
+  description: (ii) Excluded from the Rule's requirements are arrangements between a member and a customer with respect to
+    the customer
+  citation: FINRA 4210(f)(10)(B)(ii)
+  source_quote: (ii) Excluded from the Rule's requirements are arrangements between a member and a customer with respect to
+    the customer's financing of proprietary positions in security futures, based on the member's good faith determination
+    that the customer is an "Exempted Person," as defined in Rule 401(a)(9) of SEC Customer Margin Requirements for Security
+    Futures, and Rule 41.43(a)(9) under the CEA, except for the proprietary account of a broker-dealer carried by a member
+    pursuant to paragraph (e)(6)(A) of this Rule. Once a registered broker or dealer, or member of a national securities exchange
+    ceases to qualify as an "Exempted Person," it shall notify the member of this fact before establishing any new security
+    futures positions. Any new security futures positions will be subject to the provisions of this subparagraph.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_B_iii
+  description: (iii) Permissible Offsets.
+  citation: FINRA 4210(f)(10)(B)(iii)
+  source_quote: (iii) Permissible Offsets. Notwithstanding the minimum margin levels specified in paragraph (f)(10)(B)(i)
+    of this Rule, customers with offset positions involving security futures and related positions may have initial or maintenance
+    margin levels (pursuant to the offset table below) that are lower than the levels specified in paragraph (f)(10)(B)(i)
+    of this Rule. Description of Offset Security Underlying the Security Future Initial Margin Requirement Maintenance Margin
+    1 Two security futures contracts will be considered "identical" for this purpose if they are issued by the same clearing
+    agency or cleared and guaranteed by the same derivatives clearing organization, have identical specifications, and would
+    offset each other at the clearing level.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_C
+  description: (C) Definitions
+  citation: FINRA 4210(f)(10)(C)
+  source_quote: '(C) Definitions For the purposes of paragraph (f)(10) of this Rule and the offset table noted above, with
+    respect to the term "security futures contracts," the following terms shall have the meanings specified below:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(C)
+- id: 4210_f_10_C_i
+  description: (i) The term "security futures contract" means a "security future" as defined in Section 3(a)(55) of the Exchange
+    Act.
+  citation: FINRA 4210(f)(10)(C)(i)
+  source_quote: (i) The term "security futures contract" means a "security future" as defined in Section 3(a)(55) of the Exchange
+    Act.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(C)(i)
+- id: 4210_f_10_C_ii
+  description: (ii) The term "current market value" has the same meaning as defined in Rule 401(a)(4) of SEC Customer Margin
+    Requiremen
+  citation: FINRA 4210(f)(10)(C)(ii)
+  source_quote: (ii) The term "current market value" has the same meaning as defined in Rule 401(a)(4) of SEC Customer Margin
+    Requirements for Security Futures and Rule 41.43(a)(4) under the CEA.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_C_iii
+  description: (iii) The term "underlying security" means, in the case of physically settled security futures contracts, the
+    security t
+  citation: FINRA 4210(f)(10)(C)(iii)
+  source_quote: (iii) The term "underlying security" means, in the case of physically settled security futures contracts,
+    the security that is delivered upon expiration of the contract, and, in the case of cash settled security futures contracts,
+    the security or securities index the price or level of which determines the final settlement price for the security futures
+    contract upon its expiration.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_C_iv
+  description: '(iv) The term "underlying basket" means, in the case of a securities index, a group of security futures contracts
+    where '
+  citation: FINRA 4210(f)(10)(C)(iv)
+  source_quote: '(iv) The term "underlying basket" means, in the case of a securities index, a group of security futures contracts
+    where the underlying securities as defined in subparagraph (iii) above include each of the component securities of the
+    applicable index and that meets the following conditions: (1) the quantity of each underlying security is proportional
+    to its representation in the index, (2) the total market value of the underlying securities is equal to the aggregate
+    value of the applicable index, (3) the basket cannot be used to offset more than the number of contracts or warrants represented
+    by its total market value, and (4) the security futures contracts shall be unavailable to support any other contract or
+    warrant transaction in the account.'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(C)(iv)
+- id: 4210_f_10_C_v
+  description: (v) The term "underlying stock basket" means a group of securities that includes each of the component securities
+    of the
+  citation: FINRA 4210(f)(10)(C)(v)
+  source_quote: '(v) The term "underlying stock basket" means a group of securities that includes each of the component securities
+    of the applicable index and that meets the following conditions: (1) the quantity of each stock in the basket is proportional
+    to its representation in the index, (2) the total market value of the basket is equal to the underlying index value of
+    the index options or warrants to be covered, (3) the securities in the basket cannot be used to cover more than the number
+    of index options or warrants represented by that value, and (4) the securities in the basket shall be unavailable to support
+    any other option or warrant transaction in the account.'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(C)(v)
+- id: 4210_f_10_C_vi
+  description: '(vi) The term "variation settlement" has the same meaning as defined in Rule 401(a) of SEC Customer Margin
+    Requirements '
+  citation: FINRA 4210(f)(10)(C)(vi)
+  source_quote: (vi) The term "variation settlement" has the same meaning as defined in Rule 401(a) of SEC Customer Margin
+    Requirements for Security Futures and Rule 41.43(a)(32) under the CEA.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_D
+  description: (D) Security Futures Dealers' Accounts
+  citation: FINRA 4210(f)(10)(D)
+  source_quote: (D) Security Futures Dealers' Accounts
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)
+- id: 4210_f_10_D_i
+  description: (i) Notwithstanding the other provisions of this paragraph (f)(10), a member may carry and clear the market
+    maker permit
+  citation: FINRA 4210(f)(10)(D)(i)
+  source_quote: (i) Notwithstanding the other provisions of this paragraph (f)(10), a member may carry and clear the market
+    maker permitted offset positions (as defined below) of one or more security futures dealers in an account that is limited
+    to market maker transactions, upon a "Good Faith" margin basis that is satisfactory to the concerned parties, provided
+    the "Good Faith" margin requirement is not less than the net capital haircut deduction of the member carrying the transaction
+    pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a). In lieu of collecting the "Good Faith" margin requirement,
+    a carrying member may elect to deduct in computing its net capital the amount of any deficiency between the equity maintained
+    in the account and the "Good Faith" margin required.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_10_D_ii
+  description: (ii) For purposes of this paragraph (f)(10)(D), a permitted offset position means in the case of a security
+    futures cont
+  citation: FINRA 4210(f)(10)(D)(ii)
+  source_quote: '(ii) For purposes of this paragraph (f)(10)(D), a permitted offset position means in the case of a security
+    futures contract in which a security futures dealer makes a market, a position in the underlying asset or other related
+    assets, or positions in options overlying the asset or related assets. Accordingly, a security futures dealer may establish
+    a long or short position in the assets underlying the security futures contracts in which the security futures dealer
+    makes a market, and may purchase or write options overlying those assets if the account holds the following permitted
+    offset positions:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)
+- id: 4210_f_10_D_ii_a._a
+  description: a. A "long" position in the security futures contract or underlying asset offset by a "short" option position
+    that is "i
+  citation: FINRA 4210(f)(10)(D)(ii)(a.)
+  source_quote: a. A "long" position in the security futures contract or underlying asset offset by a "short" option position
+    that is "in or at the money";
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(a.)
+- id: 4210_f_10_D_ii_b._b
+  description: b. A "short" position in the security futures contract or underlying asset offset by a "long" option position
+    that is "i
+  citation: FINRA 4210(f)(10)(D)(ii)(b.)
+  source_quote: b. A "short" position in the security futures contract or underlying asset offset by a "long" option position
+    that is "in or at the money";
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(b.)
+- id: 4210_f_10_D_ii_c._c
+  description: 'c. A position in the underlying asset resulting from the assignment of a market-maker "short" option position
+    or making '
+  citation: FINRA 4210(f)(10)(D)(ii)(c.)
+  source_quote: c. A position in the underlying asset resulting from the assignment of a market-maker "short" option position
+    or making delivery in respect of a short security futures contract;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(c.)
+- id: 4210_f_10_D_ii_d._d
+  description: d. A position in the underlying asset resulting from the assignment of a market-maker "long" option position
+    or taking d
+  citation: FINRA 4210(f)(10)(D)(ii)(d.)
+  source_quote: d. A position in the underlying asset resulting from the assignment of a market-maker "long" option position
+    or taking delivery in respect of a long security futures contract;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(d.)
+- id: 4210_f_10_D_ii_e._e
+  description: e. A net "long" position in a security futures contract in which a security futures dealer makes a market or
+    the underly
+  citation: FINRA 4210(f)(10)(D)(ii)(e.)
+  source_quote: e. A net "long" position in a security futures contract in which a security futures dealer makes a market
+    or the underlying asset;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(e.)
+- id: 4210_f_10_D_ii_f._f
+  description: f. A net "short" position in a security futures contract in which a security futures dealer makes a market
+    or the underl
+  citation: FINRA 4210(f)(10)(D)(ii)(f.)
+  source_quote: f. A net "short" position in a security futures contract in which a security futures dealer makes a market
+    or the underlying asset; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(f.)
+- id: 4210_f_10_D_ii_g._g
+  description: g. An offset position as defined in SEA Rule 15c3-1, including its appendices, or any applicable SEC staff
+    interpretatio
+  citation: FINRA 4210(f)(10)(D)(ii)(g.)
+  source_quote: g. An offset position as defined in SEA Rule 15c3-1, including its appendices, or any applicable SEC staff
+    interpretation or no-action position.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(D)(ii)(g.)
+- id: 4210_f_10_E
+  description: (E) Approved Options Specialists' or Approved Market Makers' Accounts
+  citation: FINRA 4210(f)(10)(E)
+  source_quote: (E) Approved Options Specialists' or Approved Market Makers' Accounts
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)
+- id: 4210_f_10_E_i
+  description: (i) Notwithstanding the other provisions of paragraphs (f)(10) and (f)(2)(K), a member may carry and clear
+    the market ma
+  citation: FINRA 4210(f)(10)(E)(i)
+  source_quote: (i) Notwithstanding the other provisions of paragraphs (f)(10) and (f)(2)(K), a member may carry and clear
+    the market maker permitted offset positions (as defined below) of one or more approved options specialists or approved
+    market makers in an account that is limited to bona fide approved options specialist or approved market maker transactions,
+    upon a "Good Faith" margin basis that is satisfactory to the concerned parties, provided the "Good Faith" margin requirement
+    is not less than the net capital haircut deduction of the member carrying the transaction pursuant to SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a). In lieu of collecting the "Good Faith" margin requirement, a carrying member may elect
+    to deduct in computing its net capital the amount of any deficiency between the equity maintained in the account and the
+    "Good Faith" margin required. For the purpose of this paragraph (f)(10)(E), the term "approved options specialist" or
+    "approved market maker" means a specialist, market maker, or registered trader in options as referenced in paragraph (f)(2)(K)
+    of this Rule, who is deemed a specialist for all purposes under the Exchange Act and who is registered pursuant to the
+    rules of a national securities exchange.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_10_E_ii
+  description: '(ii) For purposes of this paragraph (f)(10)(E), a permitted offset position means a position in the underlying
+    asset or '
+  citation: FINRA 4210(f)(10)(E)(ii)
+  source_quote: '(ii) For purposes of this paragraph (f)(10)(E), a permitted offset position means a position in the underlying
+    asset or other related assets. Accordingly, a specialist or market maker may establish a long or short position in the
+    assets underlying the options in which the specialist or market maker makes a market, or a security futures contract thereon,
+    if the account holds the following permitted offset positions:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)
+- id: 4210_f_10_E_ii_a._a
+  description: 'a. A "long" position in the underlying instrument or security futures contract offset by a "short" option
+    position that '
+  citation: FINRA 4210(f)(10)(E)(ii)(a.)
+  source_quote: a. A "long" position in the underlying instrument or security futures contract offset by a "short" option
+    position that is "in or at the money";
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)(a.)
+- id: 4210_f_10_E_ii_b._b
+  description: 'b. A "short" position in the underlying instrument or security futures contract offset by a "long" option
+    position that '
+  citation: FINRA 4210(f)(10)(E)(ii)(b.)
+  source_quote: b. A "short" position in the underlying instrument or security futures contract offset by a "long" option
+    position that is "in or at the money";
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)(b.)
+- id: 4210_f_10_E_ii_c._c
+  description: c. A stock position resulting from the assignment of a market-maker short option position or delivery in respect
+    of a "s
+  citation: FINRA 4210(f)(10)(E)(ii)(c.)
+  source_quote: c. A stock position resulting from the assignment of a market-maker short option position or delivery in respect
+    of a "short" security futures contract;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)(c.)
+- id: 4210_f_10_E_ii_d._d
+  description: d. A stock position resulting from the exercise of a market maker "long" option position or taking delivery
+    in respect o
+  citation: FINRA 4210(f)(10)(E)(ii)(d.)
+  source_quote: d. A stock position resulting from the exercise of a market maker "long" option position or taking delivery
+    in respect of a long security futures contract;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)(d.)
+- id: 4210_f_10_E_ii_e._e
+  description: e. A net "long" position in a security (other than an option) in which the market maker makes a market;
+  citation: FINRA 4210(f)(10)(E)(ii)(e.)
+  source_quote: e. A net "long" position in a security (other than an option) in which the market maker makes a market;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)(e.)
+- id: 4210_f_10_E_ii_f._f
+  description: f. A net "short" position in a security (other than an option) in which the market maker makes a market; or
+  citation: FINRA 4210(f)(10)(E)(ii)(f.)
+  source_quote: f. A net "short" position in a security (other than an option) in which the market maker makes a market; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(E)(ii)(f.)
+- id: 4210_f_10_E_iii
+  description: (iii) For purposes of paragraphs (f)(10)(D) and (E), the term "in or at the money" means that the current market
+    price o
+  citation: FINRA 4210(f)(10)(E)(iii)
+  source_quote: (iii) For purposes of paragraphs (f)(10)(D) and (E), the term "in or at the money" means that the current
+    market price of the underlying security is not more than two standard exercise intervals below (with respect to a call
+    option) or above (with respect to a put option) the exercise price of the option; the term "in the money" means that the
+    current market price of the underlying asset or index is not below (with respect to a call option) or above (with respect
+    to a put option) the exercise price of the option; the term "overlying option" means a put option purchased or a call
+    option written against a "long" position in an underlying asset; or a call option purchased, or a put option written against
+    a "short" position in an underlying asset.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_E_iv
+  description: (iv) Securities, including options and security futures contracts, in such accounts shall be valued conservatively
+    in li
+  citation: FINRA 4210(f)(10)(E)(iv)
+  source_quote: '(iv) Securities, including options and security futures contracts, in such accounts shall be valued conservatively
+    in light of current market prices and the amount that might be realized upon liquidation. Substantial additional margin
+    must be required or excess net capital maintained in all cases where the securities carried: (a) are subject to unusually
+    rapid or violent changes in value including volatility in the expiration months of options or security futures contracts,
+    (b) do not have an active market, or (c) in one or more or all accounts, including proprietary accounts combined, are
+    such that they cannot be liquidated promptly or represent undue concentration of risk in view of the carrying member''s
+    net capital and its overall exposure to material loss.'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_F
+  description: (F) Approved Specialists' and Approved Market Makers' Accounts — Others
+  citation: FINRA 4210(f)(10)(F)
+  source_quote: (F) Approved Specialists' and Approved Market Makers' Accounts — Others
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(F)
+- id: 4210_f_10_F_i
+  description: (i) Notwithstanding the other provisions of paragraphs (f)(10) and (f)(2)(K), a member may carry the account
+    of an "appr
+  citation: FINRA 4210(f)(10)(F)(i)
+  source_quote: (i) Notwithstanding the other provisions of paragraphs (f)(10) and (f)(2)(K), a member may carry the account
+    of an "approved specialist" or "approved market maker" which account is limited to bona fide specialist or market making
+    transactions including hedge transactions with security futures contracts upon a margin basis that is satisfactory to
+    both parties. The amount of any deficiency between the equity in the account and haircut requirement pursuant to SEA Rule
+    15c3-1 and, if applicable, Rule 4110(a), shall be charged against the member's net capital when computing net capital
+    under SEA Rule 15c3-1 and Rule 4110(a).
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_10_F_ii
+  description: (ii) For purposes of this paragraph (f)(10)(F), the term "approved specialist" or "approved market maker" means
+    a specia
+  citation: FINRA 4210(f)(10)(F)(ii)
+  source_quote: (ii) For purposes of this paragraph (f)(10)(F), the term "approved specialist" or "approved market maker"
+    means a specialist or market maker who is deemed a specialist or market maker for all purposes under the Exchange Act
+    and who is registered pursuant to the rules of a national securities exchange.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(F)(ii)
+- id: 4210_f_10_G
+  description: (G) Additional Requirements
+  citation: FINRA 4210(f)(10)(G)
+  source_quote: (G) Additional Requirements
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_G_i
+  description: (i) Money market mutual funds, as defined in Rule 2a-7 under the Investment Company Act, can be used for satisfying
+    marg
+  citation: FINRA 4210(f)(10)(G)(i)
+  source_quote: (i) Money market mutual funds, as defined in Rule 2a-7 under the Investment Company Act, can be used for satisfying
+    margin requirements under this paragraph (f)(10), provided that the requirements of Rule 404(b) of SEC Customer Margin
+    Requirements for Security Futures and Rule 41.46(b)(2) under the CEA are satisfied.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_10_G_iii
+  description: '(iii) The use of the "time and tick" method is based on the member''s ability to substantiate the validity
+    of the system '
+  citation: FINRA 4210(f)(10)(G)(iii)
+  source_quote: (iii) The use of the "time and tick" method is based on the member's ability to substantiate the validity
+    of the system used. Lacking this ability dictates the use of the aggregate method.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(G)(iii)
+- id: 4210_f_10_G_iv
+  description: (iv) Security futures contracts transacted or held in a futures account shall not be subject to any provision
+    of this Ru
+  citation: FINRA 4210(f)(10)(G)(iv)
+  source_quote: (iv) Security futures contracts transacted or held in a futures account shall not be subject to any provision
+    of this Rule.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(10)(G)(iv)
+- id: 4210_f_2
+  description: (2) Puts, Calls and Other Options, Currency Warrants, Currency Index Warrants and Stock Index Warrants
+  citation: FINRA 4210(f)(2)
+  source_quote: (2) Puts, Calls and Other Options, Currency Warrants, Currency Index Warrants and Stock Index Warrants
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_ii
+  description: '(ii) The term "aggregate exercise price" as used with reference to an option contract means:'
+  citation: FINRA 4210(f)(2)(A)(ii)
+  source_quote: '(ii) The term "aggregate exercise price" as used with reference to an option contract means:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(ii)
+- id: 4210_f_2_A_ii_a._a
+  description: a. if a single stock underlies the option contract, the exercise price of the option contract multiplied by
+    the number o
+  citation: FINRA 4210(f)(2)(A)(ii)(a.)
+  source_quote: a. if a single stock underlies the option contract, the exercise price of the option contract multiplied by
+    the number of shares of the underlying stock covered by such option contract;
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_A_ii_b._b
+  description: b. if a Treasury bond or Treasury note underlies the option contract,
+  citation: FINRA 4210(f)(2)(A)(ii)(b.)
+  source_quote: b. if a Treasury bond or Treasury note underlies the option contract,
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(ii)(b.)
+- id: 4210_f_2_A_ii_b._1._b_1
+  description: 1. the exercise price of the option contract multiplied by the principal amount of the underlying security
+    covered by su
+  citation: FINRA 4210(f)(2)(A)(ii)(b.)(1.)
+  source_quote: 1. the exercise price of the option contract multiplied by the principal amount of the underlying security
+    covered by such option contract, plus
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_A_ii_b._2._b_2
+  description: '2. accrued interest:'
+  citation: FINRA 4210(f)(2)(A)(ii)(b.)(2.)
+  source_quote: '2. accrued interest: A. on bonds (except bonds issued or guaranteed by the United States Government), that
+    portion of the interest on the bonds for a full year, computed for the number of days elapsed since the previous interest
+    date on the basis of a 360-day-year. Each calendar month shall be considered to be 1/12 of 360 days, or 30 days, and each
+    period from a date in one month to the same date in the following month shall be considered to be 30 days. B. on bonds
+    issued or guaranteed by the United States Government, that portion of the interest on the bonds for the current full interest
+    period, computed for the actual number of days elapsed since the previous interest date on the basis of actual number
+    of calendar days in the current full interest period. The actual elapsed days in each calendar month shall be used in
+    determining the number of days in a period.'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(ii)(b.)(2.)
+- id: 4210_f_2_A_ii_c._c
+  description: c. if a Treasury bill underlies the option contract, the difference between the principal amount of such Treasury
+    bill a
+  citation: FINRA 4210(f)(2)(A)(ii)(c.)
+  source_quote: c. if a Treasury bill underlies the option contract, the difference between the principal amount of such Treasury
+    bill and the aggregate discount amount;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(ii)(c.)
+- id: 4210_f_2_A_ii_d._d
+  description: d. if an index stock group underlies the option contract, the exercise price of the option contract times the
+    index mult
+  citation: FINRA 4210(f)(2)(A)(ii)(d.)
+  source_quote: d. if an index stock group underlies the option contract, the exercise price of the option contract times
+    the index multiplier; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(ii)(d.)
+- id: 4210_f_2_A_ii_e._e
+  description: e. if a GNMA underlies the option contract, the exercise price of the option contract multiplied by the nominal
+    principa
+  citation: FINRA 4210(f)(2)(A)(ii)(e.)
+  source_quote: e. if a GNMA underlies the option contract, the exercise price of the option contract multiplied by the nominal
+    principal amount of the underlying GNMA covered by such option contract. In the case of an underlying GNMA, if the remaining
+    unpaid principal balance of a GNMA delivered upon exercise of an option contract is a permissible variant of, rather than
+    equal to, the nominal principal amount, the aggregate exercise price shall be adjusted to equal the product of the exercise
+    price and such remaining unpaid principal balance, plus in each case the appropriate differential.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_A_iii
+  description: (iii) The term "American-style option" means an option contract that can be exercised at any time prior to
+    its expiratio
+  citation: FINRA 4210(f)(2)(A)(iii)
+  source_quote: (iii) The term "American-style option" means an option contract that can be exercised at any time prior to
+    its expiration pursuant to the rules of The Options Clearing Corporation.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(iii)
+- id: 4210_f_2_A_iv
+  description: '(iv) The term "annualized discount" as used with reference to a Treasury bill means the percent discount from
+    principal '
+  citation: FINRA 4210(f)(2)(A)(iv)
+  source_quote: (iv) The term "annualized discount" as used with reference to a Treasury bill means the percent discount from
+    principal amount at which the Treasury bill may be purchased or sold, expressed as a discount for a term to maturity of
+    360 days.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_A_ix
+  description: (ix) The term "class (of options)" means all option contracts of the same type and kind covering the same underlying
+    sec
+  citation: FINRA 4210(f)(2)(A)(ix)
+  source_quote: (ix) The term "class (of options)" means all option contracts of the same type and kind covering the same
+    underlying security or underlying stock group.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(ix)
+- id: 4210_f_2_A_v
+  description: (v) The term "appropriate differential" as used with reference to a GNMA option contract means a positive or
+    negative am
+  citation: FINRA 4210(f)(2)(A)(v)
+  source_quote: (v) The term "appropriate differential" as used with reference to a GNMA option contract means a positive
+    or negative amount equal to the product of (A) the difference between the remaining unpaid principal balance of a GNMA
+    delivered upon exercise of that contract and the nominal principal amount, and (B) the difference between the current
+    cash market price of GNMAs bearing the same stated rate of interest as that borne by the GNMA delivered upon exercise
+    and the exercise price.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(v)
+- id: 4210_f_2_A_vi
+  description: (vi) The term "box spread" means an aggregation of positions in a long call and short put with the same exercise
+    price (
+  citation: FINRA 4210(f)(2)(A)(vi)
+  source_quote: '(vi) The term "box spread" means an aggregation of positions in a long call and short put with the same exercise
+    price ("buy side") coupled with a long put and short call with the same exercise price ("sell side") structured as: (A)
+    a "long box spread" in which the sell side exercise price exceeds the buy side exercise price or, (B) a "short box spread"
+    in which the buy side exercise price exceeds the sell side exercise price, all of which have the same contract size, underlying
+    component or index and time of expiration, and are based on the same aggregate current underlying value.'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_vii
+  description: (vii) The term "broad index stock group" means an index stock group of 25 or more stocks whose inclusion and
+    relative re
+  citation: FINRA 4210(f)(2)(A)(vii)
+  source_quote: (vii) The term "broad index stock group" means an index stock group of 25 or more stocks whose inclusion and
+    relative representation in the group are determined by the inclusion and relative representation of their current market
+    prices in a widely disseminated stock index reflecting the stock market as a whole or an inter-industry sector of the
+    stock market.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(vii)
+- id: 4210_f_2_A_viii
+  description: '(viii) The terms "call" and "put":'
+  citation: FINRA 4210(f)(2)(A)(viii)
+  source_quote: '(viii) The terms "call" and "put":'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_viii_a._a
+  description: a. as used in connection with a currency, currency index or stock index warrant mean a warrant structured as
+    a "call" or
+  citation: FINRA 4210(f)(2)(A)(viii)(a.)
+  source_quote: a. as used in connection with a currency, currency index or stock index warrant mean a warrant structured
+    as a "call" or "put" (as appropriate) on the underlying currency, index currency group or stock index group (as the case
+    may be) or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_viii_b._b
+  description: b. as used in connection with an option contract means an option under which the holder has the right, in accordance
+    wit
+  citation: FINRA 4210(f)(2)(A)(viii)(b.)
+  source_quote: 'b. as used in connection with an option contract means an option under which the holder has the right, in
+    accordance with the terms of the option, to purchase from (in the case of a call), or sell to (in the case of a put),
+    The Options Clearing Corporation:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_viii_b._1._b_1
+  description: 1. the number of shares of the underlying stock (if a single stock underlies the option contract);
+  citation: FINRA 4210(f)(2)(A)(viii)(b.)(1.)
+  source_quote: 1. the number of shares of the underlying stock (if a single stock underlies the option contract);
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(viii)(b.)(1.)
+- id: 4210_f_2_A_viii_b._2._b_2
+  description: 2. the principal amount of the underlying security (if a Government security underlies the option contract);
+  citation: FINRA 4210(f)(2)(A)(viii)(b.)(2.)
+  source_quote: 2. the principal amount of the underlying security (if a Government security underlies the option contract);
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(viii)(b.)(2.)
+- id: 4210_f_2_A_viii_b._3._b_3
+  description: 3. the multiple of the index group value of the underlying group (if an index stock group underlies the option
+    contract)
+  citation: FINRA 4210(f)(2)(A)(viii)(b.)(3.)
+  source_quote: 3. the multiple of the index group value of the underlying group (if an index stock group underlies the option
+    contract); or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(viii)(b.)(3.)
+- id: 4210_f_2_A_viii_b._4._b_4
+  description: 4. the nominal principal amount or any permissible variant of the underlying GNMA (if a GNMA underlies the
+    option contra
+  citation: FINRA 4210(f)(2)(A)(viii)(b.)(4.)
+  source_quote: 4. the nominal principal amount or any permissible variant of the underlying GNMA (if a GNMA underlies the
+    option contract) covered by the option contract.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(viii)(b.)(4.)
+- id: 4210_f_2_A_x
+  description: (x) The term "covered" has the same meaning as defined in Rule 2360(a).
+  citation: FINRA 4210(f)(2)(A)(x)
+  source_quote: (x) The term "covered" has the same meaning as defined in Rule 2360(a).
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(x)
+- id: 4210_f_2_A_xi
+  description: (xi) The terms "currency warrant," "currency index" and "currency index warrant" have the same meanings as
+    defined in Ru
+  citation: FINRA 4210(f)(2)(A)(xi)
+  source_quote: (xi) The terms "currency warrant," "currency index" and "currency index warrant" have the same meanings as
+    defined in Rule 2351(b).
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xi)
+- id: 4210_f_2_A_xii
+  description: (xii) The term "current cash market price" as used with reference to GNMAs means the prevailing price in the
+    cash market
+  citation: FINRA 4210(f)(2)(A)(xii)
+  source_quote: (xii) The term "current cash market price" as used with reference to GNMAs means the prevailing price in the
+    cash market for GNMAs bearing a particular stated rate of interest to be delivered on the next applicable monthly settlement
+    date determined in the manner specified in the rules of The Options Clearing Corporation.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xii)
+- id: 4210_f_2_A_xiii
+  description: (xiii) The terms "current market value" or "current market price" of an option, currency warrant, currency
+    index warrant
+  citation: FINRA 4210(f)(2)(A)(xiii)
+  source_quote: (xiii) The terms "current market value" or "current market price" of an option, currency warrant, currency
+    index warrant, or stock index warrant are as defined in Section 220.2 of Regulation T.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xiii)
+- id: 4210_f_2_A_xiv
+  description: (xiv) The term "escrow agreement," when used in connection with cash settled calls, puts, currency warrants,
+    currency in
+  citation: FINRA 4210(f)(2)(A)(xiv)
+  source_quote: (xiv) The term "escrow agreement," when used in connection with cash settled calls, puts, currency warrants,
+    currency index warrants or stock index warrants, carried "short", means any agreement issued in a form acceptable to FINRA
+    under which a bank holding cash, cash equivalents, one or more qualified equity securities or a combination thereof in
+    the case of a call or warrants, or cash, cash equivalents or a combination thereof in the case of a put or warrant is
+    obligated (in the case of an option) to pay the creditor the exercise settlement amount in the event an option is assigned
+    an exercise notice or, (in the case of a warrant) the sufficient funds to purchase a warrant sold "short" in the event
+    of a buy-in.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_xix
+  description: (xix) The term "expiration month" in respect of an option contract means the month and year in which such option
+    contrac
+  citation: FINRA 4210(f)(2)(A)(xix)
+  source_quote: (xix) The term "expiration month" in respect of an option contract means the month and year in which such
+    option contract expires.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xix)
+- id: 4210_f_2_A_xv
+  description: '(xv) The term "European-style option" means an option contract that can be exercised only at its expiration
+    pursuant to '
+  citation: FINRA 4210(f)(2)(A)(xv)
+  source_quote: (xv) The term "European-style option" means an option contract that can be exercised only at its expiration
+    pursuant to the rules of The Options Clearing Corporation.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xv)
+- id: 4210_f_2_A_xvi
+  description: (xvi) The term "exercise price" in respect of an option or warrant contract means the stated price per unit
+    at which the
+  citation: FINRA 4210(f)(2)(A)(xvi)
+  source_quote: (xvi) The term "exercise price" in respect of an option or warrant contract means the stated price per unit
+    at which the underlying security may be purchased (in the case of a call) or sold (in the case of a put) upon the exercise
+    of such option contract.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_xvii
+  description: (xvii) The term "exercise settlement amount" shall mean the difference between the "aggregate exercise price"
+    and the "a
+  citation: FINRA 4210(f)(2)(A)(xvii)
+  source_quote: (xvii) The term "exercise settlement amount" shall mean the difference between the "aggregate exercise price"
+    and the "aggregate current index value" (as such terms are defined in the pertinent By-Laws of The Options Clearing Corporation).
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xvii)
+- id: 4210_f_2_A_xviii
+  description: (xviii) The term "expiration date" in respect of an option contract means the date and time fixed by the rules
+    of The Op
+  citation: FINRA 4210(f)(2)(A)(xviii)
+  source_quote: (xviii) The term "expiration date" in respect of an option contract means the date and time fixed by the rules
+    of The Options Clearing Corporation for the expiration of all option contracts covering the same underlying security or
+    underlying index stock group and having the same expiration month as such option contract.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xviii)
+- id: 4210_f_2_A_xx
+  description: (xx) The term "index currency group" means a group of currencies whose inclusion and relative representation
+    in the grou
+  citation: FINRA 4210(f)(2)(A)(xx)
+  source_quote: (xx) The term "index currency group" means a group of currencies whose inclusion and relative representation
+    in the group is determined by the inclusion and relative representation of the current market prices of the currencies
+    in a currency index.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xx)
+- id: 4210_f_2_A_xxii
+  description: (xxii) The term "index multiplier" as used in reference to an index option contract means the amount specified
+    in the co
+  citation: FINRA 4210(f)(2)(A)(xxii)
+  source_quote: (xxii) The term "index multiplier" as used in reference to an index option contract means the amount specified
+    in the contract by which the index value is to be multiplied to arrive at the value required to be delivered to the holder
+    of a call or by the holder of a put upon valid exercise of the contract.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_xxiii
+  description: (xxiii) The term "industry stock index group" means an index stock group of six or more stocks whose inclusion
+    and relat
+  citation: FINRA 4210(f)(2)(A)(xxiii)
+  source_quote: (xxiii) The term "industry stock index group" means an index stock group of six or more stocks whose inclusion
+    and relative representation in the group are determined by the inclusion and relative representation of their current
+    market prices in a widely disseminated stock index reflecting a particular industry or closely related industries.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxiii)
+- id: 4210_f_2_A_xxiv
+  description: (xxiv) The term "listed" as used with reference to a call or put option contract means an option contract that
+    is traded
+  citation: FINRA 4210(f)(2)(A)(xxiv)
+  source_quote: (xxiv) The term "listed" as used with reference to a call or put option contract means an option contract
+    that is traded on a national securities exchange or issued and guaranteed by a registered clearing agency and shall include
+    an OCC Cleared OTC Option (as defined in Rule 2360).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_xxix
+  description: '(xxix) The term "reporting authority," when used in respect of a currency index warrant or a stock index warrant,
+    shall '
+  citation: FINRA 4210(f)(2)(A)(xxix)
+  source_quote: (xxix) The term "reporting authority," when used in respect of a currency index warrant or a stock index warrant,
+    shall mean the institution or reporting service specified in the prospectus as the official source for calculating and
+    reporting the level of such currency index or stock index.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxix)
+- id: 4210_f_2_A_xxvii
+  description: (xxvii) The term "OTC" as used with reference to a call or put option contract means an over-the-counter option
+    contract
+  citation: FINRA 4210(f)(2)(A)(xxvii)
+  source_quote: (xxvii) The term "OTC" as used with reference to a call or put option contract means an over-the-counter option
+    contract that is not traded on a national securities exchange and is issued and guaranteed by the carrying broker-dealer
+    and shall not include OCC Cleared OTC Option (as defined in Rule 2360).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_xxviii
+  description: '(xxviii) A "registered clearing agency" shall mean a clearing agency as defined in Section 3(a)(23) of the
+    Exchange Act '
+  citation: FINRA 4210(f)(2)(A)(xxviii)
+  source_quote: (xxviii) A "registered clearing agency" shall mean a clearing agency as defined in Section 3(a)(23) of the
+    Exchange Act that is registered with the SEC pursuant to Section 17A(b)(2) of the Exchange Act.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxviii)
+- id: 4210_f_2_A_xxx
+  description: '(xxx) The term "series (of options)" means all option contracts of the same class of options having the same
+    expiration '
+  citation: FINRA 4210(f)(2)(A)(xxx)
+  source_quote: (xxx) The term "series (of options)" means all option contracts of the same class of options having the same
+    expiration date, exercise price and unit of trading.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxx)
+- id: 4210_f_2_A_xxxi
+  description: (xxxi) The term "spot price" in respect of a currency warrant on a particular business day means the noon buying
+    rate in
+  citation: FINRA 4210(f)(2)(A)(xxxi)
+  source_quote: (xxxi) The term "spot price" in respect of a currency warrant on a particular business day means the noon
+    buying rate in U.S. dollars on such day in New York City for cable transfers of the particular underlying currency as
+    certified for customs purposes by the Federal Reserve Bank of New York.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxi)
+- id: 4210_f_2_A_xxxii_a._a
+  description: a. all options must have the same underlying security or instrument;
+  citation: FINRA 4210(f)(2)(A)(xxxii)(a.)
+  source_quote: a. all options must have the same underlying security or instrument;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxii)(a.)
+- id: 4210_f_2_A_xxxii_b._b
+  description: b. all "long" and "short" option contracts must be either all American-style or all European-style;
+  citation: FINRA 4210(f)(2)(A)(xxxii)(b.)
+  source_quote: b. all "long" and "short" option contracts must be either all American-style or all European-style;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxii)(b.)
+- id: 4210_f_2_A_xxxii_c._c
+  description: c. all "long" and "short" option contracts must be either all listed or all OTC;
+  citation: FINRA 4210(f)(2)(A)(xxxii)(c.)
+  source_quote: c. all "long" and "short" option contracts must be either all listed or all OTC;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxii)(c.)
+- id: 4210_f_2_A_xxxii_d._d
+  description: d. the aggregate underlying contract value of "long" versus "short" contracts within option type(s) must be
+    equal; and
+  citation: FINRA 4210(f)(2)(A)(xxxii)(d.)
+  source_quote: d. the aggregate underlying contract value of "long" versus "short" contracts within option type(s) must be
+    equal; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxii)(d.)
+- id: 4210_f_2_A_xxxii_e._e
+  description: e. the "short" option(s) must expire on or before the expiration date of the "long" option(s).
+  citation: FINRA 4210(f)(2)(A)(xxxii)(e.)
+  source_quote: e. the "short" option(s) must expire on or before the expiration date of the "long" option(s).
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxii)(e.)
+- id: 4210_f_2_A_xxxiii
+  description: (xxxiii) The term "stock index group" has the same meaning as defined in Rule 2351(b).
+  citation: FINRA 4210(f)(2)(A)(xxxiii)
+  source_quote: (xxxiii) The term "stock index group" has the same meaning as defined in Rule 2351(b).
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxiii)
+- id: 4210_f_2_A_xxxiv
+  description: (xxxiv) The term "stock index warrant" shall mean a put or call warrant that overlies a broad stock index group
+    or an in
+  citation: FINRA 4210(f)(2)(A)(xxxiv)
+  source_quote: (xxxiv) The term "stock index warrant" shall mean a put or call warrant that overlies a broad stock index
+    group or an industry stock index group.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_A_xxxv
+  description: (xxxv) The term "underlying component" shall mean in the case of stock, the equivalent number of shares; industry
+    and br
+  citation: FINRA 4210(f)(2)(A)(xxxv)
+  source_quote: (xxxv) The term "underlying component" shall mean in the case of stock, the equivalent number of shares; industry
+    and broad index stock groups, the index group value and the applicable index multiplier; U.S. Treasury bills, notes and
+    bonds, the underlying principal amount; foreign currencies, the units per foreign currency contract; and interest rate
+    contracts, the interest rate measure based on the yield of U.S. Treasury bills, notes or bonds and the applicable multiplier.
+    The term "interest rate measure" represents, in the case of short term U.S. Treasury bills, the annualized discount yield
+    of a specific issue multiplied by ten or, in the case of long term U.S. Treasury notes and bonds, the average of the yield
+    to maturity of the specific multiplied by ten.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_A_xxxvi
+  description: (xxxvi) The term "unit of underlying currency" in respect of a currency warrant means a single unit of the
+    currency cove
+  citation: FINRA 4210(f)(2)(A)(xxxvi)
+  source_quote: (xxxvi) The term "unit of underlying currency" in respect of a currency warrant means a single unit of the
+    currency covered by the warrant.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(A)(xxxvi)
+- id: 4210_f_2_B
+  description: (B) Except as provided below, and in the case of a put, call, index stock group option, or stock index warrant
+    with a re
+  citation: FINRA 4210(f)(2)(B)
+  source_quote: (B) Except as provided below, and in the case of a put, call, index stock group option, or stock index warrant
+    with a remaining period to expiration exceeding nine months, no put, call, currency warrant, currency index warrant or
+    stock index warrant carried for a customer shall be considered of any value for the purpose of computing the margin to
+    be maintained in the account of such customer.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_C
+  description: (C) The issuance, guarantee or sale (other than a "long" sale) for a customer of a put, a call, a currency
+    warrant, a cu
+  citation: FINRA 4210(f)(2)(C)
+  source_quote: (C) The issuance, guarantee or sale (other than a "long" sale) for a customer of a put, a call, a currency
+    warrant, a currency index warrant or a stock index warrant shall be considered a security transaction subject to paragraphs
+    (b) and (c).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_D_i
+  description: (i) is guaranteed by the carrying broker-dealer,
+  citation: FINRA 4210(f)(2)(D)(i)
+  source_quote: (i) is guaranteed by the carrying broker-dealer,
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(D)(i)
+- id: 4210_f_2_D_ii
+  description: (ii) has an American-style exercise provision, and
+  citation: FINRA 4210(f)(2)(D)(ii)
+  source_quote: (ii) has an American-style exercise provision, and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(D)(ii)
+- id: 4210_f_2_D_iii
+  description: (iii) has a remaining period to expiration exceeding nine months.
+  citation: FINRA 4210(f)(2)(D)(iii)
+  source_quote: (iii) has a remaining period to expiration exceeding nine months.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(D)(iii)
+- id: 4210_f_2_F_i
+  description: (F)(i) Each put or call shall be margined separately and any difference between the current market value of
+    the underlyi
+  citation: FINRA 4210(f)(2)(F)(i)
+  source_quote: (F)(i) Each put or call shall be margined separately and any difference between the current market value of
+    the underlying component and the exercise price of a put or call shall be considered to be of value only in providing
+    the amount of margin required on that particular put or call. Substantial additional margin must be required on listed
+    or OTC options carried "short" with an unusually long period of time to expiration, or written on securities which are
+    subject to unusually rapid or violent changes in value, or which do not have an active market, or where the securities
+    subject to the option cannot be liquidated promptly.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_G_i
+  description: (G)(i) Where both a listed put and call specify the same underlying component and are carried "short" for a
+    customer, th
+  citation: FINRA 4210(f)(2)(G)(i)
+  source_quote: '(G)(i) Where both a listed put and call specify the same underlying component and are carried "short" for
+    a customer, the amount of margin required shall be the margin on the put or call, whichever is greater, as required pursuant
+    to paragraph (f)(2)(E)(i) above, plus the current market value on the other option. When:'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_G_i_a._a
+  description: a. a currency call warrant position is carried "short" for a customer account and is offset by a "short" currency
+    put wa
+  citation: FINRA 4210(f)(2)(G)(i)(a.)
+  source_quote: a. a currency call warrant position is carried "short" for a customer account and is offset by a "short" currency
+    put warrant and/or currency put option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_b._b
+  description: b. a currency put warrant position is carried "short" for a customer account and is offset by a "short" currency
+    call wa
+  citation: FINRA 4210(f)(2)(G)(i)(b.)
+  source_quote: b. a currency put warrant position is carried "short" for a customer account and is offset by a "short" currency
+    call warrant and/or currency put option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_c._c
+  description: 'c. a currency index call warrant position is carried "short" for a customer account and is offset by a "short"
+    currency '
+  citation: FINRA 4210(f)(2)(G)(i)(c.)
+  source_quote: c. a currency index call warrant position is carried "short" for a customer account and is offset by a "short"
+    currency index put warrant and/or currency put option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_d._d
+  description: d. a currency index put warrant position is carried "short" for a customer account and is offset by a "short"
+    currency i
+  citation: FINRA 4210(f)(2)(G)(i)(d.)
+  source_quote: d. a currency index put warrant position is carried "short" for a customer account and is offset by a "short"
+    currency index call warrant and/or currency index call option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_e._e
+  description: 'e. a stock index call warrant position is carried "short" for a customer account and is offset by a "short"
+    stock index '
+  citation: FINRA 4210(f)(2)(G)(i)(e.)
+  source_quote: e. a stock index call warrant position is carried "short" for a customer account and is offset by a "short"
+    stock index put warrant and/or stock index put option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_f._f
+  description: f. a stock index put warrant position is carried "short" for a customer account and is offset by a "short"
+    stock index c
+  citation: FINRA 4210(f)(2)(G)(i)(f.)
+  source_quote: f. a stock index put warrant position is carried "short" for a customer account and is offset by a "short"
+    stock index call warrant and/or stock index call option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_g._g
+  description: g. an index call warrant position is carried "short" for a customer account and is offset by a "short" index
+    put warrant
+  citation: FINRA 4210(f)(2)(G)(i)(g.)
+  source_quote: g. an index call warrant position is carried "short" for a customer account and is offset by a "short" index
+    put warrant and/or index put option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_h._h
+  description: h. an index put warrant position is carried "short" for a customer account and is offset by a "short" index
+    call warrant
+  citation: FINRA 4210(f)(2)(G)(i)(h.)
+  source_quote: h. an index put warrant position is carried "short" for a customer account and is offset by a "short" index
+    call warrant and/or index call option position;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_i._i
+  description: i. a broad index stock group call option position is carried "short" for a customer account and is offset by
+    a "short" b
+  citation: FINRA 4210(f)(2)(G)(i)(i.)
+  source_quote: i. a broad index stock group call option position is carried "short" for a customer account and is offset
+    by a "short" broad index stock group put option position; or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_G_i_j._j
+  description: j. a broad index stock group put option position is carried "short" for a customer account and is offset by
+    a "short" br
+  citation: FINRA 4210(f)(2)(G)(i)(j.)
+  source_quote: j. a broad index stock group put option position is carried "short" for a customer account and is offset by
+    a "short" broad index stock group call option position and the offset position is of equivalent underlying value on the
+    same currency, currency index or index stock group, as appropriate, then the amount of margin required shall be the margin
+    on the put position or the call position, whichever is greater, as required pursuant to subparagraph (E)(i), plus the
+    current market value of the other warrant and/or option position.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_G_ii
+  description: (ii) Where either or both the put and call specifying the same underlying component are not listed and are
+    OTC and carri
+  citation: FINRA 4210(f)(2)(G)(ii)
+  source_quote: (ii) Where either or both the put and call specifying the same underlying component are not listed and are
+    OTC and carried "short" for a customer by the same carrying broker-dealer (as defined in paragraph (f)(2)(H) below), the
+    amount of margin required shall be the margin on the put or call, whichever is greater, as required pursuant to paragraphs
+    (f)(2)(E)(iii) and (E)(iv) above, plus any unrealized loss on the other option. Where either or both the put or call are
+    not listed or OTC and are carried by the same carrying broker-dealer then the put and call must be margined separately
+    pursuant to paragraphs (f)(2)(E)(iii) and (E)(iv) above, however, the minimum margin shall not apply to the other option.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_I_i
+  description: '(I)(i) Where a listed or OTC call is carried "short" against an existing net "long" position in the security
+    underlying '
+  citation: FINRA 4210(f)(2)(I)(i)
+  source_quote: '(I)(i) Where a listed or OTC call is carried "short" against an existing net "long" position in the security
+    underlying the option or in any security immediately exchangeable or convertible, other than warrants, without restriction
+    including the payment of money into the security underlying the option, no margin need be required on the call, provided:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_I_i_a._a
+  description: a. such net "long" position is adequately margined in accordance with this Rule; and
+  citation: FINRA 4210(f)(2)(I)(i)(a.)
+  source_quote: a. such net "long" position is adequately margined in accordance with this Rule; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_I_i_b._b
+  description: b. the right to exchange or convert the net "long" position does not expire on or before the date of expiration
+    of the "
+  citation: FINRA 4210(f)(2)(I)(i)(b.)
+  source_quote: b. the right to exchange or convert the net "long" position does not expire on or before the date of expiration
+    of the "short" call. Where a listed or OTC put is carried "short" against an existing net "short" position in the security
+    underlying the option, no margin need be required on the put, provided such net "short" position is adequately margined
+    in accordance with this Rule.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_I_ii
+  description: (ii) Where a listed or OTC call is carried "short" against an existing net "long" position in a warrant convertible
+    into
+  citation: FINRA 4210(f)(2)(I)(ii)
+  source_quote: '(ii) Where a listed or OTC call is carried "short" against an existing net "long" position in a warrant convertible
+    into the security underlying the option, margin shall be required on the call equal to any amount by which the conversion
+    price of the "long" warrant exceeds the exercise price of the call, provided:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_I_ii_b._b
+  description: b. the right to convert the net "long" position does not expire on or before the date of expiration of the
+    "short" call.
+  citation: FINRA 4210(f)(2)(I)(ii)(b.)
+  source_quote: b. the right to convert the net "long" position does not expire on or before the date of expiration of the
+    "short" call. However, when a payment of money is required to convert the "long" warrant such warrant shall have no value
+    for purposes of this Rule.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_I_iii
+  description: (iii) In determining net "long" and net "short" positions, for purposes of paragraphs (f)(2)(I)(i) and (ii)
+    above, offse
+  citation: FINRA 4210(f)(2)(I)(iii)
+  source_quote: (iii) In determining net "long" and net "short" positions, for purposes of paragraphs (f)(2)(I)(i) and (ii)
+    above, offsetting "long" and "short" positions in exchangeable or convertible securities (including warrants) or in the
+    same security, as discussed in paragraph (e)(1), shall be deducted. In computing margin on such an existing net security
+    position carried against a put or call, the current market price to be used shall not be greater than the exercise price
+    in the case of a call or less than the current market price in the case of a put and the required margin shall be increased
+    by any unrealized loss.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_J
+  description: (J) When a member guarantees an option or stock index warrant to receive or deliver securities or foreign currencies
+    for
+  citation: FINRA 4210(f)(2)(J)
+  source_quote: (J) When a member guarantees an option or stock index warrant to receive or deliver securities or foreign
+    currencies for a customer, such option or stock index warrant shall be margined as if it were a put or call.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_K_i
+  description: (K)(i) Registered specialists, market makers or traders — Notwithstanding the other provisions of this paragraph
+    (f)(2),
+  citation: FINRA 4210(f)(2)(K)(i)
+  source_quote: (K)(i) Registered specialists, market makers or traders — Notwithstanding the other provisions of this paragraph
+    (f)(2), a member may clear and carry the listed option transactions of one or more registered specialists, registered
+    market makers or registered traders in options (whereby registered traders are deemed specialists for all purposes under
+    the Exchange Act, pursuant to the rules of a national securities exchange) (hereinafter referred to as "specialist(s)"),
+    upon a "Good Faith" margin basis satisfactory to the concerned parties, provided the "Good Faith" margin requirement is
+    not less than the net capital haircut deduction of the member carrying the transaction pursuant to SEA Rule 15c3-1 and,
+    if applicable, Rule 4110(a). In lieu of collecting the "Good Faith" margin requirement, a carrying member may elect to
+    deduct in computing its net capital the amount of any deficiency between the equity maintained in the account and the
+    "Good Faith" margin required.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_2_K_i_a._a
+  description: a. A "short" option position which is not offset by a "long" or "short" option position for an equal or greater
+    number o
+  citation: FINRA 4210(f)(2)(K)(i)(a.)
+  source_quote: a. A "short" option position which is not offset by a "long" or "short" option position for an equal or greater
+    number of shares of the same underlying security which is "in the money";
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(i)(a.)
+- id: 4210_f_2_K_i_b._b
+  description: b. A "long" option position which is not offset by a "long" or "short" option position for an equal or greater
+    number of
+  citation: FINRA 4210(f)(2)(K)(i)(b.)
+  source_quote: b. A "long" option position which is not offset by a "long" or "short" option position for an equal or greater
+    number of shares of the same underlying security which is "in the money";
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(i)(b.)
+- id: 4210_f_2_K_i_c._c
+  description: c. A "short" option position against which an exercise notice was tendered;
+  citation: FINRA 4210(f)(2)(K)(i)(c.)
+  source_quote: c. A "short" option position against which an exercise notice was tendered;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(i)(c.)
+- id: 4210_f_2_K_i_d._d
+  description: d. A "long" option position which was exercised;
+  citation: FINRA 4210(f)(2)(K)(i)(d.)
+  source_quote: d. A "long" option position which was exercised;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(i)(d.)
+- id: 4210_f_2_K_i_e._e
+  description: e. A net "long" position in a security (other than an option) in which a specialist or market maker makes a
+    market;
+  citation: FINRA 4210(f)(2)(K)(i)(e.)
+  source_quote: e. A net "long" position in a security (other than an option) in which a specialist or market maker makes
+    a market;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(i)(e.)
+- id: 4210_f_2_K_i_f._f
+  description: f. A net "short" position in a security (other than an option) in which the specialist or market maker makes
+    a market; o
+  citation: FINRA 4210(f)(2)(K)(i)(f.)
+  source_quote: f. A net "short" position in a security (other than an option) in which the specialist or market maker makes
+    a market; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(i)(f.)
+- id: 4210_f_2_K_i_g._g
+  description: g. A specified portfolio type as referred to in SEA Rule 15c3-1, including its appendices, or any applicable
+    SEC staff i
+  citation: FINRA 4210(f)(2)(K)(i)(g.)
+  source_quote: g. A specified portfolio type as referred to in SEA Rule 15c3-1, including its appendices, or any applicable
+    SEC staff interpretation or no-action position. Permitted offset transactions must be effected for specialist or market
+    making purposes such as hedging, risk reduction, rebalancing of positions, liquidation, or accommodation of customer orders,
+    or other similar specialist or market maker purpose. The specialist or market maker must be able to demonstrate compliance
+    with this provision. For purposes of this paragraph (f)(2)(K), the term "in the money" means the current market price
+    of the underlying asset or index is not below (with respect to a call option) or above (with respect to a put option)
+    the exercise price of the option; and, the term "overlying option" means a put option purchased or a call option written
+    against a "long" position in an underlying asset; or a call option purchased or a put option written against a "short"
+    position in an underlying asset.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_K_ii
+  description: (ii) Securities, including options, in such accounts shall be valued conservatively in the light of current
+    market price
+  citation: FINRA 4210(f)(2)(K)(ii)
+  source_quote: '(ii) Securities, including options, in such accounts shall be valued conservatively in the light of current
+    market prices and the amount which might be realized upon liquidation. Substantial additional margin must be required
+    or excess net capital maintained in all cases where the securities carried:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_K_ii_a._a
+  description: a. are subject to unusually rapid or violent changes in value including volatility in the expiration months
+    of options;
+  citation: FINRA 4210(f)(2)(K)(ii)(a.)
+  source_quote: a. are subject to unusually rapid or violent changes in value including volatility in the expiration months
+    of options;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(ii)(a.)
+- id: 4210_f_2_K_ii_b._b
+  description: b. do not have an active market; or
+  citation: FINRA 4210(f)(2)(K)(ii)(b.)
+  source_quote: b. do not have an active market; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(K)(ii)(b.)
+- id: 4210_f_2_K_ii_c._c
+  description: c. in one or more or all accounts, including proprietary accounts combined, are such that they cannot be liquidated
+    prom
+  citation: FINRA 4210(f)(2)(K)(ii)(c.)
+  source_quote: c. in one or more or all accounts, including proprietary accounts combined, are such that they cannot be liquidated
+    promptly or represent undue concentration of risk in view of the carrying member's net capital and its overall exposure
+    to material loss.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_L
+  description: (L) FINRA may at any time impose higher margin requirements with respect to any option or warrant position(s)
+    when it de
+  citation: FINRA 4210(f)(2)(L)
+  source_quote: (L) FINRA may at any time impose higher margin requirements with respect to any option or warrant position(s)
+    when it deems such higher margin requirements are appropriate.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_M
+  description: (M) Exclusive designation — A customer may designate at the time an option order is entered which security
+    position held
+  citation: FINRA 4210(f)(2)(M)
+  source_quote: (M) Exclusive designation — A customer may designate at the time an option order is entered which security
+    position held in the account is to serve in lieu of the required margin, if such service is offered by the member; or
+    the customer may have a standing agreement with the member as to the method to be used for determining on any given day
+    which security position will be used in lieu of the margin to support an option transaction. Any security held in the
+    account which serves in lieu of the required margin for a short put or short call shall be unavailable to support any
+    other option transaction in the account.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_2_N
+  description: '(N) Cash account transactions — A member may make option transactions in a customer''s cash account, provided
+    that:'
+  citation: FINRA 4210(f)(2)(N)
+  source_quote: '(N) Cash account transactions — A member may make option transactions in a customer''s cash account, provided
+    that:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)
+- id: 4210_f_2_N_i
+  description: (i) The transaction is permissible under Regulation T, Section 220.8; or
+  citation: FINRA 4210(f)(2)(N)(i)
+  source_quote: (i) The transaction is permissible under Regulation T, Section 220.8; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(i)
+- id: 4210_f_2_N_ii
+  description: (ii) A spread, as defined in paragraph (f)(2)(A)(xxxii) of this Rule, comprised of European-style cash-settled
+    index sto
+  citation: FINRA 4210(f)(2)(N)(ii)
+  source_quote: '(ii) A spread, as defined in paragraph (f)(2)(A)(xxxii) of this Rule, comprised of European-style cash-settled
+    index stock group options, or a "short" stock index warrant and a "long" stock index warrant, having the same underlying
+    component or index that is based on the same aggregate current underlying value, that is held in or purchased for the
+    account on the same day, is deemed a covered position and eligible for the cash account provided that:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(ii)
+- id: 4210_f_2_N_ii_a._a
+  description: a. the "long" positions and the "short" positions expire concurrently;
+  citation: FINRA 4210(f)(2)(N)(ii)(a.)
+  source_quote: a. the "long" positions and the "short" positions expire concurrently;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(ii)(a.)
+- id: 4210_f_2_N_ii_b._b
+  description: b. the "long" positions are paid in full; and
+  citation: FINRA 4210(f)(2)(N)(ii)(b.)
+  source_quote: b. the "long" positions are paid in full; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(ii)(b.)
+- id: 4210_f_2_N_ii_c._c
+  description: c. there is held in the account at the time the positions are established, or received into the account promptly
+    thereaf
+  citation: FINRA 4210(f)(2)(N)(ii)(c.)
+  source_quote: 'c. there is held in the account at the time the positions are established, or received into the account promptly
+    thereafter:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(ii)(c.)
+- id: 4210_f_2_N_ii_c._1._c_1
+  description: 1. cash or cash equivalents of not less than the maximum loss, as described in paragraph (f)(2)(H)(i)b. of
+    this Rule, to
+  citation: FINRA 4210(f)(2)(N)(ii)(c.)(1.)
+  source_quote: 1. cash or cash equivalents of not less than the maximum loss, as described in paragraph (f)(2)(H)(i)b. of
+    this Rule, to which net proceeds from the sale of the "short" positions may be applied, or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(ii)(c.)(1.)
+- id: 4210_f_2_N_ii_c._2._c_2
+  description: 2. an escrow agreement.
+  citation: FINRA 4210(f)(2)(N)(ii)(c.)(2.)
+  source_quote: 2. an escrow agreement. The escrow agreement must certify that the bank holds for the account of the customer
+    as security for the agreement i. cash, ii. cash equivalents, or iii. a combination thereof having an aggregate market
+    value at the time the positions are established of not less than the maximum loss, as described in paragraph (f)(2)(H)(i)b.
+    of this Rule and that the bank will promptly pay the member such amount in the event the account is assigned an exercise
+    notice or that the bank will promptly pay the member sufficient funds to purchase a warrant sold "short" in the event
+    of a buy-in.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(2)(N)(ii)(c.)(2.)
+- id: 4210_f_2_N_ii_d._d
+  description: d. A "long" warrant may offset a "short" option contract and a "long" option contract may offset a "short"
+    warrant provi
+  citation: FINRA 4210(f)(2)(N)(ii)(d.)
+  source_quote: d. A "long" warrant may offset a "short" option contract and a "long" option contract may offset a "short"
+    warrant provided that they have the same underlying component or index and equivalent aggregate current underlying value.
+    In the event that the "long" position is not listed, it must be guaranteed by the carrying broker-dealer; otherwise the
+    "short" position is not eligible for the cash account and must be margined separately pursuant to paragraph (f)(2)(E).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_3
+  description: (3) "When Issued" and "When Distributed" Securities
+  citation: FINRA 4210(f)(3)
+  source_quote: (3) "When Issued" and "When Distributed" Securities
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(3)
+- id: 4210_f_3_B
+  description: (B) Cash Accounts
+  citation: FINRA 4210(f)(3)(B)
+  source_quote: '(B) Cash Accounts On any transaction or net position resulting from contracts for a "when issued" security
+    in an account other than that of a member, non-member broker-dealer, or a "designated account," equity must be maintained
+    equal to the margin required were such transaction or position in a margin account. On any net position resulting from
+    contracts for a "when issued" security made for or with a non-member broker-dealer, no margin need be required, but such
+    net position must be marked to the market. On any net position resulting from contracts for a "when issued" security made
+    for a member or a "designated account," no margin need be required and such net position need not be marked to the market.
+    However, where such net position is not marked to the market, an amount equal to the loss at the market in such position
+    shall be charged against the member''s net capital as provided in SEA Rule 15c3-1 and, if applicable, Rule 4110(a). The
+    provisions of this paragraph (f)(3) shall not apply to any position resulting from contracts on a "when issued" basis
+    in a security:'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_3_B_i
+  description: '(i) which is the subject of a primary distribution in connection with a bona fide offering by the issuer to
+    the general '
+  citation: FINRA 4210(f)(3)(B)(i)
+  source_quote: (i) which is the subject of a primary distribution in connection with a bona fide offering by the issuer to
+    the general public for "cash," or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(3)(B)(i)
+- id: 4210_f_3_B_ii
+  description: (ii) which is exempt by FINRA as involving a primary distribution. The term "when issued" as used herein also
+    means "whe
+  citation: FINRA 4210(f)(3)(B)(ii)
+  source_quote: (ii) which is exempt by FINRA as involving a primary distribution. The term "when issued" as used herein also
+    means "when distributed."
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(3)(B)(ii)
+- id: 4210_f_4
+  description: (4) Guaranteed Accounts
+  citation: FINRA 4210(f)(4)
+  source_quote: (4) Guaranteed Accounts Any account guaranteed by another account may be consolidated with such other account
+    and the margin to be maintained may be determined on the net position of both accounts, provided the guarantee is in writing
+    and permits the member carrying the account, without restriction, to use the money and securities in the guaranteeing
+    account to carry the guaranteed account or to pay any deficit therein; and provided further that such guaranteeing account
+    is not owned directly or indirectly by (i) a member, or any stockholder (other than a holder of freely transferable stock
+    only) in the member carrying such account, or (ii) a member, or any stockholder (other than a holder of freely transferable
+    stock only) therein having a definite arrangement for participating in the commissions earned on the guaranteed account.
+    However, the guarantee of a limited partner or of a holder of non-voting stock, if based upon his resources other than
+    his capital contribution to or other than his interest in a member, is not affected by the foregoing prohibition, and
+    such a guarantee may be taken into consideration in computing margin to be maintained in the guaranteed account.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_8_A_i
+  description: (i) higher initial margin requirements for the purpose of effecting new securities transactions and commitments
+    in accou
+  citation: FINRA 4210(f)(8)(A)(i)
+  source_quote: (i) higher initial margin requirements for the purpose of effecting new securities transactions and commitments
+    in accounts of customers with respect to specific securities;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_A_ii
+  description: (ii) higher maintenance margin requirements for accounts of customers with respect to any securities; and
+  citation: FINRA 4210(f)(8)(A)(ii)
+  source_quote: (ii) higher maintenance margin requirements for accounts of customers with respect to any securities; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_A_iii
+  description: (iii) such other terms and conditions as FINRA shall deem appropriate relating to initial and/or maintenance
+    margin requ
+  citation: FINRA 4210(f)(8)(A)(iii)
+  source_quote: (iii) such other terms and conditions as FINRA shall deem appropriate relating to initial and/or maintenance
+    margin requirements for accounts of customers with respect to any securities.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_B
+  description: (B) Day Trading
+  citation: FINRA 4210(f)(8)(B)
+  source_quote: (B) Day Trading
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(8)(B)
+- id: 4210_f_8_B_i_a._a
+  description: a. a "long" security position held overnight and sold the next day prior to any new purchase of the same security,
+    or
+  citation: FINRA 4210(f)(8)(B)(i)(a.)
+  source_quote: a. a "long" security position held overnight and sold the next day prior to any new purchase of the same security,
+    or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(8)(B)(i)(a.)
+- id: 4210_f_8_B_i_b._b
+  description: b. a "short" security position held overnight and purchased the next day prior to any new sale of the same
+    security.
+  citation: FINRA 4210(f)(8)(B)(i)(b.)
+  source_quote: b. a "short" security position held overnight and purchased the next day prior to any new sale of the same
+    security.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(8)(B)(i)(b.)
+- id: 4210_f_8_B_iv_c._c
+  description: c. Pattern day traders cannot trade in excess of their day-trading buying power as defined in paragraph (f)(8)(B)(iii)
+    a
+  citation: FINRA 4210(f)(8)(B)(iv)(c.)
+  source_quote: 'c. Pattern day traders cannot trade in excess of their day-trading buying power as defined in paragraph (f)(8)(B)(iii)
+    above. In the event a pattern day trader exceeds its day-trading buying power, which creates a special maintenance margin
+    deficiency, the following actions will be taken by the member:'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_8_B_iv_c._1._c_1
+  description: 1. The account will be margined based on the cost of all the day trades made during the day,
+  citation: FINRA 4210(f)(8)(B)(iv)(c.)(1.)
+  source_quote: 1. The account will be margined based on the cost of all the day trades made during the day,
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_B_iv_c._2._c_2
+  description: 2. The customer's day-trading buying power will be limited to the equity in the customer's account at the close
+    of busin
+  citation: FINRA 4210(f)(8)(B)(iv)(c.)(2.)
+  source_quote: 2. The customer's day-trading buying power will be limited to the equity in the customer's account at the
+    close of business of the previous day, less the maintenance margin required in paragraph (c) of this Rule, multiplied
+    by two for equity securities, and
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_f_8_B_iv_c._3._c_3
+  description: 3. "time and tick" (i.e., calculating margin using each trade in the sequence that it is executed, using the
+    highest ope
+  citation: FINRA 4210(f)(8)(B)(iv)(c.)(3.)
+  source_quote: 3. "time and tick" (i.e., calculating margin using each trade in the sequence that it is executed, using the
+    highest open position during the day) may not be used.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_B_iv_d._d
+  description: d. Pattern day traders who fail to meet their special maintenance margin calls as required within five business
+    days fro
+  citation: FINRA 4210(f)(8)(B)(iv)(d.)
+  source_quote: d. Pattern day traders who fail to meet their special maintenance margin calls as required within five business
+    days from the date the margin deficiency occurs will be permitted to execute transactions only on a cash available basis
+    for 90 days or until the special maintenance margin call is met.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_B_iv_e._e
+  description: e. Pattern day traders are restricted from using the guaranteed account provision pursuant to paragraph (f)(4)
+    of this R
+  citation: FINRA 4210(f)(8)(B)(iv)(e.)
+  source_quote: e. Pattern day traders are restricted from using the guaranteed account provision pursuant to paragraph (f)(4)
+    of this Rule for meeting the requirements of paragraph (f)(8)(B).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_B_iv_f._f
+  description: 'f. Funds deposited into a pattern day trader''s account to meet the minimum equity or maintenance margin requirements
+    of '
+  citation: FINRA 4210(f)(8)(B)(iv)(f.)
+  source_quote: f. Funds deposited into a pattern day trader's account to meet the minimum equity or maintenance margin requirements
+    of paragraph (f)(8)(B) of this Rule cannot be withdrawn for a minimum of two business days following the close of business
+    on the day of deposit.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_8_B_v
+  description: (v) In the event a customer does not meet a special margin maintenance call by the fifth business day, then
+    on the sixth
+  citation: FINRA 4210(f)(8)(B)(v)
+  source_quote: (v) In the event a customer does not meet a special margin maintenance call by the fifth business day, then
+    on the sixth business day only, members are required to deduct from net capital the amount of the unmet special margin
+    maintenance call pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_f_9
+  description: (9) Free-Riding in Cash Accounts Prohibited
+  citation: FINRA 4210(f)(9)
+  source_quote: (9) Free-Riding in Cash Accounts Prohibited No member shall permit a customer (other than a broker-dealer)
+    to make a practice, directly or indirectly, of effecting transactions in a cash account where the cost of securities purchased
+    is met by the sale of the same securities. No member shall permit a customer to make a practice of selling securities
+    with them in a cash account which are to be received against payment from another broker-dealer where such securities
+    were purchased and are not yet paid for. A member transferring an account which is subject to a Regulation T 90-day freeze
+    to another member shall inform the receiving member of such 90-day freeze. The provisions of Section 220.8(c) of Regulation
+    T dictate the prohibitions and exceptions against customers' free-riding. Members may apply to FINRA in writing for waiver
+    of a 90-day freeze not exempted by Regulation T.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (f)(9)

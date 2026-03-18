@@ -1,0 +1,711 @@
+## Fixed Income Margin Waterfall
+##
+## Determines the maintenance margin requirement for fixed income
+## securities under FINRA Rule 4210(e)(2). US Treasuries are tiered
+## by remaining maturity (1%-6%). Municipal bonds carry a flat 7%.
+## Corporate bonds are split by credit quality and convertibility.
+## Agency debt (GNMA, MBS, debentures) follows maturity-tiered rates
+## similar to Treasuries.
+##
+## Sources:
+##   - FINRA Rule 4210(e)(2)(A) -- US Government obligations
+##   - FINRA Rule 4210(e)(2)(B) -- Exempted securities (municipals)
+##   - FINRA Rule 4210(e)(2)(C) -- Non-equity securities (corporates)
+##   - FINRA Rule 4210(e)(2)(D) -- Mortgage-related / agency debt
+##   - FINRA Rule 4210(c)(4) -- General short bond floor
+
+categories:
+
+  # ═══════════════════════════════════════════════════════════════
+  # US TREASURIES — 4210(e)(2)(A)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 1
+    name: US Treasuries — Under 1 Year
+    rationale: >-
+      Short-dated government obligations have minimal interest rate risk.
+      1% maintenance reflects the near-cash nature of T-bills and
+      short-maturity notes.
+    citation: "FINRA 4210(e)(2)(A)"
+    rules:
+
+      - rule_id: "4210_treasury_under_1y"
+        name: "US Treasury — Remaining Maturity < 1 Year"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.01
+        conditions:
+          - security_type = us_treasury
+          - maturity_tier = under_1y
+        definition: >-
+          Per 4210(e)(2)(A), net long or short positions in US Government
+          obligations with remaining maturity under 1 year require 1% of
+          current market value as maintenance margin.
+
+  - priority: 2
+    name: US Treasuries — 1 to 3 Years
+    rationale: >-
+      Slightly higher duration exposure than sub-1-year paper. The 2% rate
+      captures modest interest rate sensitivity.
+    citation: "FINRA 4210(e)(2)(A)"
+    rules:
+
+      - rule_id: "4210_treasury_1y_to_3y"
+        name: "US Treasury — Remaining Maturity 1 to < 3 Years"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.02
+        conditions:
+          - security_type = us_treasury
+          - maturity_tier = 1y_to_3y
+        definition: >-
+          Per 4210(e)(2)(A), net long or short positions in US Government
+          obligations with remaining maturity 1 to under 3 years require
+          2% of current market value as maintenance margin.
+
+  - priority: 3
+    name: US Treasuries — 3 to 5 Years
+    rationale: >-
+      Intermediate-short duration. 3% margin reflects increasing price
+      sensitivity to rate changes.
+    citation: "FINRA 4210(e)(2)(A)"
+    rules:
+
+      - rule_id: "4210_treasury_3y_to_5y"
+        name: "US Treasury — Remaining Maturity 3 to < 5 Years"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 3% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.03
+        conditions:
+          - security_type = us_treasury
+          - maturity_tier = 3y_to_5y
+        definition: >-
+          Per 4210(e)(2)(A), net long or short positions in US Government
+          obligations with remaining maturity 3 to under 5 years require
+          3% of current market value as maintenance margin.
+
+  - priority: 4
+    name: US Treasuries — 5 to 10 Years
+    rationale: >-
+      Medium-duration government bonds with meaningful price volatility
+      under rate moves.
+    citation: "FINRA 4210(e)(2)(A)"
+    rules:
+
+      - rule_id: "4210_treasury_5y_to_10y"
+        name: "US Treasury — Remaining Maturity 5 to < 10 Years"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 4% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.04
+        conditions:
+          - security_type = us_treasury
+          - maturity_tier = 5y_to_10y
+        definition: >-
+          Per 4210(e)(2)(A), net long or short positions in US Government
+          obligations with remaining maturity 5 to under 10 years require
+          4% of current market value as maintenance margin.
+
+  - priority: 5
+    name: US Treasuries — 10 to 20 Years
+    rationale: >-
+      Long-duration government bonds with significant interest rate risk.
+      5% margin is calibrated to potential price moves in a 200+ bps
+      rate shock.
+    citation: "FINRA 4210(e)(2)(A)"
+    rules:
+
+      - rule_id: "4210_treasury_10y_to_20y"
+        name: "US Treasury — Remaining Maturity 10 to < 20 Years"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 5% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.05
+        conditions:
+          - security_type = us_treasury
+          - maturity_tier = 10y_to_20y
+        definition: >-
+          Per 4210(e)(2)(A), net long or short positions in US Government
+          obligations with remaining maturity 10 to under 20 years require
+          5% of current market value as maintenance margin.
+
+      - rule_id: "4210_treasury_20y_plus"
+        name: "US Treasury — Remaining Maturity >= 20 Years"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 6% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.06
+        conditions:
+          - security_type = us_treasury
+          - maturity_tier = 20y_plus
+        definition: >-
+          Per 4210(e)(2)(A), net long or short positions in US Government
+          obligations with remaining maturity 20 years or more require
+          6% of current market value as maintenance margin.
+
+      - rule_id: "4210_treasury_zero_coupon_floor"
+        name: "Zero Coupon Treasury Floor (5+ years)"
+        section: "4210(e)(2)(A)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_principal"
+        formula_detail: |
+          FINRA maintenance: 3% × principal_amount
+          Applied as a floor for zero coupon bonds with 5+ years to maturity.
+          Effective rate = max(standard_maturity_rate × market_value, 3% × principal).
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.03
+        conditions:
+          - security_type = us_treasury
+          - zero_coupon = true
+          - years_to_maturity >= 5
+        definition: >-
+          Zero coupon Treasuries with 5 or more years to maturity carry a
+          minimum margin of 3% of principal amount, regardless of the
+          standard maturity-tiered rate applied to market value. This floor
+          accounts for the amplified duration risk of zero coupon instruments.
+
+  # ═══════════════════════════════════════════════════════════════
+  # MUNICIPAL BONDS — 4210(e)(2)(B)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 6
+    name: Municipal Bonds
+    rationale: >-
+      Municipal bonds are exempt securities under Section 3(a)(2) of the
+      Securities Exchange Act. FINRA 4210(e)(2)(B) prescribes a uniform
+      7% of current market value for all exempted securities other than
+      US Government obligations, regardless of credit rating.
+    citation: "FINRA 4210(e)(2)(B)"
+    rules:
+
+      - rule_id: "4210_muni_bond_long"
+        name: "Long Municipal Bond"
+        section: "4210(e)(2)(B)"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 7% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.07
+        conditions:
+          - security_type = municipal_bond
+          - position_side = long
+        definition: >-
+          Per 4210(e)(2)(B): "On any 'long' or 'short' positions in exempted
+          securities other than obligations of the United States, the margin
+          to be maintained shall be 7 percent of the current market value."
+
+      - rule_id: "4210_muni_bond_short"
+        name: "Short Municipal Bond"
+        section: "4210(e)(2)(B)"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 7% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.07
+        conditions:
+          - security_type = municipal_bond
+          - position_side = short
+        definition: >-
+          Per 4210(e)(2)(B), short positions in municipal bonds also require
+          7% of current market value. The rate is uniform for both long and
+          short positions in exempted securities.
+
+  # ═══════════════════════════════════════════════════════════════
+  # CORPORATE BONDS — 4210(e)(2)(C)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 7
+    name: Investment-Grade Corporate Bonds
+    rationale: >-
+      Investment-grade debt securities (rated BBB-/Baa3 or higher) carry
+      lower credit risk and receive a 10% maintenance rate under
+      4210(e)(2)(C)(i).
+    citation: "FINRA 4210(e)(2)(C)(i)"
+    rules:
+
+      - rule_id: "4210_corp_bond_ig_long"
+        name: "Long Investment-Grade Corporate Bond"
+        section: "4210(e)(2)(C)(i)"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 10% × market_value
+        reg_t_initial: 0.50
+        finra_maintenance: 0.10
+        conditions:
+          - security_type = corporate_bond
+          - position_side = long
+          - investment_grade = true
+          - convertible = false
+        definition: >-
+          Per 4210(e)(2)(C)(i): "10 percent of the current market value in
+          the case of investment grade debt securities." Rated BBB-/Baa3
+          or higher by a nationally recognized statistical rating organization.
+
+      - rule_id: "4210_corp_bond_ig_short"
+        name: "Short Investment-Grade Corporate Bond"
+        section: "4210(e)(2)(C)(i)"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 10% × market_value
+        reg_t_initial: 0.50
+        finra_maintenance: 0.10
+        conditions:
+          - security_type = corporate_bond
+          - position_side = short
+          - investment_grade = true
+          - convertible = false
+        definition: >-
+          Per 4210(e)(2)(C)(i), short positions in investment-grade corporate
+          debt also require 10% of current market value. Section (e)(2)(C)
+          applies to both long and short positions, overriding the general
+          short bond provision in (c)(4).
+
+  - priority: 8
+    name: High-Yield Corporate Bonds
+    rationale: >-
+      Non-investment-grade debt carries materially higher credit risk.
+      4210(e)(2)(C)(ii) requires 20% of market value or 7% of principal,
+      whichever is greater.
+    citation: "FINRA 4210(e)(2)(C)(ii)"
+    rules:
+
+      - rule_id: "4210_corp_bond_hy_long"
+        name: "Long High-Yield Corporate Bond"
+        section: "4210(e)(2)(C)(ii)"
+        position_side: "long"
+        formula_type: "greater_of"
+        formula_detail: |
+          FINRA maintenance: greater of (20% × market_value, 7% × principal_amount)
+        reg_t_initial: 0.50
+        finra_maintenance: 0.20
+        conditions:
+          - security_type = corporate_bond
+          - position_side = long
+          - investment_grade = false
+          - convertible = false
+        definition: >-
+          Per 4210(e)(2)(C)(ii): "20 percent of the current market value or
+          7 percent of the principal amount, whichever amount is greater, in
+          the case of all other listed non-equity securities, and all other
+          margin eligible non-equity securities."
+
+      - rule_id: "4210_corp_bond_hy_short"
+        name: "Short High-Yield Corporate Bond"
+        section: "4210(e)(2)(C)(ii)"
+        position_side: "short"
+        formula_type: "greater_of"
+        formula_detail: |
+          FINRA maintenance: greater of (20% × market_value, 7% × principal_amount)
+        reg_t_initial: 0.50
+        finra_maintenance: 0.20
+        conditions:
+          - security_type = corporate_bond
+          - position_side = short
+          - investment_grade = false
+          - convertible = false
+        definition: >-
+          Per 4210(e)(2)(C)(ii), short positions in high-yield corporate
+          debt require 20% of market value or 7% of principal, whichever
+          is greater.
+
+  - priority: 9
+    name: Convertible Bonds
+    rationale: >-
+      Convertible bonds have embedded equity exposure through the
+      conversion feature. When trading near conversion parity, the
+      effective risk is equity-like, so margin rates are the higher of
+      the bond rate and the equivalent equity maintenance rate (25% long,
+      30% short).
+    citation: "FINRA 4210(e)(2)(C)"
+    rules:
+
+      - rule_id: "4210_convertible_bond_ig_long"
+        name: "Long Convertible Bond — Investment Grade"
+        section: "4210(e)(2)(C)(i)"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          Base bond rate: 10% (IG)
+          Equity-equivalent rate: 25% (long equity maintenance)
+          FINRA maintenance: max(10%, 25%) = 25%
+        reg_t_initial: 0.50
+        finra_maintenance: 0.25
+        conditions:
+          - security_type = corporate_bond
+          - position_side = long
+          - investment_grade = true
+          - convertible = true
+        definition: >-
+          Investment-grade convertible bonds carry a base rate of 10% under
+          4210(e)(2)(C)(i), but the conversion feature creates equity-like
+          exposure. The effective rate is the higher of the bond rate (10%)
+          and the equity long maintenance rate (25%) per 4210(c)(1).
+
+      - rule_id: "4210_convertible_bond_ig_short"
+        name: "Short Convertible Bond — Investment Grade"
+        section: "4210(e)(2)(C)(i)"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          Base bond rate: 10% (IG)
+          Equity-equivalent rate: 30% (short equity maintenance)
+          FINRA maintenance: max(10%, 30%) = 30%
+        reg_t_initial: 0.50
+        finra_maintenance: 0.30
+        conditions:
+          - security_type = corporate_bond
+          - position_side = short
+          - investment_grade = true
+          - convertible = true
+        definition: >-
+          Short convertible bonds carry equity short risk because the short
+          seller may be delivered shares via conversion. The effective rate
+          is the higher of the bond rate (10%) and the equity short
+          maintenance rate (30%) per 4210(c)(3).
+
+      - rule_id: "4210_convertible_bond_hy_long"
+        name: "Long Convertible Bond — High Yield"
+        section: "4210(e)(2)(C)(ii)"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          Base bond rate: 20% (HY)
+          Equity-equivalent rate: 25% (long equity maintenance)
+          FINRA maintenance: max(20%, 25%) = 25%
+        reg_t_initial: 0.50
+        finra_maintenance: 0.25
+        conditions:
+          - security_type = corporate_bond
+          - position_side = long
+          - investment_grade = false
+          - convertible = true
+        definition: >-
+          High-yield convertible bonds carry a base rate of 20% under
+          4210(e)(2)(C)(ii), but the conversion feature exposes the holder
+          to equity risk. The effective rate is the higher of the bond rate
+          (20%) and the equity long maintenance rate (25%) per 4210(c)(1).
+
+      - rule_id: "4210_convertible_bond_hy_short"
+        name: "Short Convertible Bond — High Yield"
+        section: "4210(e)(2)(C)(ii)"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          Base bond rate: 20% (HY)
+          Equity-equivalent rate: 30% (short equity maintenance)
+          FINRA maintenance: max(20%, 30%) = 30%
+        reg_t_initial: 0.50
+        finra_maintenance: 0.30
+        conditions:
+          - security_type = corporate_bond
+          - position_side = short
+          - investment_grade = false
+          - convertible = true
+        definition: >-
+          Short high-yield convertible bonds carry a base rate of 20% under
+          4210(e)(2)(C)(ii), but the conversion feature creates equity short
+          risk. The effective rate is the higher of the bond rate (20%) and
+          the equity short maintenance rate (30%) per 4210(c)(3).
+
+      - rule_id: "4210_short_bond_general"
+        name: "Short Bond — General Floor"
+        section: "4210(c)(4)"
+        position_side: "short"
+        formula_type: "greater_of"
+        formula_detail: |
+          FINRA maintenance: greater of (30% × market_value, 5% × principal_amount)
+          Note: overridden by specific (e)(2) subsection rates for treasuries,
+          municipals, and corporate debt. Applies as a fallback floor only.
+        reg_t_initial: 0.50
+        finra_maintenance: 0.30
+        conditions:
+          - security_type = bond
+          - position_side = short
+        definition: >-
+          Per 4210(c)(4): "5 percent of the principal amount or 30 percent
+          of the current market value, whichever amount is greater, of each
+          bond 'short' in the account." This is the general short bond floor.
+          However, the preamble to section (c) states "except as set forth
+          in paragraph (e), (f) or (g)," so specific bond types covered by
+          (e)(2) subsections use those rates instead.
+
+  # ═══════════════════════════════════════════════════════════════
+  # AGENCY DEBT — 4210(e)(2)(D)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 10
+    name: Agency Debt — GNMA, MBS, and Debentures
+    rationale: >-
+      Agency debt includes GNMA pass-throughs (full faith and credit of
+      US Government), agency MBS/CMOs (FNMA, FHLMC), TBA securities,
+      and agency debentures. Rates are tiered by average life or remaining
+      maturity, following the government securities schedule. GNMA receives
+      the lowest rates due to explicit government guarantee.
+    citation: "FINRA 4210(e)(2)(D)"
+    rules:
+
+      # --- GNMA Pass-Throughs ---
+
+      - rule_id: "4210_agency_gnma_under_5y"
+        name: "GNMA Pass-Through — Average Life < 5 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.02
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = true
+          - average_life < 5 years
+        definition: >-
+          GNMA pass-throughs are backed by the full faith and credit of the
+          US Government. 2% maintenance for average life under 5 years,
+          following the government securities schedule under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_gnma_5y_to_15y"
+        name: "GNMA Pass-Through — Average Life 5 to < 15 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 4% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.04
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = true
+          - average_life >= 5 years
+          - average_life < 15 years
+        definition: >-
+          GNMA pass-throughs with average life 5 to under 15 years. 4%
+          maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_gnma_15y_to_25y"
+        name: "GNMA Pass-Through — Average Life 15 to < 25 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 5% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.05
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = true
+          - average_life >= 15 years
+          - average_life < 25 years
+        definition: >-
+          GNMA pass-throughs with average life 15 to under 25 years. 5%
+          maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_gnma_25y_plus"
+        name: "GNMA Pass-Through — Average Life >= 25 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 6% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.06
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = true
+          - average_life >= 25 years
+        definition: >-
+          GNMA pass-throughs with average life 25 years or more. 6%
+          maintenance under 4210(e)(2)(D).
+
+      # --- Agency MBS/CMO ---
+
+      - rule_id: "4210_agency_mbs_under_5y"
+        name: "Agency MBS/CMO — Average Life < 5 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.02
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = false
+          - product_type = mbs
+          - average_life < 5 years
+        definition: >-
+          Agency MBS/CMO (FNMA, FHLMC) with average life under 5 years.
+          2% maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_mbs_5y_to_15y"
+        name: "Agency MBS/CMO — Average Life 5 to < 15 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 4% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.04
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = false
+          - product_type = mbs
+          - average_life >= 5 years
+          - average_life < 15 years
+        definition: >-
+          Agency MBS/CMO with average life 5 to under 15 years. 4%
+          maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_mbs_15y_to_25y"
+        name: "Agency MBS/CMO — Average Life 15 to < 25 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 5% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.05
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = false
+          - product_type = mbs
+          - average_life >= 15 years
+          - average_life < 25 years
+        definition: >-
+          Agency MBS/CMO with average life 15 to under 25 years. 5%
+          maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_mbs_25y_plus"
+        name: "Agency MBS/CMO — Average Life >= 25 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 6% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.06
+        conditions:
+          - security_type = agency_debt
+          - is_gnma = false
+          - product_type = mbs
+          - average_life >= 25 years
+        definition: >-
+          Agency MBS/CMO with average life 25 years or more. 6%
+          maintenance under 4210(e)(2)(D).
+
+      # --- TBA ---
+
+      - rule_id: "4210_agency_tba"
+        name: "TBA (To-Be-Announced) Mortgage-Backed Security"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 3% × market_value
+          Additional mark-to-market margin of 1% per $100 price change
+          from par may be required under house rules.
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.03
+        conditions:
+          - security_type = agency_debt
+          - product_type = tba
+        definition: >-
+          TBA securities are forward contracts for agency MBS delivery.
+          3% maintenance under 4210(e)(2)(D). TBAs settle on a specified
+          future date; the actual pool is not identified at trade time.
+
+      # --- Agency Debentures ---
+
+      - rule_id: "4210_agency_debenture_under_5y"
+        name: "Agency Debenture — Remaining Maturity < 5 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.02
+        conditions:
+          - security_type = agency_debt
+          - product_type = debenture
+          - maturity_tier = under_5y
+        definition: >-
+          Agency debentures (FNMA, FHLMC, FHLB) with remaining maturity
+          under 5 years. 2% maintenance under 4210(e)(2)(D), following
+          the government securities rate schedule.
+
+      - rule_id: "4210_agency_debenture_5y_to_15y"
+        name: "Agency Debenture — Remaining Maturity 5 to < 15 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 4% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.04
+        conditions:
+          - security_type = agency_debt
+          - product_type = debenture
+          - maturity_tier = 5y_to_15y
+        definition: >-
+          Agency debentures with remaining maturity 5 to under 15 years.
+          4% maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_debenture_15y_to_25y"
+        name: "Agency Debenture — Remaining Maturity 15 to < 25 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 5% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.05
+        conditions:
+          - security_type = agency_debt
+          - product_type = debenture
+          - maturity_tier = 15y_to_25y
+        definition: >-
+          Agency debentures with remaining maturity 15 to under 25 years.
+          5% maintenance under 4210(e)(2)(D).
+
+      - rule_id: "4210_agency_debenture_25y_plus"
+        name: "Agency Debenture — Remaining Maturity >= 25 Years"
+        section: "4210(e)(2)(D)"
+        position_side: "long_or_short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 6% × market_value
+        reg_t_initial: "good_faith"
+        finra_maintenance: 0.06
+        conditions:
+          - security_type = agency_debt
+          - product_type = debenture
+          - maturity_tier = 25y_plus
+        definition: >-
+          Agency debentures with remaining maturity 25 years or more.
+          6% maintenance under 4210(e)(2)(D).

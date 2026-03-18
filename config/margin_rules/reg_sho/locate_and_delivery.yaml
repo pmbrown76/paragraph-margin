@@ -1,0 +1,209 @@
+rule_set:
+  regulation: "Regulation SHO"
+  authority: "Securities and Exchange Commission"
+  cfr: "17 CFR Part 242"
+  section: "242.200, 242.203, 242.204"
+  description: "Short sale order marking, locate requirements, and close-out obligations"
+  effective_date: "2005-01-03"
+  last_amended: "2024-05-28"
+  notes: "Core Reg SHO rules governing short sale mechanics. Rule 204 close-out deadlines adjusted for T+1 settlement (May 2024)."
+
+rules:
+  - id: "reg_sho_200_order_marking"
+    description: "Order marking requirement — all sell orders must be marked long, short, or short exempt"
+    citation: "17 CFR 242.200(g)"
+    rule_category: "order_marking"
+    rule_group: "short_selling"
+    source_quote: >
+      A broker or dealer must mark all sell orders of any equity security as
+      'long', 'short', or 'short exempt'.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "equity"
+      transaction_type: "sell"
+    formula:
+      type: "compliance_requirement"
+      description: "Mark as 'long' only if seller owns the security and it is in possession/control or reasonably expected by settlement"
+    notes: >
+      A sell order can only be marked 'long' if the seller is deemed to own the security
+      AND the security will be in physical possession or control of the broker-dealer by
+      settlement date. Otherwise must be marked 'short' or 'short exempt'.
+
+  - id: "reg_sho_200f_aggregation"
+    description: "Net position aggregation — firm-wide or by independent trading unit"
+    citation: "17 CFR 242.200(f)"
+    rule_category: "order_marking"
+    rule_group: "short_selling"
+    source_quote: >
+      In determining its net position, a broker or dealer shall aggregate all of
+      its positions in a security unless it qualifies for independent aggregation
+      unit treatment.
+    conditions:
+      applies_to: "broker_dealer"
+    formula:
+      type: "compliance_requirement"
+      description: "Aggregate all positions firm-wide to determine net position for order marking; independent units require written plan"
+    notes: >
+      Independent trading unit aggregation requires: (1) written plan identifying each unit;
+      (2) each unit independently determines net position; (3) traders pursue only that unit's
+      objectives; (4) individual traders assigned to only one unit at a time.
+
+  - id: "reg_sho_203b1_locate"
+    description: "Locate requirement — must locate shares before effecting a short sale"
+    citation: "17 CFR 242.203(b)(1)"
+    rule_category: "locate"
+    rule_group: "short_selling"
+    source_quote: >
+      A broker or dealer may not accept a short sale order in an equity security
+      from another person, or effect a short sale in an equity security for its own
+      account, unless the broker or dealer has: (i) Borrowed the security, or entered
+      into a bona-fide arrangement to borrow the security; or (ii) Reasonable grounds
+      to believe that the security can be borrowed so that it can be delivered on the
+      date delivery is due.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "equity"
+      transaction_type: "short_sale"
+    formula:
+      type: "compliance_requirement"
+      description: "Must borrow, arrange to borrow, or have reasonable grounds to believe security can be borrowed and delivered by settlement"
+    notes: >
+      The locate must be obtained BEFORE the short sale is effected. Documentation of
+      the locate source must be maintained. Easy-to-borrow lists can serve as evidence
+      of reasonable grounds but must be less than 24 hours old.
+
+  - id: "reg_sho_203b2_market_maker_exception"
+    description: "Market maker exception to locate requirement for bona fide market making"
+    citation: "17 CFR 242.203(b)(2)(iii)"
+    rule_category: "locate"
+    rule_group: "short_selling"
+    source_quote: >
+      The provisions of paragraph (b)(1) of this section shall not apply to a short
+      sale effected by a market maker in connection with bona-fide market making
+      activities in the security for which this exception is claimed.
+    conditions:
+      applies_to: "market_maker"
+      activity_type: "bona_fide_market_making"
+    formula:
+      type: "exemption"
+      description: "Market makers in bona fide market-making activities are exempt from locate requirement"
+    notes: >
+      Mere registration as a market maker does not qualify. Must regularly and continuously
+      place quotations on both bid and ask sides. Does not apply to market makers conducting
+      speculative or hedging activity unrelated to market making.
+
+  - id: "reg_sho_203c6_threshold_securities"
+    description: "Threshold securities — enhanced close-out for persistent fails-to-deliver"
+    citation: "17 CFR 242.203(c)(6)"
+    rule_category: "close_out"
+    rule_group: "short_selling"
+    source_quote: >
+      The term threshold security means any equity security of an issuer that is
+      registered pursuant to section 12 of the Exchange Act for which there is an
+      aggregate fail to deliver position for five consecutive settlement days at a
+      registered clearing agency of 10,000 shares or more.
+    conditions:
+      applies_to: "clearing_participant"
+      ftd_shares_gte: 10000
+      ftd_consecutive_days_gte: 5
+      ftd_pct_outstanding_gte: 0.005
+    formula:
+      type: "compliance_requirement"
+      description: "Securities with aggregate FTDs >= 10,000 shares for 5+ consecutive days AND >= 0.5% of shares outstanding"
+    notes: >
+      SROs must publish daily threshold security lists. Securities on threshold lists
+      have enhanced close-out requirements. Should not be included on easy-to-borrow
+      lists. Ceases threshold status when fails drop below the threshold for 5 consecutive days.
+
+  - id: "reg_sho_204_closeout_short"
+    description: "Close-out requirement — short sale fails must be closed by T+2"
+    citation: "17 CFR 242.204(a)"
+    rule_category: "close_out"
+    rule_group: "short_selling"
+    source_quote: >
+      A participant of a registered clearing agency must deliver securities to a
+      registered clearing agency for clearance and settlement on a long or short
+      sale transaction in any equity security by settlement date, or if a participant
+      of a registered clearing agency has a fail to deliver position at a registered
+      clearing agency in any equity security for a short sale transaction in that
+      equity security, the participant shall, by no later than the beginning of
+      regular trading hours on the settlement day following the settlement date,
+      immediately close out its fail to deliver position.
+    conditions:
+      applies_to: "clearing_participant"
+      transaction_type: "short_sale"
+    formula:
+      type: "delivery_requirement"
+      description: "Close out FTD by beginning of regular trading hours on T+2 (settlement day following settlement date)"
+    notes: >
+      Under T+1 settlement, short sale FTDs must be closed by beginning of regular trading
+      hours on T+2. Failure triggers pre-borrow requirement on subsequent short sales in
+      that security until the fail is closed.
+
+  - id: "reg_sho_204_closeout_long_mm"
+    description: "Close-out requirement — long sale and market maker fails by T+4"
+    citation: "17 CFR 242.204(a)(1)"
+    rule_category: "close_out"
+    rule_group: "short_selling"
+    source_quote: >
+      If a participant of a registered clearing agency has a fail to deliver position
+      at a registered clearing agency in any equity security for a long sale transaction
+      in that equity security, or that is attributable to bona fide market making
+      activities, the participant shall close out the fail to deliver position by no
+      later than the beginning of regular trading hours on the third consecutive
+      settlement day following the settlement date.
+    conditions:
+      applies_to: "clearing_participant"
+      transaction_type_in:
+        - "long_sale"
+        - "bona_fide_market_making"
+    formula:
+      type: "delivery_requirement"
+      description: "Close out FTD by beginning of regular trading hours on T+4 (third settlement day after settlement date)"
+    notes: >
+      Extended timeline applies to long sale fails and bona fide market-maker fails.
+      Still subject to penalty box (pre-borrow) if not closed within the extended period.
+
+  - id: "reg_sho_204_preborrow_penalty"
+    description: "Pre-borrow penalty — must borrow before short selling after unresolved FTD"
+    citation: "17 CFR 242.204(b)"
+    rule_category: "close_out"
+    rule_group: "short_selling"
+    source_quote: >
+      If a participant of a registered clearing agency has a fail to deliver position
+      at a registered clearing agency in any equity security that is not closed out
+      in accordance with the provisions of paragraph (a) of this section, the participant
+      and any broker or dealer for which it clears transactions, including any market
+      maker that would otherwise be entitled to rely on the exception provided in
+      § 242.203(b)(2)(iii), may not accept a short sale order in the equity security
+      from another person, or effect a short sale in the equity security for its own
+      account, without borrowing the security.
+    conditions:
+      applies_to: "clearing_participant"
+      has_unresolved_ftd: true
+    formula:
+      type: "restriction"
+      description: "No short sales without pre-borrowing until FTD is closed; locate exception and market maker exception suspended"
+    notes: >
+      Known as the 'penalty box'. Both the clearing participant AND any broker-dealer
+      for which it clears are restricted. Even market makers lose their locate exception.
+      Restriction applies to the specific security with the unresolved FTD.
+
+  - id: "reg_sho_204f_antievasion"
+    description: "Anti-evasion — purchase or borrow must result in actual delivery"
+    citation: "17 CFR 242.204(f)"
+    rule_category: "close_out"
+    rule_group: "short_selling"
+    source_quote: >
+      If a participant of a registered clearing agency reasonably allocates a portion
+      of a net long position to a short sale, the purchase or borrow from which the
+      net long position results must have been bona fide.
+    conditions:
+      applies_to: "clearing_participant"
+    formula:
+      type: "compliance_requirement"
+      description: "Close-out purchase/borrow must be bona fide and result in actual delivery — sham transactions prohibited"
+    notes: >
+      Prevents 'reset transactions' where a participant buys to close the FTD but
+      simultaneously arranges to re-fail. The purchase or borrow must result in actual
+      delivery of shares to the clearing agency.

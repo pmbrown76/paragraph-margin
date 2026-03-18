@@ -1,0 +1,75 @@
+rule_set:
+  regulation: "Regulation SHO"
+  authority: "Securities and Exchange Commission"
+  cfr: "17 CFR Part 242"
+  section: "242.201"
+  description: "Short sale price test circuit breaker (alternative uptick rule)"
+  effective_date: "2010-11-10"
+  last_amended: "2010-02-26"
+  notes: "Adopted February 2010 as Release No. 34-61595. Replaced the original uptick rule (Rule 10a-1) which was eliminated in 2007."
+
+rules:
+  - id: "reg_sho_201_circuit_breaker_trigger"
+    description: "Circuit breaker trigger — activates when NMS stock declines 10% or more from prior close"
+    citation: "17 CFR 242.201(b)(1)(i)"
+    rule_category: "price_restriction"
+    rule_group: "short_selling"
+    source_quote: >
+      A trading center shall establish, maintain, and enforce written policies and
+      procedures reasonably designed to prevent the execution or display of a short
+      sale order of a covered security at a price that is less than or equal to the
+      current national best bid if the price of that covered security decreases by
+      10% or more from the covered security's closing price as determined by the
+      listing market for the covered security as of the end of regular trading hours
+      on the prior day.
+    conditions:
+      applies_to: "trading_center"
+      security_type: "nms_stock"
+      price_decline_pct_gte: 0.10
+    formula:
+      type: "price_restriction"
+      description: "Short sales restricted to prices above the national best bid (NBBO) for remainder of day and following day"
+    notes: >
+      Applies to NMS stocks only. Excludes OTC bulletin board and pink sheet stocks.
+      The restriction remains in effect for the remainder of the trading day and the
+      entire following trading day.
+
+  - id: "reg_sho_201_circuit_breaker_restriction"
+    description: "Price restriction during circuit breaker — short sales only above national best bid"
+    citation: "17 CFR 242.201(b)(1)(ii)"
+    rule_category: "price_restriction"
+    rule_group: "short_selling"
+    source_quote: >
+      The short sale price test restriction of paragraph (b)(1)(i) shall apply for
+      the remainder of the day on which it was triggered and the following day.
+    conditions:
+      applies_to: "trading_center"
+      circuit_breaker_active: true
+    formula:
+      type: "price_restriction"
+      description: "Short sale orders can only execute at a price above the current national best bid"
+    notes: >
+      During the restriction period, a short sale order may be executed or displayed
+      only at a price above the current national best bid. This prevents aggressive
+      short selling from accelerating a decline.
+
+  - id: "reg_sho_201_short_exempt_exceptions"
+    description: "Short exempt exceptions during circuit breaker"
+    citation: "17 CFR 242.201(c)-(d)"
+    rule_category: "price_restriction"
+    rule_group: "short_selling"
+    source_quote: >
+      The provisions of paragraph (b) of this section shall not apply to the
+      execution or display of a short sale order of a covered security by a
+      trading center if the order is marked 'short exempt'.
+    conditions:
+      applies_to: "broker_dealer"
+      order_marking: "short_exempt"
+    formula:
+      type: "exemption"
+      description: "Short exempt orders may execute below the bid during a circuit breaker"
+    notes: >
+      Short exempt may be used when: (1) the seller owns the security and intends to
+      deliver (held long); (2) odd-lot transactions; (3) domestic arbitrage; (4) international
+      arbitrage; (5) over-allotted transactions; (6) the broker-dealer has a reasonable basis
+      to believe the sale is at a price above the current NBB at time of submission.

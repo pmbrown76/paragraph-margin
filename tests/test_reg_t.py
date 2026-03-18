@@ -4,8 +4,8 @@ from decimal import Decimal
 
 import pytest
 
-from margin_calc_engine import RegTCalculator
-from margin_calc_engine.money import ZERO
+from paragraph_margin import RegTCalculator
+from paragraph_margin.money import ZERO
 
 
 class TestRegTCalculator:

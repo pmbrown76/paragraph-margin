@@ -1,0 +1,114 @@
+# Day Trading Margin Waterfall — FINRA Rule 4210(f)(8)(B)
+# Priority-ordered decision tree for pattern day trader margin requirements
+
+categories:
+  - priority: 1
+    name: "Pattern Day Trader Identification"
+    rationale: "Any customer who executes 4 or more day trades within 5 business days is classified as a pattern day trader, triggering enhanced margin requirements."
+    citation: "4210(f)(8)(B)(ii)"
+    rules:
+      - rule_id: "4210_pdt_classification"
+        name: "PDT Classification — 4 Day Trades in 5 Days"
+        section: "4210(f)(8)(B)(ii)"
+        formula_type: "classification"
+        formula_detail: "day_trade_count >= 4 within 5 business days"
+        conditions:
+          - "Customer executes 4+ day trades in 5 business days"
+          - "Day trade = open and close same security same day"
+          - "Once classified, designation persists until firm removes it"
+        definition: "A pattern day trader is any customer who executes four or more day trades within five business days, provided the number of day trades is more than six percent of the customer's total trading activity for that same five-day period."
+
+  - priority: 2
+    name: "Minimum Equity Requirement"
+    rationale: "Pattern day traders must maintain minimum equity to ensure sufficient capital cushion before any day-trading activity begins."
+    citation: "4210(f)(8)(B)(iv)(a)"
+    rules:
+      - rule_id: "4210_pdt_minimum_equity"
+        name: "PDT Minimum Equity — $25,000"
+        section: "4210(f)(8)(B)(iv)(a)"
+        formula_type: "account_minimum"
+        formula_detail: "account_equity >= $25,000"
+        conditions:
+          - "Account classified as pattern day trader"
+          - "Equity must be deposited before day trading"
+          - "Cannot use cross-guarantee to meet requirement"
+        definition: "Pattern day trader accounts must maintain minimum equity of $25,000 on any day the customer day trades. If the account falls below $25,000, the customer is not permitted to day trade until the account is restored to the $25,000 minimum equity level."
+
+  - priority: 3
+    name: "Day-Trading Buying Power"
+    rationale: "PDT buying power allows leverage of 4x maintenance excess equity, calculated at start of business based on prior day's close."
+    citation: "4210(f)(8)(B)(iv)(b)"
+    rules:
+      - rule_id: "4210_dt_buying_power_4x"
+        name: "Day-Trading Buying Power — 4x Maintenance Excess"
+        section: "4210(f)(8)(B)(iv)(b)"
+        formula_type: "buying_power_multiplier"
+        formula_detail: "DTBP = (equity - maintenance_requirement) x 4"
+        conditions:
+          - "Account classified as pattern day trader"
+          - "Equity >= $25,000"
+          - "Calculated at start of each business day"
+          - "Based on prior day's closing positions"
+        definition: "Day-trading buying power equals the excess of maintenance margin over the equity in the account, multiplied by four. This calculation is performed at the start of each business day based on the prior day's closing positions and equity."
+
+      - rule_id: "4210_dt_margin_rate"
+        name: "Intraday Margin — 25% of Highest Open Position"
+        section: "4210(f)(8)(B)(iv)(b)"
+        formula_type: "percentage_of_market_value"
+        formula_detail: "margin = max_open_position_value x 25%"
+        reg_t_initial: "25%"
+        finra_maintenance: "25%"
+        conditions:
+          - "Day trade position"
+          - "Margin based on highest intraday open position value"
+          - "Not the closing position value"
+        definition: "The margin requirement for day trading is 25% of the cost of all day trades made during the day or 25% of the highest open position during the day, whichever is greater."
+
+  - priority: 4
+    name: "Day-Trading Margin Call"
+    rationale: "When a pattern day trader exceeds their buying power, a margin call is issued and must be met within 5 business days."
+    citation: "4210(f)(8)(B)(iv)(c)"
+    rules:
+      - rule_id: "4210_dt_call_deadline"
+        name: "Day-Trade Margin Call — 5 Business Day Deadline"
+        section: "4210(f)(8)(B)(iv)(c)"
+        formula_type: "margin_call"
+        formula_detail: "call_amount = day_trade_value - DTBP"
+        conditions:
+          - "Day trading exceeds buying power"
+          - "Must be met within 5 business days"
+          - "Cash deposit or securities of sufficient value"
+        definition: "If a pattern day trader exceeds their day-trading buying power, a day-trade margin call is issued for the excess amount. The call must be met within 5 business days. Until met, day-trading buying power is restricted."
+
+  - priority: 5
+    name: "Restricted Account — Unmet Margin Call"
+    rationale: "Failure to meet a day-trade margin call results in severe buying power restrictions until the call is satisfied."
+    citation: "4210(f)(8)(B)(iv)(c)"
+    rules:
+      - rule_id: "4210_dt_buying_power_restricted"
+        name: "Restricted Buying Power — 2x After Unmet Call"
+        section: "4210(f)(8)(B)(iv)(c)"
+        formula_type: "buying_power_multiplier"
+        formula_detail: "restricted_DTBP = (equity - maintenance_requirement) x 2"
+        conditions:
+          - "Day-trade margin call not met within 5 business days"
+          - "Restriction applies for 90 calendar days or until call met"
+          - "Account limited to 2x leverage instead of 4x"
+        definition: "If a day-trade margin call is not met within 5 business days, the account's day-trading buying power is reduced to 2x maintenance margin excess (instead of 4x) for 90 calendar days or until the call is met, whichever comes first."
+
+  - priority: 6
+    name: "Proposed: Intraday Margin Replacement (SR-2025-017)"
+    rationale: "FINRA has proposed replacing the PDT framework with a new intraday margin calculation system. Not yet effective."
+    citation: "SR-2025-017 (proposed)"
+    rules:
+      - rule_id: "4210_dt_proposed_sr2025017"
+        name: "Proposed — Intraday Margin Calculation"
+        section: "SR-2025-017"
+        formula_type: "proposed"
+        formula_detail: "Proposed: real-time intraday margin replacing PDT framework"
+        conditions:
+          - "PROPOSED — NOT YET EFFECTIVE"
+          - "Would eliminate PDT classification"
+          - "Would eliminate $25,000 minimum equity"
+          - "Would apply intraday margin to all accounts"
+        definition: "SR-2025-017 proposes replacing the pattern day trader framework with a new intraday margin system that would apply to all customers, eliminating the 4-trade threshold, $25,000 minimum, and buying power multiplier approach."

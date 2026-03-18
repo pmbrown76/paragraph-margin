@@ -1,0 +1,446 @@
+## Regulatory Timeline — SEC Rule 15c3-1 (17 CFR 240.15c3-1)
+##
+## Maps each cited 15c3-1 section to its original rule text, amendments,
+## and current interpretation. Used by the waterfall UI to show lineage
+## when a user clicks a net capital citation.
+
+sections:
+
+  "15c3-1(a)":
+    title: General Net Capital Requirements
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        Every broker or dealer registered pursuant to Section 15 of the
+        Securities Exchange Act of 1934 shall at all times have and maintain
+        net capital no less than the greater of the highest minimum requirement
+        applicable to its activities or the amount computed pursuant to the
+        ratio requirements of paragraph (a)(1) of this section.
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Modernized the alternative method computation to reflect changes
+          in market structure. Clarified the interaction between the basic
+          and alternative methods and their respective triggers.
+      - date: "2004-06-08"
+        source: "SEC Release 34-49830"
+        change: >-
+          Introduced the consolidated supervised entity (CSE) program,
+          allowing qualifying broker-dealers to use internal models for
+          computing net capital in lieu of standard haircuts, subject to
+          SEC oversight and enhanced risk management requirements.
+    current_interpretation: >-
+      Section 15c3-1(a) is the master net capital provision. It requires
+      every registered broker-dealer to maintain net capital at or above
+      the applicable minimum at all times — not merely at month-end or
+      reporting dates. A firm must continuously monitor its net capital
+      and cease business operations if it falls below the required level.
+      The "early warning" threshold (120% of minimum) triggers notification
+      to FINRA and the SEC under Rule 17a-11.
+
+  "15c3-1(a)(1)(i)":
+    title: Basic Method (Aggregate Indebtedness Ratio)
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        A broker or dealer using the basic method shall not permit its
+        aggregate indebtedness to exceed 1500 percent of its net capital
+        (a 15-to-1 ratio). For purposes of this computation, aggregate
+        indebtedness includes all money owed by the broker-dealer, with
+        certain exclusions for adequately secured liabilities and
+        subordinated borrowings.
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Clarified the definition of aggregate indebtedness and updated
+          the list of permissible exclusions. Strengthened the early warning
+          trigger from 10-to-1 to the current framework requiring
+          notification at 12-to-1.
+    current_interpretation: >-
+      The basic method (also called the AI ratio method) limits aggregate
+      indebtedness to 15 times net capital, yielding a minimum net capital
+      equal to 6.67% of aggregate indebtedness. The basic method is used
+      primarily by introducing brokers and smaller firms that do not carry
+      customer accounts. Firms electing the basic method face a $250,000
+      minimum net capital if they carry customer accounts, or $5,000 if
+      they do not. The early warning level is 12-to-1 (8.33%).
+
+  "15c3-1(a)(1)(ii)":
+    title: Alternative Method (Aggregate Debit Items)
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        A broker or dealer that elects the alternative method shall maintain
+        net capital equal to not less than 2 percent of aggregate debit
+        items as computed pursuant to the Formula for Determination of
+        Reserve Requirements for Brokers and Dealers (Exhibit A to Rule
+        15c3-3).
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Modernized the alternative method computation. Clarified the
+          relationship between aggregate debit items under this rule and
+          the reserve formula under Rule 15c3-3 Exhibit A. Updated
+          treatment of proprietary accounts of broker-dealers (PAB).
+      - date: "2000-03-24"
+        source: "SEC Release 34-42576"
+        change: >-
+          Amended the alternative method to incorporate market risk and
+          credit risk charges for certain OTC derivatives positions,
+          replacing fixed haircuts with model-based charges for qualifying
+          firms.
+    current_interpretation: >-
+      The alternative method requires net capital of at least 2% of
+      aggregate debit items (customer receivables). This method is used by
+      virtually all large carrying/clearing firms. Aggregate debit items
+      are computed from the same formula as Rule 15c3-3 Exhibit A. The
+      early warning level is 5% of aggregate debit items. The alternative
+      method produces a capital requirement that scales with customer
+      activity and leverage, making it more risk-sensitive than the basic
+      method for large firms.
+
+  "15c3-1(a)(2)":
+    title: Minimum Net Capital Requirements
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        Regardless of the method elected, no broker or dealer shall have
+        net capital of less than: (i) $250,000 if it carries customer
+        accounts or clears transactions; (ii) $100,000 if it engages in
+        a general securities business but does not carry accounts; (iii)
+        $50,000 if it acts solely as an introducing broker; (iv) $5,000
+        if it restricts its business to certain limited activities.
+    amendments:
+      - date: "1997-12-17"
+        source: "SEC Release 34-39456"
+        change: >-
+          Established new minimum net capital categories for OTC derivatives
+          dealers, requiring $100 million for stand-alone OTC derivatives
+          dealers and updated thresholds for firms engaging in both
+          traditional and OTC derivatives activities.
+      - date: "2007-03-06"
+        source: "SEC Release 34-55431"
+        change: >-
+          Revised minimum net capital categories to reflect evolving firm
+          structures. Updated requirements for firms engaging in security-
+          based swap activities.
+    current_interpretation: >-
+      The dollar minimums serve as absolute floors regardless of the ratio
+      computation. The $250,000 threshold for carrying firms is the most
+      commonly applicable minimum for full-service broker-dealers. Firms
+      that clear and carry customer accounts cannot operate below this
+      floor even if their ratio-based requirement would be lower. FINRA
+      member firms may face higher minimums under FINRA Rule 4110.
+
+  "15c3-1(c)(1)":
+    title: Net Capital Computation Overview
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        Net capital shall be computed by starting with the broker-dealer's
+        net worth determined in accordance with generally accepted accounting
+        principles, adding qualifying subordinated borrowings, and then
+        deducting therefrom: illiquid assets, haircuts on securities
+        positions, and other prescribed charges. Only proprietary positions
+        of the broker-dealer are subject to haircut deductions.
+    amendments:
+      - date: "2000-03-24"
+        source: "SEC Release 34-42576"
+        change: >-
+          Expanded the net capital computation to incorporate market risk
+          charges and credit risk charges for OTC derivatives positions,
+          as alternatives to standard percentage haircuts for qualifying
+          firms.
+      - date: "2004-06-08"
+        source: "SEC Release 34-49830"
+        change: >-
+          Permitted CSE broker-dealers to compute net capital using
+          internal Value-at-Risk (VaR) models subject to SEC approval,
+          replacing standard haircuts with model-based capital charges.
+    current_interpretation: >-
+      The net capital computation starts from GAAP net worth and applies
+      a series of deductions to arrive at "net capital." Key deductions
+      include: non-allowable assets (furniture, prepaid expenses, unsecured
+      receivables), haircuts on proprietary securities positions, and
+      operational charges. The computation applies only to the broker-
+      dealer's own proprietary positions — customer positions are not
+      haircut but are addressed through the reserve formula of Rule 15c3-3.
+      The distinction between proprietary and customer positions is
+      fundamental to the net capital framework.
+
+  "15c3-1(c)(2)(vi)":
+    title: Securities Haircuts (General)
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        In computing net capital, every broker or dealer shall deduct from
+        net worth the applicable percentage of the market value of
+        proprietary securities positions as follows: equity securities —
+        15% of market value for long or short positions; debt securities —
+        percentages varying by maturity and credit quality; convertible
+        bonds — the lower of the equity or debt haircut.
+    amendments:
+      - date: "2000-03-24"
+        source: "SEC Release 34-42576"
+        change: >-
+          Introduced model-based haircuts as an alternative for OTC
+          derivatives positions. Established the framework for market risk
+          and credit risk charges that could replace fixed percentage
+          haircuts for qualifying positions.
+      - date: "2023-12-13"
+        source: "SEC Release 34-99149 (Proposed)"
+        change: >-
+          Proposed new haircut categories for crypto asset securities.
+          Would require 100% haircut for proprietary positions in crypto
+          asset securities unless certain conditions are met, and
+          established specific haircut methodologies for custodied crypto
+          assets.
+    current_interpretation: >-
+      Standard haircuts for equity securities are 15% of market value for
+      long and short positions, with a 15% haircut on the market value of
+      the offsetting position for hedged pairs. U.S. government securities
+      receive lower haircuts (0% to 6% depending on maturity). Municipal
+      securities receive 7%. Corporate debt receives 2% to 9% depending on
+      maturity. The haircuts are designed to absorb potential adverse price
+      movements during an orderly liquidation of the firm's proprietary
+      positions.
+
+  "15c3-1(c)(2)(x)":
+    title: Listed Option Haircuts (Appendix A)
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        The haircut on listed options shall be computed in accordance with
+        Appendix A to this section. For long option positions, the haircut
+        shall be the lesser of the market value of the option or the
+        percentage haircut on the underlying security. For short option
+        positions, the haircut shall be the applicable percentage of the
+        underlying security's market value reduced by any amount the
+        option is out of the money.
+    amendments:
+      - date: "1997-12-17"
+        source: "SEC Release 34-39456"
+        change: >-
+          Expanded Appendix A to address OTC options and index options.
+          Added provisions for computing haircuts on OTC derivatives
+          dealers' options positions using theoretical pricing models.
+      - date: "2004-06-08"
+        source: "SEC Release 34-49830"
+        change: >-
+          Permitted CSE firms to use approved VaR models for computing
+          option haircuts in lieu of the Appendix A schedule, subject to
+          back-testing and stress-testing requirements.
+    current_interpretation: >-
+      Appendix A provides the detailed haircut methodology for listed
+      options. Long options are haircut at the lesser of market value or
+      the underlying security haircut. Short (written) options are haircut
+      at the underlying security percentage minus out-of-the-money amount,
+      subject to a minimum. Paired options positions (spreads, straddles,
+      combinations) receive reduced haircuts reflecting the offset. The
+      Appendix A framework runs parallel to but is distinct from the
+      FINRA 4210(f) margin framework — net capital haircuts apply to the
+      firm's proprietary positions while 4210(f) governs customer margin.
+
+  "15c3-1(d)":
+    title: Net Capital Computation Format
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        The net capital computation shall be prepared in the format
+        prescribed by the Commission. Broker-dealers shall report their
+        net capital position on Form X-17A-5 (FOCUS Report) in accordance
+        with the instructions thereto.
+    amendments:
+      - date: "2019-06-21"
+        source: "SEC Release 34-86175"
+        change: >-
+          Modernized the FOCUS Report format. Updated reporting requirements
+          to reflect current market practices, electronic filing mandates,
+          and enhanced data fields for derivative positions, structured
+          products, and off-balance-sheet items.
+    current_interpretation: >-
+      The FOCUS Report (Financial and Operational Combined Uniform Single
+      Report) is the primary vehicle for net capital reporting. Part II
+      of the FOCUS Report contains the net capital computation. Firms
+      file the FOCUS Report monthly (Part I) and quarterly (Part IIA or
+      Part II/IIA). The computation format follows a sequential deduction
+      methodology: GAAP net worth, plus qualifying subordinated debt,
+      minus non-allowable assets, minus haircuts, equals net capital.
+      FINRA reviews FOCUS filings as the primary surveillance tool for
+      member firm financial condition.
+
+  "15c3-1(e)":
+    title: Capital Withdrawal Restrictions
+    original:
+      date: "1975-06-26"
+      source: "SEC Release 34-11497 — Uniform Net Capital Rule"
+      text: >-
+        No broker or dealer shall withdraw equity capital if, after giving
+        effect to the withdrawal and all other capital transactions, its
+        net capital would be less than 120 percent of the minimum required
+        net capital, or if the withdrawal would cause its net capital to
+        decline by more than 30 percent from the net capital reported on
+        its most recent FOCUS Report.
+    amendments:
+      - date: "2007-03-06"
+        source: "SEC Release 34-55431"
+        change: >-
+          Strengthened capital withdrawal restrictions for firms with
+          significant proprietary trading operations. Added advance
+          notification requirements for large withdrawals and clarified
+          the SEC's authority to restrict withdrawals on a temporary basis
+          in emergency situations.
+    current_interpretation: >-
+      The capital withdrawal restrictions prevent broker-dealers from
+      distributing capital to parent companies or owners when doing so
+      would impair the firm's financial condition. The dual test requires
+      that post-withdrawal net capital remains above 120% of the minimum
+      (the "early warning" threshold) and that the withdrawal does not
+      reduce capital by more than 30% from the last FOCUS Report. Firms
+      must notify FINRA and the SEC in writing at least 30 days prior to
+      any equity withdrawal exceeding 30% of excess net capital. These
+      restrictions are a critical safeguard against capital stripping.
+
+cross_cutting_amendments:
+
+  - id: "SEC_34-11497"
+    date: "1975-06-26"
+    title: "Uniform Net Capital Rule — Original Adoption"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Original adoption of the Uniform Net Capital Rule as 17 CFR 240.15c3-1.
+      Replaced the prior patchwork of exchange-level capital rules with a
+      single federal standard. Established the basic method (AI ratio) and
+      alternative method (ADI) framework, the haircut schedule for
+      proprietary securities positions, and the capital withdrawal
+      restrictions that remain the foundation of broker-dealer capital
+      regulation.
+
+  - id: "SEC_34-31511"
+    date: "1992-11-24"
+    title: "Alternative Method Modernization"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Modernized the alternative net capital method to reflect changes in
+      market structure and product complexity. Updated the aggregate debit
+      item computation, clarified the relationship with Rule 15c3-3
+      reserve requirements, and revised early warning thresholds. This
+      amendment solidified the alternative method as the dominant approach
+      for large carrying firms.
+
+  - id: "SEC_34-39456"
+    date: "1997-12-17"
+    title: "OTC Derivatives Dealer Net Capital"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Created a new regulatory category of OTC derivatives dealer with
+      specialized net capital requirements. Established the $100 million
+      minimum net capital for stand-alone OTC derivatives dealers and
+      permitted the use of theoretical pricing models for computing
+      haircuts on OTC derivatives positions. Laid the groundwork for
+      model-based capital computation.
+
+  - id: "SEC_34-42576"
+    date: "2000-03-24"
+    title: "Market and Credit Risk Charges"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Introduced market risk charges and credit risk charges as alternatives
+      to standard percentage haircuts for qualifying broker-dealers engaged
+      in OTC derivatives activities. Established the framework for Value-
+      at-Risk (VaR) based capital charges that was later expanded under the
+      CSE program. Represented the first significant move toward risk-based
+      capital computation.
+
+  - id: "SEC_34-49830"
+    date: "2004-06-08"
+    title: "Consolidated Supervised Entity (CSE) Program"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Permitted the five largest broker-dealer holding companies (Bear
+      Stearns, Goldman Sachs, Lehman Brothers, Merrill Lynch, Morgan
+      Stanley) to use internal VaR models for computing net capital,
+      subject to SEC consolidated supervision. Effectively reduced capital
+      requirements for CSE firms by replacing fixed haircuts with model-
+      based charges. The CSE program was terminated in 2008 following the
+      financial crisis and the collapse of Bear Stearns and Lehman Brothers.
+
+  - id: "SEC_34-55431"
+    date: "2007-03-06"
+    title: "Risk Management Amendments"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Enhanced risk management requirements for broker-dealers, particularly
+      those with significant proprietary trading operations. Strengthened
+      capital withdrawal restrictions, added stress testing requirements,
+      and improved notification obligations. These amendments reflected
+      lessons from market stress events and foreshadowed post-crisis
+      regulatory reforms.
+
+  - id: "SEC_34-86175"
+    date: "2019-06-21"
+    title: "FOCUS Report Modernization"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Modernized the FOCUS Report (Form X-17A-5) to reflect current market
+      practices. Updated data fields for derivative positions, structured
+      products, and off-balance-sheet items. Mandated electronic filing
+      and enhanced the granularity of reported financial data to improve
+      regulatory surveillance capabilities.
+
+  - id: "SEC_34-99149"
+    date: "2023-12-13"
+    title: "Proposed: Crypto Asset Haircuts"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Proposed amendments to establish specific haircut treatment for
+      crypto asset securities held in proprietary accounts. Would require
+      a 100% haircut for most crypto asset positions unless certain
+      custodial and operational conditions are met. Reflects the SEC's
+      position that crypto assets present unique liquidity, custody, and
+      valuation risks that standard haircuts do not adequately address.
+      As of March 2026, this rule remains in proposed form.
+
+reference_sources:
+
+  - id: "SEC_15C3_1_CURRENT"
+    title: "17 CFR 240.15c3-1 — Current Full Text"
+    version: "As amended through 2024"
+    role: >-
+      The authoritative text of the Uniform Net Capital Rule as published
+      in the Code of Federal Regulations. All broker-dealer net capital
+      requirements derive from this source. Includes Appendix A (option
+      haircuts), Appendix E (alternative net capital for CSE firms), and
+      Appendix G (conditions for capital withdrawal).
+
+  - id: "FOCUS_REPORT"
+    title: "SEC Form X-17A-5 (FOCUS Report)"
+    version: "Current version as amended by Release 34-86175"
+    role: >-
+      The Financial and Operational Combined Uniform Single Report is the
+      primary financial reporting form for registered broker-dealers. Part
+      II contains the net capital computation in the format prescribed by
+      Rule 15c3-1(d). FINRA and the SEC use FOCUS filings as the primary
+      surveillance tool for monitoring broker-dealer financial condition.
+
+  - id: "FINRA_NET_CAPITAL_GUIDE"
+    title: "FINRA Net Capital Interpretations"
+    version: "Current"
+    role: >-
+      FINRA's interpretive guidance on net capital computation issues.
+      Provides practical guidance on haircut calculations, non-allowable
+      asset determinations, subordinated borrowing qualifications, and
+      the interaction between Rule 15c3-1 and FINRA Rule 4110 (capital
+      requirements for FINRA members). Supplements the SEC rule text
+      with industry-specific interpretations.

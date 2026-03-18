@@ -1,0 +1,99 @@
+# Concentrated Account Margin Waterfall — FINRA Rule 4210 / IM-4210-2
+# Priority-ordered decision tree for concentrated position margin requirements
+
+categories:
+  - priority: 1
+    name: "Single-Security Concentration Threshold"
+    rationale: "When a single security exceeds 10% of the account's net liquidating value, the firm must evaluate additional margin."
+    citation: "IM-4210-2"
+    rules:
+      - rule_id: "4210_concentrated_threshold_single"
+        name: "Concentration Detection — Single Security"
+        section: "IM-4210-2"
+        formula_type: "concentration_threshold"
+        formula_detail: "single_position_value / net_liquidating_value > 10%"
+        conditions:
+          - "Any single security position > 10% of net liquidating value"
+          - "Applies to both long and short positions"
+        definition: "A concentrated account is one in which a single security or a group of securities of a single issuer represents more than 10% of the net liquidating value of the account. Firms must apply additional margin requirements to mitigate the heightened risk."
+
+  - priority: 2
+    name: "Issuer-Level Concentration Threshold"
+    rationale: "Multiple positions in a single issuer that collectively exceed 15% of net liquidating value trigger concentrated treatment."
+    citation: "IM-4210-2"
+    rules:
+      - rule_id: "4210_concentrated_threshold_issuer"
+        name: "Concentration Detection — Issuer Group"
+        section: "IM-4210-2"
+        formula_type: "concentration_threshold"
+        formula_detail: "issuer_positions_value / net_liquidating_value > 15%"
+        conditions:
+          - "Aggregate position value for single issuer > 15% of NLV"
+          - "Includes equity, debt, and convertible securities of same issuer"
+        definition: "When aggregate positions in securities of a single issuer (including equity, convertible bonds, and other debt) exceed 15% of the account's net liquidating value, the account is considered concentrated at the issuer level."
+
+  - priority: 3
+    name: "Concentrated Long Equity — Enhanced Margin"
+    rationale: "Long concentrated positions require margin above the standard 25% to reflect liquidity and price risk of overweight holdings."
+    citation: "IM-4210-2 / 4210(c)(1)"
+    rules:
+      - rule_id: "4210_concentrated_equity_long"
+        name: "Concentrated Long — 40% Margin"
+        section: "IM-4210-2"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: "margin = market_value × 40%"
+        reg_t_initial: "50%"
+        finra_maintenance: "40%"
+        conditions:
+          - "Long equity position"
+          - "Concentration > 10% of NLV"
+          - "Standard liquid security"
+        definition: "Long concentrated equity positions in liquid securities require 40% maintenance margin, reflecting the increased risk of a large single-name exposure versus the standard 25% requirement."
+
+      - rule_id: "4210_concentrated_low_cap"
+        name: "Concentrated Long — Low-Cap / Illiquid — 75%"
+        section: "IM-4210-2"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: "margin = market_value × 75%"
+        reg_t_initial: "75%"
+        finra_maintenance: "75%"
+        conditions:
+          - "Long equity position"
+          - "Concentration > 10% of NLV"
+          - "Low-cap or illiquid security"
+        definition: "Long concentrated positions in low-cap or illiquid securities require 75% margin due to the compounded risk of concentration plus limited liquidity for orderly liquidation."
+
+  - priority: 4
+    name: "Concentrated Short Equity — Enhanced Margin"
+    rationale: "Short concentrated positions carry unlimited loss potential and thin markets for covering, requiring margin above the standard 30%."
+    citation: "IM-4210-2 / 4210(c)(1)"
+    rules:
+      - rule_id: "4210_concentrated_equity_short"
+        name: "Concentrated Short — 50% Margin"
+        section: "IM-4210-2"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: "margin = market_value × 50%"
+        reg_t_initial: "50%"
+        finra_maintenance: "50%"
+        conditions:
+          - "Short equity position"
+          - "Concentration > 10% of NLV"
+          - "Standard liquid security"
+        definition: "Short concentrated positions in liquid securities require 50% maintenance margin, above the standard 30%, reflecting the unlimited upside risk of a large short single-name position."
+
+      - rule_id: "4210_concentrated_illiquid"
+        name: "Concentrated Short — Low-Cap / Illiquid — 100%"
+        section: "IM-4210-2"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: "margin = market_value × 100%"
+        reg_t_initial: "100%"
+        finra_maintenance: "100%"
+        conditions:
+          - "Short equity position"
+          - "Concentration > 10% of NLV"
+          - "Low-cap or illiquid security"
+        definition: "Short concentrated positions in low-cap or illiquid securities require 100% margin (full collateralization) due to the extreme risk of unlimited loss potential combined with an inability to cover the position in a timely manner."

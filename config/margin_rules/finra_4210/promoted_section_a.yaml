@@ -1,0 +1,34 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: a
+  description: FINRA 4210(a) — Definitions (promoted from stubs)
+rules:
+- id: 4210_a_16
+  description: '(16) The term "other marginable non-equity securities" means:'
+  citation: FINRA 4210(a)(16)
+  source_quote: '(16) The term "other marginable non-equity securities" means:'
+  conditions: {}
+  formula:
+    type: informational
+    description: '(16) The term "other marginable non-equity securities" means:'
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_a_3
+  description: (3) The term "customer" means any person for whom securities are purchased or sold or to whom securities are
+    purchased o
+  citation: FINRA 4210(a)(3)
+  source_quote: '(3) The term "customer" means any person for whom securities are purchased or sold or to whom securities
+    are purchased or sold whether on a regular way, when issued, delayed or future delivery basis. It will also include any
+    person for whom securities are held or carried and to or for whom a member extends, arranges or maintains any credit.
+    The term will not include the following: (A) a broker or dealer from whom a security has been purchased or to whom a security
+    has been sold for the account of the member or its customers, or (B) an "exempted borrower" as defined by Regulation T
+    of the Board of Governors of the Federal Reserve System ("Regulation T"), except for the proprietary account of a broker-dealer
+    carried by a member pursuant to paragraph (e)(6) of this Rule.'
+  conditions: {}
+  formula:
+    type: informational
+    description: (3) The term "customer" means any person for whom securities are purchased or sold or to whom securities
+      are purchased o
+  produces_calculation: false
+  calculation_status: informational

@@ -1,0 +1,191 @@
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(f)(2)(A)(xxvi)"
+  description: "Maintenance margin for single-leg option positions"
+  effective_date: "2024-01-01"
+  notes: >
+    Long options carry no maintenance margin (premium paid in full at purchase).
+    Short naked options use the standard naked option formula:
+    Premium + MAX(X% underlying − OTM, Y% underlying, per-contract minimum).
+    Equity/narrow-index: 20% / 10%. Broad-index: 15% / 10%.
+
+rules:
+  # --- Long options: no maintenance margin (fully paid at purchase) ---
+
+  - id: "4210_long_call"
+    description: "Long call option — no maintenance margin"
+    citation: "FINRA 4210(f)(2)(A)"
+    source_quote: >
+      In the case of any put, call, currency warrant, currency index
+      warrant, or stock index warrant carried "long" in a customer's
+      account that expires in nine months or less, initial margin must
+      be deposited and maintained equal to at least 100 percent of the
+      purchase price of the option or warrant.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "long"
+    formula:
+      type: "good_faith"
+      rate: 0.0
+
+  - id: "4210_long_put"
+    description: "Long put option — no maintenance margin"
+    citation: "FINRA 4210(f)(2)(A)"
+    source_quote: >
+      In the case of any put, call, currency warrant, currency index
+      warrant, or stock index warrant carried "long" in a customer's
+      account that expires in nine months or less, initial margin must
+      be deposited and maintained equal to at least 100 percent of the
+      purchase price of the option or warrant.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "long"
+    formula:
+      type: "good_faith"
+      rate: 0.0
+
+  # --- Naked equity options (20% underlying) ---
+
+  - id: "4210_naked_call_equity"
+    description: "Uncovered equity call option"
+    citation: "FINRA 4210(f)(2)(A)(xxvi)(a)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (1) Stock 20 percent.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "equity"
+      index_type: null
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "4210_naked_put_equity"
+    description: "Uncovered equity put option"
+    citation: "FINRA 4210(f)(2)(A)(xxvi)(a)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (1) Stock 20 percent.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "equity"
+      index_type: null
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked broad-based index options (15% underlying) ---
+
+  - id: "4210_naked_call_broad_index"
+    description: "Uncovered broad-based index call option"
+    citation: "FINRA 4210(f)(2)(A)(xxvi)(b)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (3) Broad index stock group 15 percent.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "4210_naked_put_broad_index"
+    description: "Uncovered broad-based index put option"
+    citation: "FINRA 4210(f)(2)(A)(xxvi)(b)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (3) Broad index stock group 15 percent.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked narrow-based index options (20% — same as equity) ---
+
+  - id: "4210_naked_call_narrow_index"
+    description: "Uncovered narrow-based index call option"
+    citation: "FINRA 4210(f)(2)(A)(xxvi)(a)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (2) Industry index stock group 20 percent.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "4210_naked_put_narrow_index"
+    description: "Uncovered narrow-based index put option"
+    citation: "FINRA 4210(f)(2)(A)(xxvi)(a)"
+    source_quote: >
+      In the case of listed puts and calls, 100 percent of the current
+      market value of the option plus the percentage of the current
+      market value of the underlying component specified in column II
+      of the chart below. (2) Industry index stock group 20 percent.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250

@@ -1,0 +1,195 @@
+rule_set:
+  regulation: "Securities Exchange Act — Anti-Fraud and Financial Responsibility"
+  authority: "Securities and Exchange Commission"
+  cfr: "17 CFR Part 240"
+  section: "240.10b-21, 240.10b-5, 240.15c6-1"
+  description: "Anti-fraud rules targeting manipulative short selling, and settlement requirements"
+  effective_date: "2008-10-17"
+  last_amended: "2024-05-28"
+  notes: "Rule 10b-21 adopted October 2008 targeting naked short selling fraud. Rule 15c6-1 amended for T+1 settlement May 2024."
+
+rules:
+  - id: "sec_10b21_naked_short_fraud"
+    description: "Naked short selling anti-fraud — illegal to deceive about ability to deliver"
+    citation: "17 CFR 240.10b-21"
+    rule_category: "anti_fraud"
+    rule_group: "short_selling"
+    source_quote: >
+      It shall constitute a manipulative or deceptive device or contrivance as used
+      in section 10(b) of the Act for any person to submit an order to sell an equity
+      security if such person deceives a broker or dealer, a participant of a
+      registered clearing agency, or a purchaser about its intention or ability to
+      deliver the security on the date delivery is due, and such person fails to
+      deliver the security on or before the date delivery is due.
+    conditions:
+      applies_to: "any_person"
+      transaction_type: "short_sale"
+    formula:
+      type: "prohibition"
+      description: "Unlawful to deceive broker about intention or ability to deliver shares, then fail to deliver"
+    notes: >
+      Targets short sellers who misrepresent their borrow source for the locate
+      requirement, or who misrepresent that they own the shares being sold. Both
+      the misrepresentation AND the failure to deliver must occur for a violation.
+
+  - id: "sec_10b5_short_and_distort"
+    description: "General anti-fraud — prohibits 'short and distort' manipulation schemes"
+    citation: "17 CFR 240.10b-5"
+    rule_category: "anti_fraud"
+    rule_group: "short_selling"
+    source_quote: >
+      It shall be unlawful for any person, directly or indirectly, by the use of
+      any means or instrumentality of interstate commerce, or of the mails or of
+      any facility of any national securities exchange, (a) To employ any device,
+      scheme, or artifice to defraud, (b) To make any untrue statement of a material
+      fact or to omit to state a material fact, or (c) To engage in any act, practice,
+      or course of business which operates or would operate as a fraud or deceit
+      upon any person, in connection with the purchase or sale of any security.
+    conditions:
+      applies_to: "any_person"
+    formula:
+      type: "prohibition"
+      description: "General anti-fraud covering manipulative short selling including 'short and distort' schemes"
+    notes: >
+      'Short and distort' involves taking a short position and then spreading
+      false negative information to drive down the price. The inverse of 'pump
+      and dump'. Applies to social media, research reports, and any public statements.
+
+  - id: "sec_9a2_market_manipulation"
+    description: "Market manipulation prohibition — creating artificial trading activity"
+    citation: "15 U.S.C. 78i(a)(2)"
+    rule_category: "anti_fraud"
+    rule_group: "short_selling"
+    source_quote: >
+      It shall be unlawful for any person, directly or indirectly, to effect,
+      alone or with one or more other persons, a series of transactions in any
+      security, creating actual or apparent active trading in such security, or
+      raising or depressing the price of such security, for the purpose of
+      inducing the purchase or sale of such security by others.
+    conditions:
+      applies_to: "any_person"
+    formula:
+      type: "prohibition"
+      description: "Prohibits coordinated short selling designed to artificially depress a security's price"
+    notes: >
+      Exchange Act Section 9(a)(2). Covers bear raids and coordinated short selling
+      campaigns designed to manipulate prices. Requires proof of manipulative intent.
+
+  - id: "sec_16c_insider_short_sale_ban"
+    description: "Insider short sale prohibition — directors, officers, and 10% owners cannot short"
+    citation: "15 U.S.C. 78p(c)"
+    rule_category: "prohibition"
+    rule_group: "short_selling"
+    source_quote: >
+      It shall be unlawful for any director or officer of an issuer, or any
+      beneficial owner of more than 10 per centum of any class of any equity
+      security, directly or indirectly, to sell any equity security of such
+      issuer if the person selling the security does not own the security sold.
+    conditions:
+      applies_to: "insider"
+      insider_type_in:
+        - "director"
+        - "officer"
+        - "10pct_beneficial_owner"
+    formula:
+      type: "prohibition"
+      description: "Absolute prohibition on insiders selling short any class of the company's equity securities"
+    notes: >
+      Covers traditional short sales and economically equivalent transactions
+      (put equivalent positions). Rule 16c-4 provides a narrow exemption for
+      establishing put equivalent positions when the insider owns sufficient
+      underlying securities.
+
+  - id: "sec_reg_m_105_offering_restriction"
+    description: "Reg M Rule 105 — no short selling 5 days before a public offering"
+    citation: "17 CFR 242.105"
+    rule_category: "prohibition"
+    rule_group: "short_selling"
+    source_quote: >
+      In connection with an offering of equity securities for cash pursuant to a
+      registration statement or a notification on Form 1-A or Form 1-E filed under
+      the Securities Act, it shall be unlawful for any person to sell short the
+      security that is the subject of the offering and purchase the offered securities
+      from an underwriter or broker or dealer participating in the offering.
+    conditions:
+      applies_to: "any_person"
+      offering_type_in:
+        - "follow_on"
+        - "secondary"
+        - "registered_offering"
+      restricted_period_days: 5
+    formula:
+      type: "prohibition"
+      description: "Cannot short sell during restricted period (5 business days before pricing) and then purchase in the offering"
+    notes: >
+      The rule is prophylactic — applies regardless of intent to manipulate.
+      Three exceptions: (1) bona fide purchases; (2) separate accounts with
+      information barriers; (3) investment companies. Applies to follow-on
+      and secondary offerings.
+
+  - id: "sec_15c6_1_settlement_t1"
+    description: "T+1 settlement — securities transactions must settle by T+1"
+    citation: "17 CFR 240.15c6-1"
+    rule_category: "delivery"
+    rule_group: "short_selling"
+    source_quote: >
+      A broker or dealer shall not effect or enter into a contract for the
+      purchase or sale of a security that provides for payment of funds and
+      delivery of securities later than the first business day after the date
+      of the contract.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type_in:
+        - "equity"
+        - "option"
+        - "etf"
+        - "corporate_bond"
+    formula:
+      type: "delivery_requirement"
+      description: "All securities transactions must settle by T+1 (one business day after trade date)"
+    notes: >
+      Effective May 28, 2024. Compressed settlement directly impacts short sale
+      delivery obligations and Reg SHO close-out timelines. Exceptions exist for
+      exempted securities, government securities, municipals, commercial paper,
+      and bankers' acceptances.
+
+  - id: "sec_13f2_short_position_reporting"
+    description: "Form SHO — institutional short position reporting"
+    citation: "17 CFR 240.13f-2"
+    rule_category: "reporting"
+    rule_group: "short_selling"
+    source_quote: >
+      An institutional investment manager that meets certain thresholds with
+      respect to short positions in equity securities must report information
+      regarding those positions and related short sale activity on a monthly basis.
+    conditions:
+      applies_to: "institutional_investment_manager"
+      reporting_threshold_reporting_company: 10000000
+      reporting_threshold_nonreporting_company: 500000
+    formula:
+      type: "reporting_requirement"
+      description: "Monthly reporting on Form SHO when short positions exceed $10M/2.5% (reporting) or $500K (non-reporting)"
+    notes: >
+      Adopted October 2023 under Dodd-Frank Section 929X. SEC aggregates data
+      by security (maintaining manager confidentiality) and publishes publicly.
+      Compliance date extended to January 2028 via temporary exemption.
+
+  - id: "sec_10c1a_securities_lending_transparency"
+    description: "Securities lending transparency — report all securities loans to FINRA"
+    citation: "17 CFR 240.10c-1a"
+    rule_category: "reporting"
+    rule_group: "short_selling"
+    source_quote: >
+      Any covered person that agrees to a covered securities loan shall report
+      the material terms of the covered securities loan to a registered national
+      securities association.
+    conditions:
+      applies_to: "lender"
+      transaction_type: "securities_loan"
+    formula:
+      type: "reporting_requirement"
+      description: "Report securities lending data (fees, collateral, volume) to FINRA for next-day public dissemination"
+    notes: >
+      Adopted October 2023. Lender and borrower identities remain confidential.
+      Data includes: issuer name, borrower type, lending platform, fees, collateral
+      type, and daily aggregate volume. Compliance date extended to September 2028.

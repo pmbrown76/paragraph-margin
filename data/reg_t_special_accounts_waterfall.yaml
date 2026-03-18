@@ -1,0 +1,266 @@
+## Regulation T — Special Accounts & SMA Waterfall
+##
+## Covers Reg T provisions for account types, Special Memorandum Account
+## (SMA) mechanics, payment period rules, and good-faith deposits.
+## These are largely procedural/ledger rules rather than formulaic
+## margin calculations.
+##
+## Sources:
+##   - 12 CFR 220.4(a) — Margin account opening
+##   - 12 CFR 220.8(a) — Cash account
+##   - 12 CFR 220.5 — Special Memorandum Account (SMA)
+##   - 12 CFR 220.4(c)(1) — Payment period
+##   - 12 CFR 220.18 — Good-faith deposit
+
+categories:
+
+  - priority: 1
+    name: Margin Account Opening
+    rationale: >-
+      Section 220.4(a) establishes the fundamental requirement that a
+      creditor must obtain margin before extending any credit for the
+      purchase of securities. This is the gateway provision — no margin
+      transaction can occur without compliance with 220.4(a).
+    citation: "220.4(a)"
+    rules:
+
+      - rule_id: "reg_t_margin_account_opening"
+        name: "Margin Account — Initial Margin Required"
+        section: "220.4(a)"
+        position_side: "any"
+        formula_type: "procedural"
+        formula_detail: |
+          Creditor must obtain margin before extending credit.
+          No specific formula — triggers the margin framework.
+        reg_t_initial: "per 220.12 Supplement"
+        finra_maintenance: "per FINRA 4210"
+        conditions:
+          - account_type = margin
+          - action = open_or_extend_credit
+        definition: >-
+          Per 220.4(a), a creditor (broker-dealer) shall not extend credit
+          to a customer in a margin account unless the creditor obtains
+          margin as required by Regulation T. This is the master provision
+          that requires initial margin before any purchase on credit. The
+          specific margin amount is determined by the 220.12 Supplement
+          and the applicable SRO rules.
+
+  - priority: 2
+    name: Cash Account
+    rationale: >-
+      Section 220.8(a) governs cash accounts where no credit extension
+      is permitted. Securities must be fully paid by the settlement date.
+      The cash account rules interact with the payment period provisions
+      and provide an alternative to margin accounts.
+    citation: "220.8(a)"
+    rules:
+
+      - rule_id: "reg_t_cash_account_full_payment"
+        name: "Cash Account — Full Payment Required"
+        section: "220.8(a)"
+        position_side: "any"
+        formula_type: "full_payment"
+        formula_detail: |
+          100% of purchase price due by settlement date.
+          No credit extension in cash accounts.
+        reg_t_initial: 1.00
+        finra_maintenance: "n/a — cash account"
+        conditions:
+          - account_type = cash
+        definition: >-
+          Per 220.8(a), securities purchased in a cash account must be
+          paid for in full by the settlement date. No credit may be
+          extended. If payment is not received by settlement + the
+          payment period, the creditor must liquidate or apply for an
+          extension from the designated examining authority.
+
+  - priority: 3
+    name: SMA — Credits
+    rationale: >-
+      Section 220.5(a) governs credits to the Special Memorandum Account.
+      SMA increases when cash or securities are deposited, or when the
+      market value of marginable securities increases (appreciation).
+      SMA credits represent available buying power.
+    citation: "220.5(a)"
+    rules:
+
+      - rule_id: "reg_t_sma_credit_deposit"
+        name: "SMA Credit — Cash/Security Deposit"
+        section: "220.5(a)"
+        position_side: "any"
+        formula_type: "ledger_operation"
+        formula_detail: |
+          SMA += deposit_amount
+          Credits SMA when customer deposits cash or fully-paid securities.
+        reg_t_initial: "n/a — ledger"
+        finra_maintenance: "n/a — ledger"
+        conditions:
+          - account_type = margin
+          - sma_event = deposit
+        definition: >-
+          Per 220.5(a), cash deposits and deposits of fully-paid
+          securities credit the Special Memorandum Account. SMA
+          represents the customer's available Reg T buying power above
+          the minimum margin requirement.
+
+      - rule_id: "reg_t_sma_credit_appreciation"
+        name: "SMA Credit — Market Appreciation"
+        section: "220.5(a)"
+        position_side: "any"
+        formula_type: "ledger_operation"
+        formula_detail: |
+          SMA += (excess_equity - prior_excess)
+          Appreciation in long securities creates SMA credit.
+        reg_t_initial: "n/a — ledger"
+        finra_maintenance: "n/a — ledger"
+        conditions:
+          - account_type = margin
+          - sma_event = appreciation
+        definition: >-
+          When the market value of securities in a margin account
+          increases, the resulting excess equity credits the SMA.
+          This excess is calculated as: (market_value × (1 - Reg_T_rate))
+          - debit_balance. The SMA balance increases by the change in
+          excess equity.
+
+  - priority: 4
+    name: SMA — Debits
+    rationale: >-
+      Section 220.5(b) governs debits to the SMA. Withdrawals and new
+      purchases reduce SMA. The SMA balance must remain non-negative
+      after any debit transaction; if it would go negative, the
+      transaction requires additional margin deposit.
+    citation: "220.5(b)"
+    rules:
+
+      - rule_id: "reg_t_sma_debit_withdrawal"
+        name: "SMA Debit — Cash Withdrawal"
+        section: "220.5(b)"
+        position_side: "any"
+        formula_type: "ledger_operation"
+        formula_detail: |
+          SMA -= withdrawal_amount
+          Withdrawal permitted only if SMA remains >= 0.
+        reg_t_initial: "n/a — ledger"
+        finra_maintenance: "n/a — ledger"
+        conditions:
+          - account_type = margin
+          - sma_event = withdrawal
+        definition: >-
+          Per 220.5(b), cash withdrawals from a margin account debit
+          the SMA. The withdrawal is permitted only if the SMA balance
+          after the debit remains non-negative and the account equity
+          remains above FINRA 4210 maintenance requirements.
+
+      - rule_id: "reg_t_sma_debit_purchase"
+        name: "SMA Debit — New Purchase"
+        section: "220.5(b)"
+        position_side: "any"
+        formula_type: "ledger_operation"
+        formula_detail: |
+          SMA -= (purchase_value × Reg_T_rate)
+          New margin purchases consume SMA.
+        reg_t_initial: "n/a — ledger"
+        finra_maintenance: "n/a — ledger"
+        conditions:
+          - account_type = margin
+          - sma_event = purchase
+        definition: >-
+          New margin purchases debit the SMA by the Reg T initial margin
+          amount (typically 50% of purchase price for equities). If the
+          SMA is insufficient, the customer must deposit additional margin.
+
+  - priority: 5
+    name: SMA — High-Water Mark
+    rationale: >-
+      The SMA operates as a high-water mark — it can increase but never
+      decreases solely due to market depreciation. Only explicit debits
+      (withdrawals, purchases) reduce SMA. This is a critical feature
+      of the SMA mechanism under Section 220.5.
+    citation: "220.5"
+    rules:
+
+      - rule_id: "reg_t_sma_high_water_mark"
+        name: "SMA High-Water Mark — No Depreciation Reduction"
+        section: "220.5"
+        position_side: "any"
+        formula_type: "ledger_operation"
+        formula_detail: |
+          SMA = max(SMA_prior, SMA_current)
+          Market depreciation does NOT reduce SMA balance.
+        reg_t_initial: "n/a — ledger"
+        finra_maintenance: "n/a — ledger"
+        conditions:
+          - account_type = margin
+          - sma_event = end_of_day_mark
+        definition: >-
+          Per 220.5, the SMA balance is a high-water mark: it increases
+          with appreciation and explicit credits but is NOT reduced by
+          market depreciation of securities in the account. Only explicit
+          debit transactions (withdrawals, purchases, transfers out) reduce
+          SMA. This means a customer retains buying power from prior
+          appreciation even if the market subsequently declines, subject
+          to the account still meeting FINRA 4210 maintenance requirements.
+
+  - priority: 6
+    name: Payment Period
+    rationale: >-
+      Section 220.4(c)(1) establishes the payment period — the deadline
+      by which a customer must deposit initial margin. As of May 28, 2024,
+      this is T+1 settlement, matching the SEC's settlement cycle change.
+    citation: "220.4(c)(1)"
+    rules:
+
+      - rule_id: "reg_t_payment_period_t1"
+        name: "Payment Period — T+1 Settlement"
+        section: "220.4(c)(1)"
+        position_side: "any"
+        formula_type: "procedural"
+        formula_detail: |
+          Margin deposit due by settlement date (T+1).
+          Effective May 28, 2024 (FRB amendment).
+        reg_t_initial: "n/a — deadline"
+        finra_maintenance: "n/a — deadline"
+        conditions:
+          - account_type = margin
+          - action = payment_deadline
+        definition: >-
+          Per 220.4(c)(1), the customer must deposit the required margin
+          within the payment period, which is the settlement date of the
+          transaction. Following the SEC's T+1 settlement rule (effective
+          May 28, 2024), the payment period is one business day after trade
+          date. Prior to this amendment, the payment period was T+2. If
+          payment is not received, the creditor must liquidate sufficient
+          securities to meet the margin requirement.
+
+  - priority: 7
+    name: Good-Faith Deposit
+    rationale: >-
+      Section 220.18 permits a good-faith deposit for exempt securities
+      (Treasuries, agencies, municipals) in lieu of the standard Reg T
+      margin. The good-faith amount is not a percentage — it is a
+      reasonable deposit determined by the creditor.
+    citation: "220.18"
+    rules:
+
+      - rule_id: "reg_t_good_faith_deposit"
+        name: "Good-Faith Deposit — Exempt Securities"
+        section: "220.18"
+        position_side: "any"
+        formula_type: "good_faith"
+        formula_detail: |
+          Good-faith deposit as determined by creditor.
+          Applies to exempt securities (Treasuries, agencies, municipals).
+          In practice, defers to FINRA 4210(e)(2) rates.
+        reg_t_initial: "good_faith"
+        finra_maintenance: "see FINRA 4210(e)(2)"
+        conditions:
+          - security_type = exempt_security
+        definition: >-
+          Per 220.18, a creditor may extend credit for the purchase of
+          exempt securities (as defined in Section 3(a)(12) of the Exchange
+          Act) upon a good-faith deposit. The deposit amount is determined
+          by the creditor in good faith. In practice, broker-dealers apply
+          the FINRA 4210(e)(2) maintenance rates as the good-faith standard.
+          Exempt securities include US Treasuries, government agency
+          obligations, and municipal bonds.

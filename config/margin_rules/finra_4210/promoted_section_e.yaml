@@ -1,0 +1,288 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: e
+  description: FINRA 4210(e) — Exceptions to Rule (promoted from stubs)
+rules:
+- id: 4210_e
+  description: (e) Exceptions to Rule
+  citation: FINRA 4210(e)
+  source_quote: '(e) Exceptions to Rule The foregoing requirements of this Rule are subject to the following exceptions:'
+  conditions: {}
+  formula:
+    type: informational
+    description: (e) Exceptions to Rule
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_2_C
+  description: (C) Non-Equity Securities
+  citation: FINRA 4210(e)(2)(C)
+  source_quote: '(C) Non-Equity Securities On any "long" or "short" positions in non-equity securities, the margin to be maintained
+    (except where a lesser requirement is imposed by other provisions of this Rule) shall be:'
+  conditions: {}
+  formula:
+    type: informational
+    description: (C) Non-Equity Securities
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_2_H_ii_d._2._d_2
+  description: 2. if the member has any non-margin counterparties, the member shall establish and enforce risk management
+    procedures re
+  citation: FINRA 4210(e)(2)(H)(ii)(d.)(2.)
+  source_quote: 2. if the member has any non-margin counterparties, the member shall establish and enforce risk management
+    procedures reasonably designed to ensure that the member would not exceed either of the limits specified in paragraph
+    (e)(2)(I)(i) of this Rule and that the member’s net capital deductions under paragraph (e)(2)(H)(ii)d.1. of this Rule
+    for all accounts combined will not exceed $25 million;
+  conditions: {}
+  formula:
+    type: informational
+    description: Members with non-margin counterparties must enforce risk management procedures ensuring net capital deduction
+      limits per (e)(2)(I)(i) are not exceeded
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_2_H_ii_d._3._d_3
+  description: 3. if the member’s specified net capital deductions exceed $25 million for five consecutive business days,
+    the member sh
+  citation: FINRA 4210(e)(2)(H)(ii)(d.)(3.)
+  source_quote: 3. if the member’s specified net capital deductions exceed $25 million for five consecutive business days,
+    the member shall give prompt written notice to FINRA. If the member’s specified net capital deductions exceed the lesser
+    of $30 million or 25% of the member’s tentative net capital, as such term is defined in SEA Rule 15c3-1, for five consecutive
+    business days, the member shall not enter into any new Covered Agency Transactions with any non-margin counterparty other
+    than risk-reducing transactions, and shall also, to the extent of its rights, promptly collect margin for each counterparty’s
+    excess net mark to market loss and promptly liquidate the Covered Agency Transactions of any counterparty whose excess
+    net mark to market loss is not margined or eliminated within five business days from the date it arises, unless FINRA
+    has specifically granted the member additional time; and
+  conditions: {}
+  formula:
+    type: informational
+    description: Net capital deductions exceeding $25M for 5 days triggers FINRA notice; exceeding lesser of $30M or 25% of
+      tentative net capital triggers margin/deposit requirements
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_2_I_i
+  description: (i) the net capital deductions taken by a member as a result of marked to the market losses incurred under
+    paragraphs (e
+  citation: FINRA 4210(e)(2)(I)(i)
+  source_quote: '(i) the net capital deductions taken by a member as a result of marked to the market losses incurred under
+    paragraphs (e)(2)(F), (e)(2)(G) (exclusive of the percentage requirements established thereunder), or (e)(2)(H)(ii)d.1.
+    of this Rule, plus any unmargined net mark to market losses below $250,000 or of small cash counterparties exceed:'
+  conditions: {}
+  formula:
+    type: informational
+    description: Net capital deductions from covered agency transactions plus unmargined losses below $250,000 must not exceed
+      limits per account (5%) or combined (25%)
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_2_I_i_a._a
+  description: a. for any one account or group of commonly controlled accounts, 5 percent of the member's tentative net capital
+    (as suc
+  citation: FINRA 4210(e)(2)(I)(i)(a.)
+  source_quote: a. for any one account or group of commonly controlled accounts, 5 percent of the member's tentative net capital
+    (as such term is defined in SEA Rule 15c3-1), or
+  conditions: {}
+  formula:
+    type: concentration_threshold
+    rate: 0.05
+    description: 'Per-account limit: covered agency net capital deductions may not exceed 5% of tentative net capital'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_2_I_i_b._b
+  description: b. for all accounts combined, 25 percent of the member's tentative net capital (as such term is defined in
+    SEA Rule 15c3
+  citation: FINRA 4210(e)(2)(I)(i)(b.)
+  source_quote: b. for all accounts combined, 25 percent of the member's tentative net capital (as such term is defined in
+    SEA Rule 15c3-1); and
+  conditions: {}
+  formula:
+    type: concentration_threshold
+    rate: 0.25
+    description: 'All-accounts limit: covered agency net capital deductions may not exceed 25% of tentative net capital'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_6_B_i_a._a
+  description: a. maintain a minimum tentative net capital (as such term is defined in SEA Rule 15c3-1) of $25 million as
+    computed purs
+  citation: FINRA 4210(e)(6)(B)(i)(a.)
+  source_quote: 'a. maintain a minimum tentative net capital (as such term is defined in SEA Rule 15c3-1) of $25 million as
+    computed pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a), except that a member whose primary business consists
+    of the clearance of options market-maker accounts may carry JBO accounts provided that it maintains a minimum net capital
+    of $7 million as computed pursuant to SEA Rule 15c3-1 and, if applicable, Rule 4110(a). In addition, the member must include
+    in its ratio of gross options market maker deductions to net capital required by the provisions of SEA Rule 15c3-1 and,
+    if applicable, Rule 4110(a), gross deductions for JBO participant accounts. Clearance of option market maker accounts
+    shall be deemed a broker-dealer''s primary business if a minimum of 60 percent of the aggregate deductions in the above
+    ratio are options market maker deductions. In the event that a carrying and clearing, or a carrying member''s tentative
+    net capital (as such term is defined in SEA Rule 15c3-1), or net capital, respectively, has fallen below the above requirements,
+    the firm shall: 1. promptly notify FINRA in writing of such deficiency, 2.'
+  conditions:
+    account_type: jbo
+  formula:
+    type: account_minimum
+    amount: 25000000.0
+    description: JBO arrangement requires minimum tentative net capital of $25 million (or $7 million for options clearing
+      members)
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_6_B_ii_c._c
+  description: c. maintain a minimum liquidating equity of $1 million in the JBO arrangement exclusive of the ownership interest
+    establ
+  citation: FINRA 4210(e)(6)(B)(ii)(c.)
+  source_quote: c. maintain a minimum liquidating equity of $1 million in the JBO arrangement exclusive of the ownership interest
+    established in subparagraph (ii)b. above. When the minimum liquidating equity decreases below the $1 million requirement,
+    the participant must deposit a sufficient amount to eliminate this deficiency within 5 business days or be subject to
+    margin account requirements prescribed for customers in Regulation T, and the margin requirements pursuant to the other
+    provisions of this Rule.
+  conditions:
+    account_type: jbo
+  formula:
+    type: account_minimum
+    amount: 1000000.0
+    description: JBO participants must maintain minimum liquidating equity of $1 million
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_7
+  description: (7) Nonpurpose Credit
+  citation: FINRA 4210(e)(7)
+  source_quote: '(7) Nonpurpose Credit In a nonsecurities credit account, a member may extend and maintain nonpurpose credit
+    to or for any customer without collateral or on any collateral whatever, provided:'
+  conditions: {}
+  formula:
+    type: informational
+    description: (7) Nonpurpose Credit
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_7_C
+  description: (C) the amount of any deficiency between the equity in the account and the margin required by the other provisions
+    of th
+  citation: FINRA 4210(e)(7)(C)
+  source_quote: (C) the amount of any deficiency between the equity in the account and the margin required by the other provisions
+    of this Rule shall be charged against the member's net capital as provided in SEA Rule 15c3-1 and, if applicable, Rule
+    4110(a). The term "nonpurpose credit" means an extension of credit other than "purpose credit" as defined in Section 220.2
+    of Regulation T.
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_8_A
+  description: (A) Shelf-Registered Securities — The equity to be maintained in margin accounts of customers for securities
+    which are t
+  citation: FINRA 4210(e)(8)(A)
+  source_quote: '(A) Shelf-Registered Securities — The equity to be maintained in margin accounts of customers for securities
+    which are the subject of a current and effective registration for a continuous or delayed offering (shelf-registered securities)
+    shall be at least the amount of margin required by paragraph (c) of this Rule, provided the member:'
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_8_B
+  description: (B) Other Control and Restricted Securities — Except as provided in subparagraph (D) below, the equity in accounts
+    of cu
+  citation: FINRA 4210(e)(8)(B)
+  source_quote: '(B) Other Control and Restricted Securities — Except as provided in subparagraph (D) below, the equity in
+    accounts of customers for other control and restricted securities of issuers that are subject to Securities Act Rule 144
+    or 145(c), shall be 40 percent of the current market value of such securities "long" in the account, provided the member:'
+  conditions:
+    security_type: restricted
+    position_side: long
+  formula:
+    type: percentage_of_market_value
+    rate: 0.4
+    description: 'Control and restricted securities (Rule 144/145(c)): 40% of current market value'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_8_C_ii
+  description: (ii) The greater of the aggregate credit agreed to be extended in writing or the aggregate credit that is actually
+    exten
+  citation: FINRA 4210(e)(8)(C)(ii)
+  source_quote: (ii) The greater of the aggregate credit agreed to be extended in writing or the aggregate credit that is
+    actually extended to all customers on control and restricted securities of any one issue that exceeds 10 percent of the
+    member's excess net capital shall be deducted from net capital for purposes of determining a member's status under Rule
+    4120. The amount of such aggregate credit extended, which has been deducted in computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a), need not be included in this calculation. FINRA, upon written application, may reduce
+    the deduction to net capital under Rule 4120 to 25 percent of such aggregate credit extended that exceeds 10 percent but
+    is less than 15 percent of the member's excess net capital.
+  conditions:
+    security_type: restricted
+  formula:
+    type: concentration_threshold
+    rate: 0.1
+    description: Aggregate credit on control/restricted securities of one issue exceeding 10% of excess net capital requires
+      net capital deduction
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_8_C_iii_a._a
+  description: a. To the extent such net amount of credit extended does not exceed 50 percent of a member's excess net capital,
+    25 perc
+  citation: FINRA 4210(e)(8)(C)(iii)(a.)
+  source_quote: a. To the extent such net amount of credit extended does not exceed 50 percent of a member's excess net capital,
+    25 percent of such net amount of credit extended shall be deducted, and
+  conditions:
+    security_type: restricted
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+    description: 'Net credit on restricted securities up to 50% of excess net capital: 25% net capital deduction'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_8_C_iii_b._b
+  description: 'b. 100 percent of such net amount of credit extended which exceeds 50 percent of a member''s excess net capital
+    shall be '
+  citation: FINRA 4210(e)(8)(C)(iii)(b.)
+  source_quote: b. 100 percent of such net amount of credit extended which exceeds 50 percent of a member's excess net capital
+    shall be deducted.
+  conditions:
+    security_type: restricted
+  formula:
+    type: percentage_of_market_value
+    rate: 1.0
+    description: 'Net credit on restricted securities exceeding 50% of excess net capital: 100% net capital deduction on the
+      excess'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_8_C_iv_a._a
+  description: a. 10 percent of the outstanding shares of such issue, or
+  citation: FINRA 4210(e)(8)(C)(iv)(a.)
+  source_quote: a. 10 percent of the outstanding shares of such issue, or
+  conditions:
+    security_type: restricted
+  formula:
+    type: concentration_threshold
+    rate: 0.1
+    description: 'Concentration in restricted securities: credit exceeds 10% of outstanding shares of the issue'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_e_8_C_iv_b._b
+  description: b. 100 percent of the average weekly volume for such issue during the preceding three-month period.
+  citation: FINRA 4210(e)(8)(C)(iv)(b.)
+  source_quote: 'b. 100 percent of the average weekly volume for such issue during the preceding three-month period. Where
+    a concentration exists, for purposes of computing subparagraph (B)(i) above, the margin requirement on such securities
+    shall be, based on the greater of subparagraph (iv)a. or b., above, as specified below: Percent of Outstanding Shares
+    or Percent of Average Weekly Volume Margin Requirement For purposes of this paragraph (e)(8)(C)(iv), "excess securities"
+    shall mean the amount of securities, if any, by which the aggregate position in control and restricted securities of any
+    one issue exceeds the aggregate amount of securities that would be required to support the aggregate credit extended on
+    such control and restricted securities if the applicable margin requirement were 50 percent.'
+  conditions: {}
+  formula:
+    type: informational
+    description: Concentration defined as credit on restricted securities exceeding 100% of average weekly volume for the
+      preceding 3-month period
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_e_8_C_v
+  description: (v) The amount to be deducted from net capital for purposes of determining a member's status under Rule 4120,
+    pursuant t
+  citation: FINRA 4210(e)(8)(C)(v)
+  source_quote: (v) The amount to be deducted from net capital for purposes of determining a member's status under Rule 4120,
+    pursuant to paragraph (e)(8)(C) shall not exceed 100 percent of the aggregate credit extended reduced by any amount deducted
+    in computing net capital under SEA Rule 15c3-1 and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: restricted
+  formula:
+    type: percentage_of_market_value
+    rate: 1.0
+    description: Net capital deduction for restricted securities shall not exceed 100% of aggregate credit extended
+  produces_calculation: true
+  calculation_status: active

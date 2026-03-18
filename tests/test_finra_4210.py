@@ -4,8 +4,8 @@ from decimal import Decimal
 
 import pytest
 
-from margin_calc_engine import FINRA4210Calculator
-from margin_calc_engine.money import ZERO
+from paragraph_margin import FINRA4210Calculator
+from paragraph_margin.money import ZERO
 
 
 class TestFINRA4210Calculator:

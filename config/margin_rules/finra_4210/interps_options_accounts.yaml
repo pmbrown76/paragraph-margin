@@ -1,0 +1,537 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(f) Interpretations — Options, Accounts, Liquidation
+  description: Options, security futures, account structure, and liquidation interpretations
+  effective_date: '2024-01-01'
+  notes: >
+    These interpretations cover concentrated/volatile security margin, options procedures, security futures,
+    margin account structure, margin call timing, and liquidation rules under 4210(f).
+rules:
+- id: 4210_interp_concentration_volatile
+  description: Concentrated or volatile securities — additional margin authority
+  citation: FINRA 4210(f)(1)/01
+  source_quote: >-
+    4210(f)(1)/01 Concentration or Volatile Securities Substantial additional margin must be required:
+    When there are concentrations in single securities (either in particular accounts or in all margin
+    accounts carried) which, due to their size, may not be liquidated promptly; and For accounts with
+    positions in volatile securities subject to unusually rapid or violent changes in value. Accordingly,
+    steps should be taken to: Increase margin requirements when it appears that accumulated positions
+    will be difficult to liquidate promptly; and Prevent such positions from being acquired.
+  conditions:
+    security_type: concentration_volatile_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(1)/01: members may (and in some cases must) require additional margin on concentrated
+    or volatile securities. The determination of whether additional margin is required is based on the
+    member's risk assessment of the specific security, including volatility, liquidity, and concentration
+    factors. See also 4210(g)(1)(I)/01 for portfolio margin concentration.
+- id: 4210_interp_suspended_securities
+  description: Suspended securities — margin treatment
+  citation: FINRA 4210(f)(1)/02
+  source_quote: >-
+    4210(f)(1)/02 Suspended Securities Securities suspended by the SEC (not those whose trading has been
+    halted or suspended by a self-regulatory organization) that are held in customer’s accounts are valued
+    and margined as follows: Long positions have no value for margin purposes or a 100 percent maintenance
+    margin requirement. Short positions are valued for margin purposes at the last known sale price prior
+    to suspension and regular maintenance margin requirements are applied. Long and short positions of
+    the same security are paired-off and only the excess position is margined in accordance with (a) or
+    (b) above. Long stock versus short warrants representing the same security are treated the same as
+    (c) above. Long exchangeable or convertible securities versus equivalent shorts of the underlying
+    security position are treated as follows: there is no maintenance requirement, if there is no conversion
+    cost or other restrictions, or if there is a conversion cost but no other restriction, the requirement
+    is the conversion cost or the regular maintenance requirement on the short position, whichever is
+    less, or if there is a restriction to the conversion other than a conversion cost, the positions are
+    margined in accordance with (a) and (b) above.
+  conditions:
+    security_type: suspended_security_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 1.0
+  notes: >
+    Per 4210(f)(1)/02: securities whose trading has been suspended by an exchange or FINRA have no margin
+    value and should be valued at zero for margin purposes until trading resumes. Members may require
+    immediate deposit or liquidation when trading is suspended.
+- id: 4210_interp_mini_jumbo_options
+  description: Mini, jumbo, and standard option contract spread combinations
+  citation: FINRA 4210(f)(2)(A)(xxxii)/01
+  source_quote: >-
+    4210(f)(2)(A)(xxxii)/01 Mini Option, Jumbo Option, and Standard Option Contract Spread Combinations
+    Members may combine mini option contracts, jumbo option contracts, or standard option contracts to
+    create a spread strategy, as defined in Rule 4210(f)(2)(A)(xxxii), provided all the required criteria
+    has been satisfied.
+  conditions:
+    security_type: mini_jumbo_option_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(A)(xxxii)/01: mini options (10 shares per contract), jumbo options (1000 shares per
+    contract), and standard options (100 shares) may be combined in spread strategies. When computing
+    spread margin, the contract sizes must be appropriately matched. E.g., 10 mini options may offset
+    1 standard option.
+- id: 4210_interp_options_merger
+  description: Options involving mergers and acquisitions
+  citation: FINRA 4210(f)(2)(E)/01
+  source_quote: >-
+    4210(f)(2)(E)/01 Treatment of Options Involving Mergers and Acquisitions When an options exchange
+    ceases trading in a listed option of a specific company because the “underlying asset” (as defined
+    in Regulation T, Section 220.2) no longer trades due to a merger or acquisition and the registered
+    clearing agency has formally announced that all outstanding options will settle for cash in an amount
+    equal to the difference between a fixed dollar amount and the exercise price of the option, the margin
+    required on such options may, at the member’s discretion, be computed as follows: FRB letter to CBOE
+    dated April 12, 1990
+  conditions:
+    security_type: option_merger_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(E)/01: options on securities involved in mergers, acquisitions, or other reorganizations
+    may require adjusted margin treatment. The deliverable may change to cash, shares of the acquiring
+    company, or a combination.
+- id: 4210_interp_options_leveraged_etp
+  description: Options on leveraged exchange-traded products — scaled margin
+  citation: FINRA 4210(f)(2)(E)/02
+  source_quote: >-
+    4210(f)(2)(E)/02 Options on Leveraged Exchange Traded Products The initial and maintenance margin
+    requirement for uncovered short positions in listed or OTC options on leveraged exchange trade products,
+    including exchange traded funds (ETFs) and exchange traded notes (ETNs) shall be increased by a factor
+    commensurate with the leverage of the ETP as set out in the following chart:
+  conditions:
+    security_type: option_leveraged_etp_interp_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(E)/02: options on leveraged ETPs are subject to scaled margin requirements. The naked
+    option percentage is increased by the leverage factor of the underlying ETP. E.g., naked call on 3x
+    ETF: 45% (3 x 15%) instead of 15%. See options_leveraged_etf.yaml for specific rules.
+- id: 4210_interp_uncovered_put_requirement
+  description: Uncovered put option — minimum margin requirement
+  citation: FINRA 4210(f)(2)(E)(i)/01
+  source_quote: >-
+    4210(f)(2)(E)(i)/01 Uncovered Put Option Requirement The maximum maintenance margin requirement for
+    a short, uncovered put option is the aggregate exercise price, as defined in Rule 4210(f)(2)(A)(ii).
+  conditions:
+    security_type: uncovered_put_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(E)(i)/01: the minimum margin requirement for an uncovered (naked) put option is the
+    greater of: (a) the standard percentage requirement minus out-of-the-money amount, plus premium, or
+    (b) a specified minimum per contract. The put can never require more than the strike price x quantity
+    (maximum loss).
+- id: 4210_interp_covered_call_restricted
+  description: Control or restricted securities covering options sold
+  citation: FINRA 4210(f)(2)(F)(ii)/01
+  source_quote: >-
+    4210(f)(2)(F)(ii)/01 Control or Restricted Securities Covering Options Sold The sale (writing) of
+    listed call options against securities subject to Securities Act Rules 144 and 145 is permissible,
+    provided all conditions of sale under such Rules have been met, both at the time of sale of the option
+    and at the time that the underlying security is delivered pursuant to an exercise notice. (SEC Release
+    33-5890, December 20, 1977) (FINRA Regulatory Notice 10-45) (FINRA Regulatory Notice 24-11)
+  conditions:
+    security_type: covered_call_restricted_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(F)(ii)/01: control or restricted securities may be used to cover short call option
+    positions, subject to the margin and saleability requirements of 4210(e)(8). The option is considered
+    covered only to the extent the underlying securities are saleable per Rule 144.
+- id: 4210_interp_covered_call_accounts
+  description: Accounts in which call options may be sold
+  citation: FINRA 4210(f)(2)(F)(ii)/02
+  source_quote: >-
+    4210(f)(2)(F)(ii)/02 Accounts in Which Call Options May Be Sold Call options may be sold (written)
+    against control or restricted securities in either the margin account or the cash account, and will
+    be deemed covered calls, provided that all conditions to sale under Securities Act Rules 144 and 145
+    are satisfied to prior to the sale (writing) of the call options.
+  conditions:
+    security_type: covered_call_accounts_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(F)(ii)/02: covered call options may be sold in margin accounts and cash accounts where
+    the underlying securities are held. In a cash account, the underlying must be fully paid.
+- id: 4210_interp_partially_covered
+  description: Partially covered option positions
+  citation: FINRA 4210(f)(2)(F)(ii)/04
+  source_quote: >-
+    4210(f)(2)(F)(ii)/04 Partially Covered Option The sale (writing) of a short option contract may be
+    partially covered by the proportionate amount of shares of the underlying security, and members may
+    apply the appropriate uncovered option requirement to the remaining uncovered portion. This transaction
+    is not eligible for the cash account.
+  conditions:
+    security_type: partially_covered_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(F)(ii)/04: when a short option is only partially covered by the underlying position,
+    the uncovered portion is subject to naked option margin requirements and the covered portion receives
+    covered option treatment.
+- id: 4210_interp_expiration_dates
+  description: Options — expiration date margin considerations
+  citation: FINRA 4210(f)(2)(H)(v)/01
+  source_quote: >-
+    4210(f)(2)(H)(v)/01 Expiration Dates In a conversion, reverse conversion or collar strategy in which
+    the long put or warrant expires on or after the expiration of the short call or warrant, and the long
+    option is paid for in full, the member may apply the margin treatment provided in applicable Rule
+    4210(f)(2)(H)(v)b. through d., provided the other conditions of the applicable strategy are satisfied.
+    4210(f)(2)(I)(i)b./01 Convertible Bond Hedge — (Rescinded)
+  conditions:
+    security_type: expiration_date_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(H)(v)/01: when options in a spread or strategy have different expiration dates, margin
+    treatment varies. The shorter-dated option may expire first, leaving the longer-dated option uncovered
+    and subject to naked option margin requirements.
+- id: 4210_interp_net_positions_options
+  description: Net positions — options on same underlying
+  citation: FINRA 4210(f)(2)(I)(iii)/01
+  source_quote: >-
+    4210(f)(2)(I)(iii)/01 Net Positions In the case of convertible hedge positions (i.e., where a security
+    carried in a long position is exchangeable or convertible within a reasonable time, without restriction,
+    other than the payment of money, into a security carried in a short position) or “short against the
+    box” positions in a customer’s account, neither the long nor the short position is available to offset
+    the margin required on any option position carried for such customer.
+  conditions:
+    security_type: net_positions_options_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(I)(iii)/01: positions in options on the same underlying may be netted for margin purposes
+    where they form recognized strategies (spreads, straddles, etc.).
+- id: 4210_interp_otc_govt_options
+  description: OTC government options — margin treatment
+  citation: FINRA 4210(f)(2)(I)(iv)/01
+  source_quote: >-
+    4210(f)(2)(I)(iv)/01 OTC Government Options Regulation T, Section 220.12(b) states that the margin
+    on exempted securities is that required by the creditor in “good faith” or the percentage set by the
+    regulatory authority where the trade occurs, whichever is greater. Under SEA Rule 3a12- 7, OTC options
+    on government securities which represent obligations of $250,000 or more are designated as exempt
+    securities. Therefore, an escrow agreement for an OTC government option where the underlying value
+    is $250,000 or more may be collateralized by cash. An escrow agreement for an OTC government option
+    where the underlying value is less than $250,000 requires that the underlying security be held as
+    collateral for the agreement. FRB Letter to CBOE Dated December 12, 1986
+  conditions:
+    security_type: otc_govt_option_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(I)(iv)/01: OTC options on government securities are subject to the margin requirements
+    of 4210(f)(2)(I).
+- id: 4210_interp_govt_escrow
+  description: Government security under escrow agreement
+  citation: FINRA 4210(f)(2)(I)(iv)/02
+  source_quote: >-
+    4210(f)(2)(I)(iv)/02 Use of Government Security Under Escrow Agreement It is not permissible for the
+    underlying security backing an escrow agreement that is collateralizing an OTC government option to
+    be sold under a repurchase agreement. Further, the underlying security may not be used to secure another
+    obligation.
+  conditions:
+    security_type: govt_escrow_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(I)(iv)/02: government securities held under escrow agreements may cover short option
+    positions. The escrow must be with an approved bank or trust company.
+- id: 4210_interp_index_escrow
+  description: Escrow agreement covering index options — under-collateralized
+  citation: FINRA 4210(f)(2)(I)(iv)/03
+  source_quote: >-
+    4210(f)(2)(I)(iv)/03 Escrow Agreement Covering Index Options – Under Collateralized If a member is
+    notified by the bank or trust company issuing the escrow agreement (pursuant to the terms of the escrow
+    agreement) that the value of the escrow deposit has fallen below 50% of the current aggregate position
+    value, the escrow agreement will cease to be acceptable in lieu of margin unless the member promptly
+    obtains additional collateral.
+  conditions:
+    security_type: index_escrow_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(I)(iv)/03: escrow agreements covering index options may be under-collateralized in
+    certain circumstances. Additional margin may be required for the uncovered portion.
+- id: 4210_interp_escrow_agreement
+  description: Escrow agreements — general requirements
+  citation: FINRA 4210(f)(2)(I)(iv)/04
+  source_quote: >-
+    4210(f)(2)(I)(iv)/04 Escrow Agreement The privilege of using escrow agreements may be extended to
+    any customer of a member provided such agreement is issued by a third party custodian bank or trust
+    company. In this regard: FINRA’s prescribed forms of escrow agreements for puts and calls on equity
+    securities or U.S. Government securities and for puts on indices are the only forms that may be accepted
+    by members. Any other form of escrow agreement is not acceptable for purposes of Rule 4210 absent
+    prior written approval of FINRA. Members must comply with Rule 2360 (Options) as it relates to the
+    customer trading the options and to the bank or trust company issuing the escrow agreement. Escrow
+    agreements may not be accepted unless the securities or cash held by the bank or trust company are
+    free of all liens or encumbrances. Members should set a limit on the number of customers from whom
+    escrow agreements will be accepted, or the number of escrow agreements to be accepted on behalf of
+    any one customer. Escrow agreements should be recorded on the member’s books and records.
+  conditions:
+    security_type: escrow_agreement_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(2)(I)(iv)/04: escrow agreements used to cover short option positions must meet specific
+    requirements regarding the depositary, the securities held, and the member's rights.
+- id: 4210_interp_futures_offsetting
+  description: Security futures — offsetting position treatment
+  citation: FINRA 4210(f)(3)(A)/01
+  source_quote: >-
+    4210(f)(3)(A)/01 Offsetting Position When an account has a short position in a “when issued” security
+    and the underlying security is held in a margin account, no margin need be required on the short position.
+  conditions:
+    security_type: futures_offsetting_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(3)(A)/01: security futures positions may be offset against corresponding positions in
+    the underlying security or options on the same underlying for margin purposes.
+- id: 4210_interp_futures_mtm
+  description: Security futures — marked-to-market gains and losses
+  citation: FINRA 4210(f)(3)(A)/02
+  source_quote: >-
+    4210(f)(3)(A)/02 Marked-to-the-Market Gains and Losses When calculating Regulation T or maintenance
+    excess, any marked- to–the-market loss on a “when issued” position shall be added to the “when issued”
+    requirement and any marked-to-the-market gain shall be subtracted. Any marked-to-the-market gain on
+    a “when issued” position cannot be applied towards the margin requirement of any other unrelated security
+    position. However, any marked-to-the- market gain can be applied to the margin requirement of any
+    other open “when issued” position of the same issue.
+  conditions:
+    security_type: futures_mtm_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(3)(A)/02: security futures must be marked to market daily. Gains and losses are reflected
+    in the margin calculation. Maintenance margin for security futures is 20% per 4210(c)(5).
+- id: 4210_interp_futures_offsetting_cash
+  description: Security futures — offsetting position in cash account
+  citation: FINRA 4210(f)(3)(B)(ii)/01
+  source_quote: >-
+    4210(f)(3)(B)(ii)/01 Offsetting Position No margin need be obtained for contracts to sell “when issued”
+    securities when the underlying security is held in a cash account or the member has been informed
+    that the customer owns the underlying securities. Any sale based on ownership by the customer of the
+    underlying security must be made in reliance upon an agreement accepted by the member in good faith
+    that the customer will not dispose of the underlying security while the contract of sale remains outstanding
+    and that upon consummation of the plan, the underlying security will be promptly deposited in the
+    account and exchanged for the new security. Since the “when issued” sale may remain outstanding for
+    a relatively long period of time, the member’s files should contain a written memorandum regarding
+    the customer’s agreement.
+  conditions:
+    security_type: futures_cash_offset_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(3)(B)(ii)/01: security futures positions in cash accounts may be offset by corresponding
+    positions in the underlying security. The maintenance margin requirement still applies per 4210(f)(3)(B).
+- id: 4210_interp_separate_accounts
+  description: Separate margin accounts — when permitted
+  citation: FINRA 4210(f)(5)/02
+  source_quote: >-
+    4210(f)(5)/02 Separate Margin Accounts Separate margin accounts may be carried for the same customer
+    only as provided in Section 220.4(a)(2) of Regulation T. If the customer has consented that the money
+    and securities in each of such accounts may be used to carry or pay any deficit in all such accounts,
+    the margin to be maintained under this Rule may be determined on the net position of said accounts
+    even though they are separate margin accounts for purposes of Regulation T. This limitation does not
+    apply to sub-accounts of a single margin account. See Interpretation /03 below.
+  conditions:
+    security_type: separate_accounts_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(5)/02: Regulation T limits circumstances for multiple margin accounts. Members may maintain
+    separate accounts for different purposes (e.g., day trading, covered writing) but must ensure each
+    meets its own margin requirements independently.
+- id: 4210_interp_pm_separate_accounts
+  description: Portfolio margin accounts — separate account treatment
+  citation: FINRA 4210(f)(5)/021
+  source_quote: >-
+    4210(f)(5)/021 Portfolio Margin Accounts Section 220.1(b)(3)(i) of Regulation T excludes portfolio
+    margin accounts maintained in accordance with Rule 4210(g) from the scope of Regulation T. Accordingly,
+    a portfolio margin account may be maintained as a separate margin account without regard to the limitation
+    on separate margin accounts under Section 220.4(a)(2) of Regulation T. The consolidation of portfolio
+    margin accounts is addressed by Rule 4210(g)(6).
+  conditions:
+    security_type: pm_separate_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(5)/021: portfolio margin accounts may be maintained separately from strategy-based margin
+    accounts for the same customer. Cross-margining between PM and non-PM accounts is not permitted. Each
+    account type has its own margin computation.
+- id: 4210_interp_sub_accounts
+  description: Margin sub-accounts — foreign currency and other
+  citation: FINRA 4210(f)(5)/03
+  source_quote: See Interpretation Rule 4210(f)(5)/03 and 4210(c)/15
+  conditions:
+    security_type: sub_accounts_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(5)/03: members may maintain sub-accounts within a margin account for specific purposes
+    (e.g., foreign currency denominated positions). See also 4210(c)/15 for foreign currency margin. Sub-account
+    equity must be computed separately but may be aggregated with the main account for maintenance purposes.
+- id: 4210_interp_15_day_period
+  description: Fifteen business day period to meet margin calls
+  citation: FINRA 4210(f)(6)/01
+  source_quote: >-
+    4210(f)(6)/01 Fifteen Business Day Period The fifteen business day period begins on the first business
+    day that follows the date on which the margin deficiency occurred, not the day the member may have
+    so notified the customer nor the fifth business day after the deficiency, when net capital charges
+    were are required by SEA Rule 15c3-1(c)(2)(xii), provided that a bona fide margin call for the deficiency
+    has been made.
+  conditions:
+    security_type: margin_call_timing_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(6)/01: customers have up to 15 business days from the date of a margin call to deposit
+    the required margin. However, the member may require a shorter time period, and must liquidate positions
+    promptly if the customer fails to meet the call. FINRA may grant extensions in extraordinary circumstances.
+- id: 4210_interp_additional_time
+  description: Requests for additional time to meet margin calls
+  citation: FINRA 4210(f)(6)/02
+  source_quote: >-
+    4210(f)(6)/02 Requests for Additional Time FINRA will only grant additional time upon written request
+    filed in the Regulatory Extension (REX) system under reason code 068, which must fully explain the
+    reason for the request. Where appropriate, the request should also explain how and when the deficiency
+    is expected to be resolved and how the member will be adequately protected against credit and market
+    risk until the deficiency is resolved. In general, FINRA will only consider those situations involving
+    concentrations of a security which is difficult to liquidate, large volatile positions that would
+    affect the market or price of the security and other similar conditions as the basis for approving
+    a request for additional time. See Extension Reason Codes for guidance.
+  conditions:
+    security_type: additional_time_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(6)/02: members may request additional time from FINRA to allow customers to meet margin
+    calls. Requests must be submitted to FINRA's Market Regulation Department with justification.
+- id: 4210_interp_liquidation
+  description: Liquidation to meet margin calls
+  citation: FINRA 4210(f)(7)/01
+  source_quote: >-
+    4210(f)(7)/01 Liquidation Members should have a complete understanding of how the customer intends
+    to finance a margin transaction prior to execution of the transaction. If funds are not available
+    in the account, margin is to be furnished by the deposit of cash or securities. If the customer intends
+    to liquidate other securities to finance the transaction, that sale should take place at or before
+    the time of the new transaction.
+  conditions:
+    security_type: liquidation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(7)/01: members must liquidate positions to meet margin calls when the customer fails to
+    deposit required margin within the specified time period. Liquidation must be sufficient to bring
+    the account into compliance.
+- id: 4210_interp_spread_assignment_liquidation
+  description: Assignment of the short component of a spread — liquidation
+  citation: FINRA 4210(f)(7)/02
+  source_quote: >-
+    4210(f)(7)/02 Assignment of the Short Component of a Spread If a customer receives a Regulation T
+    margin call due to the assignment of a short option position that is part of a spread (as defined
+    in Rule 4210(f)(2)(A)(xxxii)), the elimination or reduction of that margin call through the prompt
+    exercise of a long option position that is part of that spread will not be considered to be meeting
+    that margin call by liquidation for purposes of Rule 4210(f)(7).
+  conditions:
+    security_type: spread_assignment_liquidation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(7)/02: when the short component of a spread is assigned, the resulting position may create
+    a margin deficiency. The customer has the standard time period to meet the resulting call, or may
+    exercise the long component to close the position. See also 4210(b)(4)/051.
+- id: 4210_interp_practice_of_liquidating
+  description: Making a practice of meeting Reg T calls by liquidation
+  citation: FINRA 4210(f)(7)/03
+  source_quote: >-
+    4210(f)(7)/03 Making a Practice of Meeting Regulation T Margin Calls by Liquidation As a general matter,
+    a customer who satisfies not more than three Regulation T margin calls in a rolling 12-month period
+    by the liquidation of positions in the account would not be considered to be “making a practice” of
+    meeting Regulation T margin calls by liquidation.
+  conditions:
+    security_type: practice_liquidation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(7)/03: members may not permit customers to make a practice of meeting Regulation T margin
+    calls by liquidating securities. Repeated liquidations to meet initial margin calls may result in
+    a 90-day freeze per 4210(f)(9). See also 4210(f)(9)/01.
+- id: 4210_interp_error_account_liquidation
+  description: Liquidations in error accounts
+  citation: FINRA 4210(f)(7)/04
+  source_quote: >-
+    4210(f)(7)/04 Liquidations in Error Accounts An error account of an introducing broker-dealer or registered
+    investment advisor shall not be subject to rule 4210(f)(7), provided such account is used exclusively
+    for bona fide errors, and in which any position resulting from a bona fide error is promptly liquidated.
+  conditions:
+    security_type: error_account_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(7)/04: positions in error accounts resulting from operational errors are subject to the
+    margin requirements of 4210 and must be liquidated if margin is not met.
+- id: 4210_interp_reg_t_good_faith_liquidation
+  description: Regulation T margin calls on good faith securities
+  citation: FINRA 4210(f)(7)/05
+  source_quote: >-
+    4210(f)(7)/05 Regulation T Margin Calls on Good Faith Securities “Regulation T margin calls" include
+    margin calls for the initial margin on new positions in good faith securities (equal to the FINRA
+    maintenance requirement or any higher amount required by the broker in good faith).
+  conditions:
+    security_type: reg_t_good_faith_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(7)/05: Regulation T margin calls on good faith securities (exempted, government, municipal)
+    may be met by the deposit of such securities or cash.
+- id: 4210_interp_90_day_freeze
+  description: 90-day cash account freeze for liquidation violations
+  citation: FINRA 4210(f)(9)/01
+  source_quote: >-
+    4210(f)(9)/01 90-Day Freeze Customers that purchase securities in a cash account and sells them before
+    payment is received, are to be placed on a restricted status for a period of 90 calendar days following
+    the trade date or the payment period (as defined in Regulation T, Section 220.2) of the purchase.
+    Unless funds sufficient to pay for a new purchase in full are in the account during this 90-day freeze,
+    no security may be purchased for or sold to that customer in its cash account. When a member believes
+    a restriction should be lifted, it may apply in writing for relief to the Credit Regulation Department
+    at FINRA. Each application for a waiver of the 90-day freeze should be signed by an authorized person
+    of the member and should contain the following information: the full name and address of the customer;
+    the name and description of the security or securities involved, purchase and sale prices, and the
+    respective dates of purchase and sale; a statement describing the circumstances upon which the request
+    is made; and the date on which full payment for the purchase was received.
+  conditions:
+    security_type: 90_day_freeze_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(9)/01: if a customer makes a practice of buying securities in a cash account and selling
+    them before paying in full, the member must freeze the account for 90 calendar days. During the freeze,
+    the customer may only purchase securities if full payment is in the account before the trade. This
+    is a Regulation T requirement enforced through 4210.

@@ -1,0 +1,584 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(e) Interpretations
+  description: Exemptions, exceptions, and restricted securities interpretations
+  effective_date: '2024-01-01'
+  notes: >
+    These interpretations cover reduced margin rates for exempted and non-equity securities, sovereign
+    debt, reverse repos, underwritings, nonpurpose credit, and control/restricted securities under 4210(e).
+rules:
+- id: 4210_interp_exceptions_general
+  description: General exceptions to standard margin requirements
+  citation: FINRA 4210(e)/01
+  source_quote: >-
+    4210(e)/01 Exceptions The exceptions referred to in this paragraph apply only to the Special Initial
+    Margin Requirements (Rule 4210(f)(8)) and the Maintenance Margin Requirements (Rule 4210(c)). They
+    do not apply to the $2,000 minimum equity requirement of Rule 4210(b)(4). (i) Less than one year to
+    maturity 1 percent (ii) One year but less than three years to maturity 2 percent (iii) Three years
+    but less than five years to maturity 3 percent (iv) Five years but less than ten years to maturity
+    4 percent (v) Ten years but less than twenty years to maturity 5 percent (vi) Twenty years or more
+    to maturity 6 percent
+  conditions:
+    security_type: exceptions_general_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)/01: Rule 4210(e) provides exceptions to the standard initial and maintenance margin requirements
+    of 4210(b) and (c). Exceptions apply to specific security types, account types, and transaction types
+    as enumerated in the subsections.
+- id: 4210_interp_sovereign_debt_highly_rated
+  description: Highly rated foreign sovereign debt — reduced margin
+  citation: FINRA 4210(e)(2)(A)/01
+  source_quote: >-
+    4210(e)(2)(A)/01 Highly Rated Foreign Sovereign Debt Securities The use of a maturing obligation,
+    other than United States Treasury bills, to reduce the margin requirement of a new obligation also
+    applies to highly rated foreign sovereign debt securities.
+  conditions:
+    security_type: sovereign_debt_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.01
+  notes: >
+    Per 4210(e)(2)(A)/01: highly rated foreign sovereign debt securities (rated in one of the top two
+    categories by a NRSRO) are subject to reduced margin rates under 4210(e)(2)(A). Long: 1% of market
+    value. Short: 1% of market value. Based on sovereign credit rating and maturity. See also 4210(e)(2)(A)/03
+    for maturity adjustments.
+- id: 4210_interp_sovereign_debt_net
+  description: Net positions in exempted securities
+  citation: FINRA 4210(e)(2)(A)/02
+  source_quote: >-
+    4210(e)(2)(A)/02 Net Positions The terms net “long” or net “short” positions mean positions in the
+    same issue of the same security.
+  conditions:
+    security_type: sovereign_net_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(A)/02: offsetting long and short positions in the same exempted security may be netted
+    for margin purposes. Net position margin applies to the residual after netting.
+- id: 4210_interp_sovereign_debt_maturity
+  description: Exempted securities — margin by time to maturity
+  citation: FINRA 4210(e)(2)(A)/03
+  source_quote: >-
+    4210(e)(2)(A)/03 Time to Maturity Requirements under Rule 4210(e)(2)(A) are based on the remaining
+    life of the bond until maturity, not on the bond’s nominal life from issuance date to maturity date.
+    Thus, a thirty year bond with only eight (8) years remaining to maturity would require margin of 4%.
+  conditions:
+    security_type: sovereign_maturity_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(A)/03: margin on exempted securities varies by time to maturity. Short-term (< 1 year):
+    lowest rate. Intermediate (1-5 years): moderate rate. Long-term (> 5 years): highest rate. US Treasuries:
+    1% (< 1yr), 2% (1-5yr), 3% (> 5yr) for non- exempt accounts. See also treasury-specific rules.
+- id: 4210_interp_ibrd
+  description: International Bank for Reconstruction and Development securities
+  citation: FINRA 4210(e)(2)(A)/04
+  source_quote: >-
+    4210(e)(2)(A)/04 International Bank for Reconstruction and Development Obligations of the International
+    Bank for Reconstruction and Development are deemed to be major foreign sovereign debt.
+  conditions:
+    security_type: ibrd_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(A)/04: securities issued by the IBRD (World Bank) and other international organizations
+    are treated as exempted securities for margin purposes under Exchange Act 3(a)(12).
+- id: 4210_interp_primary_dealers
+  description: Primary dealers — exempted securities treatment
+  citation: FINRA 4210(e)(2)(A)/06
+  source_quote: >-
+    4210(e)(2)(A)/06 Primary Dealers Primary dealers designated by the Federal Reserve Bank of New York
+    may extend credit, under this Rule, to any customer on a mutually agreed upon basis on debt securities
+    that are U.S. Government securities (as defined in SEA section 3(a)(42)), provided that, if the margin
+    requirements are lower than the proprietary haircut deductions under the uniform net capital rule
+    (SEA Rule 15c3-1(c)(2)(vi)(A), Securities Haircuts, Government Securities) a deduction in computing
+    net capital will be made to the extent that the equity in a customer’s account is less than such haircuts.
+  conditions:
+    security_type: primary_dealer_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(A)/06: primary dealers recognized by the Federal Reserve Bank of New York receive special
+    treatment for exempted securities margin. Reduced or eliminated margin may apply per 4210(e)(2)(F)
+    exempt account provisions.
+- id: 4210_interp_reverse_repo
+  description: Reverse repurchase agreements — margin requirements
+  citation: FINRA 4210(e)(2)(B)/01
+  source_quote: >-
+    4210(e)(2)(B)/01 Reverse Repurchase Agreements Reverse repurchase agreements in exempted securities
+    shall be maintained in a good faith account subject to the provisions of paragraphs 4210(e)(2)(A)
+    and 4210(e)(2)(B) of this Rule.
+  conditions:
+    security_type: reverse_repo_margin_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(B)/01: reverse repurchase agreements in exempted securities are subject to the margin
+    requirements of 4210(e)(2)(B). The margin required is based on the type and maturity of the collateral
+    securities, marked to market daily.
+- id: 4210_interp_exempt_fund_carrying
+  description: Exempted securities mutual funds and ETFs — carrying
+  citation: FINRA 4210(e)(2)(B)/03
+  source_quote: 4210(e)(2)(B)/03 Exempted Securities Mutual Funds and Exempted Securities Exchange Traded
+    Funds
+  conditions:
+    security_type: exempt_fund_carrying_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(B)/03: mutual funds and qualifying ETFs that invest exclusively in exempted securities
+    may be carried with reduced margin per 4210(e)(2)(B) at the rates applicable to the underlying exempted
+    securities. See 4210(c)/11 for maintenance rates (7%).
+- id: 4210_interp_gse_equity_exception
+  description: Government-sponsored enterprise equities — no 4210(e)(2)(B) exception
+  citation: FINRA 4210(e)(2)(B)/04
+  source_quote: 4210(e)(2)(B)/04 Government Sponsored Enterprise Equity
+  conditions:
+    security_type: gse_equity_exception_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(B)/04: GSE equity securities are NOT eligible for the reduced margin rates of 4210(e)(2)(B)
+    despite being government securities. Must be margined as equity securities per 4210(c). See also 4210(a)(6)/02
+    and 4210(b)(4)/061.
+- id: 4210_interp_accrued_interest_exception
+  description: Accrued interest — margin exception for non-equity securities
+  citation: FINRA 4210(e)(2)(E)(ii)/01
+  source_quote: 4210(e)(2)(E)(ii)/01 Accrued Interest
+  conditions:
+    security_type: accrued_interest_exception_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(E)(ii)/01: accrued interest on non-equity securities is included in the market value
+    for margin calculation. See also 4210(a)(2)/01 and 4210(a)(2)/02 for accrued interest computation.
+- id: 4210_interp_associated_person
+  description: Associated person participation in offerings
+  citation: FINRA 4210(e)(3)(F)/01
+  source_quote: >-
+    4210(e)(3)(F)/01 Associated Person Participation Sharing in Profits If any associated person as part
+    of his or her compensation is participating in only the profits in a member account, such an account
+    would be deemed a proprietary account. FINRA has no objection to such arrangements, provided the associated
+    person’s participation is recorded as a salary or bonus incentive or in another similar manner. FINRA
+    permission is not required for such arrangements. Sharing in Losses FINRA does not prohibit an associated
+    person from sharing in the losses of member accounts. However, it should be understood that in such
+    instances the member is extending or maintaining credit on the associated person’s behalf. Thus, such
+    an account would represent a “joint venture” between the associated person and the member. Therefore,
+    the percentage of the account in which the associated person is a participant is considered a customer
+    account and shall be margined accordingly under this Rule. This also applies to general partners'
+    personal accounts. The remaining percentage of the account will still be considered a proprietary
+    account.
+  conditions:
+    security_type: associated_person_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(3)(F)/01: associated persons of a member participating in a public offering are subject
+    to margin requirements on any allotted securities from the offering.
+- id: 4210_interp_underwriting_overallotment
+  description: Underwritings — overallotment margin
+  citation: FINRA 4210(e)(5)/01
+  source_quote: >-
+    4210(e)(5)/01 Underwritings – Overallotments Short sale transactions made by an approved specialist
+    or approved market maker in accordance with a guaranteed over-allotment from an underwriting may be
+    treated as a specialist or market making transaction.
+  conditions:
+    security_type: underwriting_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(5)/01: overallotment positions in connection with underwritings are subject to specific
+    margin requirements. Syndicate short positions covered by the overallotment option receive reduced
+    margin treatment.
+- id: 4210_interp_underwriting_haircut
+  description: Underwritings — haircut requirements
+  citation: FINRA 4210(e)(5)/02
+  source_quote: >-
+    4210(e)(5)/02 Haircut Requirements For purposes of Rule 4210, “haircut requirements pursuant to SEA
+    Rule 15c3-1” include any net capital deductions required by SEA Rule 15c3-1(c)(2)(vi) (including deductions
+    required by subparagraphs (K) and (M) thereof) or SEA Rule 15c3-1(c)(2)(vii). Note that in certain
+    cases the haircut requirement under Rule 15c3-1 may be greater than the maintenance margin requirement
+    under this Rule.
+  conditions:
+    security_type: underwriting_haircut_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(5)/02: net capital haircut requirements apply to underwriting positions that are deficient
+    in margin. Members must deduct the deficiency from net capital per SEA Rule 15c3-1. Also referenced
+    for 4210(e)(6)(A)/02 haircut requirements.
+- id: 4210_interp_specialist_haircut
+  description: Specialist/market maker accounts — haircut requirements
+  citation: FINRA 4210(e)(6)(A)/02
+  source_quote: 4210(e)(6)(A)/02 Haircut Requirements
+  conditions:
+    security_type: specialist_haircut_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(6)(A)/02: specialist and market maker accounts carried per 4210(e)(6)(A) are subject to
+    haircut requirements. See 4210(e)(5)/02 for applicable net capital deduction methodology.
+- id: 4210_interp_sinking_fund_exempt
+  description: Sinking fund transactions — margin exemption
+  citation: FINRA 4210(e)(7)/01
+  source_quote: >-
+    If over 30 calendar days to delivery, the transaction may be exempt from the margin requirements of
+    this Rule, and instead treated as an open proprietary contractual commitment subject to the requirements
+    of SEA Rule 15c3-1(c)(2)(vi) and 15c3-1(c)(2)(viii). Such treatment, however, should not result in
+    a duplication of deductions under the capital rule (SEA Rule 15c3-1). See also Rule 4210(e)(7)/01
+    and Interpretations of Regulation T, Section 220.06/02.
+  conditions:
+    security_type: sinking_fund_exempt_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(7)/01: sinking fund transactions with delivery over 30 calendar days may be exempt from
+    margin requirements. See also 4210(c)/06 for sinking fund transactions that do not qualify for exemption.
+- id: 4210_interp_unsecured_loans
+  description: Unsecured loans — nonpurpose credit exception
+  citation: FINRA 4210(e)(7)/02
+  source_quote: >-
+    4210(e)(7)/02 Unsecured Loans Unsecured loans are to be charged to net capital in their entirety.
+    (See SEA Rule 15c3-1(c)(2)(iv)(B))
+  conditions:
+    security_type: unsecured_loan_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(7)/02: unsecured loans to customers are subject to the nonpurpose credit provisions of
+    4210(e)(7). Such loans must be for nonpurpose (not for purchasing or carrying securities).
+- id: 4210_interp_cd_collateral
+  description: Nonpurpose loans collateralized by certificates of deposit
+  citation: FINRA 4210(e)(7)/03
+  source_quote: >-
+    4210(e)(7)/03 Nonpurpose Loans Collateralized by Certificates of Deposit Nonpurpose loans collateralized
+    by negotiable certificates of deposit need not be charged to net capital in their entirety if certain
+    conditions are satisfied. (See Interpretation SEA Rule 15c3-1(c)(2)(iv)(B)/10).
+  conditions:
+    security_type: cd_collateral_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(7)/03: nonpurpose credit may be extended against certificates of deposit as collateral,
+    subject to the provisions of 4210(e)(7).
+- id: 4210_interp_non_margin_collateral
+  description: Non-margin eligible equity as collateral for nonpurpose credit
+  citation: FINRA 4210(e)(7)/04
+  source_quote: >-
+    4210(e)(7)/04 Non-Margin Eligible Equity Security as Collateral for Nonpurpose Credit Any fully-paid
+    non-margin eligible equity security deposited in a good faith account as collateral for nonpurpose
+    credit is treated as having a maintenance margin requirement of 25% of its current market value for
+    purposes of determining the capital charge required by Rule 4210(e)(7)(C). This treatment is only
+    available for a number of shares (or other units) of a non-margin eligible equity security that do
+    not exceed 20 times the security’s median trading volume over the preceding 20 trading days; any shares
+    (or other units) over this limit are treated as having a 100% maintenance requirement for this purpose.
+  conditions:
+    security_type: non_margin_collateral_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(7)/04: non-margin eligible equity securities may be used as collateral for nonpurpose
+    credit. The loan value of such securities is limited and subject to the member's policies.
+- id: 4210_interp_offshore_fund_collateral
+  description: Offshore mutual fund shares as collateral for nonpurpose credit
+  citation: FINRA 4210(e)(7)/05
+  source_quote: >-
+    4210(e)(7)/05 Offshore Mutual Fund Shares as Collateral for Nonpurpose Credit Any fully-paid eligible
+    offshore mutual fund shares deposited in a good faith account as collateral for nonpurpose credit
+    are treated as having a maintenance margin requirement of 25% of their current market value for purposes
+    of determining the capital charge required by Rule 4210(e)(7)(C). For this purpose, “eligible offshore
+    mutual fund shares” are shares that (i) are issued by a non-U.S. investment company that is affiliated
+    with an investment company registered under the Investment Company Act of 1940, and (ii) can be liquidated
+    or redeemed daily.
+  conditions:
+    security_type: offshore_fund_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(7)/05: shares in offshore (non-US registered) mutual funds may be accepted as collateral
+    for nonpurpose credit, subject to the member's credit and risk policies and 4210(e)(7) provisions.
+- id: 4210_interp_rule_144a_debt
+  description: Rule 144A debt securities — margin treatment
+  citation: FINRA 4210(e)(8)/06
+  source_quote: >-
+    4210(e)(8)/06 Rule 144A Debt Debt securities eligible for resale under Securities Act Rule 144A are
+    deemed “saleable” for purposes of Rule 4210(e)(8).
+  conditions:
+    security_type: rule_144a_debt_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)/06: debt securities that are eligible for resale under SEC Rule 144A may be carried
+    in margin accounts. The margin required is the same as for comparable registered securities of the
+    same type and credit quality.
+- id: 4210_interp_mortgage_restricted
+  description: Mortgage-related securities — exempt from 4210(e)(8)
+  citation: FINRA 4210(e)(8)/07
+  source_quote: 4210(e)(8)/07 Mortgage Related Securities
+  conditions:
+    security_type: mortgage_restricted_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)/07: mortgage-related securities are exempt from the control and restricted securities
+    provisions of 4210(e)(8). They may be margined per 4210(a)(12)/01 instead.
+- id: 4210_interp_shelf_registered
+  description: Shelf-registered securities — standard margin with conditions
+  citation: FINRA 4210(e)(8)(A)/01
+  source_quote: >-
+    4210(e)(8)(A)/01 Shelf-Registered Securities Shelf-registered securities are securities registered
+    for continuous or delayed offering pursuant to Securities Act Rule 415.
+  conditions:
+    security_type: shelf_registered_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(A)/01: shelf-registered securities may be margined at standard 4210(c) rates provided
+    the member: (i) obtains a current SEC prospectus, (ii) has no reason to believe the registration is
+    not in effect, (iii) retains the registration statement in accessible files. Securities not meeting
+    all conditions have no margin value.
+- id: 4210_interp_shelf_net_capital
+  description: Shelf-registered securities — net capital charges
+  citation: FINRA 4210(e)(8)(A)/03
+  source_quote: >-
+    4210(e)(8)(A)/03 Net Capital Charges for Shelf-Registered Securities Shelf-registered securities that
+    meet all of the conditions prescribed in Rule 4210(e)(8)(A) need not be included in the calculation
+    of excess net capital and net capital deductions required by paragraphs 4210(e)(8)(C) and 4210(e)(8)(D).
+  conditions:
+    security_type: shelf_net_capital_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(A)/03: net capital charges apply to shelf-registered securities when margin deficiencies
+    exist. Members must deduct any margin deficiency from net capital per SEA Rule 15c3-1.
+- id: 4210_interp_saleable_definition
+  description: Control/restricted securities — 'saleable' definition
+  citation: FINRA 4210(e)(8)(B)(i)/011
+  source_quote: >-
+    4210(e)(8)(B)(i)/011 “Saleable” The term “saleable,” as used in Rule 4210(e)(8)(B)(i) and in Rule
+    4210(e)(8)(D)(i) and (ii), refers to those specified and quantifiable securities where all the terms
+    and conditions of Securities Act Rule 144 have been completely satisfied, including any applicable
+    holding period, and thus are immediately saleable pursuant to Securities Act Rules 144 and 145(d)
+    by the member without restriction in the event the customer fails to meet a margin call or otherwise
+    defaults. (FINRA Regulatory Notice 20-22) (FINRA Regulatory Notice 24-11)
+  conditions:
+    security_type: saleable_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(B)(i)/011: definition of saleable for control and restricted securities. Securities
+    must be freely saleable (or saleable subject to SEC Rule 144 volume limitations) to have margin value.
+- id: 4210_interp_securities_held_away
+  description: Securities held away — same class as control/restricted
+  citation: FINRA 4210(e)(8)(B)(ii)/011
+  source_quote: >-
+    4210(e)(8)(B)(ii)/011 Securities Held Away of the Same Class as Control or Restricted Securities in
+    Customer’s Account If the amount of control or restricted securities in a customer’s account that
+    are then saleable is potentially affected by transactions in securities of the same class not held
+    in the customer’s account at the member, then the member shall either: obtain and accept in good faith
+    the customer’s written statement that it has deposited with the member all securities of such class
+    that would be relevant to determining the amount then saleable; or obtain and accept in good faith
+    a written statement from the customer of the total amount of securities of such class that would be
+    relevant to determining the amount then saleable, and compute the amount of securities in the customer’s
+    account that are then saleable based on an assumption that all other relevant securities were sold
+    immediately prior to any sales of securities from the customer’s account. If the member does not obtain
+    the agreement or statement described above, or is unable to accept such agreement or statement in
+    good faith, then the member must assume that none of the control or restricted securities are then
+    saleable.
+  conditions:
+    security_type: held_away_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(B)(ii)/011: when a customer holds securities of the same class as control or restricted
+    securities at another broker-dealer, those positions must be considered when computing the marginable
+    quantity of the control/restricted securities.
+- id: 4210_interp_restricted_computation
+  description: Control/restricted securities — computation examples
+  citation: FINRA 4210(e)(8)(B)(ii)/02
+  source_quote: >-
+    4210(e)(8)(B)(ii)/02 Example of Computations A customer deposits shares of a restricted margin security
+    with a broker-dealer with a current market value of $1,000,000 and, in accordance with Regulation
+    T (50% loan value), makes a $500,000 withdrawal. If the saleable amount of such securities, under
+    Securities Act Rule 144, has a current market value of $600,000 and no concentration exists pursuant
+    to Rule 4210(e)(8)(C)(iv), the “customer margin computation” and “capital charge computation” would
+    be as follows: Customer margin computation This account is in compliance with Rule 4210(e)(8)(B).
+    Capital charge computation If at a future date, the current market value of the restricted security
+    decreased to $800,000, then: In addition, if on that date the saleable amount of such security under
+    Securities Act Rule 144 had a current market value of only $480,000, the “capital charge computation”
+    would be as follows:
+  conditions:
+    security_type: restricted_computation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(B)(ii)/02: example computations for margin on control and restricted securities, illustrating
+    how to determine the marginable portion based on Rule 144 volume limitations and the saleable quantity.
+- id: 4210_interp_restricted_reporting
+  description: Control/restricted securities — reporting requirements
+  citation: FINRA 4210(e)(8)(C)(i)/01
+  source_quote: >-
+    4210(e)(8)(C)(i)/01 Reporting Requirements Members are required to report on the monthly FOCUS report
+    when the credit extended on shelf-registered, and other control and restricted securities, exceeds
+    10% of excess net capital.
+  conditions:
+    security_type: restricted_reporting_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(C)(i)/01: members must report positions in control and restricted securities to FINRA
+    as required.
+- id: 4210_interp_restricted_credit_limit
+  description: Control/restricted securities — limit on credit extended
+  citation: FINRA 4210(e)(8)(C)(ii)/01
+  source_quote: >-
+    4210(e)(8)(C)(ii)/01 Limit on Credit Extended There is no limit to the total amount of credit which
+    may be extended to all customers on control and restricted securities of any one issue. However, if
+    the total credit actually extended or agreed to be extended on any one issue exceeds 10% of excess
+    net capital, then the amount in excess of 10% shall be deducted from net capital in determining the
+    member’s status under Rule 4120.
+  conditions:
+    security_type: restricted_credit_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(C)(ii)/01: credit extended on control and restricted securities is limited. Members
+    must ensure that credit extended does not exceed appropriate risk limits based on the securities'
+    saleability and market conditions.
+- id: 4210_interp_restricted_net_capital_example
+  description: Control/restricted securities — net capital deduction example
+  citation: FINRA 4210(e)(8)(C)(ii)/03
+  source_quote: >-
+    4210(e)(8)(C)(ii)/03 Example of Deduction from Net Capital A member’s excess net capital is $10,000,000.
+    A customer deposits $3,000,000 (current market value) of XYZ margin securities on which the member
+    agrees to lend $1,500,000 (Regulation T 50%). The customer withdraws only $1,000,000. The member must
+    deduct $500,000 from net capital to determine its status under Rule 4120, computed as follows: 4210(e)(8)(C)(iii)b./01
+    Aggregate Credit Extended The aggregate credit extended to each customer for purposes of Rule 4210(e)(8)(C)(iii)
+    only, shall be determined by the adjusted debit balance, if any, in the customer’s account. The adjusted
+    debit balance is determined by subtracting all of the long security positions in the customer’s account,
+    other than long control or restricted securities, at their current market values (debit balance minus
+    market value of long securities), and any credit balance, and adding all of the short security positions,
+    at their current market values (debit balance plus market value of short securities), except that
+    no long option positions carried for the customer shall be considered to have any value and the short
+    cover value of any short option positions traded in the over-the-counter market shall be considered
+    as an increase (debit) to the adjusted debit balance for their in-the-money
+  conditions:
+    security_type: restricted_net_capital_example_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(C)(ii)/03: example of net capital deduction computation for margin deficiencies on
+    control and restricted securities positions.
+- id: 4210_interp_concentration_formula
+  description: Control/restricted securities — concentration formula
+  citation: FINRA 4210(e)(8)(C)(iv)/01
+  source_quote: >-
+    4210(e)(8)(C)(iv)/01 Securities Subject to Concentration Formula Only control and restricted securities
+    are to be considered in determining when a concentration exists. Shelf-registered securities are not
+    subject to the concentration formula. Other securities of the same issuer, or securities of other
+    issuers held in the customer’s account, are not subject to the concentration formula.
+  conditions:
+    security_type: restricted_concentration_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(C)(iv)/01: identifies which securities are subject to the concentration computation
+    formula. Applies to positions exceeding specified thresholds relative to the member's net capital.
+- id: 4210_interp_concentration_computation
+  description: Control/restricted securities — concentration computation example
+  citation: FINRA 4210(e)(8)(C)(iv)/02
+  source_quote: 4210(e)(8)(C)(iv)/02 Example of Concentration Computation
+  conditions:
+    security_type: restricted_concentration_example_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(C)(iv)/02: example computation of the concentration charge for control and restricted
+    securities. Demonstrates the additional margin or net capital charge triggered by concentrated holdings
+    exceeding thresholds.
+- id: 4210_interp_non_affiliate_scope
+  description: Non-affiliate exemption — scope
+  citation: FINRA 4210(e)(8)(D)(ii)/011
+  source_quote: >-
+    4210(e)(8)(D)(ii)/011 Scope of Exemption Rule 4210(e)(8)(D) exempts from Rule 4210(e)(8) all securities
+    that the member could sell immediately without restriction in the event the customer fails to meet
+    a margin call or otherwise defaults, regardless of whether the customer is an affiliate or non-affiliate.
+    For example, SEC Division of Corporate Finance’s Compliance and Disclosure Interpretation (CD&I) 532.01
+    provides: To rely on CD&I 532.01 to treat non-restricted securities deposited in a margin account
+    by an affiliate of their issuer as exempt from Rule 4210(e)(8)(B), a member must determine that each
+    of the conditions of CD&I 532.01 (including that the securities are the subject of a bona fide pledge)
+    are satisfied and document its basis for that determination.
+  conditions:
+    security_type: non_affiliate_scope_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(D)(ii)/011: defines the scope of the non-affiliate exemption for restricted securities.
+    Securities held by persons who are not affiliates of the issuer may qualify for reduced margin treatment
+    under certain conditions.
+- id: 4210_interp_optional_procedures
+  description: Control/restricted securities — optional member procedures
+  citation: FINRA 4210(e)(8)(D)(ii)/03
+  source_quote: >-
+    4210(e)(8)(D)(ii)/03 Optional Member Procedures The provisions of Rule 4210(e)(8)(D) do not restrict
+    members from imposing such higher maintenance margin requirements as they may deem appropriate. See
+    Rule 4210(d). Moreover, members may wish to establish special supervisory procedures to consider the
+    desirability of and to monitor extensions of credit on control, restricted or shelf-registered securities.
+  conditions:
+    security_type: optional_procedures_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(D)(ii)/03: members may adopt optional procedures for computing margin on control and
+    restricted securities. These procedures must be consistently applied and produce results at least
+    as conservative as the standard computation.
+- id: 4210_interp_concentration_evaluation
+  description: Control/restricted securities — concentration evaluation
+  citation: FINRA 4210(e)(8)(D)(ii)/04
+  source_quote: >-
+    4210(e)(8)(D)(ii)/04 Concentration Evaluation Any member extending or maintaining credit on any securities
+    exempted from Rule 4210(e)(8) under Rule 4210(e)(8)(D) is still required by Rule 4210(f)(1) to require
+    “substantial additional margin” if there is a concentration in those securities (whether in the particular
+    customer’s account, or in all margin accounts carried by the member) that may not be liquidated promptly
+    due to its size.
+  conditions:
+    security_type: concentration_evaluation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(e)(8)(D)(ii)/04: members must evaluate concentration risk for control and restricted securities
+    on at least a monthly basis and more frequently when market conditions warrant.

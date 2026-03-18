@@ -1,0 +1,107 @@
+rule_set:
+  regulation: "Regulation T"
+  authority: "Federal Reserve Board"
+  cfr: "12 CFR Part 220"
+  section: "220.4, 220.12"
+  description: "Reg T initial margin requirements for equity securities"
+  effective_date: "1974-01-03"
+  last_amended: "2024-05-28"
+  notes: "50% initial margin rate unchanged since 1974. Payment period adjusted for T+1 settlement (May 2024)."
+
+rules:
+  - id: "reg_t_equity_long"
+    description: "Long margin-eligible equity securities - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Margin equity security, except for an exempted security, money market
+      mutual fund or exempted securities mutual fund, warrant on a securities
+      index or foreign currency or a long position in an option: 50 percent
+      of the current market value of the security or the percentage set by
+      the regulatory authority where the trade occurs, whichever is greater.
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      marginable: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.50
+    notes: "50% of current market value at time of purchase"
+
+  - id: "reg_t_equity_short"
+    description: "Short sale of nonexempted equity securities - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Margin equity security, except for an exempted security, money market
+      mutual fund or exempted securities mutual fund, warrant on a securities
+      index or foreign currency or a long position in an option: 50 percent
+      of the current market value of the security or the percentage set by
+      the regulatory authority where the trade occurs, whichever is greater.
+    conditions:
+      security_type: "equity"
+      position_side: "short"
+      marginable: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.50
+    notes: "150% total deposit required (100% proceeds + 50% margin). The 50% is the initial margin."
+
+  - id: "reg_t_equity_nonmarginable"
+    description: "Non-marginable equity securities"
+    citation: "Reg T 220.4(c)(2)"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      marginable: false
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 1.00
+    notes: >
+      Non-marginable securities cannot be purchased on credit under Reg T 220.4(c)(2).
+      Must be paid in full — 100% of purchase price. No specific percentage is stated
+      in the regulation; the requirement derives from the prohibition on credit extension.
+
+  # --- ETFs (margin equity securities under Reg T 220.2) ---
+  - id: "reg_t_etf_long"
+    description: "Long margin-eligible ETF - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Margin equity security, except for an exempted security, money market
+      mutual fund or exempted securities mutual fund, warrant on a securities
+      index or foreign currency or a long position in an option: 50 percent
+      of the current market value of the security or the percentage set by
+      the regulatory authority where the trade occurs, whichever is greater.
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      marginable: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.50
+    notes: "ETFs are margin equity securities under Reg T 220.2. Same 50% initial margin as equities."
+
+  - id: "reg_t_etf_short"
+    description: "Short sale of ETF - initial margin"
+    citation: "Reg T 220.12 (Supplement)"
+    source_quote: >
+      Margin equity security, except for an exempted security, money market
+      mutual fund or exempted securities mutual fund, warrant on a securities
+      index or foreign currency or a long position in an option: 50 percent
+      of the current market value of the security or the percentage set by
+      the regulatory authority where the trade occurs, whichever is greater.
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      marginable: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.50
+    notes: "ETFs are margin equity securities under Reg T 220.2. Same 50% initial margin as equities."
+
+  - id: "reg_t_minimum_equity"
+    description: "Minimum equity to open margin account"
+    citation: "FINRA 4210(b)"
+    source_quote: ""
+    type: "account_minimum"
+    value: 2000.00
+    notes: "While technically a FINRA rule, enforced at Reg T level for account opening"

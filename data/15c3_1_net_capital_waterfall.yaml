@@ -1,0 +1,1340 @@
+## SEC Rule 15c3-1 — Net Capital Waterfall
+##
+## Determines the minimum net capital requirement and haircut deductions
+## for broker-dealers under the SEC's Uniform Net Capital Rule. Rules are
+## evaluated in priority order; the applicable method (Basic or Alternative)
+## determines the capital formula, minimum capital floors apply by BD type,
+## and haircut schedules reduce the value of proprietary securities positions.
+##
+## Key difference from margin waterfalls: 15c3-1 governs the FIRM's own
+## capital adequacy, not customer margin requirements. There are no
+## reg_t_initial or finra_maintenance fields. Instead, rules use formula
+## types such as capital_requirement, maturity_based_haircut,
+## concentration_charge, restriction, and notification_requirement.
+##
+## Sources:
+##   - 17 CFR 240.15c3-1 — Net Capital Requirements for Brokers or Dealers
+##   - 17 CFR 240.15c3-1(a) — Net capital requirement methods
+##   - 17 CFR 240.15c3-1(c)(2)(vi) — Haircut schedules by security type
+##   - 17 CFR 240.15c3-1(c)(2)(x) + Appendix A — Option haircuts
+##   - 17 CFR 240.17a-11 — Early warning notification
+##   - 17 CFR 240.15c3-1(e) — Capital withdrawal restrictions
+
+categories:
+
+  - priority: 1
+    name: "Basic Method (15:1 Aggregate Indebtedness Ratio)"
+    rationale: >-
+      The Basic Method is the default net capital computation for broker-dealers
+      that do not elect the Alternative Method. It requires net capital equal to
+      at least 6-2/3% of aggregate indebtedness, establishing a 15:1 ratio of
+      liabilities to capital. This method is simpler but generally more
+      conservative than the Alternative Method, and is typically used by smaller
+      firms that do not carry customer accounts.
+    citation: "15c3-1(a)(1)(i)"
+    rules:
+
+      - rule_id: "15c3_1_basic_method"
+        name: "Basic Method — 6.67% of Aggregate Indebtedness"
+        section: "15c3-1(a)(1)(i)"
+        formula_type: "capital_requirement"
+        formula_detail: |
+          capital_requirement: 6.67% of aggregate indebtedness
+          Aggregate indebtedness includes all money owed by the BD,
+          excluding certain exempted liabilities defined in 15c3-1(c)(1).
+        conditions:
+          - method = basic
+        definition: >-
+          Per 15c3-1(a)(1)(i), a broker-dealer using the Basic Method must
+          maintain net capital equal to not less than 6-2/3 percent of its
+          aggregate indebtedness. Aggregate indebtedness is the total money
+          liability of the broker or dealer, as defined in 15c3-1(c)(1),
+          arising in connection with any transaction whatsoever, excluding
+          certain specified liabilities such as adequately secured
+          indebtedness and floor brokerage accounts.
+
+  - priority: 2
+    name: "Alternative Method (2% Aggregate Debit Items)"
+    rationale: >-
+      The Alternative Method, available to broker-dealers that carry customer
+      accounts and compute the Customer Reserve Formula under 15c3-3, ties
+      the capital requirement to customer debit items rather than liabilities.
+      This method generally permits higher leverage and is preferred by larger
+      carrying and clearing firms. The 2% rate reflects the SEC's judgment
+      that firms holding customer assets need capital proportional to customer
+      exposure.
+    citation: "15c3-1(a)(1)(ii)"
+    rules:
+
+      - rule_id: "15c3_1_alternative_method"
+        name: "Alternative Method — 2% of Aggregate Debit Items"
+        section: "15c3-1(a)(1)(ii)"
+        formula_type: "capital_requirement"
+        formula_detail: |
+          capital_requirement: 2% of aggregate debit items
+          Aggregate debit items computed per 15c3-3a (Customer Reserve Formula).
+        conditions:
+          - method = alternative
+          - computes_customer_reserve = true
+        definition: >-
+          Per 15c3-1(a)(1)(ii), a broker-dealer that elects the Alternative
+          Method must maintain net capital equal to not less than 2 percent
+          of aggregate debit items as computed in accordance with the Formula
+          for Determination of Reserve Requirements under Rule 15c3-3a.
+          This method is available only to broker-dealers that carry customer
+          accounts and file FOCUS reports reflecting the Customer Reserve
+          Formula computation.
+
+  - priority: 3
+    name: "Minimum Net Capital — Introducing Broker-Dealer"
+    rationale: >-
+      The SEC establishes dollar-floor minimums by broker-dealer type to ensure
+      that even firms with minimal activity maintain a baseline level of
+      capital. An introducing broker-dealer that does not receive, hold, or
+      handle customer funds or securities has the lowest minimum at $5,000,
+      reflecting its limited risk profile.
+    citation: "15c3-1(a)(2)(i)"
+    rules:
+
+      - rule_id: "15c3_1_min_intro_bd"
+        name: "Minimum Net Capital — Introducing BD ($5,000)"
+        section: "15c3-1(a)(2)(i)"
+        formula_type: "capital_requirement"
+        formula_detail: |
+          capital_requirement: $5,000 fixed minimum
+          Applies to introducing BDs that do not receive or handle
+          customer funds or securities.
+        conditions:
+          - bd_type = introducing
+          - receives_customer_funds = false
+        definition: >-
+          Per 15c3-1(a)(2)(i), a broker-dealer that does not carry customer
+          accounts, does not receive or hold funds or securities for customers,
+          and introduces all of its transactions on a fully-disclosed basis to
+          another broker-dealer must maintain minimum net capital of $5,000.
+          This is the lowest capital floor and reflects the limited operational
+          risk of a pure introducing firm.
+
+  - priority: 4
+    name: "Minimum Net Capital — Introducing BD Receiving Funds"
+    rationale: >-
+      An introducing broker-dealer that receives but does not hold customer
+      funds or securities has incrementally higher risk than a pure introducer.
+      The $50,000 minimum reflects the additional operational risk of handling
+      customer assets, even temporarily, before transmitting them to a
+      carrying firm.
+    citation: "15c3-1(a)(2)(ii)"
+    rules:
+
+      - rule_id: "15c3_1_min_intro_receives"
+        name: "Minimum Net Capital — Intro BD Receives Funds ($50,000)"
+        section: "15c3-1(a)(2)(ii)"
+        formula_type: "capital_requirement"
+        formula_detail: |
+          capital_requirement: $50,000 fixed minimum
+          Applies to introducing BDs that receive but do not hold
+          customer funds or securities.
+        conditions:
+          - bd_type = introducing
+          - receives_customer_funds = true
+          - holds_customer_funds = false
+        definition: >-
+          Per 15c3-1(a)(2)(ii), a broker-dealer that introduces transactions
+          on a fully-disclosed basis but receives customer funds or securities
+          must maintain minimum net capital of $50,000. This higher floor
+          accounts for the transit risk inherent in handling customer assets
+          before prompt transmittal to the carrying broker-dealer.
+
+  - priority: 5
+    name: "Minimum Net Capital — Carrying/Clearing Firm"
+    rationale: >-
+      Carrying and clearing broker-dealers hold customer funds and securities,
+      maintain customer accounts, and bear the full range of operational and
+      counterparty risks. The $250,000 minimum is the highest standard floor,
+      reflecting the systemic importance and risk concentration of firms that
+      custody customer assets.
+    citation: "15c3-1(a)(2)(iii)"
+    rules:
+
+      - rule_id: "15c3_1_min_carrying"
+        name: "Minimum Net Capital — Carrying/Clearing ($250,000)"
+        section: "15c3-1(a)(2)(iii)"
+        formula_type: "capital_requirement"
+        formula_detail: |
+          capital_requirement: $250,000 fixed minimum
+          Applies to broker-dealers that carry customer accounts
+          or clear transactions.
+        conditions:
+          - bd_type = carrying
+        definition: >-
+          Per 15c3-1(a)(2)(iii), a broker-dealer that carries customer
+          accounts, holds customer funds or securities, or acts as a
+          clearing firm must maintain minimum net capital of $250,000.
+          This floor applies regardless of whether the firm uses the
+          Basic or Alternative Method, and reflects the higher risk
+          profile of firms that custody customer assets.
+
+  - priority: 6
+    name: "Minimum Net Capital — Market Maker"
+    rationale: >-
+      Market makers that hold themselves out as willing to buy and sell
+      securities for their own account on a continuous basis take on
+      concentrated inventory risk. The $100,000 minimum applies to OTC
+      market makers and specialists, reflecting the capital needed to
+      support their continuous quoting obligations.
+    citation: "15c3-1(a)(2)(iv)"
+    rules:
+
+      - rule_id: "15c3_1_min_market_maker"
+        name: "Minimum Net Capital — Market Maker ($100,000)"
+        section: "15c3-1(a)(2)(iv)"
+        formula_type: "capital_requirement"
+        formula_detail: |
+          capital_requirement: $100,000 fixed minimum
+          Applies to broker-dealers acting as OTC market makers.
+        conditions:
+          - bd_type = market_maker
+        definition: >-
+          Per 15c3-1(a)(2)(iv), a broker-dealer that acts as a market
+          maker in OTC securities or as a specialist on a national
+          securities exchange must maintain minimum net capital of
+          $100,000. This requirement ensures that market makers have
+          sufficient capital to absorb losses from their continuous
+          two-sided quoting obligations and concentrated inventory
+          positions.
+
+  - priority: 7
+    name: "U.S. Treasury Haircuts"
+    rationale: >-
+      U.S. Treasury securities receive the lowest haircuts of any security
+      type, reflecting their status as risk-free obligations backed by the
+      full faith and credit of the United States government. Haircuts increase
+      with maturity to account for interest rate risk — longer-dated
+      Treasuries exhibit greater price volatility in response to rate changes.
+      The maturity-tiered schedule ensures that capital charges are
+      proportional to the actual market risk of the position.
+    citation: "15c3-1(c)(2)(vi)(A)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_treasury_3m"
+        name: "Treasury Haircut — Maturity ≤ 3 Months"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0% of market value
+          Maturity: ≤ 3 months
+        conditions:
+          - security_type = us_treasury
+          - maturity <= 3 months
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity of 3 months or less receive a 0% haircut. The negligible
+          duration risk of very short-term government obligations warrants
+          no capital deduction.
+
+      - rule_id: "15c3_1_haircut_treasury_6m"
+        name: "Treasury Haircut — Maturity > 3 to 6 Months"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.5% of market value
+          Maturity: > 3 months to 6 months
+        conditions:
+          - security_type = us_treasury
+          - maturity > 3 months
+          - maturity <= 6 months
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 3 months but not exceeding 6 months receive
+          a 0.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_9m"
+        name: "Treasury Haircut — Maturity > 6 to 9 Months"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.75% of market value
+          Maturity: > 6 months to 9 months
+        conditions:
+          - security_type = us_treasury
+          - maturity > 6 months
+          - maturity <= 9 months
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 6 months but not exceeding 9 months receive
+          a 0.75% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_12m"
+        name: "Treasury Haircut — Maturity > 9 to 12 Months"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 1% of market value
+          Maturity: > 9 months to 12 months
+        conditions:
+          - security_type = us_treasury
+          - maturity > 9 months
+          - maturity <= 12 months
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 9 months but not exceeding 12 months receive
+          a 1% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_2y"
+        name: "Treasury Haircut — Maturity > 1 to 2 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 1.5% of market value
+          Maturity: > 1 year to 2 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 1 year
+          - maturity <= 2 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 1 year but not exceeding 2 years receive
+          a 1.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_3y"
+        name: "Treasury Haircut — Maturity > 2 to 3 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 2% of market value
+          Maturity: > 2 years to 3 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 2 years
+          - maturity <= 3 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 2 years but not exceeding 3 years receive
+          a 2% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_5y"
+        name: "Treasury Haircut — Maturity > 3 to 5 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 3% of market value
+          Maturity: > 3 years to 5 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 3 years
+          - maturity <= 5 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 3 years but not exceeding 5 years receive
+          a 3% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_7y"
+        name: "Treasury Haircut — Maturity > 5 to 7 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 3.5% of market value
+          Maturity: > 5 years to 7 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 5 years
+          - maturity <= 7 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 5 years but not exceeding 7 years receive
+          a 3.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_10y"
+        name: "Treasury Haircut — Maturity > 7 to 10 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 4% of market value
+          Maturity: > 7 years to 10 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 7 years
+          - maturity <= 10 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 7 years but not exceeding 10 years receive
+          a 4% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_15y"
+        name: "Treasury Haircut — Maturity > 10 to 15 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 4.5% of market value
+          Maturity: > 10 years to 15 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 10 years
+          - maturity <= 15 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 10 years but not exceeding 15 years receive
+          a 4.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_25y"
+        name: "Treasury Haircut — Maturity > 15 to 25 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 5% of market value
+          Maturity: > 15 years to 25 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 15 years
+          - maturity <= 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 15 years but not exceeding 25 years receive
+          a 5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_treasury_25y_plus"
+        name: "Treasury Haircut — Maturity > 25 Years"
+        section: "15c3-1(c)(2)(vi)(A)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 6% of market value
+          Maturity: > 25 years
+        conditions:
+          - security_type = us_treasury
+          - maturity > 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(A), U.S. Treasury securities with a remaining
+          maturity greater than 25 years receive a 6% haircut on market value.
+          This is the maximum Treasury haircut, reflecting the significant
+          duration risk of ultra-long-dated government obligations.
+
+  - priority: 8
+    name: "Municipal Bond Haircuts (Short-Term / High-Grade)"
+    rationale: >-
+      Short-term, high-grade municipal securities carry low credit and interest
+      rate risk and accordingly receive favorable haircut treatment. These
+      haircuts apply to municipal securities that meet the definition of
+      exempted securities under the Securities Exchange Act and have short
+      remaining maturities. The tiered schedule reflects increasing duration
+      risk as maturity extends.
+    citation: "15c3-1(c)(2)(vi)(B)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_muni_st_1y"
+        name: "Municipal Short-Term Haircut — Maturity ≤ 1 Year"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0% of market value
+          Maturity: ≤ 1 year
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity <= 1 year
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity of 1 year or less receive a 0% haircut, reflecting
+          minimal credit and duration risk.
+
+      - rule_id: "15c3_1_haircut_muni_st_2y"
+        name: "Municipal Short-Term Haircut — Maturity > 1 to 2 Years"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.1% of market value
+          Maturity: > 1 year to 2 years
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity > 1 year
+          - maturity <= 2 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity greater than 1 year but not exceeding 2 years
+          receive a 0.1% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_st_5y"
+        name: "Municipal Short-Term Haircut — Maturity > 2 to 5 Years"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.2% of market value
+          Maturity: > 2 years to 5 years
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity > 2 years
+          - maturity <= 5 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity greater than 2 years but not exceeding 5 years
+          receive a 0.2% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_st_7y"
+        name: "Municipal Short-Term Haircut — Maturity > 5 to 7 Years"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.35% of market value
+          Maturity: > 5 years to 7 years
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity > 5 years
+          - maturity <= 7 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity greater than 5 years but not exceeding 7 years
+          receive a 0.35% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_st_10y"
+        name: "Municipal Short-Term Haircut — Maturity > 7 to 10 Years"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.5% of market value
+          Maturity: > 7 years to 10 years
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity > 7 years
+          - maturity <= 10 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity greater than 7 years but not exceeding 10 years
+          receive a 0.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_st_20y"
+        name: "Municipal Short-Term Haircut — Maturity > 10 to 20 Years"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.75% of market value
+          Maturity: > 10 years to 20 years
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity > 10 years
+          - maturity <= 20 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity greater than 10 years but not exceeding 20 years
+          receive a 0.75% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_st_20y_plus"
+        name: "Municipal Short-Term Haircut — Maturity > 20 Years"
+        section: "15c3-1(c)(2)(vi)(B)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 1% of market value
+          Maturity: > 20 years
+        conditions:
+          - security_type = municipal
+          - grade = high
+          - maturity > 20 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(B), high-grade municipal securities with a
+          remaining maturity greater than 20 years receive a 1% haircut on
+          market value. This is the maximum short-term municipal haircut.
+
+  - priority: 9
+    name: "Municipal Bond Haircuts (Long-Term / General)"
+    rationale: >-
+      General municipal bonds that do not qualify for the short-term high-grade
+      treatment receive higher haircuts under paragraph (C). These securities
+      carry more credit risk and/or longer duration, requiring greater capital
+      deductions. The schedule ranges from 1% for the shortest maturities to
+      7% for bonds maturing beyond 25 years.
+    citation: "15c3-1(c)(2)(vi)(C)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_muni_lt_1y"
+        name: "Municipal Long-Term Haircut — Maturity ≤ 1 Year"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 1% of market value
+          Maturity: ≤ 1 year
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity <= 1 year
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity of 1 year or less receive a 1% haircut on
+          market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_2y"
+        name: "Municipal Long-Term Haircut — Maturity > 1 to 2 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 1.5% of market value
+          Maturity: > 1 year to 2 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 1 year
+          - maturity <= 2 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 1 year but not exceeding 2 years
+          receive a 1.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_3y"
+        name: "Municipal Long-Term Haircut — Maturity > 2 to 3 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 2% of market value
+          Maturity: > 2 years to 3 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 2 years
+          - maturity <= 3 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 2 years but not exceeding 3 years
+          receive a 2% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_5y"
+        name: "Municipal Long-Term Haircut — Maturity > 3 to 5 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 2.5% of market value
+          Maturity: > 3 years to 5 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 3 years
+          - maturity <= 5 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 3 years but not exceeding 5 years
+          receive a 2.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_10y"
+        name: "Municipal Long-Term Haircut — Maturity > 5 to 10 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 3.5% of market value
+          Maturity: > 5 years to 10 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 5 years
+          - maturity <= 10 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 5 years but not exceeding 10 years
+          receive a 3.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_15y"
+        name: "Municipal Long-Term Haircut — Maturity > 10 to 15 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 4.5% of market value
+          Maturity: > 10 years to 15 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 10 years
+          - maturity <= 15 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 10 years but not exceeding 15 years
+          receive a 4.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_20y"
+        name: "Municipal Long-Term Haircut — Maturity > 15 to 20 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 5.5% of market value
+          Maturity: > 15 years to 20 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 15 years
+          - maturity <= 20 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 15 years but not exceeding 20 years
+          receive a 5.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_25y"
+        name: "Municipal Long-Term Haircut — Maturity > 20 to 25 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 6% of market value
+          Maturity: > 20 years to 25 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 20 years
+          - maturity <= 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 20 years but not exceeding 25 years
+          receive a 6% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_muni_lt_25y_plus"
+        name: "Municipal Long-Term Haircut — Maturity > 25 Years"
+        section: "15c3-1(c)(2)(vi)(C)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 7% of market value
+          Maturity: > 25 years
+        conditions:
+          - security_type = municipal
+          - grade = general
+          - maturity > 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(C), general municipal securities with a
+          remaining maturity greater than 25 years receive a 7% haircut on
+          market value. This is the maximum general municipal haircut.
+
+  - priority: 10
+    name: "Commercial Paper Haircuts"
+    rationale: >-
+      Commercial paper is a short-term unsecured promissory note issued by
+      corporations, typically with maturities under 270 days. The haircut
+      schedule reflects the very low duration risk of these instruments,
+      ranging from 0% for paper maturing within 30 days to 0.5% for paper
+      approaching the 270-day statutory maximum. Only investment-grade
+      commercial paper is eligible for these favorable haircuts.
+    citation: "15c3-1(c)(2)(vi)(D)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_cp_30d"
+        name: "Commercial Paper Haircut — Maturity ≤ 30 Days"
+        section: "15c3-1(c)(2)(vi)(D)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0% of market value
+          Maturity: ≤ 30 days
+        conditions:
+          - security_type = commercial_paper
+          - rating = investment_grade
+          - maturity <= 30 days
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(D), investment-grade commercial paper with a
+          remaining maturity of 30 days or less receives a 0% haircut,
+          reflecting the negligible credit and duration risk of very
+          short-term high-quality paper.
+
+      - rule_id: "15c3_1_haircut_cp_60d"
+        name: "Commercial Paper Haircut — Maturity > 30 to 60 Days"
+        section: "15c3-1(c)(2)(vi)(D)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.125% of market value
+          Maturity: > 30 days to 60 days
+        conditions:
+          - security_type = commercial_paper
+          - rating = investment_grade
+          - maturity > 30 days
+          - maturity <= 60 days
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(D), investment-grade commercial paper with a
+          remaining maturity greater than 30 days but not exceeding 60 days
+          receives a 0.125% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_cp_90d"
+        name: "Commercial Paper Haircut — Maturity > 60 to 90 Days"
+        section: "15c3-1(c)(2)(vi)(D)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.25% of market value
+          Maturity: > 60 days to 90 days
+        conditions:
+          - security_type = commercial_paper
+          - rating = investment_grade
+          - maturity > 60 days
+          - maturity <= 90 days
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(D), investment-grade commercial paper with a
+          remaining maturity greater than 60 days but not exceeding 90 days
+          receives a 0.25% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_cp_270d"
+        name: "Commercial Paper Haircut — Maturity > 90 to 270 Days"
+        section: "15c3-1(c)(2)(vi)(D)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 0.5% of market value
+          Maturity: > 90 days to 270 days
+        conditions:
+          - security_type = commercial_paper
+          - rating = investment_grade
+          - maturity > 90 days
+          - maturity <= 270 days
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(D), investment-grade commercial paper with a
+          remaining maturity greater than 90 days but not exceeding 270 days
+          receives a 0.5% haircut on market value. This is the maximum
+          commercial paper haircut, corresponding to the longest permissible
+          maturity for Section 3(a)(3) exempted commercial paper.
+
+  - priority: 11
+    name: "Corporate Bond Haircuts (Investment Grade)"
+    rationale: >-
+      Investment-grade corporate bonds carry credit risk beyond that of
+      government obligations and therefore receive higher haircuts than
+      Treasuries or municipals. The maturity-tiered schedule ranges from
+      2% for the shortest maturities to 9% for bonds maturing beyond
+      25 years, reflecting the combined credit and interest rate risk of
+      these instruments. Investment-grade status is determined by ratings
+      from nationally recognized statistical rating organizations (NRSROs).
+    citation: "15c3-1(c)(2)(vi)(F)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_corp_ig_1y"
+        name: "Corporate IG Haircut — Maturity ≤ 1 Year"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 2% of market value
+          Maturity: ≤ 1 year
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity <= 1 year
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity of 1 year or less receive a 2% haircut
+          on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_2y"
+        name: "Corporate IG Haircut — Maturity > 1 to 2 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 3% of market value
+          Maturity: > 1 year to 2 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 1 year
+          - maturity <= 2 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 1 year but not exceeding
+          2 years receive a 3% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_3y"
+        name: "Corporate IG Haircut — Maturity > 2 to 3 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 3.5% of market value
+          Maturity: > 2 years to 3 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 2 years
+          - maturity <= 3 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 2 years but not exceeding
+          3 years receive a 3.5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_5y"
+        name: "Corporate IG Haircut — Maturity > 3 to 5 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 4% of market value
+          Maturity: > 3 years to 5 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 3 years
+          - maturity <= 5 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 3 years but not exceeding
+          5 years receive a 4% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_7y"
+        name: "Corporate IG Haircut — Maturity > 5 to 7 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 5% of market value
+          Maturity: > 5 years to 7 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 5 years
+          - maturity <= 7 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 5 years but not exceeding
+          7 years receive a 5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_10y"
+        name: "Corporate IG Haircut — Maturity > 7 to 10 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 6% of market value
+          Maturity: > 7 years to 10 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 7 years
+          - maturity <= 10 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 7 years but not exceeding
+          10 years receive a 6% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_15y"
+        name: "Corporate IG Haircut — Maturity > 10 to 15 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 7% of market value
+          Maturity: > 10 years to 15 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 10 years
+          - maturity <= 15 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 10 years but not exceeding
+          15 years receive a 7% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_25y"
+        name: "Corporate IG Haircut — Maturity > 15 to 25 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 8% of market value
+          Maturity: > 15 years to 25 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 15 years
+          - maturity <= 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 15 years but not exceeding
+          25 years receive an 8% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_ig_25y_plus"
+        name: "Corporate IG Haircut — Maturity > 25 Years"
+        section: "15c3-1(c)(2)(vi)(F)(1)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 9% of market value
+          Maturity: > 25 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = investment_grade
+          - maturity > 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), investment-grade corporate debt securities
+          with a remaining maturity greater than 25 years receive a 9% haircut
+          on market value. This is the maximum investment-grade corporate
+          bond haircut.
+
+  - priority: 12
+    name: "Corporate Bond Haircuts (Non-Investment Grade)"
+    rationale: >-
+      Non-investment-grade (high-yield) corporate bonds carry significantly
+      higher credit risk and wider bid-ask spreads than their investment-grade
+      counterparts. The haircut schedule approximately doubles the IG rates,
+      ranging from 4% for short maturities to 15% for bonds exceeding 25
+      years. These elevated haircuts ensure that broker-dealers holding
+      speculative-grade debt maintain capital commensurate with the higher
+      probability of default and loss given default.
+    citation: "15c3-1(c)(2)(vi)(F)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_corp_nig_1y"
+        name: "Corporate Non-IG Haircut — Maturity ≤ 1 Year"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 4% of market value
+          Maturity: ≤ 1 year
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity <= 1 year
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity of 1 year or less receive a
+          4% haircut on market value, double the investment-grade rate.
+
+      - rule_id: "15c3_1_haircut_corp_nig_2y"
+        name: "Corporate Non-IG Haircut — Maturity > 1 to 2 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 5% of market value
+          Maturity: > 1 year to 2 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 1 year
+          - maturity <= 2 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 1 year but not
+          exceeding 2 years receive a 5% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_3y"
+        name: "Corporate Non-IG Haircut — Maturity > 2 to 3 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 6% of market value
+          Maturity: > 2 years to 3 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 2 years
+          - maturity <= 3 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 2 years but not
+          exceeding 3 years receive a 6% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_5y"
+        name: "Corporate Non-IG Haircut — Maturity > 3 to 5 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 7% of market value
+          Maturity: > 3 years to 5 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 3 years
+          - maturity <= 5 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 3 years but not
+          exceeding 5 years receive a 7% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_7y"
+        name: "Corporate Non-IG Haircut — Maturity > 5 to 7 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 9% of market value
+          Maturity: > 5 years to 7 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 5 years
+          - maturity <= 7 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 5 years but not
+          exceeding 7 years receive a 9% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_10y"
+        name: "Corporate Non-IG Haircut — Maturity > 7 to 10 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 10% of market value
+          Maturity: > 7 years to 10 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 7 years
+          - maturity <= 10 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 7 years but not
+          exceeding 10 years receive a 10% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_15y"
+        name: "Corporate Non-IG Haircut — Maturity > 10 to 15 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 11% of market value
+          Maturity: > 10 years to 15 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 10 years
+          - maturity <= 15 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 10 years but not
+          exceeding 15 years receive an 11% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_25y"
+        name: "Corporate Non-IG Haircut — Maturity > 15 to 25 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 13% of market value
+          Maturity: > 15 years to 25 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 15 years
+          - maturity <= 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 15 years but not
+          exceeding 25 years receive a 13% haircut on market value.
+
+      - rule_id: "15c3_1_haircut_corp_nig_25y_plus"
+        name: "Corporate Non-IG Haircut — Maturity > 25 Years"
+        section: "15c3-1(c)(2)(vi)(F)(2)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 15% of market value
+          Maturity: > 25 years
+        conditions:
+          - security_type = corporate_bond
+          - rating = non_investment_grade
+          - maturity > 25 years
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(F), non-investment-grade corporate debt
+          securities with a remaining maturity greater than 25 years receive
+          a 15% haircut on market value. This is the maximum non-investment-
+          grade corporate bond haircut.
+
+  - priority: 13
+    name: "Equity Haircut"
+    rationale: >-
+      Equity securities held in proprietary positions receive a flat 15%
+      haircut regardless of individual security characteristics. This rate
+      reflects the general market risk of equity positions, which exhibit
+      higher volatility than fixed-income instruments. The 15% deduction
+      applies to the current market value of each long and short equity
+      position.
+    citation: "15c3-1(c)(2)(vi)(J)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_equity"
+        name: "Equity Haircut — 15% of Market Value"
+        section: "15c3-1(c)(2)(vi)(J)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 15% of market value
+          Applies to all equity securities in proprietary positions.
+        conditions:
+          - security_type = equity
+          - position_type = proprietary
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(J), equity securities held in the proprietary
+          account of the broker-dealer are subject to a haircut deduction of
+          15% of their current market value. This applies to both long and
+          short positions. The haircut is applied to the net long or net short
+          position in each individual equity security after netting same-
+          security positions across accounts.
+
+  - priority: 14
+    name: "Limited-Market Securities Haircut"
+    rationale: >-
+      Securities for which there is no ready market or for which the market
+      is limited pose heightened liquidation risk. The 40% haircut reflects
+      the difficulty of disposing of these positions at quoted prices in a
+      stress scenario. This category captures thinly traded equities,
+      restricted securities, and other instruments where bid-ask spreads
+      are wide and depth of market is insufficient to support rapid
+      liquidation.
+    citation: "15c3-1(c)(2)(vi)(K)"
+    rules:
+
+      - rule_id: "15c3_1_haircut_limited_market"
+        name: "Limited-Market Securities — 40% of Market Value"
+        section: "15c3-1(c)(2)(vi)(K)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: 40% of market value
+          Applies to securities for which there is no ready market.
+        conditions:
+          - security_type = any
+          - market_liquidity = limited
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(K), securities for which there is no ready
+          market, as defined in 15c3-1(c)(11), are subject to a haircut
+          deduction of 40% of market value. A security has no ready market
+          if it cannot be sold publicly, if its resale is conditioned on a
+          regulatory qualification that has not been obtained, or if there
+          is no independent, actively traded market with regular quotations
+          from multiple dealers. This includes restricted stock, private
+          placements, and thinly traded OTC securities.
+
+  - priority: 15
+    name: "Listed Option Haircuts"
+    rationale: >-
+      Listed options are subject to specialized haircut computations under
+      paragraph (c)(2)(x) and Appendix A of Rule 15c3-1. Option positions
+      may be paired into recognized strategies (e.g., spreads, straddles,
+      conversions) that reduce risk, and the haircut reflects the net risk
+      of the strategy rather than the gross risk of individual legs.
+      Appendix A provides the detailed methodology for computing option
+      haircuts using theoretical pricing models.
+    citation: "15c3-1(c)(2)(x) + Appendix A"
+    rules:
+
+      - rule_id: "15c3_1_haircut_option"
+        name: "Listed Option Haircut — Strategy-Based per Appendix A"
+        section: "15c3-1(c)(2)(x)"
+        formula_type: "maturity_based_haircut"
+        formula_detail: |
+          haircut: strategy-based per Appendix A methodology
+          Recognized strategies include spreads, straddles, combinations,
+          and conversions. Unhedged options use the underlying haircut
+          plus the option's in-the-money amount.
+        conditions:
+          - security_type = listed_option
+          - position_type = proprietary
+        definition: >-
+          Per 15c3-1(c)(2)(x) and Appendix A, listed option positions are
+          subject to haircut deductions computed using recognized strategy
+          pairings and theoretical pricing models. The computation considers
+          the maximum potential loss under specified percentage moves in the
+          underlying security. Recognized strategies that limit risk (such
+          as vertical spreads, calendar spreads, and conversions) receive
+          reduced haircuts reflecting their hedged nature. Unhedged long
+          options are valued at market; unhedged short options require a
+          haircut equal to the applicable percentage of the underlying
+          market value plus any in-the-money amount, less the option premium.
+
+  - priority: 16
+    name: "Concentration Charge"
+    rationale: >-
+      When a broker-dealer's proprietary position in any single issuer
+      exceeds 10% of its tentative net capital, the excess concentration
+      represents an outsized idiosyncratic risk. The 50% surcharge on the
+      excess ensures that firms do not become overly dependent on the
+      performance of a single security or issuer, maintaining diversification
+      as a pillar of capital adequacy.
+    citation: "15c3-1(c)(2)(vi)(M)"
+    rules:
+
+      - rule_id: "15c3_1_concentration_charge"
+        name: "Concentration Charge — 50% on Excess Over 10% of TNC"
+        section: "15c3-1(c)(2)(vi)(M)"
+        formula_type: "concentration_charge"
+        formula_detail: |
+          concentration_charge: 50% of (position_value - 10% × tentative_net_capital)
+          Applies only to the portion exceeding the 10% threshold.
+        conditions:
+          - single_issuer_position > 10% of tentative_net_capital
+        definition: >-
+          Per 15c3-1(c)(2)(vi)(M), when the net position in securities of
+          a single issuer (excluding U.S. government and agency securities)
+          exceeds 10% of the broker-dealer's tentative net capital, a
+          concentration charge of 50% is applied to the excess amount. This
+          charge is in addition to the standard haircut applicable to the
+          security type. The purpose is to penalize over-concentration in
+          a single name and incentivize portfolio diversification.
+
+  - priority: 17
+    name: "Proprietary vs Customer Position Scope"
+    rationale: >-
+      The net capital haircut deductions under 15c3-1(c)(2) apply exclusively
+      to proprietary positions — securities owned by the broker-dealer for
+      its own account. Customer securities held in custody or as margin
+      collateral are not subject to haircuts because they are not at the
+      firm's market risk. This fundamental scoping rule ensures that the
+      capital computation reflects only the firm's own risk exposures.
+    citation: "15c3-1(c)(1)"
+    rules:
+
+      - rule_id: "15c3_1_proprietary_only"
+        name: "Haircuts Apply to Proprietary Positions Only"
+        section: "15c3-1(c)(1)"
+        formula_type: "compliance_requirement"
+        formula_detail: |
+          scope: proprietary positions only
+          Customer securities held in custody or as collateral are excluded
+          from haircut computations.
+        conditions:
+          - position_type = proprietary
+        definition: >-
+          Per 15c3-1(c)(1), haircut deductions are computed only on securities
+          and commodities held in the proprietary accounts of the broker-
+          dealer. Securities held in customer accounts, whether in custody or
+          pledged as margin collateral, are not subject to haircut deductions
+          in the firm's net capital computation. This distinction is
+          fundamental: the net capital rule measures the firm's ability to
+          absorb losses on its OWN positions, not the market risk of customer
+          holdings.
+
+  - priority: 18
+    name: "Early Warning Notification"
+    rationale: >-
+      Rule 17a-11 requires broker-dealers to file immediate notice with the
+      SEC and their designated examining authority when net capital falls
+      below 120% of the required minimum. This early warning system provides
+      regulators advance notice of potential capital adequacy problems before
+      they reach critical levels, enabling intervention and heightened
+      oversight while the firm may still have time to remediate.
+    citation: "17a-11(b)"
+    rules:
+
+      - rule_id: "15c3_1_early_warning"
+        name: "Early Warning — Net Capital Below 120% of Minimum"
+        section: "17a-11(b)"
+        formula_type: "notification_requirement"
+        formula_detail: |
+          notification_trigger: net_capital < 120% of required_minimum
+          Firm must file immediate notice with SEC and DEA.
+        conditions:
+          - net_capital < 120% of required_minimum
+        definition: >-
+          Per Rule 17a-11(b), a broker-dealer must give notice to the
+          Commission, its designated examining authority (DEA), and the
+          Securities Investor Protection Corporation (SIPC) when its net
+          capital declines below 120% of the minimum required under Rule
+          15c3-1. The notice must be filed within 24 hours of the event.
+          This early warning threshold provides regulators a buffer period
+          to assess the firm's financial condition and, if necessary,
+          initiate corrective action before an actual capital deficiency
+          occurs.
+
+  - priority: 19
+    name: "Capital Withdrawal Restriction"
+    rationale: >-
+      To prevent broker-dealers from distributing capital to owners or
+      affiliates in a manner that would impair their ability to meet net
+      capital requirements, Rule 15c3-1(e) restricts withdrawals of equity
+      capital. A firm may not make a withdrawal if doing so would cause net
+      capital to fall below 120% of its minimum requirement. This restriction
+      acts as a built-in governor preventing capital distributions during
+      periods of financial stress.
+    citation: "15c3-1(e)"
+    rules:
+
+      - rule_id: "15c3_1_withdrawal_restriction"
+        name: "Capital Withdrawal Restriction — 120% Post-Withdrawal Floor"
+        section: "15c3-1(e)"
+        formula_type: "restriction"
+        formula_detail: |
+          restriction: no withdrawal if post_withdrawal_net_capital < 120% of required_minimum
+          Applies to equity capital withdrawals, loans to affiliates,
+          and distributions to partners/shareholders.
+        conditions:
+          - post_withdrawal_net_capital < 120% of required_minimum
+        definition: >-
+          Per 15c3-1(e), no broker-dealer shall permit the withdrawal of
+          equity capital (including repayment of subordinated debt, loans
+          to affiliates, or distributions to partners or shareholders) if,
+          after giving effect to the withdrawal, the firm's net capital
+          would be less than 120% of the minimum required under paragraph
+          (a). Withdrawals exceeding 30% of excess net capital in any
+          rolling 30-day period require prior written notice to the SEC
+          and the firm's DEA at least two business days before the intended
+          withdrawal date.

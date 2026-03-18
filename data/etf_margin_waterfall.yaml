@@ -1,0 +1,444 @@
+## ETF/ETP Margin Waterfall
+##
+## Determines the maintenance margin requirement for exchange-traded
+## funds and exchange-traded products under FINRA Rule 4210. Standard
+## (1x) ETFs follow equity margin rules under 4210(c)(1). Leveraged
+## and inverse ETFs/ETPs are subject to scaled margin rates per
+## Interpretation 4210(c)/13, which codified FINRA Regulatory Notice
+## 09-53.
+##
+## Formula: margin_rate = base_rate x |leverage_factor|
+##   - Long base_rate = 25%, Short base_rate = 30%
+##   - Inverse long uses short base_rate (short-like exposure)
+##   - Inverse short uses long base_rate (long-like exposure)
+##   - Long margin is capped at 100%; short margin has no cap
+##
+## Sources:
+##   - FINRA Rule 4210(c)(1) -- Standard equity maintenance
+##   - FINRA Interpretation 4210(c)/13 -- Leveraged ETF scaling
+##   - FINRA Regulatory Notice 09-53 (December 2009)
+
+categories:
+
+  # ═══════════════════════════════════════════════════════════════
+  # STANDARD (1x) ETFs
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 1
+    name: Standard (1x) ETF
+    rationale: >-
+      Non-leveraged ETFs tracking a benchmark at 1:1 ratio are treated
+      identically to equities for margin purposes under 4210(c)(1).
+    citation: "FINRA 4210(c)(1)"
+    rules:
+
+      - rule_id: "4210_etf_1x_long"
+        name: "Standard (1x) ETF — Long"
+        section: "4210(c)(1)"
+        position_side: "long"
+        leverage_factor: 1
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1 × 25% = 25%
+        reg_t_initial: 0.50
+        finra_maintenance: 0.25
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = 1
+        definition: >-
+          Standard (1x) ETFs held long are margined at 25% of market value,
+          identical to standard equity long maintenance under 4210(c)(1).
+
+      - rule_id: "4210_etf_1x_short"
+        name: "Standard (1x) ETF — Short"
+        section: "4210(c)(1)"
+        position_side: "short"
+        leverage_factor: 1
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1 × 30% = 30%
+        reg_t_initial: 0.50
+        finra_maintenance: 0.30
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = 1
+        definition: >-
+          Standard (1x) ETFs held short are margined at 30% of market value,
+          identical to standard equity short maintenance under 4210(c)(3).
+
+  # ═══════════════════════════════════════════════════════════════
+  # LEVERAGED ETFs (1.5x through 5x)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 2
+    name: 1.5x Leveraged ETF
+    rationale: >-
+      1.5x leveraged ETPs amplify daily returns by 50%, requiring
+      proportionally scaled margin under Interpretation 4210(c)/13.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_1_5x_long"
+        name: "1.5x Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: 1.5
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1.5 × 25% = 37.5%
+        reg_t_initial: 0.75
+        finra_maintenance: 0.375
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = 1.5
+        definition: >-
+          1.5x leveraged ETF long margin is scaled: 1.5 x 25% = 37.5%.
+
+      - rule_id: "4210_etf_1_5x_short"
+        name: "1.5x Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: 1.5
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1.5 × 30% = 45%
+        reg_t_initial: 0.75
+        finra_maintenance: 0.45
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = 1.5
+        definition: >-
+          1.5x leveraged ETF short margin is scaled: 1.5 x 30% = 45%.
+
+  - priority: 3
+    name: 2x Leveraged ETF
+    rationale: >-
+      2x leveraged ETPs are the most common leveraged products.
+      Margin is doubled relative to standard rates.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_2x_long"
+        name: "2x Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: 2
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2 × 25% = 50%
+        reg_t_initial: 1.00
+        finra_maintenance: 0.50
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = 2
+        definition: >-
+          2x leveraged ETF long margin: 2 x 25% = 50%.
+
+      - rule_id: "4210_etf_2x_short"
+        name: "2x Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: 2
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2 × 30% = 60%
+        reg_t_initial: 1.00
+        finra_maintenance: 0.60
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = 2
+        definition: >-
+          2x leveraged ETF short margin: 2 x 30% = 60%.
+
+  - priority: 4
+    name: 3x Leveraged ETF
+    rationale: >-
+      3x leveraged products carry triple the daily exposure.
+      Long margin reaches 75%; short margin reaches 90%.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_3x_long"
+        name: "3x Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: 3
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 3 × 25% = 75%
+        reg_t_initial: 1.00
+        finra_maintenance: 0.75
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = 3
+        definition: >-
+          3x leveraged ETF long margin: 3 x 25% = 75%.
+
+      - rule_id: "4210_etf_3x_short"
+        name: "3x Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: 3
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 3 × 30% = 90%
+        reg_t_initial: 1.00
+        finra_maintenance: 0.90
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = 3
+        definition: >-
+          3x leveraged ETF short margin: 3 x 30% = 90%.
+
+  - priority: 5
+    name: 4x Leveraged ETF
+    rationale: >-
+      4x leveraged products. Long margin hits the 100% cap; short
+      margin of 120% exceeds market value.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_4x_long"
+        name: "4x Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: 4
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 4 × 25% = 100% (capped at 100%)
+        reg_t_initial: 1.00
+        finra_maintenance: 1.00
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = 4
+        definition: >-
+          4x leveraged ETF long margin: 4 x 25% = 100%, capped at 100%
+          of market value per Interpretation 4210(c)/13.
+
+      - rule_id: "4210_etf_4x_short"
+        name: "4x Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: 4
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 4 × 30% = 120% (no cap on short)
+        reg_t_initial: 1.00
+        finra_maintenance: 1.20
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = 4
+        definition: >-
+          4x leveraged ETF short margin: 4 x 30% = 120%. No cap on
+          short margin per Interpretation 4210(c)/13.
+
+  - priority: 6
+    name: 5x Leveraged ETF
+    rationale: >-
+      Maximum leverage tier currently observed. Long margin is capped
+      at 100%; short margin of 150% reflects extreme risk.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_5x_long"
+        name: "5x Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: 5
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 5 × 25% = 125%, capped at 100%
+        reg_t_initial: 1.00
+        finra_maintenance: 1.00
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = 5
+        definition: >-
+          5x leveraged ETF long margin: 5 x 25% = 125%, capped at 100%
+          of market value.
+
+      - rule_id: "4210_etf_5x_short"
+        name: "5x Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: 5
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 5 × 30% = 150% (no cap on short)
+        reg_t_initial: 1.00
+        finra_maintenance: 1.50
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = 5
+        definition: >-
+          5x leveraged ETF short margin: 5 x 30% = 150%. No cap on
+          short margin.
+
+  # ═══════════════════════════════════════════════════════════════
+  # INVERSE ETFs (-1x through -3x)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 7
+    name: Inverse (-1x) ETF
+    rationale: >-
+      Inverse ETFs deliver the opposite daily return of the benchmark.
+      A long position in an inverse ETF has short-like economic exposure,
+      so margin uses the short base rate (30%). Conversely, a short
+      position in an inverse ETF has long-like exposure (25% base rate).
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_inv1x_long"
+        name: "-1x Inverse ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: -1
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1 × 30% = 30% (inverse long = short exposure)
+        reg_t_initial: 0.50
+        finra_maintenance: 0.30
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = -1
+        definition: >-
+          Inverse (-1x) ETF long positions have short-like economic exposure.
+          Margin uses the short base rate: 1 x 30% = 30%.
+
+      - rule_id: "4210_etf_inv1x_short"
+        name: "-1x Inverse ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: -1
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 1 × 25% = 25% (inverse short = long exposure)
+        reg_t_initial: 0.50
+        finra_maintenance: 0.25
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = -1
+        definition: >-
+          Short positions in inverse (-1x) ETFs have long-like economic
+          exposure. Margin uses the long base rate: 1 x 25% = 25%.
+
+  - priority: 8
+    name: Inverse (-2x) ETF
+    rationale: >-
+      -2x inverse leveraged ETFs deliver double the inverse daily return.
+      Long positions carry 2x short exposure; short positions carry
+      2x long exposure.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_inv2x_long"
+        name: "-2x Inverse Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: -2
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2 × 30% = 60% (inverse long = short exposure)
+        reg_t_initial: 1.00
+        finra_maintenance: 0.60
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = -2
+        definition: >-
+          -2x inverse leveraged ETF long margin: 2 x 30% = 60%
+          (inverse long = short exposure, uses short base rate).
+
+      - rule_id: "4210_etf_inv2x_short"
+        name: "-2x Inverse Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: -2
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 2 × 25% = 50% (inverse short = long exposure)
+        reg_t_initial: 1.00
+        finra_maintenance: 0.50
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = -2
+        definition: >-
+          -2x inverse leveraged ETF short margin: 2 x 25% = 50%
+          (inverse short = long exposure, uses long base rate).
+
+  - priority: 9
+    name: Inverse (-3x) ETF
+    rationale: >-
+      -3x inverse leveraged ETFs deliver triple the inverse daily return.
+      The highest inverse leverage tier commonly available.
+    citation: "FINRA 4210(c)/13"
+    rules:
+
+      - rule_id: "4210_etf_inv3x_long"
+        name: "-3x Inverse Leveraged ETF — Long"
+        section: "4210(c)/13"
+        position_side: "long"
+        leverage_factor: -3
+        base_rate: 0.30
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 3 × 30% = 90% (inverse long = short exposure)
+        reg_t_initial: 1.00
+        finra_maintenance: 0.90
+        conditions:
+          - security_type = etf
+          - position_side = long
+          - leverage_factor = -3
+        definition: >-
+          -3x inverse leveraged ETF long margin: 3 x 30% = 90%
+          (inverse long = short exposure, uses short base rate).
+
+      - rule_id: "4210_etf_inv3x_short"
+        name: "-3x Inverse Leveraged ETF — Short"
+        section: "4210(c)/13"
+        position_side: "short"
+        leverage_factor: -3
+        base_rate: 0.25
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 3 × 25% = 75% (inverse short = long exposure)
+        reg_t_initial: 1.00
+        finra_maintenance: 0.75
+        conditions:
+          - security_type = etf
+          - position_side = short
+          - leverage_factor = -3
+        definition: >-
+          -3x inverse leveraged ETF short margin: 3 x 25% = 75%
+          (inverse short = long exposure, uses long base rate).

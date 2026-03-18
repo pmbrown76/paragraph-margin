@@ -1,0 +1,47 @@
+# FINRA Rule 4210(c)(7) — Security Futures Margin Requirements
+# ===========================================================
+# Security futures products (single stock futures and narrow-based
+# security index futures) require customer margin of 20% of the
+# current market value per SEC Rule 403(b)(2) and FINRA 4210(c)(7).
+
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(c)(7)"
+  description: "Security futures maintenance margin requirements"
+  effective_date: "2024-01-01"
+  notes: >
+    Security futures products (single stock futures and narrow-based security
+    index futures) require customer margin of 20% of the current market value.
+    This applies to both long and short positions per SEC Rule 403(b)(2) and
+    FINRA 4210(c)(7).
+
+rules:
+  - id: "4210_security_future_long"
+    description: "Long security future"
+    citation: "FINRA 4210(c)(7)"
+    source_quote: >
+      The minimum maintenance margin levels for security futures contracts,
+      "long" and "short", shall be 20 percent of the current market value
+      of such contract.
+    conditions:
+      security_type: "security_future"
+      position_side: "long"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.20
+    notes: "20% of the current market value of the security future."
+
+  - id: "4210_security_future_short"
+    description: "Short security future"
+    citation: "FINRA 4210(c)(7)"
+    source_quote: >
+      The minimum maintenance margin levels for security futures contracts,
+      "long" and "short", shall be 20 percent of the current market value
+      of such contract.
+    conditions:
+      security_type: "security_future"
+      position_side: "short"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.20
+    notes: "20% of the current market value of the security future."

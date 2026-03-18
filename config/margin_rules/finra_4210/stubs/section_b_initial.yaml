@@ -1,0 +1,35 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_b_1
+  description: (1) the amount specified in Regulation T, or Rules 400 through 406 of SEC Customer Margin Requirements for
+    Security Futu
+  citation: FINRA 4210(b)(1)
+  source_quote: (1) the amount specified in Regulation T, or Rules 400 through 406 of SEC Customer Margin Requirements for
+    Security Futures, or Rules 41.42 through 41.49 under the Commodity Exchange Act ("CEA"); or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_b_2
+  description: (2) the amount specified in paragraph (c) of this Rule; or
+  citation: FINRA 4210(b)(2)
+  source_quote: (2) the amount specified in paragraph (c) of this Rule; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (b)(2)
+- id: 4210_b_3
+  description: (3) such greater amount as FINRA may from time to time require for specific securities; or
+  citation: FINRA 4210(b)(3)
+  source_quote: (3) such greater amount as FINRA may from time to time require for specific securities; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (b)(3)

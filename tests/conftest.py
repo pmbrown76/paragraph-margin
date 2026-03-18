@@ -1,11 +1,11 @@
-"""Shared test fixtures for margin-calc-engine."""
+"""Shared test fixtures for paragraph-margin."""
 
 from datetime import date, datetime
 from decimal import Decimal
 
 import pytest
 
-from margin_calc_engine import (
+from paragraph_margin import (
     Account,
     Equity,
     Option,
@@ -20,7 +20,7 @@ from margin_calc_engine import (
     MinimumConfig,
     MarginRulesRegistry,
 )
-from margin_calc_engine.money import ZERO
+from paragraph_margin.money import ZERO
 
 
 @pytest.fixture

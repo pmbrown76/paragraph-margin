@@ -1,0 +1,90 @@
+# FINRA IM-4210-2 — Concentrated Account Requirements
+# ====================================================
+# Additional margin requirements for accounts with concentrated
+# positions in a single security or issuer. Firms must apply
+# additional margin to positions that represent a significant
+# portion of the account's net equity per FINRA IM-4210-2
+# (Interpretation regarding margin requirements for concentrated
+# accounts) and FINRA 4210(c)(1).
+
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "IM-4210-2"
+  description: "Concentrated account margin surcharges"
+  effective_date: "2024-01-01"
+
+rules:
+  - id: "4210_concentrated_equity_long"
+    description: "Concentrated long equity position surcharge"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      concentrated: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.40
+      description: "40% maintenance for concentrated long equity (vs 25% standard)"
+
+  - id: "4210_concentrated_equity_short"
+    description: "Concentrated short equity position surcharge"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "short"
+      concentrated: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.50
+      description: "50% maintenance for concentrated short equity (vs 30% standard)"
+
+  - id: "4210_concentrated_threshold_single"
+    description: "Single-security concentration threshold — 10% of equity"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.10
+      description: "A position is concentrated if its market value exceeds 10% of account equity"
+
+  - id: "4210_concentrated_threshold_issuer"
+    description: "Same-issuer concentration threshold — 15% of equity"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.15
+      description: "Positions in same issuer are concentrated if combined value exceeds 15% of equity"
+
+  - id: "4210_concentrated_low_cap"
+    description: "Low-capitalization concentrated position surcharge"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+      concentrated: true
+      low_cap: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.75
+      description: "75% maintenance for concentrated low-cap equity"
+
+  - id: "4210_concentrated_illiquid"
+    description: "Illiquid concentrated position surcharge"
+    citation: "FINRA IM-4210-2"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      concentrated: true
+      illiquid: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.00
+      description: "100% maintenance (non-marginable) for illiquid concentrated positions"

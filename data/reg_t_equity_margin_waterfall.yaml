@@ -1,0 +1,187 @@
+## Regulation T — Equity Margin Waterfall
+##
+## Determines the INITIAL margin requirement for equity securities
+## under 12 CFR Part 220 (Regulation T). Rules are evaluated in priority
+## order; the first matching rule sets the initial margin rate.
+##
+## Key difference from FINRA 4210: Reg T uses TRADE VALUE (purchase price)
+## not current market value. Reg T governs the initial credit extension
+## at trade time; FINRA 4210 governs ongoing maintenance.
+##
+## Sources:
+##   - 12 CFR 220.4 — Margin account requirements
+##   - 12 CFR 220.12 Supplement — Margin schedule (50% for most equities)
+##   - 12 CFR 220.4(c)(2) — Non-marginable securities
+##   - FINRA 4210(b) — Account minimum ($2,000)
+
+categories:
+
+  - priority: 1
+    name: Non-Marginable Equity
+    rationale: >-
+      Securities that are not margin-eligible under Regulation T cannot receive
+      any credit extension. The customer must pay 100% of the trade value.
+      This takes precedence over all other equity margin rules because
+      non-marginable status is an absolute constraint imposed by the Federal
+      Reserve Board.
+    citation: "220.4(c)(2)"
+    rules:
+
+      - rule_id: "reg_t_equity_nonmarginable"
+        name: "Non-Marginable Long Equity"
+        section: "220.4(c)(2)"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 100% × trade_value
+          No credit extension permitted.
+        reg_t_initial: 1.00
+        finra_maintenance: "n/a — see FINRA 4210(c)(6)"
+        conditions:
+          - security_type = equity
+          - marginable = false
+          - position_side = long
+        definition: >-
+          Per 220.4(c)(2), securities that are not margin securities as
+          defined in Section 220.2 may not be purchased on credit. The
+          customer must deposit 100% of the purchase price. This includes
+          OTC bulletin board stocks, penny stocks, and securities designated
+          by the creditor as non-marginable.
+
+  - priority: 2
+    name: Standard Long Equity
+    rationale: >-
+      The standard Reg T initial margin for marginable long equity securities.
+      The 50% rate has been in effect since 1974 and applies to all equity
+      securities listed on a national securities exchange or meeting the
+      margin eligibility criteria of Section 220.2.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_equity_long"
+        name: "Standard Long Equity — 50% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 50% × trade_value
+          Applies at time of purchase.
+        reg_t_initial: 0.50
+        finra_maintenance: "see FINRA 4210(c)(1) — 25%"
+        conditions:
+          - security_type = equity
+          - marginable = true
+          - position_side = long
+        definition: >-
+          Per the 220.12 Supplement (Margin Schedule), the initial margin
+          required for a purchase of margin equity securities is 50% of the
+          current value of the securities. This rate has been in effect
+          since 1974 and applies to all exchange-listed equities and OTC
+          margin securities meeting the criteria of Section 220.2.
+
+  - priority: 3
+    name: Standard Short Equity
+    rationale: >-
+      Short sales under Reg T also require 50% initial margin on the trade
+      value. The short sale proceeds are held in the account, and the
+      customer must deposit an additional 50% of the current market value
+      as initial margin.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_equity_short"
+        name: "Standard Short Equity — 50% Initial"
+        section: "220.12 Supplement"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 50% × trade_value
+          Short sale proceeds retained plus 50% deposit.
+        reg_t_initial: 0.50
+        finra_maintenance: "see FINRA 4210(c)(3) — 30%"
+        conditions:
+          - security_type = equity
+          - marginable = true
+          - position_side = short
+        definition: >-
+          Per the 220.12 Supplement, the initial margin for a short sale
+          of equity securities is 50% of the current market value. The
+          proceeds of the short sale remain in the account as collateral,
+          and the 50% deposit provides a cushion against adverse price
+          movements.
+
+  - priority: 4
+    name: Standard ETF (Long/Short)
+    rationale: >-
+      Non-leveraged ETFs are treated as equity securities under Reg T
+      and carry the standard 50% initial margin. This applies to both
+      long and short positions in standard (1x) ETFs.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_etf_long"
+        name: "Standard ETF Long — 50% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 50% × trade_value
+          Standard equity treatment for non-leveraged ETFs.
+        reg_t_initial: 0.50
+        finra_maintenance: "see FINRA 4210(c)(1) — 25%"
+        conditions:
+          - security_type = etf
+          - leverage_factor = 1
+          - position_side = long
+        definition: >-
+          Non-leveraged ETFs are margin equity securities under Section 220.2
+          and receive standard 50% initial margin under the 220.12 Supplement.
+          Leveraged ETFs may require higher initial margin under firm policies,
+          but Reg T itself does not distinguish by leverage factor.
+
+      - rule_id: "reg_t_etf_short"
+        name: "Standard ETF Short — 50% Initial"
+        section: "220.12 Supplement"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 50% × trade_value
+          Standard equity treatment for non-leveraged ETFs.
+        reg_t_initial: 0.50
+        finra_maintenance: "see FINRA 4210(c)(3) — 30%"
+        conditions:
+          - security_type = etf
+          - leverage_factor = 1
+          - position_side = short
+        definition: >-
+          Short sales of non-leveraged ETFs receive the standard 50% initial
+          margin under the 220.12 Supplement, consistent with equity short
+          sale treatment.
+
+  - priority: 5
+    name: Account Minimum
+    rationale: >-
+      Before any margin transaction can occur, the account must meet the
+      minimum equity requirement. While Reg T itself references a good-faith
+      requirement, FINRA 4210(b) sets the $2,000 account minimum that
+      applies in practice for all margin accounts.
+    citation: "FINRA 4210(b)"
+    rules:
+
+      - rule_id: "reg_t_minimum_equity"
+        name: "Margin Account Minimum Equity — $2,000"
+        section: "FINRA 4210(b)"
+        position_side: "any"
+        formula_type: "account_minimum"
+        formula_detail: |
+          Minimum equity: $2,000 or 100% of purchase price, whichever is less.
+        reg_t_initial: "$2,000"
+        finra_maintenance: "$2,000"
+        conditions:
+          - account_type = margin
+        definition: >-
+          Per FINRA 4210(b), the minimum initial deposit for a margin account
+          is $2,000 or 100% of the purchase price, whichever is less. This
+          floor applies before any Reg T initial margin calculation. Reg T
+          220.4(a) requires the creditor to obtain margin before extending
+          credit; FINRA 4210(b) sets the specific dollar minimum.

@@ -1,0 +1,25 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_h
+  description: (h) Margin Requirement Exception for Certain Members.
+  citation: FINRA 4210(h)
+  source_quote: >-
+    (h) Margin Requirement Exception for Certain Members. Any member designated to another self-regulatory
+    organization for oversight of the member's compliance with applicable securities laws, rules and regulations,
+    and self-regulatory organization rules under SEA Rule 17d-1 is exempt from the provisions of Rule
+    4210. • • • Supplementary Material: -------------- .01 The following tables are given to illustrate
+    the method of computing the number of elapsed days in conformity with paragraph (f)(2)(A)(ii): .01
+    * Leap Year Adds 1 day to this period. .02 Guaranteed. For purposes of paragraph (e)(2)(H) of this
+    Rule, a member is deemed to have “guaranteed” a transaction if such member has become liable for the
+    performance of either party’s obligations under such transaction. .02 Guaranteed. .03 Risk Limit Determination.
+    For purposes of any risk limit determination pursuant to paragraphs (e)(2)(F), (e)(2)(G) or (e)(2)(H)
+    of this Rule:
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation

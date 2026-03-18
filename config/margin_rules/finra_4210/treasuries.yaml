@@ -1,0 +1,121 @@
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(e)(2)(A)"
+  description: "US Government securities maintenance margin by maturity tier"
+  effective_date: "2024-01-01"
+  notes: "US Treasuries are exempted securities under Reg T - margin is 'good faith' federally, but FINRA sets specific rates."
+
+rules:
+  - id: "4210_treasury_under_1y"
+    description: "US Treasury - remaining maturity < 1 year"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      maturity_tier: "under_1y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.01
+    notes: "1% of market value"
+
+  - id: "4210_treasury_1y_to_3y"
+    description: "US Treasury - remaining maturity 1 to < 3 years"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      maturity_tier: "1y_to_3y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.02
+    notes: "2% of market value"
+
+  - id: "4210_treasury_3y_to_5y"
+    description: "US Treasury - remaining maturity 3 to < 5 years"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      maturity_tier: "3y_to_5y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.03
+    notes: "3% of market value"
+
+  - id: "4210_treasury_5y_to_10y"
+    description: "US Treasury - remaining maturity 5 to < 10 years"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      maturity_tier: "5y_to_10y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.04
+    notes: "4% of market value"
+
+  - id: "4210_treasury_10y_to_20y"
+    description: "US Treasury - remaining maturity 10 to < 20 years"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      maturity_tier: "10y_to_20y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.05
+    notes: "5% of market value"
+
+  - id: "4210_treasury_20y_plus"
+    description: "US Treasury - remaining maturity >= 20 years"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      maturity_tier: "20y_plus"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.06
+    notes: "6% of market value"
+
+  - id: "4210_treasury_zero_coupon_floor"
+    description: "Zero coupon Treasury with 5+ years - 3% of principal floor"
+    citation: "FINRA 4210(e)(2)(A)"
+    source_quote: >
+      On net "long" or net "short" positions in obligations issued or
+      guaranteed as to principal or interest by the United States Government,
+      the margin to be maintained shall be the percentage of the current
+      market value as specified by maturity.
+    conditions:
+      security_type: "us_treasury"
+      zero_coupon: true
+      years_to_maturity_gte: 5
+    formula:
+      type: "percentage_of_principal"
+      rate: 0.03
+    minimum_of_standard: true
+    notes: "Minimum 3% of principal amount for zero coupon bonds with 5+ years to maturity"

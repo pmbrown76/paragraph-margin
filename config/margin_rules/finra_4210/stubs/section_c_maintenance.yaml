@@ -1,0 +1,6 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules: []

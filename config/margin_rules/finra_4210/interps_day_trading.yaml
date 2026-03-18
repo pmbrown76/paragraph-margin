@@ -1,0 +1,327 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(f)(8) Interpretations
+  description: Day trading margin requirements and pattern day trader rules
+  effective_date: '2024-01-01'
+  notes: >
+    These interpretations supplement the day trading provisions of 4210(f)(8) with detailed guidance on
+    PDT identification, buying power computation, margin call procedures, and option day trades.
+rules:
+- id: 4210_interp_dt_special_initial
+  description: Day trading — special initial margin requirements
+  citation: FINRA 4210(f)(8)/01
+  source_quote: >-
+    4210(f)(8)/01 Special Initial Requirements Any special initial margin requirements imposed by FINRA
+    shall, without regard to the other provisions of this Rule, be imposed only on the day of a new transaction.
+    Thereafter, the maintenance requirement will be applicable. Equity in the margin account which is
+    in excess of FINRA maintenance requirements may be used to satisfy special initial margin requirements.
+    However, the credit balance in a customer’s Special Memorandum Account may not be used toward the
+    margin required. The required margin for any margin purchase or any short sale of special requirement
+    securities must be in the account before any new order is accepted. It is not necessary to deposit
+    more than the initial margin required on any new transaction or group of transactions on a given day.
+  conditions:
+    security_type: dt_special_initial_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)/01: FINRA may prescribe higher initial margin requirements for day trading in specific
+    securities when market conditions warrant. These special requirements are in addition to the standard
+    day trading margin requirements.
+- id: 4210_interp_dt_exemptions
+  description: Day trading — exemptions from definition
+  citation: FINRA 4210(f)(8)/02
+  source_quote: >-
+    4210(f)(8)/02 Exemptions The special initial margin requirements will not apply to: purchases of stocks
+    to cover existing short positions; accounts long that sell short against the box; puts, calls and
+    other options held in accounts prior to the establishment of special margin requirements on the underlying
+    security in accordance with this Rule (Note: Such options issued after the establishment of special
+    margin requirements must be margined as though the potential security positions were established at
+    that time.); transactions in cash accounts; and transactions in U.S. Government and Municipal obligations.
+  conditions:
+    security_type: dt_exemptions_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)/02: certain transactions are exempt from the day trading definition under 4210(f)(8)(B)(i),
+    including: (a) bona fide hedging by approved specialists/market makers, (b) certain omnibus account
+    transactions, (c) error account corrections.
+- id: 4210_interp_dt_itm_options
+  description: Day trading — in-the-money option exemption
+  citation: FINRA 4210(f)(8)/03
+  source_quote: 4210(f)(8)/03 In-the-Money Options
+  conditions:
+    security_type: dt_itm_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)/03: transactions in in-the-money options as outlined under 4210(b)(4)/05 are exempt
+    from special initial margin requirements. An ITM option exercise followed by same-day liquidation
+    is not treated as a day trade for PDT counting. FINRA RN 10-45, 24-11.
+- id: 4210_interp_dt_specialist
+  description: Day trading — approved specialist/market maker exemption
+  citation: FINRA 4210(f)(8)(B)(i)/01
+  source_quote: >-
+    4210(f)(8)(B)(i)/01 Approved Specialist or Approved Market-Maker Transactions executed by an approved
+    specialist or approved market-maker in accordance with Rule 4210(e)(5)(A) of this Rule, shall be exempt
+    from the day trading requirements promulgated under Rule 4210. All other transactions executed by
+    the specialist or market maker shall be subject to such day trading requirements.
+  conditions:
+    security_type: dt_specialist_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(i)/01: bona fide transactions by approved specialists or approved market makers
+    in their assigned securities are exempt from the day trading definition.
+- id: 4210_interp_dt_omnibus
+  description: Day trading — omnibus account treatment
+  citation: FINRA 4210(f)(8)(B)(i)/02
+  source_quote: >-
+    4210(f)(8)(B)(i)/02 Omnibus Accounts The omnibus credit account of a registered broker-dealer, which
+    is carried and cleared by a member pursuant to section 220.7(f) of Regulation T, will not be subject
+    to Rule 4210(f)(8)(B).
+  conditions:
+    security_type: dt_omnibus_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(i)/02: day trading in omnibus accounts is exempt from the day trading definition,
+    provided the carrying member applies the day trading requirements to the underlying customers of the
+    introducing member.
+- id: 4210_interp_dt_error_accounts
+  description: Day trading — error accounts
+  citation: FINRA 4210(f)(8)(B)(i)/03
+  source_quote: >-
+    4210(f)(8)(B)(i)/03 Day Trading in Error Accounts An error account of an introducing broker-dealer
+    or registered investment advisor shall not be subject to Rule 4210(f)(8)(B), provided such account
+    is used exclusively for bona fide errors, and in which any position resulting from a bona fide error
+    is promptly liquidated.
+  conditions:
+    security_type: dt_error_account_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(i)/03: day trading in error accounts resulting from operational errors is exempt
+    from the day trading definition. However, a pattern of day trading in error accounts would be subject
+    to scrutiny.
+- id: 4210_interp_dt_spreads_exempt
+  description: Day trading — spread exemption from definition
+  citation: FINRA 4210(f)(8)(B)(i)/04
+  source_quote: >-
+    4210(f)(8)(B)(i)/04 Spreads If a short option component of a spread (as defined in Rule 4210(f)(2)(A)(xxxii))
+    is exercised against the customer, the customer may exercise a long option component of the spread
+    on the same day to close out the resulting security position without being considered to have effected
+    a day trade.
+  conditions:
+    security_type: dt_spreads_exempt_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(i)/04: establishing and closing a spread position on the same day is exempt from
+    the day trading definition if the transaction is treated as a spread for margin purposes. See also
+    4210(f)(8)(B)(iii)/06.
+- id: 4210_interp_pdt_multiple_purchases
+  description: PDT — multiple purchases and sales counting
+  citation: FINRA 4210(f)(8)(B)(ii)/01
+  source_quote: >-
+    4210(f)(8)(B)(ii)/01 Multiple Purchases and Sales If a customer enters an order to purchase a security
+    and sells the same security within the same day, but for reasons beyond the customer’s control e.g.,
+    price, the purchase was executed in smaller blocks, it will be considered as one day trade. However,
+    the member must be able to demonstrate that it was the customer’s intent to execute one day trade.
+    This will also apply to when a customer enters a sale order and buys the same security within the
+    same day. In addition, the trades would have to have been executed in sequential order. One purchase
+    and several subsequent sale transactions of the same security, where the sales were executed in sequential
+    order within the same day, shall constitute one day trade. One sale and several subsequent purchases
+    of the same security, where the purchases were executed in sequential order within the same day, shall
+    also constitute one day trade.
+  conditions:
+    security_type: pdt_counting_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(ii)/01: when determining whether a customer is a pattern day trader, each purchase
+    and sale (or sale and purchase) of the same security on the same day in a margin account counts as
+    one day trade. Multiple purchases followed by multiple sales of the same security count as the number
+    of sale transactions. 4+ day trades in 5 business days triggers PDT designation.
+- id: 4210_interp_pdt_alt_method
+  description: PDT — alternative method for counting day trades
+  citation: FINRA 4210(f)(8)(B)(ii)/02
+  source_quote: >-
+    4210(f)(8)(B)(ii)/02 Multiple Purchases and Sales – Alternative Method Rather than counting day trades
+    based on the number of transactions a customer executes to establish or increase a position that is
+    liquidated on the same day (as set out in Interpretation /01) a member may instead count day trades
+    based on the number of times during the day that the day trading customer changes its trading direction
+    (i.e., changes from buying a particular security to selling it, or changes from selling a particular
+    security to buying it). Example A: 09:30 Buy 250 ABC 09:31 Buy 250 ABC 13:00 Sell 500 ABC The customer
+    has executed one day trade. Example B: 09:30 Buy 100 ABC 09:31 Sell 100 ABC 09:32 Buy 100 ABC 13:00
+    Sell 100 ABC The customer has executed two day trades. Example C: 09:30 Buy 500 ABC 13:00 Sell 100
+    ABC 13:01 Sell 100 ABC 13:03 Sell 300 ABC The customer has executed one day trade. Example D: 09:30
+    Buy 250 ABC 09:31 Buy 300 ABC 13:01 Buy 100 ABC 13:02 Sell 150 ABC 13:03 Sell 175 ABC The customer
+    has executed one day trade.
+  conditions:
+    security_type: pdt_alt_method_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(ii)/02: members may use an alternative method for counting day trades that produces
+    an equivalent result. The alternative must be consistently applied and documented.
+- id: 4210_interp_pdt_termination
+  description: PDT — terminating pattern day trader status
+  citation: FINRA 4210(f)(8)(B)(ii)/03
+  source_quote: >-
+    4210(f)(8)(B)(ii)/03 Terminating Pattern Day Trader Status A customer that has been classified as
+    a pattern day trader under Rule 4210(f)(8)(B)(ii) of this Rule is presumed to remain a pattern day
+    trader. However, if a customer seeks to terminate its pattern day trader classification, a member
+    may so accommodate such request after the member determines in good faith, as defined in Section 220.2
+    of Regulation T, that the customer will no longer engage in pattern day trading. A member may, for
+    example, base its good faith determination on providing the definition of pattern day trader to the
+    customer and receiving a written certification from the customer that (1) the customer understands
+    the definition of pattern day trading and (2) the customer will not engage in future pattern day trading.
+    As an alternative, a good faith determination that a customer will not engage in future pattern day
+    trading may be based on the member’s application of technological restrictions on such customer’s
+    trading activity that effectively prevent the customer from engaging in pattern day trading.
+  conditions:
+    security_type: pdt_termination_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(ii)/03: a customer may request removal of PDT status after demonstrating that they
+    are no longer engaging in pattern day trading. The member may remove the designation if the customer
+    has not day traded for at least 60 consecutive calendar days. PDT restrictions remain in effect until
+    removal.
+- id: 4210_interp_dt_buying_power
+  description: Day-trading buying power — 4x maintenance excess
+  citation: FINRA 4210(f)(8)(B)(iii)/01
+  source_quote: >-
+    4210(f)(8)(B)(iii)/01 Day-Trading Buying Power For a proprietary account of a registered broker-dealer
+    subject to SEA Rule 15c3-1, “day-trading buying power” means the equity in the account at the close
+    of business of the previous day, less any haircut requirement as prescribed in SEA Rule 15c3-1, multiplied
+    by six, for transactions in equity securities.
+  conditions:
+    security_type: dt_buying_power_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(iii)/01: day-trading buying power for PDT accounts equals 4 times the maintenance
+    margin excess as of the prior day's close. Example: if maintenance excess = $50,000, day-trading buying
+    power = $200,000. When a PDT exceeds buying power, a day-trade margin call is issued and buying power
+    is restricted to 2x maintenance excess until met.
+- id: 4210_interp_dt_option_day_trade
+  description: Option day trade — buying power impact
+  citation: FINRA 4210(f)(8)(B)(iii)/02
+  source_quote: >-
+    4210(f)(8)(B)(iii)/02 Option Day Trade Option day trades are subject to Rule 4210(f)(8)(B). For day
+    trades executed in accounts of customers not deemed pattern day traders, the margin requirement is
+    100% of the premium on the “long” or “short” transaction, whichever occurred first. If a customer
+    is a pattern day trader, the day-trading transactions are treated as having created a naked short
+    option position and, therefore, subject to the margin requirements as prescribed in Rule 4210(f)(2)(E).
+    However, if the member can substantiate that the purchase side of the day trade took place prior to
+    the sell side of the day trade, the margin required will be 100% of the premium on the “long” option.
+    A written record of the time of each executed option transaction must be maintained to demonstrate
+    that the purchase was prior to the sale. In addition, in a margin account that is not a portfolio
+    margin account, if the option that was day traded was part of an intra-day hedge strategy currently
+    recognized under Rule 4210(f), then the margin required will be 100% of the premium of the option
+    transaction that was executed first.
+  conditions:
+    security_type: dt_option_trade_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(iii)/02: an option day trade (buying and selling the same option on the same day)
+    uses day-trading buying power. The buying power consumed equals the cost of the option position, not
+    the underlying security value. Naked option day trades use the margin requirement as the buying power
+    consumed.
+- id: 4210_interp_dt_time_and_tick
+  description: Day trading — 'time and tick' method and aggregation
+  citation: FINRA 4210(f)(8)(B)(iii)/03
+  source_quote: >-
+    4210(f)(8)(B)(iii)/03 “Time and Tick” and Aggregation A member that has “time and tick” information
+    for some, but not all, day trades in an account during a day may separately compute the special maintenance
+    margin requirement on the day trades for which “time and tick” information is available, utilizing
+    the highest (dollar amount) open position during that day, and compute the special maintenance margin
+    requirement on the day trades for which “time and tick” information is not available, and then add
+    the results of these two computations to determine that day’s special maintenance margin requirement
+    for that account. compute the special maintenance margin requirement on the day trades for which “time
+    and tick” information is available, utilizing the highest (dollar amount) open position during that
+    day, and compute the special maintenance margin requirement on the day trades for which “time and
+    tick” information is not available,
+  conditions:
+    security_type: dt_time_tick_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(iii)/03: members may use the "time and tick" method to calculate day-trading margin
+    on an individual transaction basis (each round trip computed independently) or the "aggregation" method
+    (sum of all day trades). Both methods must produce margin requirements at least as stringent as the
+    25% day-trading margin rule. Time and tick tracks each opening and closing transaction chronologically.
+- id: 4210_interp_dt_multiple_calls
+  description: Multiple day-trade margin calls
+  citation: FINRA 4210(f)(8)(B)(iii)/04
+  source_quote: >-
+    4210(f)(8)(B)(iii)/04 Multiple Day-Trade Calls When a customer has multiple day-trade calls outstanding,
+    the customer can meet the calls by depositing the highest day-trade call amount.
+  conditions:
+    security_type: dt_multiple_calls_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(iii)/04: multiple day-trade margin calls may be outstanding simultaneously. Each
+    call must be met within 5 business days. Failure to meet a day-trade call restricts the account to
+    2x maintenance excess buying power for 90 calendar days or until the call is met. Three unmet calls
+    in a 12-month period may result in account restriction.
+- id: 4210_interp_dt_liquidation
+  description: Liquidation to meet a day-trade margin call
+  citation: FINRA 4210(f)(8)(B)(iii)/05
+  source_quote: >-
+    4210(f)(8)(B)(iii)/05 Liquidation to Meet a Day-Trade Call A customer may liquidate securities to
+    satisfy a day-trade call; however, when doing so, only the maintenance margin requirement of the liquidated
+    securities shall be credited toward meeting such call.
+  conditions:
+    security_type: dt_liquidation_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(iii)/05: day-trade margin calls may be met by depositing funds or by liquidating
+    existing positions. However, if the customer liquidates positions to meet a day-trade call, those
+    same positions may not be used to generate additional day-trading buying power for 2 business days
+    (T+2).
+- id: 4210_interp_dt_option_spreads
+  description: Option spreads and combinations as day trades
+  citation: FINRA 4210(f)(8)(B)(iii)/06
+  source_quote: >-
+    4210(f)(8)(B)(iii)/06 Option Spreads and Combinations as Day Trades Option transactions executed to
+    create an option spread, as defined under Rule 4210(f)(2)(A)(xxxii), or combination as described under
+    Rule 4210(f)(2)(G)(i) and (ii), may be treated as one option transaction for the purpose of applying
+    day trade requirements. Thus, only one day trade will be deemed to have occurred when all the components
+    of a spread (“legs”) are, on the same day, opened through a single order and subsequently closed through
+    a single order. In addition, a written record of the time of each executed option transaction must
+    be maintained to substantiate that all the components of the option spread were established, and subsequently
+    closed, contemporaneously. Absent such written record, each component must be treated as a separate
+    day trade. For a customer that is not a pattern day trader (as defined in Rule 4210(e)(8)(B)(ii)),
+    the day trade requirement of the opening option spread transactions shall be 100% of the net dollar
+    amount (debit or credit) of the opening option spread transaction executed first. Non-Pattern Day
+    Trader The day trade requirement for this option spread would be net debit of $250.
+  conditions:
+    security_type: dt_option_spreads_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(f)(8)(B)(iii)/06: opening and closing an option spread or combination strategy on the same
+    day constitutes a day trade. The buying power consumed is the margin requirement of the spread/ combination
+    (the net debit or strategy margin requirement), not the sum of the individual legs. This reduces the
+    buying power impact for defined-risk strategies like vertical spreads.

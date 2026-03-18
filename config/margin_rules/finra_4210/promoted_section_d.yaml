@@ -1,0 +1,19 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: d
+  description: FINRA 4210(d) — Additional Margin (promoted from stubs)
+rules:
+- id: 4210_d_3
+  description: (3) review the need for instituting higher margin requirements, mark-to-markets and collateral deposits than
+    are require
+  citation: FINRA 4210(d)(3)
+  source_quote: (3) review the need for instituting higher margin requirements, mark-to-markets and collateral deposits than
+    are required by this Rule for individual securities or customer accounts.
+  conditions: {}
+  formula:
+    type: informational
+    description: (3) review the need for instituting higher margin requirements, mark-to-markets and collateral deposits than
+      are require
+  produces_calculation: false
+  calculation_status: informational

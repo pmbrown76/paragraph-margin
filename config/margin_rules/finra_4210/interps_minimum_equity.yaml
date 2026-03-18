@@ -1,0 +1,231 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(b)(4) Interpretations
+  description: Minimum equity interpretations for margin accounts
+  effective_date: '2024-01-01'
+  notes: >
+    These interpretations supplement the base $2,000 minimum equity requirement with specific guidance
+    for account types, market declines, withdrawals, and special situations.
+rules:
+- id: 4210_interp_reg_t_compliance
+  description: Compliance with Regulation T initial margin requirements
+  citation: FINRA 4210(b)(4)/01
+  source_quote: >-
+    4210(b)(4)/01 Compliance with Regulation T Members must adhere to the requirements of this Rule or
+    Regulation T, whichever is greater. Where Regulation T requires “good faith” margin or has no requirements
+    (e.g., exempted securities or portfolio margin accounts), then the equity required by this Rule will
+    govern.
+  conditions:
+    security_type: reg_t_compliance_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/01: members must comply with Regulation T initial margin requirements (currently 50%
+    for margin equity securities) in addition to 4210 maintenance requirements. Reg T governs the amount
+    of credit that may be extended at the time of a new purchase or short sale. 4210 maintenance requirements
+    are ongoing.
+- id: 4210_interp_min_equity_decline
+  description: No forced deposit when equity declines below $2,000 absent new commitments
+  citation: FINRA 4210(b)(4)/022
+  source_quote: >
+    If the equity in a margin account falls below $2,000 because of a decline in the market value of the
+    security positions in the account and no new commitments are made, no deposit or liquidation is necessary.
+    For the purpose of this Rule, a same-day substitution constitutes a new commitment.
+  conditions:
+    security_type: min_equity_decline_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/022: passive market decline below $2,000 does not trigger a margin call. However, any
+    new commitment (including same-day substitutions) while below $2,000 requires deposit to restore the
+    minimum. FINRA Regulatory Notice 21-24.
+- id: 4210_interp_min_equity_withdrawal
+  description: Withdrawal restrictions when equity below $2,000
+  citation: FINRA 4210(b)(4)/023
+  source_quote: >
+    No withdrawal may be made from a margin account that would leave less than $2,000 equity in the account
+    after the withdrawal if the account has a debit balance, short position or other commitment.
+  conditions:
+    security_type: min_equity_withdrawal_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/023: withdrawals permitted below $2,000 only if (1) account has no debit balance, short
+    position, or commitment after the withdrawal, (2) withdrawal complies with Reg T, and (3) account
+    is not a PDT ($25,000 minimum applies). Three subsections detail exceptions. FINRA Regulatory Notice
+    21-24.
+- id: 4210_interp_min_equity_cash
+  description: Cash accounts exempt from $2,000 minimum equity requirement
+  citation: FINRA 4210(b)(4)/024
+  source_quote: >
+    The $2,000 minimum equity requirement of Rule 4210(b)(4) does not apply to transactions in a cash
+    account, including transactions in when issued or when distributed securities in a cash account, even
+    though Rule 4210(f)(3)(B) generally subjects cash account positions in such securities to the same
+    maintenance margin requirements as in a margin account.
+  conditions:
+    security_type: min_equity_cash_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/024: the $2,000 minimum applies only to margin accounts. Cash account transactions
+    are exempt even when subject to maintenance margin on WI/WD securities per 4210(f)(3)(B). FINRA Regulatory
+    Notices 21-24, 24-11.
+- id: 4210_interp_min_equity_good_faith
+  description: Good faith account minimum equity exceptions
+  citation: FINRA 4210(b)(4)/031
+  source_quote: >
+    A good faith account is generally subject to the $2,000 minimum equity requirement.
+  conditions:
+    security_type: min_equity_good_faith_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/031: good faith accounts are subject to $2,000 minimum with three exceptions: (1) exempt
+    account for transactions per 4210(e)(2)(F)/(G), (2) non-securities credit per 4210(e)(7), (3) executing
+    broker in prime broker arrangement (until prime broker DKs and trade moves to margin account). FINRA
+    RN 24-11.
+- id: 4210_interp_min_equity_prime_500k
+  description: Prime brokerage customer — $500,000 minimum net equity
+  citation: FINRA 4210(b)(4)/032
+  source_quote: >
+    a prime broker generally may not settle prime broker trades on behalf of a customer, unless the customer
+    keeps a minimum net equity with the prime broker of at least $500,000 in cash or securities with a
+    ready market.
+  conditions:
+    security_type: prime_brokerage_reference
+  formula:
+    type: account_minimum
+    rate: 0.0
+  type: account_minimum
+  value: 500000.0
+  notes: >
+    Per 4210(b)(4)/032: prime brokerage customers require $500,000 minimum net equity per SEC no-action
+    letter (Jan 25, 1994). RIA-managed accounts: $100,000 minimum per account. Cross-guarantee accounts:
+    $100,000 with guarantor maintaining $500,000 plus $400,000 per guaranteed account. 5 business days
+    to restore if fallen below.
+- id: 4210_interp_min_equity_prime_ria
+  description: Prime brokerage — RIA managed account minimum $100,000
+  citation: FINRA 4210(b)(4)/032
+  source_quote: >
+    A prime broker may settle prime broker trades on behalf of customer accounts managed by a registered
+    investment adviser if each account has a minimum net equity of at least $100,000 in cash or securities
+    with a ready market.
+  conditions:
+    security_type: prime_brokerage_ria_reference
+  formula:
+    type: account_minimum
+    rate: 0.0
+  type: account_minimum
+  value: 100000.0
+  notes: >
+    Per 4210(b)(4)/032: reduced $100,000 minimum for RIA-managed prime brokerage accounts. Also applies
+    to cross-guaranteed accounts where the guarantor maintains at least $500,000 net equity.
+- id: 4210_interp_min_equity_bd_omnibus
+  description: Omnibus credit accounts — $2,000 minimum or PM policies
+  citation: FINRA 4210(b)(4)/033
+  source_quote: >
+    An omnibus credit account described in Section 220.7(f) of Regulation T is a margin account for purposes
+    of Rule 4210 and subject to the $2,000 minimum equity requirement, except for an omnibus credit account
+    that is maintained as a portfolio margin account.
+  conditions:
+    security_type: bd_omnibus_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/033: omnibus accounts = $2,000 minimum (or PM policies if PM account). Specialist/market
+    maker accounts per 4210(e)(5) have no minimum. BD proprietary accounts per 4210(e)(6)(A) may not be
+    carried in negative equity. JBO arrangements per 4210(e)(6)(B)(ii)c require $1 million minimum liquidating
+    equity. FINRA RN 24-11.
+- id: 4210_interp_min_equity_pm_full_monitoring
+  description: Portfolio margin — $100,000 minimum with full real-time monitoring
+  citation: FINRA 4210(b)(4)/034
+  source_quote: >-
+    4210(b)(4)/034 Minimum Equity – Portfolio Margin Account The minimum equity requirements applicable
+    to portfolio margin accounts are set by the member carrying the accounts in accordance with the procedures
+    and guidelines (the member’s “Portfolio Margin Policies”) contained in the member’s comprehensive
+    written risk analysis methodology filed with FINRA under Rule 4210(g)(1). A member’s Portfolio Margin
+    Policies may not set a minimum equity requirement for a portfolio margin account that is less than:
+    $100,000, if the member has “full, real-time, intra-day monitoring capability” – i.e., the member:
+    obtains real-time information about all transactions and positions in the portfolio margin account
+    (e.g.
+  conditions:
+    security_type: pm_min_equity_reference
+  formula:
+    type: account_minimum
+    rate: 0.0
+  type: account_minimum
+  value: 100000.0
+  notes: >
+    Per 4210(b)(4)/034: PM minimum equity is set by member's Portfolio Margin Policies per 4210(g)(1).
+    Floors: (1) $100,000 with full real-time intra-day monitoring (real-time position info, ability to
+    calculate maintenance excess, ability to reject/prevent orders that would cause deficiency); (3) $150,000–$500,000
+    with partial monitoring; (5) $500,000 without monitoring; (6) $5 million for unlisted derivatives
+    (non-BD, non-futures exchange member); (7) $5 million for PM day trading without (f)(8)(B) restrictions.
+- id: 4210_interp_min_equity_uncovered_options
+  description: Members should require higher minimums for uncovered option accounts
+  citation: FINRA 4210(b)(4)/04
+  source_quote: >
+    Pursuant to FINRA Rule 2360(b)(16)(E)(iv), members are required to establish minimum net equity requirements
+    for customer accounts that establish and maintain uncovered short option positions.
+  conditions:
+    security_type: uncovered_options_min_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/04: members must establish minimum net equity for uncovered short option accounts per
+    Rule 2360(b)(16)(E)(iv). Due to inherent risks, minimums should be higher than the standard $2,000.
+    Typical industry practice: $5,000–$25,000 for uncovered option approval. FINRA RN 10-45.
+- id: 4210_interp_itm_option_exercise
+  description: In-the-money options — exercise and liquidate without initial margin
+  citation: FINRA 4210(b)(4)/05
+  source_quote: >
+    A customer that has a long position in an in-the-money option may either sell it or exercise it and
+    simultaneously liquidate the resulting security position without meeting the initial margin requirement
+    of this paragraph of the Rule.
+  conditions:
+    security_type: itm_option_exercise_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/05: ITM option exercise + same-day liquidation of resulting position is exempt from
+    initial margin. This allows customers to monetize ITM options without depositing additional margin.
+    Also exempt from special initial requirements per 4210(f)(8)/03. FINRA RN 10-45, 24-11.
+- id: 4210_interp_spread_assignment
+  description: Spread — exercise long leg to close assigned short leg without initial margin
+  citation: FINRA 4210(b)(4)/051
+  source_quote: >
+    If a customer account contains a spread and an exercise of short option component of that spread is
+    assigned to the customer, then the customer may on the same day exercise a long option component of
+    the spread to close out the security position created by the assignment without meeting the initial
+    margin requirement.
+  conditions:
+    security_type: spread_assignment_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(b)(4)/051: when the short leg of a spread is assigned, the customer may exercise the long
+    leg same-day to close the resulting position without initial margin. Applies to all spreads as defined
+    in 4210(f)(2)(A)(xxxii). FINRA RN 10-45, 24-11.
+- id: 4210_interp_gse_equity
+  description: Government-sponsored enterprise equities — margin as equity securities
+  citation: FINRA 4210(b)(4)/061
+  source_quote: 4210(b)(4)/061 Government-Sponsored Enterprise Equity Securities
+  conditions:
+    security_type: gse_equity_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    Per 4210(b)(4)/061 and 4210(a)(6)/02: equity securities of GSEs (e.g., FNMA, FHLMC common/preferred
+    stock) are categorized as government securities under Exchange Act 3(a)(42) but are NOT treated as
+    exempted securities for margin. Initial margin = Reg T rate (50%). Maintenance = 4210(c) equity rates
+    (25% long, 30% short). Rule 4210(e)(2)(B) does not apply to GSE equities.

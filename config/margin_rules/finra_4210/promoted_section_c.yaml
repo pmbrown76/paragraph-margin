@@ -1,0 +1,34 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: c
+  description: FINRA 4210(c) — Maintenance Margin (promoted from stubs)
+rules:
+- id: 4210_c
+  description: (c) Maintenance Margin
+  citation: FINRA 4210(c)
+  source_quote: '(c) Maintenance Margin The margin which must be maintained in all accounts of customers, except as set forth
+    in paragraph (e), (f) or (g) and for cash accounts subject to other provisions of this Rule, shall be as follows: (c)
+    The member may base the risk limit determination on consideration of all products involved in the member''s business with
+    the counterparty, provided the member makes a daily record of the counterparty''s risk limit usage; and'
+  conditions: {}
+  formula:
+    type: informational
+    description: (c) Maintenance Margin
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_c_5
+  description: (5) The minimum maintenance margin levels for security futures contracts, "long" and "short", shall be 20 percent
+    of the
+  citation: FINRA 4210(c)(5)
+  source_quote: (5) The minimum maintenance margin levels for security futures contracts, "long" and "short", shall be 20
+    percent of the current market value of such contract. (See paragraph (f)(10) of this Rule for other provisions pertaining
+    to security futures contracts.)
+  conditions:
+    security_type: security_future
+  formula:
+    type: percentage_of_market_value
+    rate: 0.2
+    description: 'Security futures contracts maintenance margin: 20% of current market value'
+  produces_calculation: true
+  calculation_status: active

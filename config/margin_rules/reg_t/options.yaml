@@ -1,0 +1,470 @@
+rule_set:
+  regulation: "Regulation T"
+  authority: "Federal Reserve Board"
+  cfr: "12 CFR Part 220"
+  section: "220.12(c)"
+  description: "Initial margin for listed options — Reg T defers to SRO rules for option margin"
+  effective_date: "2024-01-01"
+
+rules:
+  # --- Long options: must be paid in full ---
+
+  - id: "reg_t_long_call"
+    description: "Long call option — full payment required"
+    citation: "Reg T 220.12(c)(1)"
+    source_quote: >
+      Put or call on a security, certificate of deposit, securities index or
+      foreign currency or a warrant on a securities index or foreign currency:
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "long"
+      is_leaps: false
+    formula:
+      type: "full_payment"
+
+  - id: "reg_t_long_put"
+    description: "Long put option — full payment required"
+    citation: "Reg T 220.12(c)(1)"
+    source_quote: >
+      Put or call on a security, certificate of deposit, securities index or
+      foreign currency or a warrant on a securities index or foreign currency:
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "long"
+      is_leaps: false
+    formula:
+      type: "full_payment"
+
+  # --- Long LEAPS (>9 months): 75% of premium ---
+
+  - id: "reg_t_long_call_leaps"
+    description: "Long LEAPS call (>9 months) — 75% of premium"
+    citation: "Reg T 220.12 Supplement"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "long"
+      is_leaps: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.75
+
+  - id: "reg_t_long_put_leaps"
+    description: "Long LEAPS put (>9 months) — 75% of premium"
+    citation: "Reg T 220.12 Supplement"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "long"
+      is_leaps: true
+    formula:
+      type: "percentage_of_trade_value"
+      rate: 0.75
+
+  # --- Naked equity options: per SRO rules (same formula as FINRA 4210) ---
+
+  - id: "reg_t_naked_call_equity"
+    description: "Naked equity call — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "equity"
+      index_type: null
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_equity"
+    description: "Naked equity put — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "equity"
+      index_type: null
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked broad-based index options (15% underlying) ---
+
+  - id: "reg_t_naked_call_broad_index"
+    description: "Naked broad-based index call — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_broad_index"
+    description: "Naked broad-based index put — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked narrow-based index options (20% — same as equity) ---
+
+  - id: "reg_t_naked_call_narrow_index"
+    description: "Naked narrow-based index call — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_narrow_index"
+    description: "Naked narrow-based index put — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked options on standard (1x) ETFs (20%) ---
+
+  - id: "reg_t_naked_call_etf_1x"
+    description: "Naked call on standard (1x) ETF — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "etf"
+      underlying_leverage_factor: 1
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_etf_1x"
+    description: "Naked put on standard (1x) ETF — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "etf"
+      underlying_leverage_factor: 1
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked options on 2x leveraged ETFs (30%) ---
+
+  - id: "reg_t_naked_call_etf_2x"
+    description: "Naked call on 2x leveraged ETF — per SRO rules / RN 09-53"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "etf"
+      underlying_leverage_factor: 2
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.30
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_etf_2x"
+    description: "Naked put on 2x leveraged ETF — per SRO rules / RN 09-53"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "etf"
+      underlying_leverage_factor: 2
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.30
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked options on 3x leveraged ETFs (45%) ---
+
+  - id: "reg_t_naked_call_etf_3x"
+    description: "Naked call on 3x leveraged ETF — per SRO rules / RN 09-53"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "etf"
+      underlying_leverage_factor: 3
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.45
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_etf_3x"
+    description: "Naked put on 3x leveraged ETF — per SRO rules / RN 09-53"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "etf"
+      underlying_leverage_factor: 3
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.45
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  # --- Naked options on ETPs/ETNs (fixed 20%, no leverage scaling) ---
+
+  - id: "reg_t_naked_call_etp"
+    description: "Naked call on ETP/ETN — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "etp"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250
+
+  - id: "reg_t_naked_put_etp"
+    description: "Naked put on ETP/ETN — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "etp"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 250

@@ -1,0 +1,48 @@
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(e)(2)(B)"
+  description: "Municipal bond maintenance margin requirements (exempted securities)"
+  effective_date: "2024-01-01"
+  notes: >
+    Municipal bonds are exempt securities under Section 3(a)(2) of the Securities
+    Exchange Act of 1934. FINRA 4210(e)(2)(B) prescribes 7% of current market value
+    for all exempted securities other than US Government obligations.
+
+rules:
+  # === Municipal Bonds (Exempted Securities) ===
+  - id: "4210_muni_bond_long"
+    description: "Long municipal bond"
+    citation: "FINRA 4210(e)(2)(B)"
+    source_quote: >
+      On any "long" or "short" positions in exempted securities other than
+      obligations of the United States, the margin to be maintained shall
+      be 7 percent of the current market value.
+    conditions:
+      security_type: "municipal_bond"
+      position_side: "long"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.07
+    notes: >
+      Per 4210(e)(2)(B): "On any 'long' or 'short' positions in exempted securities
+      other than obligations of the United States, the margin to be maintained shall
+      be 7 percent of the current market value." Municipal securities are exempt
+      securities and carry this uniform 7% rate regardless of credit rating.
+
+  - id: "4210_muni_bond_short"
+    description: "Short municipal bond"
+    citation: "FINRA 4210(e)(2)(B)"
+    source_quote: >
+      On any "long" or "short" positions in exempted securities other than
+      obligations of the United States, the margin to be maintained shall
+      be 7 percent of the current market value.
+    conditions:
+      security_type: "municipal_bond"
+      position_side: "short"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.07
+    notes: >
+      7% of current market value for short positions in municipal bonds.
+      Section (e)(2)(B) applies to both long and short positions in
+      exempted securities other than US Government obligations.

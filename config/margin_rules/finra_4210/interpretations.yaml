@@ -1,0 +1,383 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: Interpretations
+  description: Margin requirements established by FINRA interpretive guidance
+  effective_date: '2024-01-01'
+  notes: >
+    FINRA publishes interpretive materials that supplement Rule 4210 with specific margin requirements
+    for product types not explicitly enumerated in the rule text. These interpretations have the force
+    of rule guidance and are binding on member firms.
+rules:
+- id: 4210_interp_mmf_normal_long
+  description: Money market mutual fund shares — normal NAV, long
+  citation: FINRA 4210(c)/10
+  source_quote: >-
+    4210(c)/10 Money Market Mutual Fund Shares — Margin Requirements In General: Except as provided in
+    b. below: (i) the margin to be maintained on shares of a money market mutual fund long in a customer’s
+    account, other than a cash account, is 1 percent of their current market value; and (ii) a member
+    may presume the current market value of a money market mutual fund share is $1.00. Exception: If the
+    net asset value (NAV) of a money market mutual fund falls below $1.00 per share (the fund “breaks
+    the buck”) or customer redemptions of shares of the fund have been suspended (“frozen”), then a. above
+    shall not apply and: (i) the maintenance margin requirement on shares in that fund is increased to
+    50% of their current market value; and (ii) a member may presume that the current market value of
+    such shares is the fund’s current NAV per share. Exception: If the net asset value (NAV) of a money
+    market mutual fund falls below $1.00 per share (the fund “breaks the buck”) or customer redemptions
+    of shares of the fund have been suspended (“frozen”), then a.
+  conditions:
+    security_type: money_market_fund
+    position_side: long
+    nav_broken: false
+  formula:
+    type: percentage_of_market_value
+    rate: 0.01
+  notes: >
+    Per Interpretation 4210(c)/10: money market mutual fund shares carried long are subject to 1% maintenance
+    margin, presuming a $1.00 NAV per share. Members must obtain redemption rights per 4210(c)/09.
+- id: 4210_interp_mmf_broken_long
+  description: Money market mutual fund shares — broken buck or frozen, long
+  citation: FINRA 4210(c)/10
+  source_quote: >-
+    4210(c)/10 Money Market Mutual Fund Shares — Margin Requirements In General: Except as provided in
+    b. below: (i) the margin to be maintained on shares of a money market mutual fund long in a customer’s
+    account, other than a cash account, is 1 percent of their current market value; and (ii) a member
+    may presume the current market value of a money market mutual fund share is $1.00. Exception: If the
+    net asset value (NAV) of a money market mutual fund falls below $1.00 per share (the fund “breaks
+    the buck”) or customer redemptions of shares of the fund have been suspended (“frozen”), then a. above
+    shall not apply and: (i) the maintenance margin requirement on shares in that fund is increased to
+    50% of their current market value; and (ii) a member may presume that the current market value of
+    such shares is the fund’s current NAV per share. Exception: If the net asset value (NAV) of a money
+    market mutual fund falls below $1.00 per share (the fund “breaks the buck”) or customer redemptions
+    of shares of the fund have been suspended (“frozen”), then a.
+  conditions:
+    security_type: money_market_fund
+    position_side: long
+    nav_broken: true
+  formula:
+    type: percentage_of_market_value
+    rate: 0.5
+  notes: >
+    Per Interpretation 4210(c)/10: if the fund "breaks the buck" (NAV falls below $1.00) or redemptions
+    are frozen, maintenance margin increases to 50% of current NAV per share.
+- id: 4210_interp_exempt_fund_long
+  description: Exempted securities mutual fund or ETF — long
+  citation: FINRA 4210(c)/11
+  source_quote: >-
+    4210(c)/11 Exempted Securities Mutual Funds and Exchange Traded Funds The margin to be maintained
+    on shares of exempted securities mutual funds (as defined in section 220.2 of Regulation T) carried
+    long in a customer’s account, is 7 percent of their current market value. Exchange traded funds (ETFs)
+    that qualify as exempted securities mutual funds under the definition in Section 220.2 of Regulation
+    T are also subject to this 7 percent margin requirement, subject to the higher requirements applicable
+    to leveraged ETFs under interpretation /13 below. Section 220.2 of Regulation T defines an “exempted
+    securities mutual fund” as “any security issued by an investment company registered under section
+    8 of the Investment Company Act of 1940, provided the company has at least 95 percent of its assets
+    continuously invested in exempted securities (as defined in section 3(a)(12) of the [Securities Exchange]
+    Act).”
+  conditions:
+    security_type: exempt_fund
+    position_side: long
+  formula:
+    type: percentage_of_market_value
+    rate: 0.07
+  notes: >
+    Per Interpretation 4210(c)/11: mutual funds and qualifying ETFs that invest exclusively in exempted
+    securities (e.g., government bond funds, municipal bond funds) are subject to 7% maintenance margin,
+    consistent with the rate for exempted securities under 4210(e)(2)(B).
+- id: 4210_interp_exempt_fund_short
+  description: Exempted securities mutual fund or ETF — short
+  citation: FINRA 4210(c)/11
+  source_quote: >-
+    4210(c)/11 Exempted Securities Mutual Funds and Exchange Traded Funds The margin to be maintained
+    on shares of exempted securities mutual funds (as defined in section 220.2 of Regulation T) carried
+    long in a customer’s account, is 7 percent of their current market value. Exchange traded funds (ETFs)
+    that qualify as exempted securities mutual funds under the definition in Section 220.2 of Regulation
+    T are also subject to this 7 percent margin requirement, subject to the higher requirements applicable
+    to leveraged ETFs under interpretation /13 below. Section 220.2 of Regulation T defines an “exempted
+    securities mutual fund” as “any security issued by an investment company registered under section
+    8 of the Investment Company Act of 1940, provided the company has at least 95 percent of its assets
+    continuously invested in exempted securities (as defined in section 3(a)(12) of the [Securities Exchange]
+    Act).”
+  conditions:
+    security_type: exempt_fund
+    position_side: short
+  formula:
+    type: percentage_of_market_value
+    rate: 0.07
+  notes: >
+    Per Interpretation 4210(c)/11: 7% maintenance margin for short positions in exempted securities mutual
+    funds and qualifying ETFs. Higher rates apply for leveraged products per 4210(c)/13.
+- id: 4210_interp_etn_long
+  description: Exchange-traded note (ETN) — long
+  citation: FINRA 4210(c)/12
+  source_quote: >
+    Exchange traded notes (ETNs) that pay principal based on the performance of a reference instrument,
+    index or benchmark are excluded from the exceptions provided by Rule 4210(e)(2)(C) and (G). Accordingly,
+    the margin to be maintained on such ETNs carried long in a customer's account, is 25% of their current
+    market value.
+  conditions:
+    security_type: etp
+    position_side: long
+    leverage_factor: 1
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    Per Interpretation 4210(c)/12: ETNs are excluded from the reduced margin rates of Rule 4210(e)(2)(C)
+    that apply to other non-equity securities. Standard (1x) ETNs carry 25% long maintenance margin, the
+    same rate as equity securities under 4210(c)(1). See also 4210(e)(2)(C)(ii)/02.
+- id: 4210_interp_etn_short
+  description: Exchange-traded note (ETN) — short
+  citation: FINRA 4210(c)/12
+  source_quote: >
+    the margin to be maintained on such ETNs carried short in a customer's account is 30% of their current
+    market, subject to the higher requirements applicable to leveraged ETNs under Interpretation Rule
+    4210(c)/13.
+  conditions:
+    security_type: etp
+    position_side: short
+    leverage_factor: 1
+  formula:
+    type: percentage_of_market_value
+    rate: 0.3
+  notes: >
+    Per Interpretation 4210(c)/12: standard (1x) ETNs carry 30% short maintenance margin, the same rate
+    as equity securities under 4210(c)(3). Leveraged ETNs are subject to scaled rates per 4210(c)/13.
+- id: 4210_interp_leveraged_etp_principle
+  description: Leveraged ETP scaling principle
+  citation: FINRA 4210(c)/13
+  source_quote: >-
+    Exchange traded notes (ETNs) that pay principal based on the performance of a reference instrument,
+    index or benchmark are excluded from the exceptions provided by Rule 4210(e)(2)(C) and (G). Accordingly,
+    the margin to be maintained on such ETNs carried long in a customer’s account, is 25% of their current
+    market value, and the margin to be maintained on such ETNs carried short in a customer’s account is
+    30% of their current market, subject to the higher requirements applicable to leveraged ETNs under
+    Interpretation Rule 4210(c)/13. (FINRA Regulatory Notice 19-21) (FINRA Regulatory Notice 24-11) 4210(c)/13
+    Leveraged Exchange Traded Products The initial and maintenance margin requirement leveraged exchange
+    trade products, including exchange traded funds (ETFs) and exchange traded notes (ETNs) designed to
+    generate multiples (e.g., two times (2x), three times (3x), etc.) of the performance of a reference
+    instrument, index or benchmark (leveraged ETPs) carried long or short in a customer’s account is increased
+    by an amount commensurate with its leverage, subject to a cap of 100% of the current market value
+    on a long position (but without a cap on the margin on a short position).
+  conditions:
+    security_type: leveraged_etp_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    Per Interpretation 4210(c)/13: maintenance margin for leveraged ETPs (including leveraged ETFs and
+    ETNs) is increased by the leverage factor. Long positions: leverage x 25%, capped at 100%. Short positions:
+    leverage x 30%, no cap. Examples: 2x long = 50%, 3x long = 75%, 2x short = 60%, 3x short = 90%, 4x
+    long = 100%, 5x short = 150%. This interpretation codifies FINRA Regulatory Notice 09-53.
+- id: 4210_interp_offset_convertible
+  description: Offsetting positions — exchangeable or convertible securities
+  citation: FINRA 4210(e)(1)
+  source_quote: >
+    When a security carried in a "long" position is exchangeable or convertible within a reasonable time,
+    without restriction other than the payment of money, into a security carried in a "short" position
+    for the same customer, the margin to be maintained on such positions shall be 10 percent of the current
+    market value of the "long" securities.
+  conditions:
+    security_type: offset_convertible
+  formula:
+    type: percentage_of_market_value
+    rate: 0.1
+  notes: >
+    Per 4210(e)(1): when a customer holds a long position in a security that is exchangeable or convertible
+    into another security and simultaneously holds a short position in the other security, margin required
+    is 10% of the current market value of the long position. The short position must be marked to market.
+- id: 4210_interp_offset_same_security
+  description: Offsetting positions — same security long and short
+  citation: FINRA 4210(e)(1)
+  source_quote: >
+    When the same security is carried "long" and "short" the margin to be maintained on such positions
+    shall be 5 percent of the current market value of the "long" securities. In determining such margin
+    requirements "short" positions shall be marked to the market.
+  conditions:
+    security_type: offset_same_security
+  formula:
+    type: percentage_of_market_value
+    rate: 0.05
+  notes: >
+    Per 4210(e)(1): when a customer holds both a long and short position in the same security, margin
+    required is 5% of the current market value of the long position. The short position must be marked
+    to market. This applies to positions awaiting delivery or settlement.
+- id: 4210_interp_non_margin_eligible
+  description: Non-margin eligible equity security definition
+  citation: FINRA 4210(c)/14
+  source_quote: >-
+    4210(c)/14 Non-Margin Eligible Equity Security A “non-margin eligible equity security” is any equity
+    security that is not a “margin security,” as defined in Section 220.2 of Regulation T. (FINRA Regulatory
+    Notice 12-44) (FINRA Regulatory Notice 24-11)
+  conditions:
+    security_type: non_margin_eligible_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 1.0
+  notes: >
+    Per Interpretation 4210(c)/14: a non-margin eligible equity security is any equity security that does
+    not qualify as a "margin security" under Section 220.2 of Regulation T. Such securities require 100%
+    margin per 4210(c)(6). This includes OTC securities not on any approved marginable list and securities
+    with insufficient float or trading history.
+- id: 4210_interp_min_equity_standard
+  description: Minimum equity requirement — standard margin account
+  citation: FINRA 4210(b)(4)/021
+  source_quote: >-
+    4210(b)(4)/021 Minimum Equity Each new transaction in a customer margin account, including those instances
+    where more than one margin account is permitted under Regulation T, is subject to the $2,000 minimum
+    equity requirement except that: Full cash payment for any security purchased will satisfy this requirement
+    with respect to such purchase, even if the resulting equity is less than $2,000; Full cash payment
+    for any option purchased will satisfy this requirement with respect to such purchase, even if the
+    resulting equity is less than $2,000 (the purchase or sale of securities upon the exercise of an option,
+    however, will constitute a new commitment for purposes of this requirement); The purchase of exempted
+    securities; Securities transactions resulting in positions covered by Rule 4210(e)(2)(F), 4210(e)(2)(G)
+    or 4210(e)(2)(H) or other provisions of Rule 4210 that allow the member to take a capital charge in
+    lieu of collecting margin are not subject to this requirement; Even if the resulting equity is less
+    than $2,000, the minimum equity requirement with respect to the sale of an option in the account would
+    be satisfied by the deposit into the account or under an escrow agreement (as defined in Rule 4210(f)(2)(A)(xiv))
+    of: cash sufficient to satisfy the
+  conditions:
+    security_type: account_minimum_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.0
+  type: account_minimum
+  value: 2000.0
+  notes: >
+    Per Interpretation 4210(b)(4)/021: $2,000 minimum equity per new transaction, with exceptions for:
+    (i) full cash payment for securities or options; (ii) exempted securities purchases; (iii) certain
+    exempt account positions under 4210(e)(2)(F), (G), or (H); (iv) option sales satisfied by cash deposit
+    (puts) or fully-paid securities (calls). Short sales always subject to $2,000 minimum.
+- id: 4210_interp_min_equity_pdt
+  description: Minimum equity requirement — pattern day trader
+  citation: FINRA 4210(b)(4)/025
+  source_quote: >-
+    4210(b)(4)/025 Minimum Equity – Pattern Day Trader Pattern day traders are subject to a $25,000 minimum
+    equity requirement under Rule 4210(f)(8)(B)(iv)a.
+  conditions:
+    security_type: pdt_minimum_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.0
+  type: account_minimum
+  value: 25000.0
+  notes: >
+    Per Interpretation 4210(b)(4)/025: pattern day traders are subject to $25,000 minimum equity under
+    Rule 4210(f)(8)(B)(iv)a. This supersedes the standard $2,000 minimum for accounts flagged as pattern
+    day traders.
+- id: 4210_interp_exempt_acct_good_faith
+  description: Exempt account — good faith securities (no margin required)
+  citation: FINRA 4210(e)(2)(F)
+  source_quote: >
+    on any "long" or "short" position resulting from a transaction involving exempted securities, mortgage
+    related securities, or major foreign sovereign debt securities made for or with an "exempt account,"
+    no margin need be required and any marked to the market loss on such position need not be collected.
+  conditions:
+    security_type: exempt_account_reference
+  formula:
+    type: good_faith
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(F): no margin required on long or short positions in exempted securities, mortgage-related
+    securities, or major foreign sovereign debt for exempt accounts (registered broker-dealers, banks,
+    insurance companies, etc.). Uncollected mark-to-market losses are deducted from the member's net capital
+    per SEA Rule 15c3-1, subject to aggregate limits in 4210(e)(2)(I).
+- id: 4210_interp_exempt_acct_sovereign
+  description: Exempt account — highly rated foreign sovereign debt
+  citation: FINRA 4210(e)(2)(G)
+  source_quote: >
+    the margin to be maintained on highly rated foreign sovereign debt and investment grade debt securities
+    shall be, in lieu of any greater requirements imposed under this Rule, (i) 0.5 percent of current
+    market value in the case of highly rated foreign sovereign debt securities.
+  conditions:
+    security_type: exempt_account_sovereign_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.005
+  notes: >
+    Per 4210(e)(2)(G): positions in highly rated foreign sovereign debt from exempt account transactions
+    carry 0.5% maintenance margin. Members may alternatively take a net capital charge instead of collecting
+    margin. Written risk analysis methodology required.
+- id: 4210_interp_exempt_acct_ig_debt
+  description: Exempt account — other investment grade debt
+  citation: FINRA 4210(e)(2)(G)
+  source_quote: >
+    the margin to be maintained on highly rated foreign sovereign debt and investment grade debt securities
+    shall be, in lieu of any greater requirements imposed under this Rule, (ii) 3 percent of current market
+    value in the case of all other investment grade debt securities.
+  conditions:
+    security_type: exempt_account_ig_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.03
+  notes: >
+    Per 4210(e)(2)(G): positions in investment grade debt securities (other than highly rated foreign
+    sovereign) from exempt account transactions carry 3% maintenance margin. Members may alternatively
+    take a net capital charge instead of collecting margin.
+- id: 4210_interp_covered_agency_txn
+  description: Covered agency transactions — mark-to-market margin
+  citation: FINRA 4210(e)(2)(H)
+  source_quote: >
+    Members shall collect margin for each counterparty's excess net mark to market loss, unless otherwise
+    provided under paragraph (e)(2)(H)(ii)d. of this Rule.
+  conditions:
+    security_type: covered_agency_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(H): covered agency transactions (TBAs with settlement >1 day, specified pools >1 day,
+    CMOs >3 days) require collection of margin for excess net mark-to-market losses exceeding $250,000
+    per counterparty. Capital charge alternative available: member deducts unmargined losses from net
+    capital. Non-margin counterparty aggregate deductions capped at $25 million; exceeding lesser of $30
+    million or 25% of tentative net capital for 5 days triggers restrictions.
+- id: 4210_interp_net_capital_limits
+  description: Net capital deduction limits for unmargined exempt accounts
+  citation: FINRA 4210(e)(2)(I)
+  source_quote: >
+    the net capital deductions taken by a member as a result of marked to the market losses incurred under
+    paragraphs (e)(2)(F), (e)(2)(G), or (e)(2)(H)(ii)d.1. of this Rule exceed for any one account or group
+    of commonly controlled accounts, 5 percent of the member's tentative net capital, or for all accounts
+    combined, 25 percent of the member's tentative net capital.
+  conditions:
+    security_type: net_capital_limit_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.0
+  notes: >
+    Per 4210(e)(2)(I): aggregate net capital deductions from unmargined losses under 4210(e)(2)(F), (G),
+    and (H) combined are limited to the lesser of (i) 4% of the member's net capital, or (ii) $100 million.
+    Per-account limits set by the member's risk methodology.
+- id: 4210_interp_non_ig_non_listed
+  description: Non-IG non-listed debt — not eligible for reduced margins
+  citation: FINRA 4210(e)(2)(C)(ii)/01
+  source_quote: >-
+    4210(e)(2)(C)(ii)/01 Other Debt Securities Non-convertible corporate debt securities that are not
+    investment grade, are not listed or traded on a registered national securities exchange, and do not
+    qualify as other margin eligible non-equity securities as defined in Rule 4210(a)(16) are not eligible
+    for the lower margin requirements permitted in this paragraph of the Rule. These debt securities must
+    be margined in accordance with Rule 4210(c).
+  conditions:
+    security_type: non_ig_non_listed_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    Per Interpretation 4210(e)(2)(C)(ii)/01: non-convertible, non-investment grade corporate debt that
+    is neither listed nor otherwise margin-eligible does NOT qualify for the reduced 20% margin rate of
+    4210(e)(2)(C)(ii). Such securities must be margined under the general provisions of 4210(c), effectively
+    at equity rates (25% long, 30% short).
+- id: 4210_interp_etn_exclusion
+  description: ETNs excluded from non-equity securities reduced margin
+  citation: FINRA 4210(e)(2)(C)(ii)/02
+  source_quote: >-
+    4210(e)(2)(C)(ii)/02 Exchange Traded Notes Linked to a Reference Instrument,
+    Index or Benchmark
+  conditions:
+    security_type: etn_exclusion_reference
+  formula:
+    type: percentage_of_market_value
+    rate: 0.25
+  notes: >
+    Per Interpretation 4210(e)(2)(C)(ii)/02: Rule 4210(e)(2)(C) does NOT apply to exchange-traded notes
+    (ETNs). Despite being debt instruments, ETNs are excluded from the 10%/20% reduced margin rates for
+    non-equity securities. See 4210(c)/12 for applicable ETN margin rates (25% long, 30% short). Leveraged
+    ETNs subject to scaling per 4210(c)/13.

@@ -4,13 +4,13 @@ from decimal import Decimal
 
 import pytest
 
-from margin_calc_engine import (
+from paragraph_margin import (
     RuleConfig,
     FormulaConfig,
     MinimumConfig,
     evaluate_formula,
 )
-from margin_calc_engine.money import ZERO
+from paragraph_margin.money import ZERO
 
 
 class TestPercentageOfMarketValue:

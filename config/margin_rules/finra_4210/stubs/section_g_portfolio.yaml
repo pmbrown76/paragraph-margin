@@ -1,0 +1,744 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_g_1_A
+  description: '(A) obtaining and reviewing the appropriate account documentation and financial information necessary for
+    assessing the '
+  citation: FINRA 4210(g)(1)(A)
+  source_quote: (A) obtaining and reviewing the appropriate account documentation and financial information necessary for
+    assessing the amount of credit to be extended to eligible participants;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_1_B
+  description: (B) the determination, review and approval of credit limits to each eligible participant, and across all eligible
+    partic
+  citation: FINRA 4210(g)(1)(B)
+  source_quote: (B) the determination, review and approval of credit limits to each eligible participant, and across all eligible
+    participants, utilizing a portfolio margin account;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_1_D
+  description: (D) the use of stress testing of portfolio margin accounts in order to monitor market risk exposure from individual
+    acco
+  citation: FINRA 4210(g)(1)(D)
+  source_quote: (D) the use of stress testing of portfolio margin accounts in order to monitor market risk exposure from individual
+    accounts;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_1_E
+  description: (E) the regular review and testing of these risk analysis procedures by an independent unit such as internal
+    audit or ot
+  citation: FINRA 4210(g)(1)(E)
+  source_quote: (E) the regular review and testing of these risk analysis procedures by an independent unit such as internal
+    audit or other comparable group;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(1)(E)
+- id: 4210_g_1_F
+  description: (F) managing the impact of credit extended related to portfolio margin accounts on the member's overall risk
+    exposure;
+  citation: FINRA 4210(g)(1)(F)
+  source_quote: (F) managing the impact of credit extended related to portfolio margin accounts on the member's overall risk
+    exposure;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_1_G
+  description: (G) the appropriate response by management when limits on credit extensions related to portfolio margin accounts
+    have be
+  citation: FINRA 4210(g)(1)(G)
+  source_quote: (G) the appropriate response by management when limits on credit extensions related to portfolio margin accounts
+    have been exceeded;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_1_H
+  description: (H) determining the need to collect additional margin from a particular eligible participant, including whether
+    that det
+  citation: FINRA 4210(g)(1)(H)
+  source_quote: (H) determining the need to collect additional margin from a particular eligible participant, including whether
+    that determination was based upon the creditworthiness of the participant and/or the risk of the eligible product; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_10
+  description: (10) Portfolio Margin Deficiency
+  citation: FINRA 4210(g)(10)
+  source_quote: (10) Portfolio Margin Deficiency
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_10_B
+  description: (B) If the portfolio margin deficiency is not met by the close of business on the next business day after the
+    business d
+  citation: FINRA 4210(g)(10)(B)
+  source_quote: (B) If the portfolio margin deficiency is not met by the close of business on the next business day after
+    the business day on which such deficiency arises, members will be required to deduct the amount of the deficiency from
+    net capital until such time the deficiency is satisfied or positions are liquidated pursuant to paragraph (g)(10)(A) above.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_10_C
+  description: (C) Members will not be permitted to deduct any portfolio margin deficiency amount from net capital in lieu
+    of collectin
+  citation: FINRA 4210(g)(10)(C)
+  source_quote: (C) Members will not be permitted to deduct any portfolio margin deficiency amount from net capital in lieu
+    of collecting the margin required.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_g_10_D
+  description: (D) FINRA, or the member's DEA if other than FINRA, may grant additional time for an eligible participant to
+    meet a port
+  citation: FINRA 4210(g)(10)(D)
+  source_quote: (D) FINRA, or the member's DEA if other than FINRA, may grant additional time for an eligible participant
+    to meet a portfolio margin deficiency upon written request, which is expected to be granted in extraordinary circumstances
+    only.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_11
+  description: (11) Determination of Value for Margin Purposes
+  citation: FINRA 4210(g)(11)
+  source_quote: (11) Determination of Value for Margin Purposes For the purposes of this paragraph (g), all eligible products
+    shall be valued at current market prices. Account equity for the purposes of paragraphs (g)(9)(A) and (g)(10)(A) shall
+    be calculated separately for each portfolio margin account by adding the current market value of all long positions, subtracting
+    current market value of all short positions, and adding the credit (or subtracting the debit) balance in the account.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_12
+  description: (12) Net Capital Treatment of Portfolio Margin Accounts
+  citation: FINRA 4210(g)(12)
+  source_quote: (12) Net Capital Treatment of Portfolio Margin Accounts
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_12_A
+  description: (A) No member that requires margin in any portfolio account pursuant to paragraph (g) of this Rule shall permit
+    the aggr
+  citation: FINRA 4210(g)(12)(A)
+  source_quote: (A) No member that requires margin in any portfolio account pursuant to paragraph (g) of this Rule shall permit
+    the aggregate portfolio margin requirements to exceed ten times its net capital for any period exceeding three business
+    days. The member shall, beginning on the fourth business day, cease opening new portfolio margin accounts until compliance
+    is achieved.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_12_B
+  description: (B) If, at any time, a member's aggregate portfolio margin requirements exceed ten times its net capital, the
+    member sha
+  citation: FINRA 4210(g)(12)(B)
+  source_quote: (B) If, at any time, a member's aggregate portfolio margin requirements exceed ten times its net capital,
+    the member shall immediately transmit telegraphic or facsimile notice of such deficiency to the principal office of the
+    SEC in Washington, D.C., the district or regional office of the SEC for the district or region in which the member maintains
+    its principal place of business; and to FINRA, or the member's DEA if other than FINRA. The notice to FINRA shall be in
+    such form as FINRA may prescribe.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_14
+  description: (14) Requirements to Liquidate
+  citation: FINRA 4210(g)(14)
+  source_quote: (14) Requirements to Liquidate
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_14_A
+  description: (A) A member is required immediately either to liquidate, or transfer to another broker-dealer eligible to
+    carry portfol
+  citation: FINRA 4210(g)(14)(A)
+  source_quote: '(A) A member is required immediately either to liquidate, or transfer to another broker-dealer eligible to
+    carry portfolio margin accounts, all portfolio margin accounts with positions in related instruments if the member is:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_14_A_i
+  description: (i) insolvent as defined in Section 101 of Title 11 of the United States Code, or is unable to meet its obligations
+    as t
+  citation: FINRA 4210(g)(14)(A)(i)
+  source_quote: (i) insolvent as defined in Section 101 of Title 11 of the United States Code, or is unable to meet its obligations
+    as they mature;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(14)(A)(i)
+- id: 4210_g_14_A_ii
+  description: '(ii) the subject of a proceeding pending in any court or before any agency of the United States or any State
+    in which a '
+  citation: FINRA 4210(g)(14)(A)(ii)
+  source_quote: (ii) the subject of a proceeding pending in any court or before any agency of the United States or any State
+    in which a receiver, trustee, or liquidator for such debtor has been appointed;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_14_A_iii
+  description: (iii) not in compliance with applicable requirements under the Exchange Act or rules of the SEC or any self-regulatory
+    o
+  citation: FINRA 4210(g)(14)(A)(iii)
+  source_quote: (iii) not in compliance with applicable requirements under the Exchange Act or rules of the SEC or any self-regulatory
+    organization with respect to financial responsibility or hypothecation of eligible participant's securities; or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_14_A_iv
+  description: '(iv) unable to make such computations as may be necessary to establish compliance with such financial responsibility
+    or '
+  citation: FINRA 4210(g)(14)(A)(iv)
+  source_quote: (iv) unable to make such computations as may be necessary to establish compliance with such financial responsibility
+    or hypothecation rules.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(14)(A)(iv)
+- id: 4210_g_14_B
+  description: (B) Nothing in this paragraph (g)(14) shall be construed as limiting or restricting in any way the exercise
+    of any right
+  citation: FINRA 4210(g)(14)(B)
+  source_quote: (B) Nothing in this paragraph (g)(14) shall be construed as limiting or restricting in any way the exercise
+    of any right of a registered clearing agency to liquidate or cause the liquidation of positions in accordance with its
+    by-laws and rules.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_15
+  description: (15) Members must ensure that portfolio accounts are in compliance with Rule 2360.
+  citation: FINRA 4210(g)(15)
+  source_quote: (15) Members must ensure that portfolio accounts are in compliance with Rule 2360.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(15)
+- id: 4210_g_2
+  description: '(2) Definitions — For purposes of this paragraph (g), the following terms shall have the meanings specified
+    below:'
+  citation: FINRA 4210(g)(2)
+  source_quote: '(2) Definitions — For purposes of this paragraph (g), the following terms shall have the meanings specified
+    below: (2) Definitions'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(2)
+- id: 4210_g_2_A
+  description: (A) The term "listed option" means any equity-based or equity index-based option traded on a registered national
+    securit
+  citation: FINRA 4210(g)(2)(A)
+  source_quote: (A) The term "listed option" means any equity-based or equity index-based option traded on a registered national
+    securities exchange or issued and guaranteed by a registered clearing agency and shall include an OCC Cleared OTC Option
+    (as defined in Rule 2360).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_2_B
+  description: (B) The term "portfolio" means any eligible product, as defined in paragraph (g)(6)(B)(i), grouped with its
+    underlying i
+  citation: FINRA 4210(g)(2)(B)
+  source_quote: (B) The term "portfolio" means any eligible product, as defined in paragraph (g)(6)(B)(i), grouped with its
+    underlying instruments and related instruments.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(2)(B)
+- id: 4210_g_2_C
+  description: '(C) The term "product group" means two or more portfolios of the same type (see table in paragraph (g)(2)(F)
+    below) for '
+  citation: FINRA 4210(g)(2)(C)
+  source_quote: (C) The term "product group" means two or more portfolios of the same type (see table in paragraph (g)(2)(F)
+    below) for which it has been determined by SEA Rule 15c3-1a that a percentage of offsetting profits may be applied to
+    losses at the same valuation point.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_g_2_D
+  description: (D) The term "related instrument" within a security class or product group means broad-based index futures
+    and options o
+  citation: FINRA 4210(g)(2)(D)
+  source_quote: (D) The term "related instrument" within a security class or product group means broad-based index futures
+    and options on broad-based index futures covering the same underlying instrument. The term "related instrument" does not
+    include security futures products.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(2)(D)
+- id: 4210_g_2_E
+  description: (E) The term "security class" refers to all listed options, security futures products, unlisted derivatives,
+    and related
+  citation: FINRA 4210(g)(2)(E)
+  source_quote: (E) The term "security class" refers to all listed options, security futures products, unlisted derivatives,
+    and related instruments covering the same underlying instrument and the underlying instrument itself.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(2)(E)
+- id: 4210_g_2_F
+  description: (F) The term "theoretical gains and losses" means the gain and loss in the value of individual eligible products
+    and rel
+  citation: FINRA 4210(g)(2)(F)
+  source_quote: '(F) The term "theoretical gains and losses" means the gain and loss in the value of individual eligible products
+    and related instruments at ten equidistant intervals (valuation points) ranging from an assumed movement (both up and
+    down) in the current market value of the underlying instrument. The magnitude of the valuation point range shall be as
+    follows: Portfolio Type Up / Down Market Move (High & Low Valuation Points)'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(2)(F)
+- id: 4210_g_2_G
+  description: (G) The term "underlying instrument" means a security or security index upon which any listed option, unlisted
+    derivativ
+  citation: FINRA 4210(g)(2)(G)
+  source_quote: (G) The term "underlying instrument" means a security or security index upon which any listed option, unlisted
+    derivative, security future, or broad-based index future is based.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(2)(G)
+- id: 4210_g_2_H
+  description: (H) The term "unlisted derivative" means any equity-based or equity index-based option, forward contract, or
+    security-ba
+  citation: FINRA 4210(g)(2)(H)
+  source_quote: (H) The term "unlisted derivative" means any equity-based or equity index-based option, forward contract,
+    or security-based swap that can be valued by a theoretical pricing model approved by the SEC for valuing that type of
+    option, forward contract, or security-based swap, and that is neither traded on a national securities exchange, nor issued
+    and guaranteed by a registered clearing agency and shall not include an OCC Cleared OTC Option (as defined in Rule 2360).
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_3
+  description: (3) Approved Theoretical Pricing Models — Theoretical pricing models must be approved by the SEC.
+  citation: FINRA 4210(g)(3)
+  source_quote: (3) Approved Theoretical Pricing Models — Theoretical pricing models must be approved by the SEC. (3) Approved
+    Theoretical Pricing Models
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(3)
+- id: 4210_g_4
+  description: (4) Eligible Participants — The application of the portfolio margin provisions of this paragraph (g) is limited
+    to the f
+  citation: FINRA 4210(g)(4)
+  source_quote: '(4) Eligible Participants — The application of the portfolio margin provisions of this paragraph (g) is limited
+    to the following: (4) Eligible Participants'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_4_A
+  description: (A) any broker or dealer registered pursuant to Section 15 of the Exchange Act;
+  citation: FINRA 4210(g)(4)(A)
+  source_quote: (A) any broker or dealer registered pursuant to Section 15 of the Exchange Act;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(4)(A)
+- id: 4210_g_4_B
+  description: '(B) any member of a national futures exchange to the extent that listed index options, unlisted derivatives,
+    options on '
+  citation: FINRA 4210(g)(4)(B)
+  source_quote: (B) any member of a national futures exchange to the extent that listed index options, unlisted derivatives,
+    options on ETFs, stock index warrants or underlying instruments hedge the member's index futures; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(4)(B)
+- id: 4210_g_5
+  description: (5) Opening of Accounts
+  citation: FINRA 4210(g)(5)
+  source_quote: (5) Opening of Accounts
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(5)
+- id: 4210_g_5_A
+  description: '(A) Members must notify and receive approval from FINRA, or the member''s DEA if other than FINRA, prior to
+    establishing '
+  citation: FINRA 4210(g)(5)(A)
+  source_quote: (A) Members must notify and receive approval from FINRA, or the member's DEA if other than FINRA, prior to
+    establishing a portfolio margin methodology for eligible participants.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_5_B
+  description: (B) Only eligible participants that have been approved to engage in uncovered short option contracts pursuant
+    to Rule 23
+  citation: FINRA 4210(g)(5)(B)
+  source_quote: (B) Only eligible participants that have been approved to engage in uncovered short option contracts pursuant
+    to Rule 2360, or the rules of the member's DEA if other than FINRA, are permitted to utilize a portfolio margin account.
+    If eligible participants engage in security futures products transactions, approval from the member will also be required
+    pursuant to Rule 2370.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_5_C
+  description: '(C) On or before the date of the initial transaction in a portfolio margin account, a member shall:'
+  citation: FINRA 4210(g)(5)(C)
+  source_quote: '(C) On or before the date of the initial transaction in a portfolio margin account, a member shall:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_5_C_i
+  description: (i) furnish the eligible participant with a special written disclosure statement describing the nature and
+    risks of port
+  citation: FINRA 4210(g)(5)(C)(i)
+  source_quote: (i) furnish the eligible participant with a special written disclosure statement describing the nature and
+    risks of portfolio margining which includes an acknowledgement for all portfolio margin account owners to sign, attesting
+    that they have read and understood the disclosure statement, and agree to the terms under which a portfolio margin account
+    is provided (see Rule 2360(c)); and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_5_C_ii
+  description: (ii) obtain the signed acknowledgement noted above from the eligible participant and record the date of receipt.
+  citation: FINRA 4210(g)(5)(C)(ii)
+  source_quote: (ii) obtain the signed acknowledgement noted above from the eligible participant and record the date of receipt.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(5)(C)(ii)
+- id: 4210_g_6
+  description: (6) Establishing Account and Eligible Positions
+  citation: FINRA 4210(g)(6)
+  source_quote: (6) Establishing Account and Eligible Positions
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(6)
+- id: 4210_g_6_A
+  description: (A) For purposes of applying the portfolio margin requirements prescribed in this paragraph (g), members are
+    to establis
+  citation: FINRA 4210(g)(6)(A)
+  source_quote: (A) For purposes of applying the portfolio margin requirements prescribed in this paragraph (g), members are
+    to establish and utilize a specific securities margin account, or sub-account of a margin account, clearly identified
+    as a portfolio margin account that is separate from any other securities account carried for an eligible participant.
+    A margin deficit in the portfolio margin account of an eligible participant may not be considered as satisfied by excess
+    equity in another account. Funds and/or securities must be transferred to the deficient account and a written record created
+    and maintained. However, if a portfolio margin account is carried as a sub-account of a margin account, excess equity
+    in the margin account (determined in accordance with the rules applicable to a margin account other than a portfolio margin
+    account) may be used to satisfy a margin deficit in the portfolio margin sub-account without having to transfer any funds
+    and/or securities.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_6_B
+  description: (B) Eligible Products
+  citation: FINRA 4210(g)(6)(B)
+  source_quote: (B) Eligible Products
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(6)(B)
+- id: 4210_g_6_B_i
+  description: '(i) For eligible participants as described in paragraphs (g)(4)(A) through (g)(4)(C), a transaction in, or
+    transfer of, '
+  citation: FINRA 4210(g)(6)(B)(i)
+  source_quote: '(i) For eligible participants as described in paragraphs (g)(4)(A) through (g)(4)(C), a transaction in, or
+    transfer of, an eligible product may be effected in the portfolio margin account. Eligible products under this paragraph
+    (g) consist of:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_6_B_i_a._a
+  description: a. a margin equity security (including a foreign equity security and option on a foreign equity security, provided
+    the f
+  citation: FINRA 4210(g)(6)(B)(i)(a.)
+  source_quote: a. a margin equity security (including a foreign equity security and option on a foreign equity security,
+    provided the foreign equity security is deemed to have a "ready market" under SEA Rule 15c3-1 or a "no-action" position
+    issued thereunder, and a control or restricted security, provided the security has met the requirements in a manner consistent
+    with Securities Act Rule 144 or an SEC "no-action" position issued thereunder, sufficient enough to permit the sale of
+    the security, upon exercise or assignment of any listed option or unlisted derivative written or held against it, without
+    restriction);
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_6_B_i_b._b
+  description: b. a listed option on an equity security or index of equity securities;
+  citation: FINRA 4210(g)(6)(B)(i)(b.)
+  source_quote: b. a listed option on an equity security or index of equity securities;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_6_B_i_c._c
+  description: c. a security futures product;
+  citation: FINRA 4210(g)(6)(B)(i)(c.)
+  source_quote: c. a security futures product;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(6)(B)(i)(c.)
+- id: 4210_g_6_B_i_d._d
+  description: d. an unlisted derivative on an equity security or index of equity securities;
+  citation: FINRA 4210(g)(6)(B)(i)(d.)
+  source_quote: d. an unlisted derivative on an equity security or index of equity securities;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_6_B_i_e._e
+  description: e. a warrant on an equity security or index of equity securities; and
+  citation: FINRA 4210(g)(6)(B)(i)(e.)
+  source_quote: e. a warrant on an equity security or index of equity securities; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_6_B_i_f._f
+  description: f. a related instrument as defined in paragraph (g)(2)(D).
+  citation: FINRA 4210(g)(6)(B)(i)(f.)
+  source_quote: f. a related instrument as defined in paragraph (g)(2)(D).
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(6)(B)(i)(f.)
+- id: 4210_g_7_A
+  description: (A) the amount for any of the ten equidistant valuation points representing the largest theoretical loss as
+    calculated p
+  citation: FINRA 4210(g)(7)(A)
+  source_quote: (A) the amount for any of the ten equidistant valuation points representing the largest theoretical loss as
+    calculated pursuant to paragraph (g)(8) below; or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(7)(A)
+- id: 4210_g_7_B
+  description: (B) for eligible participants as described in paragraph (g)(4)(A) through (g)(4)(C), $.375 for each listed
+    option, unlis
+  citation: FINRA 4210(g)(7)(B)
+  source_quote: (B) for eligible participants as described in paragraph (g)(4)(A) through (g)(4)(C), $.375 for each listed
+    option, unlisted derivative, security future product, and related instrument, multiplied by the contract's or instrument's
+    multiplier, not to exceed the market value in the case of long contracts in eligible products.
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_g_7_C
+  description: (C) Account guarantees pursuant to paragraph (f)(4) of this Rule are not permitted for purposes of meeting
+    margin requir
+  citation: FINRA 4210(g)(7)(C)
+  source_quote: (C) Account guarantees pursuant to paragraph (f)(4) of this Rule are not permitted for purposes of meeting
+    margin requirements.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_7_D_i
+  description: (i) the customer waives any right to redeem shares without the member's consent;
+  citation: FINRA 4210(g)(7)(D)(i)
+  source_quote: (i) the customer waives any right to redeem shares without the member's consent;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(7)(D)(i)
+- id: 4210_g_7_D_ii
+  description: (ii) the member (or, if the shares are deposited with a clearing organization, the clearing organization) obtains
+    the ri
+  citation: FINRA 4210(g)(7)(D)(ii)
+  source_quote: (ii) the member (or, if the shares are deposited with a clearing organization, the clearing organization)
+    obtains the right to redeem shares in cash upon request;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_7_D_iii
+  description: (iii) the fund agrees to satisfy any conditions necessary or appropriate to ensure that the shares may be redeemed
+    in ca
+  citation: FINRA 4210(g)(7)(D)(iii)
+  source_quote: (iii) the fund agrees to satisfy any conditions necessary or appropriate to ensure that the shares may be
+    redeemed in cash, promptly upon request; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(7)(D)(iii)
+- id: 4210_g_7_D_iv
+  description: (iv) the member complies with the requirements of Section 11(d)(1) of the Exchange Act and SEA Rule 11d1-2.
+  citation: FINRA 4210(g)(7)(D)(iv)
+  source_quote: (iv) the member complies with the requirements of Section 11(d)(1) of the Exchange Act and SEA Rule 11d1-2.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_8
+  description: (8) Method of Calculation
+  citation: FINRA 4210(g)(8)
+  source_quote: (8) Method of Calculation
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(8)
+- id: 4210_g_8_A
+  description: (A) Long and short positions in eligible products, including underlying instruments and related instruments,
+    are to be g
+  citation: FINRA 4210(g)(8)(A)
+  source_quote: (A) Long and short positions in eligible products, including underlying instruments and related instruments,
+    are to be grouped by security class; each security class group being a "portfolio." Each portfolio is categorized as one
+    of the portfolio types specified in paragraph (g)(2)(F) above, as applicable.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(8)(A)
+- id: 4210_g_8_B
+  description: (B) For each portfolio, theoretical gains and losses are calculated for each position as specified in paragraph
+    (g)(2)(F
+  citation: FINRA 4210(g)(8)(B)
+  source_quote: (B) For each portfolio, theoretical gains and losses are calculated for each position as specified in paragraph
+    (g)(2)(F) above. For purposes of determining the theoretical gains and losses at each valuation point, members shall obtain
+    and utilize the theoretical values of eligible products as described in this paragraph (g) rendered by an approved theoretical
+    pricing model.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(8)(B)
+- id: 4210_g_8_C
+  description: (C) Offsets. Within each portfolio, theoretical gains and losses may be netted fully at each valuation point.
+    Offsets be
+  citation: FINRA 4210(g)(8)(C)
+  source_quote: (C) Offsets. Within each portfolio, theoretical gains and losses may be netted fully at each valuation point.
+    Offsets between portfolios within the eligible product groups, as described in paragraph (g)(2)(F), may then be applied
+    as permitted by SEA Rule 15c3-1a.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(8)(C)
+- id: 4210_g_8_D
+  description: (D) After applying the offsets above, the sum of the greatest loss from each portfolio is computed to arrive
+    at the tota
+  citation: FINRA 4210(g)(8)(D)
+  source_quote: (D) After applying the offsets above, the sum of the greatest loss from each portfolio is computed to arrive
+    at the total margin required for the account (subject to the per contract minimum).
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_g_8_E
+  description: (E) In addition, if a security that is convertible, exchangeable, or exercisable into a security that is an
+    underlying i
+  citation: FINRA 4210(g)(8)(E)
+  source_quote: (E) In addition, if a security that is convertible, exchangeable, or exercisable into a security that is an
+    underlying instrument requires the payment of money or would result in a loss if converted, exchanged, or exercised at
+    the time when the security is deemed an underlying instrument, the full amount of the conversion loss is required.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (g)(8)(E)
+- id: 4210_g_9_A_ii
+  description: (ii) all unlisted derivatives are liquidated or transferred from the portfolio margin account to the appropriate
+    securit
+  citation: FINRA 4210(g)(9)(A)(ii)
+  source_quote: (ii) all unlisted derivatives are liquidated or transferred from the portfolio margin account to the appropriate
+    securities account.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_g_9_B
+  description: (B) Members will not be permitted to deduct any portfolio margin minimum equity deficiency amount from net
+    capital in li
+  citation: FINRA 4210(g)(9)(B)
+  source_quote: (B) Members will not be permitted to deduct any portfolio margin minimum equity deficiency amount from net
+    capital in lieu of collecting the minimum equity required.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation

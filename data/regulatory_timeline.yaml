@@ -1,0 +1,832 @@
+## Regulatory Timeline — FINRA 4210(f) Option Margin
+##
+## Maps each cited subsection to its original rule text, amendments,
+## and current interpretation. Used by the waterfall UI to show
+## lineage when a user clicks a regulation citation.
+
+sections:
+
+  "4210(f)(2)(B)":
+    title: Long Option Contracts
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        No margin may be extended on any put or call option contract
+        carried for a customer. Long options must be paid in full.
+    amendments: []
+    current_interpretation: >-
+      Long options (puts and calls) must be paid in full at purchase.
+      No margin extension is permitted. This applies to listed options,
+      OCC-cleared OTC options (per RN 13-39), and FLEX options.
+
+  "4210(f)(2)(D)":
+    title: Synthetic Positions
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Where a customer holds a long call and short put (or short call
+        and long put) on the same underlying with the same exercise price
+        and expiration, the position is margined as the equivalent stock
+        position.
+    amendments: []
+    current_interpretation: >-
+      Synthetic long stock (long call + short put, same strike/expiry)
+      is margined as a long equity position. Synthetic short stock
+      (short call + long put) is margined as a short equity position.
+      Standard Reg T initial and FINRA maintenance rates apply to the
+      notional stock equivalent.
+
+  "4210(f)(2)(E)":
+    title: Uncovered (Naked) Short Options
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For each uncovered short option, margin required shall be 100%
+        of the current market value of the option plus 20% of the
+        underlying security value, less any out-of-the-money amount.
+        Minimum: option premium plus 10% of underlying (equity) or
+        15% of underlying (broad-based index).
+    amendments:
+      - date: "2012-10-26"
+        source: "RN 12-44"
+        change: >-
+          Clarified that for short options within a qualifying spread,
+          the margin is the lesser of the standard 4210(f)(2)(E)
+          requirement or the maximum potential loss on the spread.
+      - date: "2019-07-01"
+        source: "RN 19-21"
+        change: >-
+          Options on ETN underlyings: 20% base rate applies, but
+          leveraged ETN options multiply by the leverage factor.
+          ETN options excluded from portfolio margin.
+      - date: "2024-03-19"
+        source: "RN 24-08"
+        change: >-
+          New exemption for "protected" short index options/warrants
+          written against index-tracking ETFs, mutual funds, or stock
+          baskets. Margin = greater of ITM amount or protection shortfall.
+    current_interpretation: >-
+      Naked equity option: premium + max(20% underlying - OTM amount,
+      10% underlying + premium). Naked broad-based index option: premium
+      + max(15% underlying - OTM amount, 10% underlying + premium).
+      $250 per-contract minimum applies. For ETN options, multiply
+      percentages by leverage factor. Protected index options eligible
+      for reduced margin per RN 24-08.
+
+  "4210(f)(2)(E)(i)":
+    title: Uncovered Short Options — Standard Formula
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Margin = 100% of option market value + 20% of underlying
+        market value - out-of-the-money amount, subject to a minimum
+        of option premium + 10% of underlying (equity options) or
+        option premium + 15% of underlying (broad-based index options).
+    amendments:
+      - date: "2012-10-26"
+        source: "RN 12-44"
+        change: >-
+          When short option is part of a qualifying spread, margin is
+          the lesser of this formula or maximum potential loss.
+      - date: "2019-07-01"
+        source: "RN 19-21"
+        change: >-
+          ETN-underlying options use 20% base but leverage-adjusted.
+          Excluded from portfolio margin eligibility.
+    current_interpretation: >-
+      The standard naked option margin formula. Applied to all short
+      options not offset by a qualifying spread, covered position,
+      or other recognized strategy. The 20%/10% rates (equity) and
+      15%/10% rates (index) have not changed since consolidation.
+
+  "4210(f)(2)(F)":
+    title: Covered Option Positions — General
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        No margin is required on a short option that is covered by
+        a corresponding position in the underlying security.
+    amendments: []
+    current_interpretation: >-
+      A short call covered by long stock, or a short put covered by
+      short stock, requires no additional option margin. Only the
+      standard equity margin on the underlying position applies.
+
+  "4210(f)(2)(F)(ii)":
+    title: Covered Options — No Margin Required
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        No margin need be required on any covered put or call.
+    amendments: []
+    current_interpretation: >-
+      Covered calls (long stock + short call) and covered puts
+      (short stock + short put) have zero additional option margin.
+      The underlying equity position carries its own maintenance
+      requirement (25% long, 30% short).
+
+  "4210(f)(2)(G)":
+    title: Short Straddles and Combinations
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For a short straddle or combination (short call + short put
+        on the same underlying), margin = the greater of the naked
+        call or naked put requirement, plus the current market value
+        of the other option.
+    amendments: []
+    current_interpretation: >-
+      Short straddle/strangle margin = max(naked call margin, naked
+      put margin) + premium of the lesser side. This recognizes that
+      only one side can be in-the-money at expiration, but both
+      premiums must be collateralized.
+
+  "4210(f)(2)(G)(i)":
+    title: Short Straddles/Combinations — Margin Formula
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Margin on a short straddle or short combination shall be the
+        margin required on the short put or short call, whichever
+        is greater, plus the current market value of the other
+        component.
+    amendments: []
+    current_interpretation: >-
+      Unchanged since consolidation. Calculate naked margin on each
+      side per 4210(f)(2)(E)(i), take the greater, add the other
+      side's premium. Applies to both straddles (same strike) and
+      strangles (different strikes).
+
+  "4210(f)(2)(H)":
+    title: Spreads — General
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Specific margin requirements for spread positions in options.
+    amendments:
+      - date: "2012-10-26"
+        source: "RN 12-44"
+        change: >-
+          Major overhaul. Revised spread definition to include
+          combinations of calls and puts with limited risk/reward.
+          Codified the "lesser of" test. Set qualification criteria:
+          same underlying, same exercise style, same listing type,
+          equal aggregate notional, short expires on or before long.
+    current_interpretation: >-
+      The umbrella section for all spread-based margin. RN 12-44
+      is the controlling amendment — it defines what qualifies as
+      a spread and how margin is computed (lesser of naked margin
+      or maximum potential loss).
+
+  "4210(f)(2)(H)(i)":
+    title: Spreads — Lesser-Of Test
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For spreads, the margin required on the short options shall
+        be the lesser of the margin required under (f)(2)(E) or
+        the maximum potential loss on the position.
+    amendments:
+      - date: "2012-10-26"
+        source: "RN 12-44"
+        change: >-
+          Formalized the lesser-of test and expanded the spread
+          definition to cover multi-leg combinations (butterflies,
+          condors, iron strategies) with limited risk/reward profiles.
+          Qualification requirements: same underlying, same option
+          style (American/European), same listing type, equal aggregate
+          contract values, short expires on or before long.
+      - date: "2013-11-07"
+        source: "RN 13-39"
+        change: >-
+          OCC-cleared OTC options now qualify for spread treatment
+          alongside listed options under the same lesser-of test.
+    current_interpretation: >-
+      The core margin rule for all vertical spreads, butterflies,
+      condors, iron condors, iron butterflies, calendars, diagonals,
+      backspreads, and ratio spreads. For debit spreads, margin =
+      net debit paid (max loss). For credit spreads, margin = strike
+      width - net credit (max loss). The Cboe Margin Manual provides
+      worked examples but the legal basis is this subsection as
+      amended by RN 12-44.
+
+  "4210(f)(2)(H)(v)":
+    title: Equity-Option Combinations — General
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Specific margin requirements for positions combining equity
+        securities with option contracts.
+    amendments: []
+    current_interpretation: >-
+      Parent section for conversions, reverse conversions, collars,
+      protective puts/calls, and box spreads. Each subsection (a)
+      through (f) addresses a specific combination type.
+
+  "4210(f)(2)(H)(v)(a)":
+    title: Protective Put / Protective Call
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Where a long option is carried with a position in the
+        underlying security, margin = the lesser of the requirement
+        on the security alone, or 10% of the aggregate exercise
+        price plus any out-of-the-money amount.
+    amendments: []
+    current_interpretation: >-
+      Protective put (long stock + long put): margin = lesser of
+      standard equity margin or 10% of exercise price + put OTM
+      amount. Protective call (short stock + long call): same formula
+      using call OTM amount. The long option must be paid in full.
+
+  "4210(f)(2)(H)(v)(b)":
+    title: Conversion
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For a conversion (long stock, long put, short call at the
+        same strike and expiry), margin = 10% of the aggregate
+        exercise price plus any out-of-the-money amount on the put.
+    amendments: []
+    current_interpretation: >-
+      Conversion margin = 10% of (strike x multiplier x contracts).
+      $250 per-contract minimum applies. The position is fully hedged
+      so margin is minimal. Unchanged since consolidation.
+
+  "4210(f)(2)(H)(v)(c)":
+    title: Reverse Conversion (Reversal)
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For a reverse conversion (short stock, short put, long call
+        at the same strike and expiry), margin = 10% of the exercise
+        price plus any in-the-money amount on the short put.
+    amendments: []
+    current_interpretation: >-
+      Reverse conversion margin = 10% of aggregate exercise price +
+      ITM amount on short put. $250 per-contract minimum. Mirror of
+      conversion. Unchanged since consolidation.
+
+  "4210(f)(2)(H)(v)(d)":
+    title: Collar
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For a collar (long stock, long put at lower strike, short
+        call at higher strike, same expiry), margin = the lesser of
+        10% of the put exercise price plus OTM amount, or the
+        applicable equity margin requirement.
+    amendments: []
+    current_interpretation: >-
+      Collar margin = put OTM amount (stock price - put strike,
+      floored at zero). This is the downside risk between the
+      current price and the put protection level. Unchanged since
+      consolidation.
+
+  "4210(f)(2)(H)(v)(e)":
+    title: Box Spread
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        For a box spread, margin = the net cost of the position.
+    amendments:
+      - date: "2012-10-26"
+        source: "RN 12-44"
+        change: >-
+          Box spreads with European-style exercise explicitly eligible
+          for cash account treatment.
+    current_interpretation: >-
+      Long box: margin = net debit paid. Short box: margin = strike
+      width - net credit. A box spread synthesizes a risk-free loan;
+      the margin equals the capital at risk. European-style boxes
+      may be held in cash accounts per RN 12-44.
+
+  "4210(f)(2)(A)(vi)":
+    title: Box Spread — Definition
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        A box spread is defined as a long call and short put at one
+        exercise price, combined with a short call and long put at
+        a different exercise price, all on the same underlying with
+        the same expiration.
+    amendments: []
+    current_interpretation: >-
+      Equivalent to a bull call spread + bear put spread at the same
+      strikes. Always settles at the strike width at expiration.
+
+  "4210(f)(2)(I)(i)":
+    title: Covered Call — Specific
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        A short call option carried in an account that holds the
+        underlying security in sufficient quantity to cover the
+        obligation requires no option margin.
+    amendments: []
+    current_interpretation: >-
+      Covered call (buy-write): no option margin. Standard equity
+      maintenance (25%) applies to the long stock position only.
+
+  "4210(f)(2)(H)(v)(f)":
+    title: Protected Index Option/Warrant Positions
+    original:
+      date: "2024-03-19"
+      source: "FINRA Regulatory Notice 24-08 (SR-FINRA-2023-010)"
+      text: >-
+        Short index options or warrants written against positions in an
+        underlying stock basket, non-leveraged index mutual fund, or
+        non-leveraged ETF tracking the same index. Protection value must
+        be at least 100% of aggregate current underlying index value when
+        created and remain at minimum 95%.
+    amendments: []
+    current_interpretation: >-
+      Margin = greater of (amount by which aggregate index value exceeds
+      exercise price) or (amount protection falls below 100% of index
+      value). Does not apply to leveraged instruments. This is the newest
+      option margin strategy category, effective March 2024.
+
+  "4210(f)(2)(I)(i)(b)":
+    title: Covered Put — Specific
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        A short put option carried in an account that holds a short
+        position in the underlying security requires no option margin.
+    amendments: []
+    current_interpretation: >-
+      Covered put: no option margin. Standard short equity maintenance
+      (30%) applies to the short stock position only.
+
+  # === Non-Option Sections ===
+
+  "4210(a)":
+    title: Definitions
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Defines key terms for margin requirements including: margin account,
+        customer, equity, maintenance margin, net capital, pattern day trader,
+        day trade, and margin-eligible security.
+    amendments:
+      - date: "2021-07-01"
+        source: "RN 21-24"
+        change: >-
+          Clarified good faith account definition and its interaction with
+          margin requirements. Good faith deposit requirements apply to
+          non-margin-eligible securities.
+    current_interpretation: >-
+      The definitions section establishes the vocabulary for all of 4210.
+      Key definitions include "margin account" (any account in which credit
+      is extended), "equity" (market value minus debit balance), and
+      "pattern day trader" (4+ day trades in 5 business days).
+
+  "4210(b)":
+    title: Initial Margin Requirements
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Minimum initial deposit of $2,000 or 100% of purchase price,
+        whichever is less, for any margin account. Pattern day traders
+        require $25,000 minimum equity.
+    amendments:
+      - date: "2021-07-01"
+        source: "RN 21-24"
+        change: >-
+          Clarified that PDT minimum equity of $25,000 must be deposited
+          before day trading commences and cannot be met through
+          cross-guarantee arrangements.
+    current_interpretation: >-
+      The $2,000 minimum initial deposit has not changed since the
+      predecessor rules. PDT accounts require $25,000 minimum equity
+      per 4210(f)(8)(B). The initial margin for purchases is governed
+      by Reg T 220.4 (50% for most equity securities).
+
+  "4210(c)(1)":
+    title: Equity Securities — Standard Maintenance Margin
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        The margin to be maintained on equity securities carried long in
+        a customer account shall be not less than 25% of the current
+        market value. Short equity positions require not less than 30%
+        of the current market value or $5 per share, whichever is greater.
+    amendments: []
+    current_interpretation: >-
+      The 25% long / 30% short maintenance rates have not changed since
+      the predecessor NYSE Rule 431 and NASD Rule 2520. These are the
+      foundational equity margin rates. For short positions priced below
+      $16.67, the $5/share minimum exceeds the 30% rate. For shares
+      under $5, the requirement is $2.50/share or 100% of market value.
+
+  "4210(c)(6)":
+    title: Non-Margin-Eligible Securities
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Securities that are not margin-eligible require deposit of 100%
+        of the current market value. No credit may be extended on these
+        securities.
+    amendments:
+      - date: "2011-04-01"
+        source: "RN 11-16"
+        change: >-
+          Clarified that non-margin-eligible equity securities require
+          full payment (100% margin). Extended the list of qualifying
+          criteria for non-marginability.
+      - date: "2012-10-26"
+        source: "RN 12-44"
+        change: >-
+          Codified treatment of non-marginable securities in concentrated
+          accounts and clarified portfolio stress test exclusions.
+    current_interpretation: >-
+      Non-margin-eligible securities (penny stocks, IPOs within 30 days,
+      certain OTC securities) require 100% margin — no credit extension.
+      This is the most conservative treatment for any equity security.
+
+  "4210(c)(7)":
+    title: Security Futures
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Margin on security futures products shall be the greater of 20%
+        of the current market value of the security future or the
+        applicable customer margin required by the security futures
+        exchange.
+    amendments: []
+    current_interpretation: >-
+      Security futures require 20% margin, matching the base rate for
+      naked equity options. This harmonizes with the 20% rate in
+      4210(f)(2)(E) for consistency between derivatives on the same
+      underlying.
+
+  "4210(c)/13":
+    title: Leveraged and Inverse ETFs
+    original:
+      date: "2009-09-01"
+      source: "FINRA Regulatory Notice 09-53"
+      text: >-
+        Margin requirements for leveraged and inverse ETFs shall be
+        adjusted by their leverage factor. A 2x leveraged ETF long
+        position requires 50% margin (25% × 2). An inverse ETF short
+        position requires margin reflecting the inverse leverage.
+    amendments:
+      - date: "2010-12-01"
+        source: "RN 10-45"
+        change: >-
+          Incorporated leveraged ETF margin guidance into consolidated
+          FINRA 4210 framework. Prior NASD/NYSE guidance codified.
+    current_interpretation: >-
+      Leveraged ETFs: multiply the standard 25%/30% rate by the
+      leverage factor. 2× long ETF = 50% margin, 3× = 75%. Inverse
+      ETFs: the long/short sides are reversed (long inverse = short
+      economics). Leveraged inverse ETFs combine both adjustments.
+      4× and 5× leveraged ETFs require 100% margin.
+
+  "4210(e)(2)(A)":
+    title: US Treasury Securities
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Margin on US Treasury securities: 1% for maturities up to 1 year,
+        2% for 1-3 years, 3% for 3-5 years, 4% for 5-10 years,
+        5% for 10-20 years, 6% for over 20 years.
+    amendments: []
+    current_interpretation: >-
+      US Treasury margin rates are maturity-based and have not changed
+      since consolidation. The graduated schedule reflects duration risk —
+      longer maturities face greater price sensitivity to interest rate
+      changes. These are among the lowest margin rates for any security type.
+
+  "4210(e)(2)(B)":
+    title: Municipal Securities
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Margin on exempt municipal securities: 7% of market value or
+        such greater amount as prescribed.
+    amendments: []
+    current_interpretation: >-
+      Municipal bond margin is a flat 7% of market value for
+      investment-grade municipal bonds. Higher rates apply for
+      non-investment-grade or unrated municipal securities.
+      GO bonds and revenue bonds receive the same rate.
+
+  "4210(e)(2)(C)":
+    title: Corporate Bonds
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Non-convertible corporate bonds: investment grade 10% of market
+        value, high yield 20% of market value or 7% of principal amount.
+    amendments:
+      - date: "2019-07-01"
+        source: "RN 19-21"
+        change: >-
+          ETN margin requirements clarified under this section. Exchange-
+          traded notes treated as corporate debt obligations with margin
+          based on credit quality and leverage.
+    current_interpretation: >-
+      Investment-grade corporate bonds: 10% of market value. High-yield
+      corporates: greater of 20% of market value or 7% of principal.
+      ETNs are margined as corporate debt under this section, with
+      leverage adjustments per RN 19-21 where applicable.
+
+  "4210(e)(2)(D)":
+    title: Agency Debt Securities
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Government agency securities: margin requirements ranging from
+        1% to 7% depending on maturity and type (GNMA, FNMA, FHLMC,
+        debentures, MBS pass-throughs, CMOs).
+    amendments: []
+    current_interpretation: >-
+      Agency debentures and MBS follow maturity-tiered rates similar to
+      Treasuries but slightly higher. GNMA pass-throughs carry lower
+      rates due to full faith and credit backing. CMO tranches vary
+      by weighted average life and credit enhancement.
+
+  "4210(e)(2)(H)":
+    title: Covered Agency Transactions
+    original:
+      date: "2016-08-01"
+      source: "FINRA Regulatory Notice 16-31"
+      text: >-
+        New margin requirements for covered agency transactions including
+        TBA (to-be-announced) securities, specified pool transactions,
+        and CMO transactions. Two-track margin: 2% for well-capitalized
+        counterparties, higher for others.
+    amendments:
+      - date: "2023-08-01"
+        source: "RN 23-14"
+        change: >-
+          Eliminated the two-track maintenance margin framework. Single
+          maintenance margin rate applies to all counterparties regardless
+          of capitalization status.
+    current_interpretation: >-
+      Covered agency transactions (TBAs, specified pools, CMOs) have a
+      unified maintenance margin schedule after RN 23-14 eliminated the
+      two-track system. Margin is based on the net settlement amount and
+      maturity/average life of the underlying agency securities.
+
+  "4210(e)(8)":
+    title: Control and Restricted Securities
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Securities subject to resale restrictions (Rule 144, control
+        securities, restricted securities) may be subject to additional
+        margin requirements.
+    amendments:
+      - date: "2020-07-01"
+        source: "RN 20-22"
+        change: >-
+          Updated guidance on control and restricted securities margin.
+          Clarified treatment of securities with holding period restrictions
+          and those subject to volume limitations under Rule 144.
+    current_interpretation: >-
+      Control securities (held by affiliates) and restricted securities
+      (unregistered) may require additional margin above standard rates
+      due to limited marketability. Firms must evaluate the liquidity
+      constraints when setting margin requirements.
+
+  "4210(f)(8)(B)":
+    title: Pattern Day Trader Requirements
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 (consolidated via RN 10-45)"
+      text: >-
+        Pattern day traders (4+ day trades in 5 business days) must
+        maintain minimum equity of $25,000. Day-trading buying power
+        equals 4x maintenance margin excess. Margin calls must be met
+        within 5 business days.
+    amendments:
+      - date: "2021-03-01"
+        source: "RN 21-13"
+        change: >-
+          Updated day-trading interpretation. Clarified counting methodology
+          for day trades and interaction with cross-account restrictions.
+      - date: "2021-07-01"
+        source: "RN 21-24"
+        change: >-
+          Clarified that good faith deposit does not satisfy PDT minimum
+          equity. $25,000 must be net equity, not a pending deposit.
+      - date: "2024-10-01"
+        source: "RN 24-13"
+        change: >-
+          Retrospective review of PDT requirements. FINRA published
+          analysis of PDT rule effectiveness and solicited comments
+          on potential modernization.
+    current_interpretation: >-
+      PDT: 4+ day trades in 5 business days triggers $25,000 minimum
+      equity, 4× buying power, and enhanced margin call rules. SR-2025-017
+      proposes replacing the entire PDT framework with real-time intraday
+      margin calculations — this is proposed only, not yet effective.
+
+  "4210(g)":
+    title: Portfolio Margin
+    original:
+      date: "2006-12-12"
+      source: "SEC Release 34-54918 / FINRA Rule 4210(g)"
+      text: >-
+        Portfolio margin using TIMS-based stress testing for eligible
+        accounts with minimum equity of $100,000 (individual) or
+        $500,000 (broker-dealer). Eligible products include listed
+        options, security futures, and underlying equities.
+    amendments:
+      - date: "2010-12-01"
+        source: "RN 10-45"
+        change: >-
+          Portfolio margin provisions incorporated into consolidated
+          FINRA 4210 as section (g).
+      - date: "2019-07-01"
+        source: "RN 19-21"
+        change: >-
+          ETN options explicitly excluded from portfolio margin eligibility.
+    current_interpretation: >-
+      Portfolio margin stress-tests positions at ±15% (equity), ±8%
+      (large-cap index), ±6% (mega-cap index) across 10 price points
+      and 3 volatility scenarios (30 total). Minimum floor: 0.375% of
+      notional per position group. Only available to accounts meeting
+      minimum equity and qualification requirements.
+
+  "IM-4210-2":
+    title: Concentrated Accounts
+    original:
+      date: "2010-12-01"
+      source: "FINRA Rule 4210 Interpretive Material (consolidated via RN 10-45)"
+      text: >-
+        An account in which a single security or securities of a single
+        issuer exceed 10% of the account's net liquidating value is
+        considered concentrated. Firms must evaluate and may impose
+        additional margin requirements.
+    amendments: []
+    current_interpretation: >-
+      Single-security concentration > 10% of NLV or issuer concentration
+      > 15% of NLV triggers enhanced margin. Typical firm practice:
+      40% for liquid concentrated longs (vs 25% standard), 50% for
+      concentrated shorts (vs 30%), up to 75-100% for illiquid or
+      low-cap concentrated positions.
+
+cross_cutting_amendments:
+
+  - id: "RN_10-45"
+    date: "2010-12-01"
+    title: "Consolidation of NASD 2520 + NYSE 431 into FINRA 4210"
+    source: "FINRA Regulatory Notice 10-45"
+    impact: >-
+      Unified option margin rules from two predecessor SROs into
+      a single framework. All 4210(f) subsections originate here.
+
+  - id: "RN_12-44"
+    date: "2012-10-26"
+    title: "Spread Definition and Lesser-Of Test Overhaul"
+    source: "FINRA Regulatory Notice 12-44"
+    impact: >-
+      The most significant amendment to option strategy margin.
+      Rewrote the spread definition, codified the lesser-of test,
+      set qualification criteria, and enabled cash-account spreads.
+      Affects all strategies under 4210(f)(2)(H).
+
+  - id: "RN_13-39"
+    date: "2013-11-07"
+    title: "OCC-Cleared OTC Options"
+    source: "FINRA Regulatory Notice 13-39"
+    impact: >-
+      Extended listed-option margin treatment to OCC-cleared OTC
+      options. All strategy types now apply to both listed and
+      OCC-cleared OTC options.
+
+  - id: "RN_19-21"
+    date: "2019-07-01"
+    title: "ETN Option Margin"
+    source: "FINRA Regulatory Notice 19-21"
+    impact: >-
+      Higher margin rates for options on ETN underlyings. Leveraged
+      ETN options multiply by leverage factor. ETN options excluded
+      from portfolio margin.
+
+  - id: "RN_24-08"
+    date: "2024-03-19"
+    title: "Protected Index Option/Warrant Positions"
+    source: "FINRA Regulatory Notice 24-08"
+    impact: >-
+      New strategy category for short index options hedged by
+      index-tracking products (ETFs, mutual funds, stock baskets).
+      Reduced margin where protection >= 95% of index value.
+
+  - id: "RN_09-53"
+    date: "2009-09-01"
+    title: "Leveraged and Inverse ETF Margin Requirements"
+    source: "FINRA Regulatory Notice 09-53"
+    impact: >-
+      Established leverage-adjusted margin requirements for leveraged
+      and inverse ETFs. Base 25%/30% rate multiplied by leverage factor.
+      Applies to all leveraged ETF positions.
+
+  - id: "RN_11-16"
+    date: "2011-04-01"
+    title: "Non-Margin-Eligible Equity Securities"
+    source: "FINRA Regulatory Notice 11-16"
+    impact: >-
+      Clarified that non-margin-eligible equity securities require 100%
+      margin (full payment). Expanded criteria for non-marginability.
+
+  - id: "RN_16-31"
+    date: "2016-08-01"
+    title: "Covered Agency Transactions"
+    source: "FINRA Regulatory Notice 16-31"
+    impact: >-
+      Introduced margin requirements for TBA securities, specified pools,
+      and CMO transactions. Established two-track margin based on
+      counterparty capitalization (later simplified by RN 23-14).
+
+  - id: "RN_20-22"
+    date: "2020-07-01"
+    title: "Control and Restricted Securities"
+    source: "FINRA Regulatory Notice 20-22"
+    impact: >-
+      Updated guidance on margin treatment for control securities and
+      restricted securities subject to Rule 144 restrictions.
+
+  - id: "RN_21-13"
+    date: "2021-03-01"
+    title: "Day Trading Interpretation Updates"
+    source: "FINRA Regulatory Notice 21-13"
+    impact: >-
+      Clarified day trade counting methodology and cross-account
+      restriction interactions for pattern day trader accounts.
+
+  - id: "RN_21-24"
+    date: "2021-07-01"
+    title: "Good Faith Accounts and PDT Minimum Equity"
+    source: "FINRA Regulatory Notice 21-24"
+    impact: >-
+      Clarified that good faith deposits do not satisfy PDT minimum
+      equity requirement. $25,000 must be net equity in the account.
+
+  - id: "RN_23-14"
+    date: "2023-08-01"
+    title: "Covered Agency — Eliminated Two-Track Margin"
+    source: "FINRA Regulatory Notice 23-14"
+    impact: >-
+      Simplified covered agency transaction margin by eliminating the
+      two-track framework. Single maintenance margin rate now applies
+      regardless of counterparty capitalization status.
+
+reference_sources:
+
+  - id: "CBOE_MARGIN_MANUAL"
+    title: "Cboe Margin Manual"
+    version: "November 2021"
+    role: >-
+      De facto industry reference for strategy-based margin
+      calculations. Provides worked examples and compositional
+      strategy definitions. Interprets Cboe Rule 10.3, which is
+      harmonized with FINRA 4210(f). Does not mandate a specific
+      waterfall recognition order.
+
+  - id: "SEC_34-54918"
+    title: "Portfolio Margin Approval"
+    date: "2006-12-12"
+    role: >-
+      SEC order approving TIMS-based portfolio margin for customer
+      accounts. Replaced strategy-based margin with risk-based
+      for eligible accounts.
+
+  - id: "OCC_TIMS"
+    title: "OCC TIMS Methodology"
+    role: >-
+      Theoretical Intermarket Margining System used for portfolio
+      margin calculations. Replaced by STANS for clearing members
+      but TIMS remains the basis for customer portfolio margin.

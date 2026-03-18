@@ -1,0 +1,36 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: (f)(2)(A)
+  description: Definitions — terms used in options margin provisions
+  notes: >-
+    Paragraph (f)(2)(A) defines key terms used throughout the options and
+    strategy margin subsections of FINRA Rule 4210. These are definitional
+    rules that do not directly produce margin calculations but are essential
+    for interpreting and applying the computable rules.
+
+rules:
+
+- id: 4210_f_2_A_xxi
+  description: Definition of "index group value" for currency and stock index warrants
+  citation: FINRA 4210(f)(2)(A)(xxi)
+  produces_calculation: false
+  calculation_status: informational
+  source_quote: >-
+    (xxi) The term "index group value," when used in respect of a currency index warrant or a stock index
+    warrant, shall mean $1.00 (1) multiplied by the numerical value reported for the index that is derived
+    from the market prices of the currencies in the index currency group or the stocks in the stock index
+    group and (2) divided by the applicable divisor in the prospectus (if any). When used with reference
+    to the exercise of an stock index group option, the value is the last one reported on the day of exercise
+    or, if the day of exercise is not a trading day, on the last trading day before exercise.
+  conditions:
+    security_type: definitions_reference
+  formula:
+    type: informational
+    description: >-
+      Index group value = $1.00 × (reported numerical index value) ÷ (prospectus divisor, if any).
+      For exercise purposes, the value is the last reported on the exercise day, or the last trading
+      day before exercise if the exercise day is not a trading day.
+  notes: >-
+    This definition is used by the warrant margin rules in (f)(2)(G) and (f)(2)(F) to determine
+    the in-the-money or out-of-the-money amount for index warrants.

@@ -1,0 +1,325 @@
+rule_set:
+  regulation: "Securities Exchange Act — Net Capital Rule"
+  authority: "Securities and Exchange Commission"
+  cfr: "17 CFR Part 240"
+  section: "240.15c3-1"
+  description: "Minimum net capital requirements for broker-dealers to ensure sufficient liquid assets to meet obligations to customers and counterparties"
+  effective_date: "1975-01-01"
+  last_amended: "2024-03-28"
+  notes: "Originally adopted under the Securities Exchange Act of 1934. Substantially revised in 1975 as the Uniform Net Capital Rule. Alternative method added for clearing firms."
+
+rules:
+  - id: "sec_15c3_1_basic_method"
+    description: "Basic method — net capital must equal or exceed 6-2/3% of aggregate indebtedness"
+    citation: "17 CFR 240.15c3-1(a)(1)(i)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      No broker or dealer shall permit its aggregate indebtedness to all other
+      persons to exceed 1500 percent of its net capital.
+    conditions:
+      applies_to: "broker_dealer"
+      method: "basic"
+    formula:
+      type: "capital_requirement"
+      rate: 0.0667
+      description: "Net capital >= 6-2/3% of aggregate indebtedness (i.e., aggregate indebtedness cannot exceed 15x net capital)"
+    notes: >
+      The basic method is a leverage test. Aggregate indebtedness includes
+      money borrowed, customer free credit balances, and other payables.
+      Most introducing broker-dealers use this method. Minimum dollar
+      amount also applies ($5,000 to $250,000 depending on activities).
+
+  - id: "sec_15c3_1_alternative_method"
+    description: "Alternative method — net capital must equal or exceed 2% of aggregate debit items"
+    citation: "17 CFR 240.15c3-1(a)(1)(ii)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      A broker or dealer may elect not to be subject to the aggregate
+      indebtedness standard of paragraph (a)(1)(i) provided it maintains
+      net capital of not less than the greater of $250,000 or 2 percent
+      of aggregate debit items computed in accordance with the Formula
+      for Determination of Reserve Requirements.
+    conditions:
+      applies_to: "broker_dealer"
+      method: "alternative"
+      holds_customer_funds: true
+    formula:
+      type: "capital_requirement"
+      rate: 0.02
+      description: "Net capital >= greater of $250,000 or 2% of aggregate debit items from the customer reserve formula"
+    notes: >
+      The alternative method is a balance sheet test used by most carrying/clearing
+      firms. Aggregate debit items come from the Rule 15c3-3 reserve formula.
+      This method better reflects the risk of firms holding customer assets.
+
+  - id: "sec_15c3_1_minimum_intro_bd"
+    description: "Minimum net capital — introducing broker-dealer not holding customer funds"
+    citation: "17 CFR 240.15c3-1(a)(2)(i)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      A broker or dealer that does not receive or hold funds or securities
+      for, or owe money or securities to, customers and that does not carry
+      accounts of or for customers shall maintain net capital of not less
+      than $5,000.
+    conditions:
+      applies_to: "introducing_bd"
+      holds_customer_funds: false
+      receives_customer_securities: false
+    formula:
+      type: "capital_requirement"
+      amount: 5000
+      description: "$5,000 minimum net capital for introducing BDs that do not hold customer funds or securities"
+    notes: >
+      Lowest tier. Applies to fully introduced broker-dealers that pass all
+      customer transactions to their clearing firm. If the introducing BD
+      receives customer checks (even temporarily), the $50,000 or $100,000
+      minimum applies instead.
+
+  - id: "sec_15c3_1_minimum_intro_receives"
+    description: "Minimum net capital — introducing broker-dealer that receives but does not hold customer funds"
+    citation: "17 CFR 240.15c3-1(a)(2)(ii)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      A broker or dealer that receives but does not hold customer funds or
+      securities and that does not carry accounts shall maintain net capital
+      of not less than $50,000.
+    conditions:
+      applies_to: "introducing_bd"
+      receives_customer_funds: true
+      holds_customer_funds: false
+    formula:
+      type: "capital_requirement"
+      amount: 50000
+      description: "$50,000 minimum for introducing BDs that receive (but promptly transmit) customer funds"
+    notes: >
+      Applies when the introducing BD receives customer checks or securities
+      but promptly forwards them to the clearing firm. The firm must transmit
+      within one business day of receipt.
+
+  - id: "sec_15c3_1_minimum_carrying"
+    description: "Minimum net capital — carrying/clearing broker-dealer"
+    citation: "17 CFR 240.15c3-1(a)(2)(iii)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      A broker or dealer that carries customer accounts and receives or
+      holds funds or securities for customers shall maintain net capital
+      of not less than $250,000.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+      holds_customer_funds: true
+    formula:
+      type: "capital_requirement"
+      amount: 250000
+      description: "$250,000 minimum net capital for carrying/clearing firms (or 2% of aggregate debit items if using alternative method)"
+    notes: >
+      This is the minimum dollar floor for firms using the alternative method.
+      The actual requirement is the greater of $250,000 or 2% of aggregate
+      debit items. Large clearing firms typically have net capital requirements
+      far exceeding this minimum.
+
+  - id: "sec_15c3_1_minimum_market_maker"
+    description: "Minimum net capital — market maker"
+    citation: "17 CFR 240.15c3-1(a)(2)(iv)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      A broker or dealer acting as a market maker shall maintain net capital
+      of not less than $100,000 or such greater amount as the Commission
+      may require.
+    conditions:
+      applies_to: "market_maker"
+    formula:
+      type: "capital_requirement"
+      amount: 100000
+      description: "$100,000 minimum net capital for registered market makers"
+    notes: >
+      Market makers may also be subject to exchange-specific requirements
+      that exceed the SEC minimum. For example, NYSE DMMs have additional
+      capital requirements based on their assigned securities.
+
+  - id: "sec_15c3_1_equity_haircut"
+    description: "Equity securities haircut — 15% for long/short equity positions"
+    citation: "17 CFR 240.15c3-1(c)(2)(vi)(J)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      In the case of all securities or evidence of indebtedness, except those
+      described in subparagraphs (A) through (I), the percentages of the
+      market value of the greater of the long or short position in each
+      security shall be 15 percent of the market value of such security.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "equity"
+      position_type: "proprietary"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.15
+      description: "15% haircut on the market value of proprietary equity positions (greater of long or short in each security)"
+    notes: >
+      Haircuts reduce net capital by a percentage of proprietary positions
+      to account for market risk. The 15% rate applies to most equity
+      securities. Higher haircuts apply to concentrated positions, illiquid
+      securities, and undue concentration.
+
+  - id: "sec_15c3_1_treasury_haircut_short"
+    description: "US Treasury haircut — 0% to 6% based on maturity"
+    citation: "17 CFR 240.15c3-1(c)(2)(vi)(A)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      In the case of a government security, the applicable percentage
+      shall be determined by the category in which the security falls based
+      on the number of years to maturity.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "us_treasury"
+      position_type: "proprietary"
+    formula:
+      type: "maturity_based_haircut"
+      description: "Haircuts by maturity: <3mo 0%, 3-6mo 0.5%, 6-12mo 1%, 1-2yr 1.5%, 2-3yr 2%, 3-5yr 3%, 5-10yr 4%, 10-15yr 4.5%, 15-25yr 5%, >25yr 6%"
+    notes: >
+      Government securities receive the lowest haircuts due to their
+      minimal credit risk. The maturity-based schedule reflects duration
+      risk — longer-dated treasuries have more price sensitivity to
+      interest rate changes.
+
+  - id: "sec_15c3_1_option_haircut"
+    description: "Listed option haircut — based on underlying security haircut"
+    citation: "17 CFR 240.15c3-1(c)(2)(x)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      In computing net capital, the deductions for listed options and related
+      positions shall be computed pursuant to the strategies and methods set
+      forth in Appendix A.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "option"
+      position_type: "proprietary"
+    formula:
+      type: "strategy_based_haircut"
+      description: "Option haircuts per Appendix A: paired with underlying, strategy-based netting, or standalone based on underlying haircut rate"
+    notes: >
+      Appendix A to Rule 15c3-1 provides detailed haircut calculations for
+      options. Options paired with their underlying securities or with other
+      options in recognized strategies receive reduced haircuts. Unhedged
+      written options receive the full underlying haircut plus the premium.
+
+  - id: "sec_15c3_1_corporate_bond_haircut"
+    description: "Corporate bond haircuts — based on rating and maturity"
+    citation: "17 CFR 240.15c3-1(c)(2)(vi)(F)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      In the case of cumulative nonconvertible preferred stock or
+      nonconvertible debt securities having a fixed interest rate and
+      a fixed maturity date and which are not in default, the applicable
+      percentage shall be based on the security's rating and time to maturity.
+    conditions:
+      applies_to: "broker_dealer"
+      security_type: "corporate_bond"
+      position_type: "proprietary"
+    formula:
+      type: "rating_maturity_haircut"
+      description: "IG bonds: 2-9% by maturity. Non-IG/unrated: 4-15% by maturity. Defaulted: 40% haircut"
+    notes: >
+      Investment grade bonds receive lower haircuts. Maturity matters because
+      longer-dated bonds have more duration risk. Defaulted securities receive
+      a punitive 40% haircut. Convertible bonds are haircut at the greater of
+      the bond rate or the underlying equity rate.
+
+  - id: "sec_15c3_1_concentrated_haircut"
+    description: "Concentration haircut — additional charge for large single-issuer positions"
+    citation: "17 CFR 240.15c3-1(c)(2)(vi)(M)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      In addition to the applicable haircut, a broker or dealer shall deduct
+      from net worth any excess of a security's net position over 10% of the
+      broker or dealer's tentative net capital.
+    conditions:
+      applies_to: "broker_dealer"
+      position_type: "proprietary"
+      concentration_pct_gte: 0.10
+    formula:
+      type: "concentration_charge"
+      description: "Additional haircut on any single-issuer net position exceeding 10% of tentative net capital"
+    notes: >
+      Prevents broker-dealers from concentrating proprietary capital in a
+      single issuer. The charge applies to the excess above the 10% threshold.
+      For particularly illiquid or thinly traded securities, FINRA may impose
+      additional concentration charges.
+
+  - id: "sec_15c3_1_early_warning"
+    description: "Early warning — notification required when net capital falls below 120% of minimum"
+    citation: "17 CFR 240.17a-11(b)"
+    rule_category: "notification"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Every broker or dealer whose net capital declines below 120 percent
+      of the minimum required shall give notice of such deficiency that same
+      day in accordance with paragraph (g) of this section.
+    conditions:
+      applies_to: "broker_dealer"
+      net_capital_pct_of_minimum_lt: 1.20
+    formula:
+      type: "notification_requirement"
+      description: "Same-day notice to SEC and FINRA when net capital falls below 120% of required minimum"
+    notes: >
+      The early warning triggers heightened regulatory scrutiny. Below 120%
+      the firm must notify SEC and its designated examining authority (FINRA).
+      Below the actual minimum, the firm is in net capital violation and must
+      cease all trading activity until cured.
+
+  - id: "sec_15c3_1_restriction_on_withdrawal"
+    description: "Capital withdrawal restriction — equity withdrawals limited to maintain net capital"
+    citation: "17 CFR 240.15c3-1(e)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      No equity capital of the broker or dealer or a subsidiary or affiliate
+      consolidated pursuant to Appendix C may be withdrawn by action of a
+      stockholder or partner or by redemption or repurchase of shares of stock
+      by any of the consolidated entities or through the payment of dividends
+      or any similar distribution, nor may any unsecured advance or loan be
+      made to a stockholder, partner, sole proprietor, employee or affiliate
+      if after giving effect thereto and to any other such withdrawals,
+      advances or loans and any Payments of Payment Obligations which are
+      scheduled to occur within 180 days following such withdrawal, advance
+      or loan the broker or dealer's net capital would be less than 120 percent
+      of the minimum net capital required.
+    conditions:
+      applies_to: "broker_dealer"
+    formula:
+      type: "restriction"
+      description: "Equity withdrawals, dividends, and unsecured loans to affiliates prohibited if net capital would fall below 120% of minimum"
+    notes: >
+      Prevents owners from extracting capital when the firm is near its
+      minimum. The 180-day look-forward for scheduled payments means firms
+      must plan for upcoming obligations. Large withdrawals (exceeding 30%
+      of excess net capital) require 2 business days advance notice to SEC.
+
+  - id: "sec_15c3_1_segregation_of_customer_securities"
+    description: "Proprietary vs customer positions — customer securities excluded from haircut inventory"
+    citation: "17 CFR 240.15c3-1(c)(1)"
+    rule_category: "capital_requirement"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      For purposes of this section, a broker or dealer in computing net
+      capital shall not include any equity in its computation of net capital
+      that is attributable to securities which are not readily marketable.
+    conditions:
+      applies_to: "broker_dealer"
+    formula:
+      type: "compliance_requirement"
+      description: "Only proprietary positions generate haircuts; customer fully-paid and excess margin securities must be segregated per 15c3-3"
+    notes: >
+      Net capital is computed on the broker-dealer's proprietary positions
+      only. Customer securities held in segregation per Rule 15c3-3 do not
+      generate haircuts. However, customer securities that are rehypothecated
+      (used by the firm) do generate capital charges.

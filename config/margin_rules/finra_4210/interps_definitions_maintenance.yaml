@@ -1,0 +1,365 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(a), (c), (d) Interpretations
+  description: Definitional, maintenance, and additional margin interpretations
+  effective_date: '2024-01-01'
+  notes: >
+    These interpretations provide guidance on defined terms, maintenance margin procedures, and additional
+    margin authority under Rule 4210.
+rules:
+- id: 4210_interp_terms_defined
+  description: Terms defined in Exchange Act or rules thereunder
+  citation: FINRA 4210(a)/01
+  source_quote: >-
+    4210(a)/01 Terms Defined in the Exchange Act or Rules Thereunder Unless otherwise specified in this
+    Rule or other FINRA Rules, terms defined in the Exchange Act or rules thereunder (including Regulation
+    T) shall have the meanings given them in the Exchange Act or in such rules. (FINRA Regulatory Notice
+    24-11)
+  conditions:
+    security_type: definitions_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)/01: terms used in Rule 4210 that are also defined in the Securities Exchange Act of 1934
+    or rules thereunder have the same meaning as in such statute or rules.
+- id: 4210_interp_good_faith
+  description: Good faith margin — definition and application
+  citation: FINRA 4210(a)/011
+  source_quote: >-
+    4210(a)/011 Good Faith Good faith with respect to: Margin means the amount of margin which a creditor
+    would require in exercising sound credit judgment; Making a determination or accepting a statement
+    concerning a borrower means that the creditor is alert to the circumstances surrounding the credit,
+    and if in possession of information that would cause a prudent person not to make the determination
+    or accept the notice or certification without inquiry, investigates and is satisfied that it is correct.
+    (Regulation T Section 220.2 Definitions) (FINRA Regulatory Notice 24-11)
+  conditions:
+    security_type: good_faith_definition_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)/011: good faith margin means the amount of margin a member would require of a customer
+    in the exercise of sound business judgment. Applies where Rule 4210 specifies good faith margin (e.g.,
+    exempted securities, certain non-equity securities). Two subsections detail application to specific
+    security types.
+- id: 4210_interp_accrued_interest
+  description: Accrued interest — included in market value for margin
+  citation: FINRA 4210(a)(2)/01
+  source_quote: >-
+    4210(a)(2)/01 Accrued Interest Members may only use accrued interest to reduce or eliminate a maintenance
+    call that has been created pursuant to this Rule. Accrued interest may not be considered as part of
+    the price of a bond nor used in determining or computing equity in an account. (FINRA Regulatory Notice
+    10-45) (FINRA Regulatory Notice 24-11)
+  conditions:
+    security_type: accrued_interest_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(2)/01: accrued interest is included in the current market value of debt securities for
+    margin calculation purposes. For bonds trading flat (in default or income bonds), accrued interest
+    is zero. See also 4210(a)(2)/02 for alternate method and 4210(e)(2)(E)(ii)/01.
+- id: 4210_interp_accrued_interest_alt
+  description: Accrued interest — alternate computation method
+  citation: FINRA 4210(a)(2)/02
+  source_quote: >-
+    4210(a)(2)/02 Accrued Interest – Alternate Method In computing the current market value of a debt
+    security, the maintenance margin requirement on the debt security, and equity in an account containing
+    the debt security, a member may use a reasonable estimate of the amount that would be realized upon
+    sale of the debt security, including amounts reasonably estimated to be received by a seller in respect
+    of accrued interest, provided that (i) interest paid by the issuer on such debt security will be paid
+    to the member rather than to the customer, and (ii) withdrawals of such interest are subjected to
+    the limitations on withdrawals from the account under Rule 4210(b). Such reasonable estimates must
+    be consistently applied—a member may not exclude interest from the current market value of a debt
+    security for purposes computing the maintenance margin requirement on the debt security while including
+    it in the current market value for purposes of computing the equity in the customer’s account.
+  conditions:
+    security_type: accrued_interest_alt_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(2)/02: members may use an alternate method of computing accrued interest for margin purposes,
+    provided the method is consistently applied and produces substantially equivalent results.
+- id: 4210_interp_customer_includes
+  description: Customer — includes various entity types
+  citation: FINRA 4210(a)(3)/01
+  source_quote: >-
+    4210(a)(3)/01 Customer Includes The term “customer” includes a broker or dealer, member and their
+    partners, officers or associated persons whenever the carrying member extends, arranges or maintains
+    any credit on their behalf. (FINRA Regulatory Notice 10-45)
+  conditions:
+    security_type: customer_definition_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(3)/01: the term customer includes any person for whom securities are purchased or sold
+    or to whom securities are purchased or sold. Includes natural persons, corporations, partnerships,
+    etc.
+- id: 4210_interp_reverse_repo_counterparty
+  description: Reverse repurchase counterparty — customer treatment
+  citation: FINRA 4210(a)(3)/02
+  source_quote: >-
+    4210(a)(3)/02 Reverse Repurchase Counterparty The term “customer” includes a counterparty (other than
+    an exempted borrower) to a reverse repurchase transaction with the member. For purposes of Rule 4210,
+    a reverse repurchase transaction is treated as a margin loan in the amount (the “purchase price”)
+    the member pays or credits the counterparty for the securities subject to the transaction (the “purchased
+    securities”), against a long position in the purchased securities. When calculating required margin
+    and equity, the member shall use the current market value of the purchased securities. If the purchased
+    securities include any equity securities, the reverse repurchase transaction must be recorded in a
+    Regulation T margin account. If purchased securities do not include any equity securities, then the
+    transaction may be recorded in a Regulation T good faith account or a Regulation T margin account.
+  conditions:
+    security_type: reverse_repo_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(3)/02: a counterparty to a reverse repurchase agreement is considered a customer for purposes
+    of Rule 4210.
+- id: 4210_interp_exempt_acct_foreign
+  description: Foreign institutions as exempt accounts
+  citation: FINRA 4210(a)(4)/01
+  source_quote: 4210(a)(4)/01 Foreign Institutions
+  conditions:
+    security_type: foreign_institution_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(4)/01: foreign institutions (including banks, brokers, dealers, and government entities)
+    may qualify as exempt accounts for margin purposes. Members must verify the foreign institution's
+    status and maintain documentation.
+- id: 4210_interp_bank_definition
+  description: Bank — definition for exempt account purposes
+  citation: FINRA 4210(a)(4)(A)/011
+  source_quote: >-
+    Foreign institutions (including without limitation foreign banks, brokers, dealers, insurance companies
+    and government agencies) generally do not qualify as “designated accounts” as they are not regulated
+    under the laws of the United States or of a state or political subdivision thereof. United States
+    branches of foreign banks, however, may qualify as “banks” (and therefore “designated accounts”) under
+    clause (C) of the definition of “bank” in Exchange Act Section 3(a)(6). See Interpretation Rule 4210(a)(4)(A)/011.
+  conditions:
+    security_type: bank_definition_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(4)(A)/011: definition of bank for exempt account classification. Foreign banks and financial
+    institutions included per 4210(a)(4)/01.
+- id: 4210_interp_strips
+  description: STRIPS and similar zero-coupon treasury securities
+  citation: FINRA 4210(a)(6)/01
+  source_quote: >-
+    4210(a)(6)/01 STRIPS and Similar Securities STRIPS (Separate Trading of Registered Interest and Principal
+    Securities) and similar securities may be treated as “exempted securities” subject to the same requirements
+    as any other U.S. government security.
+  conditions:
+    security_type: strips_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(6)/01: STRIPS (Separate Trading of Registered Interest and Principal of Securities) and
+    similar zero-coupon government securities are treated as exempted securities for margin purposes.
+    Margin based on current market value, not par.
+- id: 4210_interp_gse_equity_definition
+  description: Government-sponsored enterprise equity — definitional
+  citation: FINRA 4210(a)(6)/02
+  source_quote: >-
+    4210(a)(6)/02 Government-Sponsored Enterprise Equity Securities All securities issued by certain government
+    sponsored enterprises are categorized as “government securities” under Exchange Act section 3(a)(42),
+    and therefore as “exempted securities” under Exchange Act section 3(a)(12); however, equity securities
+    issued by these GSEs (“GSE Equities”) are not treated as exempted securities for purposes of this
+    rule. The initial margin required on transactions in GSE Equities are the same as that required by
+    Rule 4210(b) for transactions in margin equity securities that are not exempted securities. The maintenance
+    margin requirement on positions in GSE Equities are the same as that required by Rule 4210(c) for
+    positions in margin equity securities. Rule 4210(e)(2)(B) does not apply to GSE Equities.
+  conditions:
+    security_type: gse_equity_definition_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(6)/02: GSE equities (e.g., FNMA, FHLMC stock) are government securities under Exchange
+    Act 3(a)(42) but NOT exempted securities for margin. Margined as equity securities: 50% initial (Reg
+    T), 25%/30% maintenance (4210(c)). 4210(e)(2)(B) does not apply. See also 4210(b)(4)/061.
+- id: 4210_interp_mortgage_related
+  description: Mortgage-related securities — definition and margin treatment
+  citation: FINRA 4210(a)(12)/01
+  source_quote: >-
+    4210(a)(12)/01 Mortgage Related Securities For the purpose of this Rule, positions and transactions
+    (including reverse repurchase transactions) in mortgage related securities may be afforded the same
+    treatment as exempted securities under Rule 4210(e)(2)(A) or 4210(e)(2)(B). See Rule 4210(e)(2)(F)
+    for positions and transactions in mortgage related securities made for or with an exempt account as
+    defined in Rule 4210(a)(13). 4210(a)(13)(B)(ii)e./01 Comparable Financial Reports In appropriate circumstances,
+    “comparable financial reports” may be unaudited statements of financial condition, income or changes
+    in owners’ equity.
+  conditions:
+    security_type: mortgage_related_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(a)(12)/01: mortgage-related securities (GNMA, FNMA, FHLMC pass-throughs, CMOs, REMICs) qualify
+    for reduced margin treatment. Exempt from 4210(e)(8) restricted securities rules. May be margined
+    per 4210(e)(2)(F) for exempt accounts (good faith) or per 4210(e)(2)(B) at 7% of market value.
+- id: 4210_interp_partners_accounts
+  description: Partners' accounts — indebtedness offset
+  citation: FINRA 4210(c)/02
+  source_quote: >-
+    4210(c)/02 Partners’ Accounts Partners of a member organized as a partnership should be guided by
+    the following principles in determining margin requirements of partners’ accounts: The net combined
+    deficit, if any, in a partners’ capital account, drawing account, other personal accounts and his
+    or her share of the partnership’s undistributed profits and losses, must be deducted in determining
+    the equity in his or her individual securities account(s). Any securities carried in capital accounts
+    must be fully paid for after considering any deficits in individual accounts as described above. Any
+    purchase in partners’ individual accounts must meet Regulation T initial margin requirements.
+  conditions:
+    security_type: partners_account_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/02: for member firm partners with securities accounts, if a partner is indebted to the
+    firm from another transaction, that indebtedness is offset against the securities account to determine
+    the value of securities that may be carried. Three subsections detail specific offset scenarios.
+- id: 4210_interp_stockholders_accounts
+  description: Stockholders' accounts — same offset treatment as partners
+  citation: FINRA 4210(c)/03
+  source_quote: 4210(c)/03 Stockholders’ Accounts
+  conditions:
+    security_type: stockholders_account_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/03: the requirements of 4210(c)/02 for partners' accounts apply equally to stockholders
+    of a member organized as a corporation. Indebtedness from non-securities transactions must be offset
+    against the stockholder's securities account.
+- id: 4210_interp_securities_value
+  description: Securities value — current market value determination
+  citation: FINRA 4210(c)/04
+  source_quote: >-
+    4210(c)/04 Securities Value Listed and unlisted securities, other than options with less than 9 months
+    to expiration, may be given value in the computation of maintenance margin requirements.
+  conditions:
+    security_type: securities_value_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/04: securities are valued at current market value for margin purposes. For listed securities,
+    this is the closing price on the exchange. For OTC securities, the inside bid (for long positions)
+    or inside offer (for short positions).
+- id: 4210_interp_due_bills
+  description: Sales of stock covered by due bills
+  citation: FINRA 4210(c)/05
+  source_quote: >-
+    4210(c)/05 Sales of Stock Covered by Due Bills When a customer sells stock, in any type of account,
+    which carries a due bill representing additional shares of the same stock or another stock, and the
+    certificate covering the sale is not registered in the name of a member or its nominee, the carrying
+    member shall retain out of the proceeds of the sale a sum at least equal to the market value of the
+    shares represented by the due bill until the shares covered thereby are received. If the market value
+    of the shares represented by the due bill increases, the member must obtain from the customer additional
+    funds or securities to satisfy the mark to market. Only excess funds or securities held against these
+    due bill requirements are to be given consideration in determining the status of a customer’s account
+    as it relates to maintenance margin for other purposes.
+  conditions:
+    security_type: due_bills_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/05: when stock is sold with a due bill for a dividend or distribution, the value of the
+    due bill must be considered in computing the margin on the position.
+- id: 4210_interp_sinking_fund
+  description: Sinking fund transactions — margin treatment
+  citation: FINRA 4210(c)/06
+  source_quote: >-
+    4210(c)/06 Sinking Fund Transactions Certain sinking fund transactions fail to qualify for non-purpose
+    credit and credit under an employee stock ownership plan under Interpretations of Regulation T (see
+    Section 220.6/02) because: Retirement of the security is deferred; Delivery is delayed beyond the
+    next sinking fund retirement date; or The transaction is made with an affiliate of the issuer rather
+    than directly with the issuer. When a sinking fund transaction that may not be non-purpose credit
+    and credit under an employee stock ownership plan for one or more of the above reasons, it qualifies
+    for the margin account under Regulation T, Section 220.4. The margin treatment afforded such transaction
+    may be as follows: If 30 calendar days or less to delivery, the transaction may be exempt from margin
+    requirements, but any marked to the market loss which is not obtained must be deducted in computing
+    net capital (See SEA Rule 15c3-1(c)(2)(xii)); or
+  conditions:
+    security_type: sinking_fund_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/06: sinking fund transactions may be exempt from margin requirements if they meet certain
+    conditions. Two subsections detail when the exemption applies and the requirements for non-qualifying
+    transactions. See also 4210(e)(7)/01.
+- id: 4210_interp_mmf_carrying
+  description: Money market mutual fund shares — carrying requirements
+  citation: FINRA 4210(c)/09
+  source_quote: >
+    Shares in a money market mutual fund may be carried long in a customer's account for purposes of Rule
+    4210 provided that the customer waives any right to redeem shares without the member's consent.
+  conditions:
+    security_type: mmf_carrying_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/09: MMF shares may be carried in margin accounts if four conditions are met: (1) customer
+    waives right to redeem without member's consent, (2) member obtains right to redeem in cash upon request,
+    (3) fund agrees to conditions ensuring cash redemption, (4) member complies with Exchange Act 11(d)(1)
+    and SEA Rule 11d1-2. FINRA RN 10-53, 24-11.
+- id: 4210_interp_foreign_currency
+  description: Foreign currency credit balances — usable for margin
+  citation: FINRA 4210(c)/15
+  source_quote: >
+    Members may use credit balances in freely convertible foreign currencies in computing the customer's
+    margin requirements and equity provided their value in U.S. dollars is calculated daily using current
+    foreign exchange rates.
+  conditions:
+    security_type: foreign_currency_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(c)/15: foreign currency balances may count toward margin equity if (1) freely convertible,
+    (2) valued daily at current FX rates. Members must recognize FX fluctuation risk and should require
+    additional margin for potential currency losses. See also 4210(f)(5)/03.
+- id: 4210_interp_credit_extended
+  description: Credit extended — determination and monitoring
+  citation: FINRA 4210(d)(3)/01
+  source_quote: >-
+    4210(d)(3)/01 Credit Extended This Rule requires that members determine the total dollar amount of
+    credit to be extended to any one customer or on any one security to limit the potential loss or exposure
+    to the member. It is important that specific limits be established to prevent any one customer or
+    group of customers from endangering the member’s capital.
+  conditions:
+    security_type: credit_extended_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(d)(3)/01: members must monitor the amount of credit extended to margin accounts. Credit extended
+    includes the debit balance in the account and the value of securities lent. Applies to additional
+    margin requirements under 4210(d).
+- id: 4210_interp_credit_committee
+  description: Credit committee — oversight of margin credit
+  citation: FINRA 4210(d)(3)/02
+  source_quote: >-
+    4210(d)(3)/02 Credit Committee It is suggested that members appoint a credit committee with full authority
+    to formulate credit policies and set limits as to the amount of credit that may be extended. It is
+    recommended that the committee include the finance officer, credit officer and/or margin manager.
+  conditions:
+    security_type: credit_committee_reference
+  formula:
+    type: guidance
+    rate: 0.0
+  notes: >
+    Per 4210(d)(3)/02: members should maintain a credit committee or equivalent oversight body responsible
+    for reviewing margin credit decisions, setting house requirements, and monitoring concentrated or
+    high-risk positions.

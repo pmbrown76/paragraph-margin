@@ -1,0 +1,39 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_d
+  description: (d) Additional Margin
+  citation: FINRA 4210(d)
+  source_quote: '(d) Additional Margin Procedures shall be established by members to: (d) A member shall consider whether
+    the margin required pursuant to this Rule is adequate with respect to a particular counterparty account or all its counterparty
+    accounts and, where appropriate, increase such requirements. .04 Reserved. .05 Reserved. .06 Good Faith Account. A Regulation
+    T good faith account, other than a non-securities account, is a margin account for purposes of Rule 4210. .06 Good Faith
+    Account. 1 For purposes of this paragraph (g) of this Rule, the term "margin equity security" utilizes the definition
+    at Section 220.2 of Regulation T. 2 In accordance with paragraph (b)(1)(i)(B) of SEA Rule 15c3-1a (Appendix A to SEA Rule
+    15c3-1), 17 CFR 240.15c3-1a(b)(1)(i)(B). 3 See footnote 2. Selected Notices:'
+  category: computational
+  conditions: {}
+  formula:
+    type: TODO_needs_formula
+    description: Computational rule — needs margin formula implementation
+- id: 4210_d_1
+  description: (1) review limits and types of credit extended to all customers;
+  citation: FINRA 4210(d)(1)
+  source_quote: (1) review limits and types of credit extended to all customers;
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_d_2
+  description: (2) formulate their own margin requirements; and
+  citation: FINRA 4210(d)(2)
+  source_quote: (2) formulate their own margin requirements; and
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation

@@ -1,0 +1,405 @@
+rule_set:
+  regulation: "FINRA Rule 4210"
+  section: "4210(c)(1), 4210(c)/13"
+  description: "ETF and ETP maintenance margin requirements"
+  effective_date: "2009-12-01"
+  notes: >
+    Standard ETFs follow equity maintenance margin rules under 4210(c)(1).
+    Leveraged and inverse ETFs/ETPs are subject to scaled margin rates per
+    Interpretation 4210(c)/13, which codified FINRA Regulatory Notice 09-53.
+    Long margin = leverage x 25% (capped at 100%). Short margin = leverage
+    x 30% (no cap).
+
+rules:
+  # Standard (1x) ETFs - same as equities
+  - id: "4210_etf_1x_long"
+    description: "Standard (1x) ETF - long"
+    citation: "FINRA 4210(c)(1)"
+    source_quote: >
+      25 percent of the current market value of all margin securities, as
+      defined in Section 220.2 of Regulation T, except for security futures
+      contracts, "long" in the account.
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: 1
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+    notes: "Same as standard equity long maintenance"
+
+  - id: "4210_etf_1x_short"
+    description: "Standard (1x) ETF - short"
+    citation: "FINRA 4210(c)(1)"
+    source_quote: >
+      $5.00 per share or 30 percent of the current market value, whichever
+      amount is greater, of each stock "short" in the account selling at
+      $5.00 per share or above.
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: 1
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.30
+    notes: "Same as standard equity short maintenance"
+
+  # 1.5x Leveraged ETFs
+  - id: "4210_etf_1_5x_long"
+    description: "1.5x leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: 1.5
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.375
+    notes: "1.5 x 25% = 37.5%"
+
+  - id: "4210_etf_1_5x_short"
+    description: "1.5x leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: 1.5
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.45
+    notes: "1.5 x 30% = 45%"
+
+  # 2x Leveraged ETFs
+  - id: "4210_etf_2x_long"
+    description: "2x leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: 2
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.50
+    notes: "2 x 25% = 50%"
+
+  - id: "4210_etf_2x_short"
+    description: "2x leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: 2
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.60
+    notes: "2 x 30% = 60%"
+
+  # 3x Leveraged ETFs
+  - id: "4210_etf_3x_long"
+    description: "3x leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: 3
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.75
+    notes: "3 x 25% = 75%"
+
+  - id: "4210_etf_3x_short"
+    description: "3x leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: 3
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.90
+    notes: "3 x 30% = 90%"
+
+  # 4x Leveraged ETFs
+  - id: "4210_etf_4x_long"
+    description: "4x leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: 4
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.00
+    notes: "4 x 25% = 100% (capped at 100%)"
+
+  - id: "4210_etf_4x_short"
+    description: "4x leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: 4
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.20
+    notes: "4 x 30% = 120% (no cap on short)"
+
+  # 5x Leveraged ETFs
+  - id: "4210_etf_5x_long"
+    description: "5x leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: 5
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.00
+    notes: "5 x 25% = 125%, capped at 100%"
+
+  - id: "4210_etf_5x_short"
+    description: "5x leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: 5
+    formula:
+      type: "percentage_of_market_value"
+      rate: 1.50
+    notes: "5 x 30% = 150% (no cap on short)"
+
+  # Inverse (-1x) ETFs
+  - id: "4210_etf_inv1x_long"
+    description: "-1x inverse ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: -1
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.30
+    notes: "Inverse long has short-like exposure: 1 x 30% = 30%"
+
+  - id: "4210_etf_inv1x_short"
+    description: "-1x inverse ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: -1
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+    notes: "Inverse short has long-like exposure: 1 x 25% = 25%"
+
+  # -2x Inverse Leveraged ETFs
+  - id: "4210_etf_inv2x_long"
+    description: "-2x inverse leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: -2
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.60
+    notes: "2 x 30% = 60% (inverse long = short exposure)"
+
+  - id: "4210_etf_inv2x_short"
+    description: "-2x inverse leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: -2
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.50
+    notes: "2 x 25% = 50% (inverse short = long exposure)"
+
+  # -3x Inverse Leveraged ETFs
+  - id: "4210_etf_inv3x_long"
+    description: "-3x inverse leveraged ETF - long"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "long"
+      leverage_factor: -3
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.90
+    notes: "3 x 30% = 90% (inverse long = short exposure)"
+
+  - id: "4210_etf_inv3x_short"
+    description: "-3x inverse leveraged ETF - short"
+    citation: "FINRA 4210(c)/13"
+    source_quote: >
+      The initial and maintenance margin requirement leveraged exchange
+      trade products, including exchange traded funds (ETFs) and exchange
+      traded notes (ETNs) designed to generate multiples (e.g., two times
+      (2x), three times (3x), etc.) of the performance of a reference
+      instrument, index or benchmark (leveraged ETPs) carried long or
+      short in a customer's account is increased by an amount
+      commensurate with its leverage, subject to a cap of 100% of the
+      current market value on a long position (but without a cap on the
+      margin on a short position).
+    conditions:
+      security_type: "etf"
+      position_side: "short"
+      leverage_factor: -3
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.75
+    notes: "3 x 25% = 75% (inverse short = long exposure)"

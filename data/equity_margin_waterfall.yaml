@@ -1,0 +1,195 @@
+## Equity Margin Waterfall
+##
+## Determines the maintenance margin requirement for equity securities
+## under FINRA Rule 4210. Rules are evaluated in priority order; the
+## first matching rule sets the margin rate. Higher-priority rules
+## (lower numbers) capture positions with special treatment before
+## the standard equity rules apply.
+##
+## Sources:
+##   - FINRA Rule 4210(c)(1)-(6) -- Maintenance margin for equities
+##   - FINRA IM-4210-2 -- Concentrated account requirements
+##   - Reg T 220.4(b)(4) -- Initial margin (50% standard)
+
+categories:
+
+  - priority: 1
+    name: Non-Marginable Equity
+    rationale: >-
+      Securities that are not margin-eligible receive no credit extension.
+      The customer must deposit 100% of market value. This takes precedence
+      over all other equity margin rules because non-marginable status is
+      an absolute constraint.
+    citation: "FINRA 4210(c)(6)"
+    rules:
+
+      - rule_id: "4210_equity_long_nonmarginable"
+        name: "Non-Marginable Long Equity"
+        section: "4210(c)(6)"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 100% × market_value
+          No credit extension permitted.
+        reg_t_initial: 1.00
+        finra_maintenance: 1.00
+        conditions:
+          - security_type = equity
+          - marginable = false
+          - position_side = long
+        definition: >-
+          Per 4210(c)(6): "100 percent of the current market value for each
+          non-margin eligible equity security held 'long' in the account."
+          Non-marginable securities include OTC bulletin board stocks, penny
+          stocks, and securities designated by the firm as non-marginable.
+
+  - priority: 2
+    name: Concentrated Long Equity
+    rationale: >-
+      When a single position or issuer represents a disproportionate share
+      of account equity, the standard 25% maintenance rate is insufficient.
+      FINRA IM-4210-2 requires firms to impose additional margin on
+      concentrated positions. This is evaluated before standard rules so
+      that concentrated positions are not under-margined.
+    citation: "FINRA IM-4210-2"
+    rules:
+
+      - rule_id: "4210_equity_concentrated_long"
+        name: "Concentrated Long Equity"
+        section: "IM-4210-2"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 40% × market_value
+          Applies when position exceeds concentration thresholds.
+        reg_t_initial: 0.50
+        finra_maintenance: 0.40
+        conditions:
+          - security_type = equity
+          - marginable = true
+          - concentrated = true
+          - position_side = long
+        definition: >-
+          Per FINRA Interpretive Material IM-4210-2, positions that represent
+          a significant portion of account equity require additional margin.
+          The 40% rate applies to long equity positions that exceed the
+          single-security (10% of equity) or same-issuer (15% of equity)
+          concentration thresholds. Rate can be escalated up to 100% at
+          firm discretion based on liquidity and volatility.
+
+  - priority: 3
+    name: Concentrated Short Equity
+    rationale: >-
+      Short concentrated positions carry higher risk than long concentrated
+      positions due to unlimited loss potential. The surcharge is 50%
+      compared to 30% standard short maintenance.
+    citation: "FINRA IM-4210-2"
+    rules:
+
+      - rule_id: "4210_equity_concentrated_short"
+        name: "Concentrated Short Equity"
+        section: "IM-4210-2"
+        position_side: "short"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 50% × market_value
+          Applies when short position exceeds concentration thresholds.
+        reg_t_initial: 0.50
+        finra_maintenance: 0.50
+        conditions:
+          - security_type = equity
+          - marginable = true
+          - concentrated = true
+          - position_side = short
+        definition: >-
+          Per FINRA IM-4210-2, concentrated short equity positions require
+          50% maintenance margin (vs 30% standard). Short positions carry
+          unlimited risk potential, so the surcharge reflects the amplified
+          danger of a concentrated short that may be difficult to cover.
+
+  - priority: 4
+    name: Standard Long Equity
+    rationale: >-
+      The baseline maintenance margin for marginable long equity positions.
+      This is the most commonly applied equity margin rule.
+    citation: "FINRA 4210(c)(1)"
+    rules:
+
+      - rule_id: "4210_equity_long_standard"
+        name: "Standard Long Equity"
+        section: "4210(c)(1)"
+        position_side: "long"
+        formula_type: "percentage_of_market_value"
+        formula_detail: |
+          FINRA maintenance: 25% × market_value
+          Minimum: $2.50/share
+        reg_t_initial: 0.50
+        finra_maintenance: 0.25
+        conditions:
+          - security_type = equity
+          - marginable = true
+          - concentrated = false
+          - position_side = long
+        definition: >-
+          Per 4210(c)(1): "25 percent of the current market value of all
+          margin securities, as defined in Section 220.2 of Regulation T,
+          except for security futures contracts, 'long' in the account."
+          This is the standard maintenance margin for marginable equities.
+
+  - priority: 5
+    name: Standard Short Equity
+    rationale: >-
+      Standard short equity maintenance is 30% of market value or $5.00
+      per share, whichever is greater. The higher rate relative to long
+      positions reflects unlimited upside risk on short sales.
+    citation: "FINRA 4210(c)(1)"
+    rules:
+
+      - rule_id: "4210_equity_short_standard"
+        name: "Standard Short Equity (price >= $5.00)"
+        section: "4210(c)(3)"
+        position_side: "short"
+        formula_type: "greater_of"
+        formula_detail: |
+          FINRA maintenance: greater of (30% × market_value, $5.00/share)
+        reg_t_initial: 0.50
+        finra_maintenance: 0.30
+        conditions:
+          - security_type = equity
+          - marginable = true
+          - concentrated = false
+          - position_side = short
+          - price >= $5.00
+        definition: >-
+          Per 4210(c)(3): "$5.00 per share or 30 percent of the current
+          market value, whichever amount is greater, of each stock 'short'
+          in the account selling at $5.00 per share or above."
+
+  - priority: 6
+    name: Low-Priced Short Equity
+    rationale: >-
+      Stocks trading below $5.00/share are subject to 100% maintenance
+      margin for short positions, reflecting the extreme volatility risk
+      of low-priced securities. The $2.50/share floor ensures a minimum
+      margin even on very cheap stocks.
+    citation: "FINRA 4210(c)(1)"
+    rules:
+
+      - rule_id: "4210_equity_short_low_price"
+        name: "Low-Priced Short Equity (price < $5.00)"
+        section: "4210(c)(2)"
+        position_side: "short"
+        formula_type: "greater_of"
+        formula_detail: |
+          FINRA maintenance: greater of (100% × market_value, $2.50/share)
+        reg_t_initial: 1.00
+        finra_maintenance: 1.00
+        conditions:
+          - security_type = equity
+          - position_side = short
+          - price < $5.00
+        definition: >-
+          Per 4210(c)(2): "$2.50 per share or 100 percent of the current
+          market value, whichever amount is greater, of each stock 'short'
+          in the account selling at less than $5.00 per share." The 100%
+          rate effectively makes low-priced short sales non-marginable.

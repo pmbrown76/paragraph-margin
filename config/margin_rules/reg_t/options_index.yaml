@@ -1,0 +1,190 @@
+rule_set:
+  regulation: "Regulation T"
+  authority: "Federal Reserve Board"
+  cfr: "12 CFR Part 220"
+  section: "220.12(c)"
+  description: "Initial margin for cash-settled index options — Reg T defers to SRO rules"
+  effective_date: "2024-01-01"
+  notes: >
+    Cash-settled European-style index options (SPX, NDX, RUT, etc.) settle in
+    cash with no physical delivery. Reg T Section 220.12(c) defers to SRO rules
+    (FINRA 4210(f)) for option margin requirements.
+
+rules:
+  # --- Long cash-settled index options: full payment required ---
+
+  - id: "reg_t_long_call_index_cash"
+    description: "Long call on cash-settled index — full payment required"
+    citation: "Reg T 220.12(c)(1)"
+    source_quote: >
+      Put or call on a security, certificate of deposit, securities index or
+      foreign currency or a warrant on a securities index or foreign currency:
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "long"
+      underlying_type: "index"
+      settlement_type: "cash"
+    formula:
+      type: "full_payment"
+    notes: "100% of premium must be paid at purchase. Reg T requires full payment for all long option positions."
+
+  - id: "reg_t_long_put_index_cash"
+    description: "Long put on cash-settled index — full payment required"
+    citation: "Reg T 220.12(c)(1)"
+    source_quote: >
+      Put or call on a security, certificate of deposit, securities index or
+      foreign currency or a warrant on a securities index or foreign currency:
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "long"
+      underlying_type: "index"
+      settlement_type: "cash"
+    formula:
+      type: "full_payment"
+    notes: "100% of premium must be paid at purchase. Reg T requires full payment for all long option positions."
+
+  # --- Naked cash-settled broad-based index options (15% underlying) ---
+
+  - id: "reg_t_naked_call_broad_index_cash"
+    description: "Naked call on cash-settled broad-based index — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Reg T defers to FINRA 4210(f)(6)(A) for naked broad-based index options.
+      100% of premium plus 15% of underlying index value, less out-of-the-money
+      amount. Minimum: 100% of premium plus 10% of underlying. Cash settlement
+      eliminates physical delivery risk.
+
+  - id: "reg_t_naked_put_broad_index_cash"
+    description: "Naked put on cash-settled broad-based index — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "broad_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.15
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Reg T defers to FINRA 4210(f)(6)(A) for naked broad-based index options.
+      100% of premium plus 15% of underlying index value, less out-of-the-money
+      amount. Minimum: 100% of premium plus 10% of underlying.
+
+  # --- Naked cash-settled narrow-based index options (20% underlying) ---
+
+  - id: "reg_t_naked_call_narrow_index_cash"
+    description: "Naked call on cash-settled narrow-based index — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "call"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Reg T defers to FINRA 4210(f)(6)(B) for naked narrow-based index options.
+      100% of premium plus 20% of underlying index value, less out-of-the-money
+      amount. Minimum: 100% of premium plus 10% of underlying. Higher rate than
+      broad-based reflects greater concentration risk.
+
+  - id: "reg_t_naked_put_narrow_index_cash"
+    description: "Naked put on cash-settled narrow-based index — per SRO rules"
+    citation: "Reg T 220.12(c)"
+    source_quote: >
+      In the case of puts and calls issued by a registered clearing corporation
+      and listed or traded on a registered national securities exchange or a
+      registered securities association, the amount, or other position specified
+      by the rules of the registered national securities exchange or the
+      registered securities association authorized to trade the option or
+      warrant, provided that all such rules have been approved or amended by
+      the SEC.
+    conditions:
+      security_type: "option"
+      option_type: "put"
+      position_side: "short"
+      covered: false
+      underlying_type: "index"
+      index_type: "narrow_based"
+      settlement_type: "cash"
+    formula:
+      type: "naked_option"
+      premium_pct: 1.00
+      underlying_pct: 0.20
+      otm_deduction: true
+      minimum_underlying_pct: 0.10
+      minimum_per_contract: 100
+    notes: >
+      Reg T defers to FINRA 4210(f)(6)(B) for naked narrow-based index options.
+      100% of premium plus 20% of underlying index value, less out-of-the-money
+      amount. Minimum: 100% of premium plus 10% of underlying.

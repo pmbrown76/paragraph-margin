@@ -1,0 +1,644 @@
+## SEC Rule 15c3-3 — Customer Protection Waterfall
+##
+## Determines the obligations of a broker-dealer to safeguard customer
+## assets under SEC Rule 15c3-3 (the "Customer Protection Rule").
+## Rules are evaluated in priority order; each category represents a
+## distinct compliance obligation. Unlike margin waterfalls, these are
+## firm-level rules governing possession/control of customer securities
+## and segregation of customer cash.
+##
+## Sources:
+##   - SEC Rule 15c3-3 -- Customer Protection
+##   - SEC Rule 15c3-3 Exhibit A -- Reserve Formula
+##   - SEC Rule 17a-11(c) -- Notification requirements
+##   - Exchange Act Release No. 34-70072 (2013) -- Amendments
+
+categories:
+
+  - priority: 1
+    name: "Possession or Control"
+    rationale: >-
+      The foundational obligation of the Customer Protection Rule. A
+      broker-dealer must obtain and maintain physical possession or control
+      of all fully-paid and excess margin securities carried for customers.
+      This is the highest priority because it is the core protective
+      mechanism — ensuring customer securities are not exposed to the
+      broker-dealer's proprietary risk.
+    citation: "15c3-3(b)"
+    rules:
+
+      - rule_id: "15c3_3_possession_control"
+        name: "Possession or Control Requirement"
+        section: "15c3-3(b)"
+        formula_type: "compliance_requirement"
+        formula_detail: |
+          compliance: hold fully-paid + excess margin securities
+          Fully-paid securities: securities for which the customer
+          has paid in full.
+          Excess margin securities: securities with market value
+          exceeding 140% of the customer's debit balance.
+        conditions:
+          - account carries fully-paid customer securities
+          - account carries excess margin securities
+        definition: >-
+          Per 15c3-3(b): "Every broker or dealer shall promptly obtain and
+          shall thereafter maintain the physical possession or control of all
+          fully paid securities and excess margin securities carried by a
+          broker or dealer for the account of customers." This is an
+          affirmative, ongoing obligation — the firm must cure any deficiency
+          within one business day of discovery.
+
+  - priority: 2
+    name: "Acceptable Control Locations"
+    rationale: >-
+      Possession or control is only meaningful if the securities are held
+      in locations where they are protected from the broker-dealer's
+      creditors. Rule 15c3-3(c) enumerates the exclusive set of "good
+      control locations" where customer securities may be held and still
+      satisfy the possession or control requirement.
+    citation: "15c3-3(c)"
+    rules:
+
+      - rule_id: "15c3_3_control_locations"
+        name: "Good Control Locations"
+        section: "15c3-3(c)"
+        formula_type: "compliance_requirement"
+        formula_detail: |
+          compliance: DTC, bank, vault
+          Acceptable locations include:
+            - Depository Trust Company (DTC) segregation account
+            - Bank custodian with no lien
+            - Firm vault (proprietary physical custody)
+            - Transfer agent (in customer name)
+        conditions:
+          - securities must be in a location enumerated by 15c3-3(c)
+          - location must be free of any lien or claim by the broker-dealer's creditors
+        definition: >-
+          Per 15c3-3(c): Securities are deemed in the broker-dealer's control
+          if they are held in specific enumerated locations, including a
+          clearing corporation, a bank under an acceptable control agreement,
+          the firm's physical possession, or at a transfer agent in customer
+          name. Securities at non-enumerated locations (e.g., a foreign
+          depository without qualifying agreement) do not satisfy the
+          possession or control requirement.
+
+  - priority: 3
+    name: "Rehypothecation Limit"
+    rationale: >-
+      Broker-dealers may use customer margin securities as collateral for
+      their own financing (rehypothecation), but only up to 140% of the
+      customer's debit balance. This limit prevents the firm from pledging
+      more customer property than is justified by the credit extended,
+      ensuring the excess remains under possession or control.
+    citation: "15c3-3(b)(3)"
+    rules:
+
+      - rule_id: "15c3_3_rehypothecation_limit"
+        name: "140% Rehypothecation Limit"
+        section: "15c3-3(b)(3)"
+        formula_type: "restriction"
+        formula_detail: |
+          restriction: 140% of debit balance
+          max_rehypothecation = 1.40 × customer_debit_balance
+          Any securities with MV above this threshold are
+          "excess margin securities" and must be in P&C.
+        conditions:
+          - customer has a margin debit balance
+          - firm rehypothecates customer margin securities
+        definition: >-
+          Per 15c3-3(b)(3) and Section 8 of the Exchange Act: A broker-dealer
+          may not hypothecate customer margin securities in an amount exceeding
+          140% of the aggregate debit balance of all customer margin accounts.
+          Securities with market value in excess of this limit are classified
+          as "excess margin securities" and must be maintained in the firm's
+          possession or control under 15c3-3(b).
+
+  - priority: 4
+    name: "Reserve Formula Overview"
+    rationale: >-
+      The reserve formula is the mechanism by which a broker-dealer
+      determines how much cash it must segregate on behalf of customers.
+      Credits represent customer claims; debits represent amounts owed by
+      customers. If credits exceed debits, the net excess must be deposited
+      in the Special Reserve Bank Account. This is the central quantitative
+      requirement of the Customer Protection Rule.
+    citation: "15c3-3(e)"
+    rules:
+
+      - rule_id: "15c3_3_reserve_formula"
+        name: "Reserve Formula Computation"
+        section: "15c3-3(e)"
+        formula_type: "reserve_computation"
+        formula_detail: |
+          reserve_computation: credits - debits
+          reserve_deposit = total_credits - total_debits
+          If result > 0: deposit excess in Special Reserve Account
+          If result <= 0: no deposit required (but cannot withdraw
+          below prior deposit without 2-day waiting period)
+        conditions:
+          - firm carries customer accounts
+          - firm is not exempt under 15c3-3(k)
+        definition: >-
+          Per 15c3-3(e) and Exhibit A: The broker-dealer must compute weekly
+          (or daily if required) the aggregate amount of credits and debits
+          in all customer accounts. If total credits exceed total debits,
+          the broker-dealer must maintain a deposit in a Special Reserve
+          Bank Account for the exclusive benefit of customers equal to the
+          net credit balance. The computation follows the items enumerated
+          in Exhibit A to Rule 15c3-3.
+
+  - priority: 5
+    name: "Credit Items"
+    rationale: >-
+      Credit items represent obligations the broker-dealer owes to customers
+      or amounts received on behalf of customers. These are the numerator
+      of the reserve formula — the total claims of customers against the
+      firm's assets. Each credit item is defined in Exhibit A, Section 1
+      of Rule 15c3-3.
+    citation: "Exhibit A §1(a)-(i)"
+    rules:
+
+      - rule_id: "15c3_3_credit_free_balance"
+        name: "Free Credit Balances"
+        section: "Exhibit A §1(a)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: free_credit_balances
+          Uninvested cash held in customer accounts that has not
+          been committed to purchase securities.
+        conditions:
+          - customer has uninvested cash balance
+        definition: >-
+          Per Exhibit A §1(a): Free credit balances and other credit balances
+          in customers' securities accounts. These represent cash owed to
+          customers that the firm holds but has not invested on their behalf.
+          Includes proceeds from sales awaiting reinvestment.
+
+      - rule_id: "15c3_3_credit_short_proceeds"
+        name: "Short Sale Proceeds"
+        section: "Exhibit A §1(b)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: market_value_of_short_positions
+          Credit equals current market value of all customer short
+          positions (marked to market daily).
+        conditions:
+          - customer has open short positions
+        definition: >-
+          Per Exhibit A §1(b): Money borrowed collateralizing customers' short
+          positions, calculated as the current market value of such short
+          securities. This credit represents the obligation to eventually
+          return borrowed securities, valued at current market prices.
+
+      - rule_id: "15c3_3_credit_margin_balance"
+        name: "Margin Account Credits"
+        section: "Exhibit A §1(c)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: margin_account_credit_balances
+          Credit balances arising from customer margin transactions.
+        conditions:
+          - customer has credit balance in margin account
+        definition: >-
+          Per Exhibit A §1(c): Customers' securities accounts containing
+          credit balances which have not been specifically identified as
+          free credit balances. These arise from margin account activity
+          including partial payments and mark-to-market adjustments.
+
+      - rule_id: "15c3_3_credit_customer_payable"
+        name: "Customer Payables"
+        section: "Exhibit A §1(d)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: customer_payable_balances
+          Amounts payable to customers against fully-paid securities.
+        conditions:
+          - firm owes payment to customer
+        definition: >-
+          Per Exhibit A §1(d): Market value of stock dividends, stock splits,
+          and similar distributions payable to customers but not yet
+          distributed. Also includes amounts payable against customers'
+          fully-paid securities received by the broker-dealer.
+
+      - rule_id: "15c3_3_credit_ftr_aged"
+        name: "Failed-to-Receive Aged Items"
+        section: "Exhibit A §1(e)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: aged_fail_to_receive_contract_value
+          Contract value of customer securities failed to receive
+          for 30 or more calendar days.
+        conditions:
+          - fail-to-receive on customer purchase aged 30+ days
+        definition: >-
+          Per Exhibit A §1(e): The contract value of fails to receive of
+          customers' fully-paid securities and the contract value of fails
+          to receive of customers' margin securities that have been
+          outstanding 30 calendar days or longer. Aged fails represent a
+          credit because the firm has received payment but not yet
+          delivered securities.
+
+      - rule_id: "15c3_3_credit_sec_borrowed"
+        name: "Securities Borrowed Deposits"
+        section: "Exhibit A §1(f)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: cash_deposited_for_securities_borrowed
+          Cash collateral deposited with lenders for customer-related
+          securities borrowing transactions.
+        conditions:
+          - firm borrows securities to cover customer delivery obligations
+        definition: >-
+          Per Exhibit A §1(f): The market value of stock dividends, stock
+          splits and similar distributions receivable outstanding more than
+          30 calendar days and cash deposited with clearing organizations
+          or others for the account of customers.
+
+      - rule_id: "15c3_3_credit_money_market"
+        name: "Money Market Balances"
+        section: "Exhibit A §1(g)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: money_market_fund_balances
+          Balances in money market funds held for customer accounts.
+        conditions:
+          - customer funds invested in money market instruments
+        definition: >-
+          Per Exhibit A §1(g): Credit balances in firmʼs account
+          representing customer funds invested in money market instruments
+          or similar short-term investments pending final settlement or
+          customer instruction.
+
+      - rule_id: "15c3_3_credit_margin_deficiency"
+        name: "Margin Deficiency Calls"
+        section: "Exhibit A §1(h)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: debit_balance_offset_for_margin_deficiency
+          Reduction to debit items for margin calls outstanding
+          less than required timeframe.
+        conditions:
+          - margin deficiency call outstanding
+        definition: >-
+          Per Exhibit A §1(h): The amount of margin required and on deposit
+          with Options Clearing Corporation or other clearing organizations
+          for all customers' option contracts and commodities written,
+          purchased, sold or granted in customer accounts.
+
+      - rule_id: "15c3_3_credit_other"
+        name: "Other Credits"
+        section: "Exhibit A §1(i)"
+        formula_type: "reserve_credit"
+        formula_detail: |
+          reserve_credit: other_credit_items
+          Any additional credit items not enumerated above, as
+          specified by SEC interpretation or no-action guidance.
+        conditions:
+          - other items creating customer credit obligations
+        definition: >-
+          Per Exhibit A §1(i): Any other items as the Commission may
+          designate as credits. This is a catch-all provision allowing
+          the SEC to designate additional credit items through
+          interpretive releases, no-action letters, or rulemaking.
+
+  - priority: 6
+    name: "Debit Items"
+    rationale: >-
+      Debit items represent amounts owed by customers to the broker-dealer
+      or assets the firm holds that offset customer claims. These reduce
+      the reserve requirement. Each debit item is defined in Exhibit A,
+      Section 2 of Rule 15c3-3.
+    citation: "Exhibit A §2(a)-(f)"
+    rules:
+
+      - rule_id: "15c3_3_debit_margin_loan"
+        name: "Margin Debit Balances"
+        section: "Exhibit A §2(a)"
+        formula_type: "reserve_debit"
+        formula_detail: |
+          reserve_debit: margin_debit_balances
+          Amounts owed by customers on margin loans, net of
+          any allowance for doubtful accounts.
+        conditions:
+          - customer has outstanding margin loan balance
+        definition: >-
+          Per Exhibit A §2(a): Debit balances in customers' securities margin
+          accounts after applying the formula for reserves. These represent
+          credit extended to customers secured by their margin securities.
+          Debit balances reduce the reserve requirement because they
+          represent customer obligations to the firm.
+
+      - rule_id: "15c3_3_debit_cash_account"
+        name: "Cash Account Debits"
+        section: "Exhibit A §2(b)"
+        formula_type: "reserve_debit"
+        formula_detail: |
+          reserve_debit: cash_account_debit_balances
+          Amounts owed by customers in cash (non-margin) accounts,
+          typically from unsettled purchases.
+        conditions:
+          - customer has debit balance in cash account
+        definition: >-
+          Per Exhibit A §2(b): Debit balances in customers' cash accounts
+          including amounts arising from customer purchases not yet settled.
+          These amounts are expected to be collected within normal settlement
+          timeframes and reduce the reserve requirement accordingly.
+
+      - rule_id: "15c3_3_debit_sec_borrowed"
+        name: "Securities Borrowed Value"
+        section: "Exhibit A §2(c)"
+        formula_type: "reserve_debit"
+        formula_detail: |
+          reserve_debit: securities_borrowed_value
+          Market value of securities borrowed to effectuate
+          customer short sales or cover delivery obligations.
+        conditions:
+          - firm borrows securities for customer-related activity
+        definition: >-
+          Per Exhibit A §2(c): The market value of securities borrowed by
+          the broker-dealer to cover customers' short sales and to cover
+          failures to deliver of customers' securities to other
+          broker-dealers. Offsets the credit from short sale proceeds.
+
+      - rule_id: "15c3_3_debit_ftd_aged"
+        name: "Failed-to-Deliver Aged Items"
+        section: "Exhibit A §2(d)"
+        formula_type: "reserve_debit"
+        formula_detail: |
+          reserve_debit: aged_fail_to_deliver_contract_value
+          Contract value of customer securities failed to deliver
+          for 30 or more calendar days.
+        conditions:
+          - fail-to-deliver on customer sale aged 30+ days
+        definition: >-
+          Per Exhibit A §2(d): The contract value of fails to deliver of
+          customers' securities outstanding 30 calendar days or longer.
+          Aged fails to deliver represent amounts the firm expects to
+          receive and thus offset the reserve requirement.
+
+      - rule_id: "15c3_3_debit_customer_receivable"
+        name: "Customer Receivables"
+        section: "Exhibit A §2(e)"
+        formula_type: "reserve_debit"
+        formula_detail: |
+          reserve_debit: customer_receivable_balances
+          Amounts receivable from customers for settled but
+          unpaid transactions.
+        conditions:
+          - firm has receivable from customer
+        definition: >-
+          Per Exhibit A §2(e): Net receivable balances from customers
+          arising from cash and margin transactions. Represents amounts
+          customers owe the firm that reduce the net credit obligation
+          and thus reduce the required reserve deposit.
+
+      - rule_id: "15c3_3_debit_other"
+        name: "Other Debits"
+        section: "Exhibit A §2(f)"
+        formula_type: "reserve_debit"
+        formula_detail: |
+          reserve_debit: other_debit_items
+          Any additional debit items not enumerated above, as
+          specified by SEC interpretation or no-action guidance.
+        conditions:
+          - other items reducing customer credit obligations
+        definition: >-
+          Per Exhibit A §2(f): Any other items as the Commission may
+          designate as debits. Parallel to the credit catch-all, this
+          allows the SEC to designate additional debit items through
+          interpretive releases, no-action letters, or rulemaking.
+
+  - priority: 7
+    name: "Special Reserve Bank Account"
+    rationale: >-
+      When the reserve formula produces a net credit (credits exceed debits),
+      the broker-dealer must deposit that amount in a Special Reserve Bank
+      Account for the exclusive benefit of customers. The account must be
+      at a bank, subject to an agreement that the bank will not assert any
+      lien or right of offset against the account. This ensures customer
+      funds are protected in the event of broker-dealer insolvency.
+    citation: "15c3-3(e)(1)"
+    rules:
+
+      - rule_id: "15c3_3_special_reserve_account"
+        name: "Special Reserve Bank Account Deposit"
+        section: "15c3-3(e)(1)"
+        formula_type: "compliance_requirement"
+        formula_detail: |
+          compliance: deposit at bank, no lien
+          Deposit must be in a separate account at a bank.
+          Bank must execute agreement waiving lien rights.
+          Account titled "Special Reserve Bank Account for the
+          Exclusive Benefit of Customers."
+        conditions:
+          - reserve formula produces net credit balance
+          - firm is not exempt under 15c3-3(k)
+        definition: >-
+          Per 15c3-3(e)(1): The broker-dealer shall maintain with a bank
+          or banks at all times a "Special Reserve Bank Account for the
+          Exclusive Benefit of Customers" in an amount not less than the
+          net cash owed to customers as determined by the reserve formula.
+          The bank must execute a written notification acknowledging that
+          the funds are for the exclusive benefit of customers and that
+          the bank shall not assert any lien or right of offset.
+
+  - priority: 8
+    name: "PAB Reserve"
+    rationale: >-
+      Broker-dealers that carry proprietary accounts of broker-dealers
+      (PAB accounts) must perform a separate reserve computation for those
+      accounts. The PAB reserve prevents commingling of obligations owed
+      to other broker-dealers with those owed to customers, providing an
+      additional layer of protection in the event of insolvency.
+    citation: "15c3-3(e)(2)"
+    rules:
+
+      - rule_id: "15c3_3_pab_reserve"
+        name: "PAB Reserve Computation"
+        section: "15c3-3(e)(2)"
+        formula_type: "reserve_computation"
+        formula_detail: |
+          reserve_computation: separate PAB calc
+          Separate reserve formula for proprietary accounts of
+          broker-dealers (PAB). Same credit/debit methodology
+          but applied only to PAB account balances.
+          Deposit maintained in separate PAB reserve account.
+        conditions:
+          - firm carries proprietary accounts of other broker-dealers
+        definition: >-
+          Per 15c3-3(e)(2): A broker-dealer that carries PAB accounts must
+          perform a separate reserve computation for those accounts using
+          a parallel methodology to the customer reserve formula. The
+          resulting deposit must be maintained in a separate "Special
+          Reserve Bank Account for the Exclusive Benefit of PAB Account
+          Holders." This prevents the broker-dealer from using PAB funds
+          to satisfy customer reserve obligations or vice versa.
+
+  - priority: 9
+    name: "Weekly Computation Cycle"
+    rationale: >-
+      The standard computation cycle requires firms to calculate the reserve
+      formula as of the close of business each Friday and deposit any
+      required amount by the following Tuesday (one hour after the opening
+      of banking business). This weekly cadence balances the regulatory
+      need for current calculations against the operational burden on firms.
+    citation: "15c3-3(e)(3)"
+    rules:
+
+      - rule_id: "15c3_3_weekly_computation"
+        name: "Weekly Computation and Deposit"
+        section: "15c3-3(e)(3)"
+        formula_type: "procedural"
+        formula_detail: |
+          procedural: Friday close, deposit by Tuesday
+          Computation date: as of close of business Friday.
+          Deposit deadline: 1 hour after opening of banking
+          business the following Tuesday.
+          Withdrawal: excess may be withdrawn only after
+          maintaining for 2+ business days.
+        conditions:
+          - firm performs standard weekly reserve computation
+          - firm is not required to compute daily under (e)(3)(iii)
+        definition: >-
+          Per 15c3-3(e)(3): A broker-dealer shall make a computation as of
+          the close of the last business day of each week and shall deposit
+          in or withdraw from the Special Reserve Bank Account not later
+          than one hour after the opening of banking business on the second
+          following business day (typically Tuesday). Withdrawals of excess
+          deposits are permitted only after the excess has been maintained
+          for at least two consecutive business days.
+
+  - priority: 10
+    name: "Monthly Computation (Small Firms)"
+    rationale: >-
+      Smaller broker-dealers with limited customer business may perform the
+      reserve computation monthly rather than weekly, reducing the
+      operational burden. This exemption applies to firms whose reserve
+      requirement has not exceeded $1 million at any month-end during the
+      preceding twelve months.
+    citation: "15c3-3(e)(3)(ii)"
+    rules:
+
+      - rule_id: "15c3_3_monthly_computation"
+        name: "Monthly Computation for Small Firms"
+        section: "15c3-3(e)(3)(ii)"
+        formula_type: "procedural"
+        formula_detail: |
+          procedural: firms with < $1M reserve
+          Eligible if reserve requirement has not exceeded $1M
+          at any month-end during the preceding 12 months.
+          Computation: as of last business day of each month.
+          Deposit: by the second following business day.
+        conditions:
+          - reserve requirement < $1M at all month-ends in prior 12 months
+          - firm elects monthly computation
+        definition: >-
+          Per 15c3-3(e)(3)(ii): A broker-dealer whose reserve formula
+          computation has not required a deposit in excess of $1 million at
+          any month-end during the prior twelve months may perform the
+          computation monthly rather than weekly. The computation must be
+          made as of the close of the last business day of each month, with
+          the deposit made by the second following business day.
+
+  - priority: 11
+    name: "Daily Computation (Large Firms)"
+    rationale: >-
+      The largest broker-dealers pose the greatest systemic risk and hold
+      the largest customer credit balances. Daily computation ensures these
+      firms maintain current reserve deposits, minimizing the risk of a
+      shortfall persisting for an extended period. The threshold was
+      established by the SEC in 2013 and applies to firms with average
+      daily customer credits exceeding a specified level.
+    citation: "15c3-3(e)(3)(iii)"
+    rules:
+
+      - rule_id: "15c3_3_daily_computation"
+        name: "Daily Computation for Large Firms"
+        section: "15c3-3(e)(3)(iii)"
+        formula_type: "procedural"
+        formula_detail: |
+          procedural: firms with > $500M ADI (2024)
+          Required if average total credits in reserve formula
+          exceed specified threshold (currently $500M average
+          daily customer indebtedness).
+          Computation: daily as of close of business.
+          Deposit: by 1 hour after opening of next banking day.
+        conditions:
+          - average daily total credits exceed threshold ($500M ADI as of 2024)
+        definition: >-
+          Per 15c3-3(e)(3)(iii): A broker-dealer whose average total credits
+          (as computed in the reserve formula) exceed the threshold specified
+          by the SEC must perform the reserve computation daily rather than
+          weekly. The computation is made as of the close of each business
+          day, with the required deposit made by one hour after the opening
+          of banking business on the following business day.
+
+  - priority: 12
+    name: "Notification of Deficiency"
+    rationale: >-
+      If a broker-dealer discovers it is not in compliance with the
+      possession or control requirement or the reserve formula, it must
+      immediately notify the SEC and its designated examining authority
+      (typically FINRA). Prompt notification allows regulators to monitor
+      the situation and take protective action if needed.
+    citation: "17a-11(c)"
+    rules:
+
+      - rule_id: "15c3_3_notification_deficit"
+        name: "Notification of Reserve or P&C Deficiency"
+        section: "17a-11(c)"
+        formula_type: "notification_requirement"
+        formula_detail: |
+          notification: immediate to SEC/FINRA
+          Trigger: discovery of any deficiency in:
+            - Possession or control (15c3-3(b))
+            - Reserve deposit (15c3-3(e))
+          Timing: same day as discovery.
+          Recipients: SEC, FINRA (or other DEA).
+        conditions:
+          - firm discovers possession or control deficiency
+          - firm discovers reserve deposit deficiency
+        definition: >-
+          Per SEC Rule 17a-11(c): A broker-dealer must give notice to the
+          Commission and its designated examining authority the same day it
+          discovers that it is not in compliance with SEC Rule 15c3-3. The
+          notification must specify the nature and amount of the deficiency
+          and the steps the firm is taking to cure it. Failure to provide
+          timely notification is a separate violation subject to regulatory
+          action.
+
+  - priority: 13
+    name: "Buy-In Obligation"
+    rationale: >-
+      When a broker-dealer identifies a deficiency in the possession or
+      control of customer securities, it must take affirmative steps to
+      cure the deficiency. If the firm cannot promptly obtain the
+      securities through normal channels, it must buy in the securities
+      in the open market. This ensures that possession or control
+      deficiencies are resolved rather than allowed to persist.
+    citation: "15c3-3(d)"
+    rules:
+
+      - rule_id: "15c3_3_buy_in"
+        name: "Buy-In to Cure P&C Deficiency"
+        section: "15c3-3(d)"
+        formula_type: "delivery_requirement"
+        formula_detail: |
+          delivery_requirement: cure P&C deficiency
+          If possession or control deficiency exists:
+            1. Attempt to obtain securities (recall loans, etc.)
+            2. If not obtained by close of next business day,
+               buy in the securities in the open market.
+          Timeline: cure within 1 business day of discovery.
+        conditions:
+          - possession or control deficiency identified
+          - securities not obtainable through recall or return
+        definition: >-
+          Per 15c3-3(d): If a broker-dealer determines that it has not
+          obtained or maintained possession or control of securities as
+          required by paragraph (b), the broker-dealer must immediately
+          take steps to obtain possession or control of such securities.
+          If possession or control is not achieved within one business day
+          after the determination, the broker-dealer must buy in the
+          securities through a purchase on the open market for the account
+          and liability of the firm.

@@ -1,0 +1,35 @@
+# House Rules — Security Futures Margin Overrides
+# ================================================
+# Firm-specific margin requirements for security futures
+# that exceed the regulatory 20% minimum.
+
+rule_set:
+  regulation: "House Rules"
+  description: "Firm-specific margin requirements for security futures"
+  effective_date: "2024-01-01"
+  notes: "House requirements above the 20% regulatory minimum for security futures."
+
+rules:
+  - id: "house_security_future_long"
+    description: "House requirement for long security futures"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "security_future"
+      position_side: "long"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+    notes: "25% house requirement (above 20% regulatory minimum)"
+
+  - id: "house_security_future_short"
+    description: "House requirement for short security futures"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "security_future"
+      position_side: "short"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+    notes: "25% house requirement (above 20% regulatory minimum)"

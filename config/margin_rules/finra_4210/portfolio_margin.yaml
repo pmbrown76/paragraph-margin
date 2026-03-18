@@ -1,0 +1,79 @@
+# FINRA Rule 4210(g) — Portfolio Margin Requirements
+# ===================================================
+# Portfolio margining uses the OCC TIMS methodology to calculate margin
+# based on theoretical worst-case portfolio loss under stress scenarios.
+# This file defines supplemental rules and parameters.
+#
+# The actual portfolio margin calculation is performed programmatically
+# by the PortfolioMarginCalculator, not by the YAML rule engine.
+# These rules define eligibility and parameters.
+
+rule_set:
+  regulation: "FINRA Rule 4210(g)"
+  section: "4210(g)"
+  description: "Portfolio margin requirements — TIMS-based risk calculation"
+  effective_date: "2024-01-01"
+
+rules:
+  - id: "4210g_equity_pm_stress"
+    description: "Portfolio margin equity stress range — ±15%"
+    citation: "FINRA 4210(g)(2)(F)"
+    source_quote: >-
+      The term "theoretical gains and losses" means the gain and loss in the value
+      of individual eligible products and related instruments at ten equidistant
+      intervals (valuation points) ranging from an assumed movement (both up and
+      down) in the current market value of the underlying instrument.
+    conditions:
+      account_type: "portfolio_margin"
+      security_type: "equity"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.15
+      description: "±15% stress range for equity positions under TIMS"
+
+  - id: "4210g_broad_index_pm_stress"
+    description: "Portfolio margin broad-based index stress range — ±8%"
+    citation: "FINRA 4210(g)(2)(F)"
+    source_quote: >-
+      The term "theoretical gains and losses" means the gain and loss in the value
+      of individual eligible products and related instruments at ten equidistant
+      intervals (valuation points) ranging from an assumed movement (both up and
+      down) in the current market value of the underlying instrument.
+    conditions:
+      account_type: "portfolio_margin"
+      security_type: "option"
+      index_type: "broad_based"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.08
+      description: "±8% stress range for broad-based index options"
+
+  - id: "4210g_minimum_equity"
+    description: "Portfolio margin minimum equity requirement — $500,000"
+    citation: "FINRA 4210(g)(1)"
+    source_quote: >
+      Members must monitor the risk of portfolio margin accounts and maintain a
+      comprehensive written risk analysis methodology for assessing the potential
+      risk to the member's capital over a specified range of possible market
+      movements of positions maintained in such accounts.
+    conditions:
+      account_type: "portfolio_margin"
+    formula:
+      type: "fixed_amount"
+      amount: 500000
+      description: "Minimum $500,000 net equity required for PM eligibility"
+
+  - id: "4210g_concentrated_surcharge"
+    description: "Portfolio margin concentration charge — 30% surcharge"
+    citation: "FINRA 4210(g)(9)"
+    source_quote: >
+      monitoring the credit exposure resulting from concentrated positions
+      within both individual portfolio margin accounts and across all portfolio
+      margin accounts.
+    conditions:
+      account_type: "portfolio_margin"
+      concentrated: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.30
+      description: "30% concentration charge for positions exceeding thresholds"

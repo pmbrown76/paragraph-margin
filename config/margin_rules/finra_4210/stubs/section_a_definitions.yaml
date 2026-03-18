@@ -1,0 +1,423 @@
+rule_set:
+  regulation: FINRA
+  section: '4210'
+  description: Rule 4210 sections — auto-generated stubs (needs review)
+  status: stub
+rules:
+- id: 4210_a
+  description: (a) Definitions
+  citation: FINRA 4210(a)
+  source_quote: '(a) Definitions For purposes of this Rule, the following terms shall have the meanings specified below: (a)
+    If a member engages in transactions with advisory clients of a registered investment adviser, the member may elect to
+    make the risk limit determination at the investment adviser level;'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)
+- id: 4210_a_1
+  description: (1) The term "basket" shall mean a group of stocks that FINRA or any national securities exchange designates
+    as eligible
+  citation: FINRA 4210(a)(1)
+  source_quote: (1) The term "basket" shall mean a group of stocks that FINRA or any national securities exchange designates
+    as eligible for execution in a single trade through its trading facilities and that consists of stocks whose inclusion
+    and relative representation in the group are determined by the inclusion and relative representation of their current
+    market prices in a widely disseminated stock index reflecting the stock market as a whole.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(1)
+- id: 4210_a_10
+  description: '(10) The term "investment grade debt securities" means any debt securities (including those issued by the
+    government of '
+  citation: FINRA 4210(a)(10)
+  source_quote: (10) The term "investment grade debt securities" means any debt securities (including those issued by the
+    government of a foreign country, its provinces, states or cities, or a supranational entity), if at the time of the extension
+    of credit the issue, the issuer or guarantor, or any other outstanding obligation of the issuer or guarantor ranked junior
+    to or on a parity with the issue or the guarantee is assigned a rating (implicitly or explicitly) in one of the top four
+    rating categories by at least one nationally recognized statistical rating organization.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_11
+  description: (11) The term "major foreign sovereign debt" means any debt securities issued or guaranteed by the government
+    of a forei
+  citation: FINRA 4210(a)(11)
+  source_quote: (11) The term "major foreign sovereign debt" means any debt securities issued or guaranteed by the government
+    of a foreign country or a supranational entity, if at the time of the extension of credit the issue, the issuer or guarantor,
+    or any other outstanding obligation of the issuer or guarantor ranked junior to or on a parity with the issue or the guarantee
+    is assigned a rating (implicitly or explicitly) in the top rating category by at least one nationally recognized statistical
+    rating organization.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_12
+  description: (12) The term "mortgage related securities" means securities falling within the definition in Section 3(a)(41)
+    of the Ex
+  citation: FINRA 4210(a)(12)
+  source_quote: (12) The term "mortgage related securities" means securities falling within the definition in Section 3(a)(41)
+    of the Exchange Act.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(12)
+- id: 4210_a_13
+  description: '(13) The term "exempt account" means:'
+  citation: FINRA 4210(a)(13)
+  source_quote: '(13) The term "exempt account" means:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)
+- id: 4210_a_13_A
+  description: '(A) a member, non-member broker-dealer registered as a broker or dealer under the Exchange Act, a "designated
+    account," '
+  citation: FINRA 4210(a)(13)(A)
+  source_quote: (A) a member, non-member broker-dealer registered as a broker or dealer under the Exchange Act, a "designated
+    account," or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)(A)
+- id: 4210_a_13_B
+  description: '(B) any person that:'
+  citation: FINRA 4210(a)(13)(B)
+  source_quote: '(B) any person that:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)(B)
+- id: 4210_a_13_B_i
+  description: (i) has a net worth of at least $45 million and financial assets of at least $40 million for purposes of paragraphs
+    (e)(
+  citation: FINRA 4210(a)(13)(B)(i)
+  source_quote: (i) has a net worth of at least $45 million and financial assets of at least $40 million for purposes of paragraphs
+    (e)(2)(F), (e)(2)(G) and (e)(2)(H), and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)(B)(i)
+- id: 4210_a_13_B_ii
+  description: '(ii) either:'
+  citation: FINRA 4210(a)(13)(B)(ii)
+  source_quote: '(ii) either:'
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)(B)(ii)
+- id: 4210_a_13_B_ii_a._a
+  description: 'a. has securities registered pursuant to Section 12 of the Exchange Act, has been subject to the reporting
+    requirements '
+  citation: FINRA 4210(a)(13)(B)(ii)(a.)
+  source_quote: a. has securities registered pursuant to Section 12 of the Exchange Act, has been subject to the reporting
+    requirements of Section 13 of the Exchange Act for a period of at least 90 days and has filed all the reports required
+    to be filed thereunder during the preceding 12 months (or such shorter period as it was required to file such reports),
+    or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_13_B_ii_b._b
+  description: b. has securities registered pursuant to the Securities Act, has been subject to the reporting requirements
+    of Section 1
+  citation: FINRA 4210(a)(13)(B)(ii)(b.)
+  source_quote: b. has securities registered pursuant to the Securities Act, has been subject to the reporting requirements
+    of Section 15(d) of the Exchange Act for a period of at least 90 days and has filed all the reports required to be filed
+    thereunder during the preceding 12 months (or such shorter period as it was required to file such reports), or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_13_B_ii_c._c
+  description: 'c. if such person is not subject to Section 13 or 15(d) of the Exchange Act, is a person with respect to which
+    there is '
+  citation: FINRA 4210(a)(13)(B)(ii)(c.)
+  source_quote: c. if such person is not subject to Section 13 or 15(d) of the Exchange Act, is a person with respect to which
+    there is publicly available the information specified in paragraphs (a)(5)(i) through (xiv), inclusive, of SEA Rule 15c2-11,
+    or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)(B)(ii)(c.)
+- id: 4210_a_13_B_ii_d._d
+  description: d. furnishes information to the SEC as required by SEA Rule 12g3-2(b), or
+  citation: FINRA 4210(a)(13)(B)(ii)(d.)
+  source_quote: d. furnishes information to the SEC as required by SEA Rule 12g3-2(b), or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(13)(B)(ii)(d.)
+- id: 4210_a_13_B_ii_e._e
+  description: e. makes available to the member such current information regarding such person's ownership, business, operations
+    and fi
+  citation: FINRA 4210(a)(13)(B)(ii)(e.)
+  source_quote: e. makes available to the member such current information regarding such person's ownership, business, operations
+    and financial condition (including such person's current audited statement of financial condition, statement of income
+    and statement of changes in stockholder's equity or comparable financial reports), as reasonably believed by the member
+    to be accurate, sufficient for the purposes of performing a risk analysis in respect of such person.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_14
+  description: (14) The term "non-equity securities" means any securities other than equity securities as defined in Section
+    3(a)(11) o
+  citation: FINRA 4210(a)(14)
+  source_quote: (14) The term "non-equity securities" means any securities other than equity securities as defined in Section
+    3(a)(11) of the Exchange Act.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_15
+  description: '(15) The term "listed non-equity securities" means any non-equity securities that: (A) are listed on a national
+    securiti'
+  citation: FINRA 4210(a)(15)
+  source_quote: '(15) The term "listed non-equity securities" means any non-equity securities that: (A) are listed on a national
+    securities exchange; or (B) have unlisted trading privileges on a national securities exchange.'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_16_A
+  description: '(A) Any debt securities not traded on a national securities exchange meeting all of the following requirements:'
+  citation: FINRA 4210(a)(16)(A)
+  source_quote: '(A) Any debt securities not traded on a national securities exchange meeting all of the following requirements:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_16_A_i
+  description: (i) At the time of the original issue, a principal amount of not less than $25 million of the issue was outstanding;
+  citation: FINRA 4210(a)(16)(A)(i)
+  source_quote: (i) At the time of the original issue, a principal amount of not less than $25 million of the issue was outstanding;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(16)(A)(i)
+- id: 4210_a_16_A_ii
+  description: (ii) The issue was registered under Section 5 of the Securities Act and the issuer either files periodic reports
+    pursuan
+  citation: FINRA 4210(a)(16)(A)(ii)
+  source_quote: (ii) The issue was registered under Section 5 of the Securities Act and the issuer either files periodic reports
+    pursuant to Section 13(a) or 15(d) of the Exchange Act or is an insurance company which meets all of the conditions specified
+    in Section 12(g)(2)(G) of the Exchange Act; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(16)(A)(ii)
+- id: 4210_a_16_A_iii
+  description: '(iii) At the time of the extensions of credit, the creditor has a reasonable basis for believing that the
+    issuer is not '
+  citation: FINRA 4210(a)(16)(A)(iii)
+  source_quote: (iii) At the time of the extensions of credit, the creditor has a reasonable basis for believing that the
+    issuer is not in default on interest or principal payments; or
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_16_B
+  description: (B) Any private pass-through securities (not guaranteed by any agency of the U.S. government) meeting all of
+    the followi
+  citation: FINRA 4210(a)(16)(B)
+  source_quote: '(B) Any private pass-through securities (not guaranteed by any agency of the U.S. government) meeting all
+    of the following requirements:'
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_16_B_i
+  description: '(i) An aggregate principal amount of not less than $25 million (which may be issued in series) was issued
+    pursuant to a '
+  citation: FINRA 4210(a)(16)(B)(i)
+  source_quote: (i) An aggregate principal amount of not less than $25 million (which may be issued in series) was issued
+    pursuant to a registration statement filed with the SEC under Section 5 of the Securities Act;
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(16)(B)(i)
+- id: 4210_a_16_B_ii
+  description: (ii) Current reports relating to the issue have been filed with the SEC; and
+  citation: FINRA 4210(a)(16)(B)(ii)
+  source_quote: (ii) Current reports relating to the issue have been filed with the SEC; and
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(16)(B)(ii)
+- id: 4210_a_16_B_iii
+  description: (iii) At the time of the credit extension, the creditor has a reasonable basis for believing that mortgage
+    interest, pri
+  citation: FINRA 4210(a)(16)(B)(iii)
+  source_quote: (iii) At the time of the credit extension, the creditor has a reasonable basis for believing that mortgage
+    interest, principal payments and other distributions are being passed through as required and that the servicing agent
+    is meeting its material obligations under the terms of the offering.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_2
+  description: (2) The term "current market value" means the total cost or net proceeds of a security on the day it was purchased
+    or so
+  citation: FINRA 4210(a)(2)
+  source_quote: (2) The term "current market value" means the total cost or net proceeds of a security on the day it was purchased
+    or sold or at any other time the preceding business day's closing price as shown by any regularly published reporting
+    or quotation service except for security futures contracts (see paragraph (f)(10)(C)(ii)). If there is no closing price,
+    a member may use a reasonable estimate of the market value of the security as of the close of business on the preceding
+    business day.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(2)
+- id: 4210_a_4
+  description: '(4) The term "designated account" means the account of:'
+  citation: FINRA 4210(a)(4)
+  source_quote: '(4) The term "designated account" means the account of:'
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(4)
+- id: 4210_a_4_A
+  description: (A) a bank (as defined in Section 3(a)(6) of the Exchange Act),
+  citation: FINRA 4210(a)(4)(A)
+  source_quote: (A) a bank (as defined in Section 3(a)(6) of the Exchange Act),
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(4)(A)
+- id: 4210_a_4_B
+  description: (B) a savings association (as defined in Section 3(b) of the Federal Deposit Insurance Act), the deposits of
+    which are i
+  citation: FINRA 4210(a)(4)(B)
+  source_quote: (B) a savings association (as defined in Section 3(b) of the Federal Deposit Insurance Act), the deposits
+    of which are insured by the Federal Deposit Insurance Corporation,
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_4_C
+  description: (C) an insurance company (as defined in Section 2(a)(17) of the Investment Company Act),
+  citation: FINRA 4210(a)(4)(C)
+  source_quote: (C) an insurance company (as defined in Section 2(a)(17) of the Investment Company Act),
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(4)(C)
+- id: 4210_a_4_D
+  description: (D) an investment company registered with the SEC under the Investment Company Act,
+  citation: FINRA 4210(a)(4)(D)
+  source_quote: (D) an investment company registered with the SEC under the Investment Company Act,
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(4)(D)
+- id: 4210_a_4_E
+  description: (E) a state or political subdivision thereof, or
+  citation: FINRA 4210(a)(4)(E)
+  source_quote: (E) a state or political subdivision thereof, or
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(4)(E)
+- id: 4210_a_4_F
+  description: (F) a pension or profit sharing plan subject to the Employee Retirement Income Security Act (ERISA) or of an
+    agency of t
+  citation: FINRA 4210(a)(4)(F)
+  source_quote: (F) a pension or profit sharing plan subject to the Employee Retirement Income Security Act (ERISA) or of
+    an agency of the United States or of a state or a political subdivision thereof.
+  category: informational
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(4)(F)
+- id: 4210_a_5
+  description: (5) The term "equity" means the customer's ownership interest in the account, computed by adding the current
+    market valu
+  citation: FINRA 4210(a)(5)
+  source_quote: (5) The term "equity" means the customer's ownership interest in the account, computed by adding the current
+    market value of all securities "long" and the amount of any credit balance and subtracting the current market value of
+    all securities "short" and the amount of any debit balance. Any variation settlement received or paid on a security futures
+    contract shall be considered a credit or debit to the account for purposes of equity.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_6
+  description: (6) The term "exempted security" or "exempted securities" has the meaning as in Section 3(a)(12) of the Exchange
+    Act.
+  citation: FINRA 4210(a)(6)
+  source_quote: (6) The term "exempted security" or "exempted securities" has the meaning as in Section 3(a)(12) of the Exchange
+    Act.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(6)
+- id: 4210_a_7
+  description: (7) The term "margin" means the amount of equity to be maintained on a security position held or carried in
+    an account.
+  citation: FINRA 4210(a)(7)
+  source_quote: (7) The term "margin" means the amount of equity to be maintained on a security position held or carried in
+    an account.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation
+- id: 4210_a_8
+  description: (8) The term "person" has the meaning as in Section 3(a)(9) of the Exchange Act.
+  citation: FINRA 4210(a)(8)
+  source_quote: (8) The term "person" has the meaning as in Section 3(a)(9) of the Exchange Act.
+  category: definitional
+  conditions: {}
+  formula:
+    type: informational
+    description: See (a)(8)
+- id: 4210_a_9
+  description: (9) The term "highly rated foreign sovereign debt securities" means any debt securities (including major foreign
+    soverei
+  citation: FINRA 4210(a)(9)
+  source_quote: (9) The term "highly rated foreign sovereign debt securities" means any debt securities (including major foreign
+    sovereign debt securities) issued or guaranteed by the government of a foreign country, its provinces, state or cities,
+    or a supranational entity, if at the time of the extension of credit the issue, the issuer or guarantor, or any other
+    outstanding obligation of the issuer or guarantor ranked junior to or on a parity with the issue or the guarantee is assigned
+    a rating (implicitly or explicitly) in one of the top two rating categories by at least one nationally recognized statistical
+    rating organization.
+  category: procedural
+  conditions: {}
+  formula:
+    type: TODO_procedural
+    description: Margin-related procedure — review for implementation

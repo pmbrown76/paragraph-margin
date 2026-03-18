@@ -1,0 +1,114 @@
+# Portfolio Margin Waterfall — FINRA Rule 4210(g)
+# Priority-ordered decision tree for portfolio margin (TIMS-based) requirements
+
+categories:
+  - priority: 1
+    name: "Portfolio Margin Eligibility"
+    rationale: "Only qualified accounts may elect portfolio margin. Eligibility is based on account type, minimum equity, and customer qualification."
+    citation: "4210(g)(1)"
+    rules:
+      - rule_id: "4210_pm_min_equity_individual"
+        name: "Minimum Equity — $100,000 (Individual)"
+        section: "4210(g)(1)"
+        formula_type: "account_minimum"
+        formula_detail: "account_equity >= $100,000"
+        conditions:
+          - "Individual or joint customer account"
+          - "Customer approved for uncovered option writing"
+          - "Minimum $100,000 net equity"
+        definition: "Individual customer accounts must maintain minimum net equity of $100,000 to be eligible for portfolio margining. The customer must be approved for uncovered short option writing. If equity falls below $100,000, the account must be margined under standard rules."
+
+      - rule_id: "4210_pm_min_equity_bd"
+        name: "Minimum Equity — $500,000 (Broker-Dealer)"
+        section: "4210(g)(1)"
+        formula_type: "account_minimum"
+        formula_detail: "account_equity >= $500,000"
+        conditions:
+          - "Broker-dealer or affiliate account"
+          - "Minimum $500,000 net equity"
+        definition: "Broker-dealer and affiliate accounts must maintain minimum net equity of $500,000 to be eligible for portfolio margining under FINRA 4210(g)."
+
+  - priority: 2
+    name: "Eligible Products"
+    rationale: "Only certain product types qualify for portfolio margin treatment. Other products revert to standard Reg T / 4210 margin."
+    citation: "4210(g)(2)"
+    rules:
+      - rule_id: "4210_pm_eligible_products"
+        name: "Portfolio Margin Eligible Products"
+        section: "4210(g)(2)"
+        formula_type: "eligibility"
+        formula_detail: "Listed options, security futures, equity, narrow-based index options"
+        conditions:
+          - "Listed equity options and index options"
+          - "Security futures products"
+          - "Underlying equity securities and ETFs"
+          - "Narrow-based index options"
+          - "Warrants on eligible products"
+          - "NOT eligible: OTC options, mutual funds (unless with listed options), fixed income"
+        definition: "Portfolio margin applies to listed options, equity positions that underlie options, index options, security futures, and related products. Over-the-counter options, mutual funds without listed option overlays, and fixed-income securities are NOT eligible and must be margined under standard rules."
+
+  - priority: 3
+    name: "Stress Test Parameters (TIMS-Based)"
+    rationale: "Portfolio margin uses a theoretical intermarket margining system (TIMS) that stress-tests positions across a range of market scenarios."
+    citation: "4210(g)(5)"
+    rules:
+      - rule_id: "4210_pm_stress_equity"
+        name: "Equity Stress Range — +/-15% / +/-10 Points"
+        section: "4210(g)(5)"
+        formula_type: "stress_test"
+        formula_detail: "stress +/-15% equity, +/-10 index points, 10 equidistant intervals"
+        stress_range: "+/-15% (equity), +/-10 points (index)"
+        scenarios: 10
+        conditions:
+          - "Equity and narrow-based index positions"
+          - "10 equidistant scenarios from -15% to +15%"
+          - "Implied volatility shifts: up 15%, unchanged, down 15%"
+          - "Total: 30 risk scenarios per position group"
+        definition: "For equity and narrow-based index option positions, portfolio margin calculates theoretical gains and losses at 10 equidistant intervals spanning +/-15% of the current market price. Each price point is evaluated under three implied volatility scenarios (up 15%, unchanged, down 15%), producing 30 total scenarios. The margin requirement is the greatest theoretical loss across all scenarios."
+
+  - priority: 4
+    name: "Broad-Based Index Stress Parameters"
+    rationale: "Broad-based indexes receive more favorable stress ranges reflecting their diversification benefit."
+    citation: "4210(g)(5)"
+    rules:
+      - rule_id: "4210_pm_stress_index"
+        name: "Broad-Based Index Stress — +/-8% / +/-6%"
+        section: "4210(g)(5)"
+        formula_type: "stress_test"
+        formula_detail: "stress +/-8% (large-cap index), +/-6% (mega-cap)"
+        stress_range: "+/-8% (large-cap), +/-6% (mega-cap, e.g. SPX/DJX)"
+        scenarios: 10
+        conditions:
+          - "Broad-based index positions (SPX, RUT, NDX, DJX)"
+          - "+/-8% for large-cap broad-based indexes"
+          - "+/-6% for mega-cap broad-based (SPX, DJX)"
+          - "Same 3 volatility shifts x 10 price intervals"
+        definition: "Broad-based index positions receive reduced stress ranges reflecting their diversification: +/-8% for large-cap broad-based indexes and +/-6% for mega-cap (e.g., SPX, DJX). This acknowledges that a diversified index is less likely to experience the same magnitude of price shock as an individual stock."
+
+  - priority: 5
+    name: "Minimum Margin Floors"
+    rationale: "Even under portfolio margin, minimum per-position and per-account floors prevent margin from falling to negligible levels."
+    citation: "4210(g)(6)"
+    rules:
+      - rule_id: "4210_pm_floor_position"
+        name: "Minimum Per-Position Floor — 0.375%"
+        section: "4210(g)(6)"
+        formula_type: "percentage_of_market_value"
+        formula_detail: "min_margin = notional_value x 0.375%"
+        finra_maintenance: "0.375%"
+        conditions:
+          - "Applies to each position group after TIMS calculation"
+          - "Portfolio margin requirement cannot be less than 0.375% of notional"
+          - "Prevents near-zero margin on hedged positions"
+        definition: "The portfolio margin requirement for any position group may not be less than 0.375% of the notional value of the positions in the group. This floor ensures that even perfectly hedged portfolios carry some minimum margin requirement."
+
+      - rule_id: "4210_pm_floor_account"
+        name: "Account-Level Portfolio Margin Minimum"
+        section: "4210(g)(6)"
+        formula_type: "account_minimum"
+        formula_detail: "total_pm_requirement >= $500 per option contract"
+        conditions:
+          - "Aggregate portfolio margin for the account"
+          - "Minimum $500 per net short option contract"
+          - "Supplements the stress-test calculation"
+        definition: "In addition to the stress-test-derived requirement, the total portfolio margin for the account must be at least $500 per net short option contract (or contract equivalent), ensuring a meaningful margin requirement even for hedged portfolios."

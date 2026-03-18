@@ -1,0 +1,305 @@
+## Regulation T — Fixed Income Margin Waterfall
+##
+## Determines the INITIAL margin requirement for fixed income securities
+## under 12 CFR Part 220 (Regulation T). Exempt securities (Treasuries,
+## agencies, municipals) are governed by Section 220.18 and receive
+## "good faith" treatment — Reg T defers to the SRO (FINRA 4210) for
+## specific maintenance rates. Non-exempt bonds (corporates, convertibles)
+## follow the 220.12 Supplement schedule.
+##
+## Sources:
+##   - 12 CFR 220.18 — Exempted securities (Treasuries, agencies, municipals)
+##   - 12 CFR 220.12 Supplement — Margin schedule for non-exempt securities
+
+categories:
+
+  # ═══════════════════════════════════════════════════════════════
+  # EXEMPT SECURITIES — 220.18 (Good Faith)
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 1
+    name: US Treasuries (Exempt)
+    rationale: >-
+      US Treasury securities are "exempted securities" under Section 3(a)(12)
+      of the Securities Exchange Act. Section 220.18 requires only a
+      good-faith deposit for exempt securities. In practice, Reg T defers
+      to FINRA 4210(e)(2)(A) for specific maturity-based maintenance rates.
+    citation: "220.18"
+    rules:
+
+      - rule_id: "reg_t_treasury_long"
+        name: "US Treasury Long — Good Faith"
+        section: "220.18"
+        position_side: "long"
+        formula_type: "good_faith"
+        formula_detail: |
+          Reg T: good-faith deposit required.
+          Defers to FINRA 4210(e)(2)(A) for maturity-tiered rates (1%-6%).
+        reg_t_initial: "good_faith"
+        finra_maintenance: "see FINRA 4210(e)(2)(A)"
+        conditions:
+          - security_type = us_treasury
+          - position_side = long
+        definition: >-
+          Per 220.18, exempted securities including US Government obligations
+          require only a good-faith margin deposit. The Federal Reserve does
+          not prescribe a specific rate for Treasuries; the practical margin
+          is set by FINRA 4210(e)(2)(A) with maturity-tiered rates ranging
+          from 1% (under 1 year) to 6% (over 20 years).
+
+      - rule_id: "reg_t_treasury_short"
+        name: "US Treasury Short — Good Faith"
+        section: "220.18"
+        position_side: "short"
+        formula_type: "good_faith"
+        formula_detail: |
+          Reg T: good-faith deposit required.
+          Defers to FINRA 4210(e)(2)(A) for maturity-tiered rates (1%-6%).
+        reg_t_initial: "good_faith"
+        finra_maintenance: "see FINRA 4210(e)(2)(A)"
+        conditions:
+          - security_type = us_treasury
+          - position_side = short
+        definition: >-
+          Short positions in US Treasuries also receive good-faith treatment
+          under 220.18. FINRA 4210(e)(2)(A) maintenance rates apply to both
+          long and short positions.
+
+  - priority: 2
+    name: Agency Debt (Exempt)
+    rationale: >-
+      Government agency securities (GNMA, FNMA, FHLMC) are exempt securities
+      under Section 220.18. Like Treasuries, they receive good-faith
+      treatment under Reg T, with specific rates deferred to FINRA
+      4210(e)(2)(D) based on product type and average life.
+    citation: "220.18"
+    rules:
+
+      - rule_id: "reg_t_agency_debt_long"
+        name: "Agency Debt Long — Good Faith"
+        section: "220.18"
+        position_side: "long"
+        formula_type: "good_faith"
+        formula_detail: |
+          Reg T: good-faith deposit required.
+          Defers to FINRA 4210(e)(2)(D) for agency-specific rates (2%-6%).
+        reg_t_initial: "good_faith"
+        finra_maintenance: "see FINRA 4210(e)(2)(D)"
+        conditions:
+          - security_type = agency_debt
+          - position_side = long
+        definition: >-
+          Per 220.18, agency debt securities (GNMA pass-throughs, agency MBS,
+          CMOs, and agency debentures) are exempt securities requiring only a
+          good-faith deposit under Reg T. FINRA 4210(e)(2)(D) sets specific
+          maintenance rates based on product type and average life/maturity.
+
+      - rule_id: "reg_t_agency_debt_short"
+        name: "Agency Debt Short — Good Faith"
+        section: "220.18"
+        position_side: "short"
+        formula_type: "good_faith"
+        formula_detail: |
+          Reg T: good-faith deposit required.
+          Defers to FINRA 4210(e)(2)(D) for agency-specific rates (2%-6%).
+        reg_t_initial: "good_faith"
+        finra_maintenance: "see FINRA 4210(e)(2)(D)"
+        conditions:
+          - security_type = agency_debt
+          - position_side = short
+        definition: >-
+          Short positions in agency debt also receive good-faith treatment
+          under 220.18. FINRA 4210(e)(2)(D) maintenance rates apply.
+
+  - priority: 3
+    name: Municipal Bonds (Exempt)
+    rationale: >-
+      Municipal bonds are exempt securities under Section 3(a)(2) of the
+      Exchange Act. Reg T 220.18 requires good-faith margin. Industry
+      practice applies a 15% initial margin rate for municipal bonds,
+      with FINRA 4210(e)(2)(B) setting a 7% maintenance floor.
+    citation: "220.18"
+    rules:
+
+      - rule_id: "reg_t_municipal_bond_long"
+        name: "Municipal Bond Long — 15% Initial"
+        section: "220.18"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 15% × trade_value (industry convention)
+          Good-faith basis under 220.18.
+        reg_t_initial: 0.15
+        finra_maintenance: "see FINRA 4210(e)(2)(B) — 7%"
+        conditions:
+          - security_type = municipal_bond
+          - position_side = long
+        definition: >-
+          Municipal bonds are exempt securities under 220.18. While the
+          statute requires only a good-faith deposit, industry convention
+          applies 15% initial margin for municipal bonds. FINRA 4210(e)(2)(B)
+          sets a 7% maintenance requirement.
+
+      - rule_id: "reg_t_municipal_bond_short"
+        name: "Municipal Bond Short — 15% Initial"
+        section: "220.18"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 15% × trade_value (industry convention)
+          Good-faith basis under 220.18.
+        reg_t_initial: 0.15
+        finra_maintenance: "see FINRA 4210(e)(2)(B) — 7%"
+        conditions:
+          - security_type = municipal_bond
+          - position_side = short
+        definition: >-
+          Short positions in municipal bonds receive the same 15% initial
+          margin under the good-faith provision of 220.18.
+
+  # ═══════════════════════════════════════════════════════════════
+  # NON-EXEMPT FIXED INCOME — 220.12 Supplement
+  # ═══════════════════════════════════════════════════════════════
+
+  - priority: 4
+    name: Investment-Grade Corporate Bonds
+    rationale: >-
+      Non-exempt debt securities rated investment grade (BBB-/Baa3 or
+      higher) carry 20% initial margin under the 220.12 Supplement.
+      This is lower than the 50% equity rate, reflecting the lower
+      volatility of investment-grade fixed income.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_corporate_bond_ig_long"
+        name: "Long IG Corporate Bond — 20% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 20% × trade_value
+        reg_t_initial: 0.20
+        finra_maintenance: "see FINRA 4210(e)(2)(C)(i) — 10%"
+        conditions:
+          - security_type = corporate_bond
+          - investment_grade = true
+          - convertible = false
+          - position_side = long
+        definition: >-
+          Per the 220.12 Supplement, margin-eligible non-convertible
+          investment-grade corporate bonds require 20% initial margin.
+          FINRA 4210(e)(2)(C)(i) sets a 10% maintenance requirement.
+
+      - rule_id: "reg_t_corporate_bond_ig_short"
+        name: "Short IG Corporate Bond — 20% Initial"
+        section: "220.12 Supplement"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 20% × trade_value
+        reg_t_initial: 0.20
+        finra_maintenance: "see FINRA 4210(e)(2)(C)(i) — 10%"
+        conditions:
+          - security_type = corporate_bond
+          - investment_grade = true
+          - convertible = false
+          - position_side = short
+        definition: >-
+          Short positions in investment-grade corporate bonds require
+          20% initial margin under the 220.12 Supplement.
+
+  - priority: 5
+    name: High-Yield Corporate Bonds
+    rationale: >-
+      Non-investment-grade corporate bonds carry higher credit risk and
+      require 30% initial margin under the 220.12 Supplement. This
+      reflects the greater price volatility of speculative-grade debt.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_corporate_bond_hy_long"
+        name: "Long HY Corporate Bond — 30% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 30% × trade_value
+        reg_t_initial: 0.30
+        finra_maintenance: "see FINRA 4210(e)(2)(C)(ii) — 20%/7%"
+        conditions:
+          - security_type = corporate_bond
+          - investment_grade = false
+          - convertible = false
+          - position_side = long
+        definition: >-
+          Per the 220.12 Supplement, non-investment-grade (high-yield)
+          corporate bonds require 30% initial margin. FINRA 4210(e)(2)(C)(ii)
+          sets maintenance at the greater of 20% of market value or 7%
+          of principal.
+
+      - rule_id: "reg_t_corporate_bond_hy_short"
+        name: "Short HY Corporate Bond — 30% Initial"
+        section: "220.12 Supplement"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 30% × trade_value
+        reg_t_initial: 0.30
+        finra_maintenance: "see FINRA 4210(e)(2)(C)(ii) — 20%/7%"
+        conditions:
+          - security_type = corporate_bond
+          - investment_grade = false
+          - convertible = false
+          - position_side = short
+        definition: >-
+          Short positions in high-yield corporate bonds require 30%
+          initial margin under the 220.12 Supplement.
+
+  - priority: 6
+    name: Convertible Bonds
+    rationale: >-
+      Convertible bonds carry embedded equity exposure and are treated
+      as equity securities for Reg T margin purposes. The 50% initial
+      margin matches the standard equity rate, reflecting the equity-like
+      risk profile when trading near conversion parity.
+    citation: "220.12 Supplement"
+    rules:
+
+      - rule_id: "reg_t_convertible_bond_long"
+        name: "Long Convertible Bond — 50% Initial"
+        section: "220.12 Supplement"
+        position_side: "long"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 50% × trade_value
+          Treated as equity security due to conversion feature.
+        reg_t_initial: 0.50
+        finra_maintenance: "see FINRA 4210(e)(2)(C) — max(bond rate, equity rate)"
+        conditions:
+          - security_type = corporate_bond
+          - convertible = true
+          - position_side = long
+        definition: >-
+          Convertible bonds are treated as equity securities under Reg T
+          due to their embedded equity exposure. The 50% initial margin
+          matches the standard equity rate under the 220.12 Supplement.
+          FINRA 4210 maintenance is the higher of the applicable bond rate
+          and the equity maintenance rate.
+
+      - rule_id: "reg_t_convertible_bond_short"
+        name: "Short Convertible Bond — 50% Initial"
+        section: "220.12 Supplement"
+        position_side: "short"
+        formula_type: "percentage_of_trade_value"
+        formula_detail: |
+          Reg T initial: 50% × trade_value
+          Treated as equity security due to conversion feature.
+        reg_t_initial: 0.50
+        finra_maintenance: "see FINRA 4210(e)(2)(C) — max(bond rate, equity rate)"
+        conditions:
+          - security_type = corporate_bond
+          - convertible = true
+          - position_side = short
+        definition: >-
+          Short convertible bonds require 50% initial margin under Reg T,
+          reflecting equity-like risk from the conversion feature.

@@ -1,0 +1,66 @@
+rule_set:
+  regulation: "House Rules"
+  description: "Firm-specific margin requirements for agency debt and mortgage-related securities"
+  effective_date: "2024-01-01"
+  notes: "House requirements at approximately 1.5x FINRA minimums for agency debt."
+
+rules:
+  - id: "house_agency_mbs_under_5y"
+    description: "House requirement for agency MBS/CMO - average life < 5 years"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "agency_debt"
+      maturity_tier: "under_5y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.03
+    notes: "3% house requirement (1.5x FINRA 2% minimum)"
+
+  - id: "house_agency_mbs_5y_to_15y"
+    description: "House requirement for agency MBS/CMO - average life 5-15 years"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "agency_debt"
+      maturity_tier: "5y_to_15y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.06
+    notes: "6% house requirement (1.5x FINRA 4% minimum)"
+
+  - id: "house_agency_mbs_15y_to_25y"
+    description: "House requirement for agency MBS/CMO - average life 15-25 years"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "agency_debt"
+      maturity_tier: "15y_to_25y"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.075
+    notes: "7.5% house requirement (1.5x FINRA 5% minimum)"
+
+  - id: "house_agency_mbs_25y_plus"
+    description: "House requirement for agency MBS/CMO - average life >= 25 years"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "agency_debt"
+      maturity_tier: "25y_plus"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.09
+    notes: "9% house requirement (1.5x FINRA 6% minimum)"
+
+  - id: "house_agency_tba"
+    description: "House requirement for TBA securities"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "agency_debt"
+      product_type: "tba"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.045
+    notes: "4.5% house requirement (1.5x FINRA 3% minimum)"

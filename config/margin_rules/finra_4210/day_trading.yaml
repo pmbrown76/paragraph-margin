@@ -1,0 +1,109 @@
+# FINRA Rule 4210(f)(8)(B) — Day-Trading Margin Requirements
+# ===========================================================
+# Pattern day trader provisions. The actual PDT detection, day-trade
+# buying power, and day-trade call logic are implemented programmatically
+# in src/engine/finra_4210/day_trading.py. These YAML rules define
+# the margin parameters used by that engine.
+
+rule_set:
+  regulation: "FINRA Rule 4210(f)(8)(B)"
+  section: "4210(f)(8)(B)"
+  description: "Day-trading margin requirements for pattern day traders"
+  effective_date: "2024-01-01"
+
+rules:
+  - id: "4210_pdt_minimum_equity"
+    description: "Pattern day trader minimum equity requirement — $25,000"
+    citation: "FINRA 4210(f)(8)(B)(iv)(a)"
+    source_quote: >
+      The minimum equity required for the accounts of customers deemed to be
+      pattern day traders shall be $25,000. This minimum equity must be deposited
+      in the account before such customer may continue day trading and must be
+      maintained in the customer's account at all times.
+    conditions:
+      account_type: "margin"
+      pattern_day_trader: true
+    formula:
+      type: "fixed_amount"
+      amount: 25000
+      description: "PDT accounts must maintain minimum $25,000 net equity at all times"
+
+  - id: "4210_dt_margin_rate"
+    description: "Day-trading margin requirement — 25% of cost basis"
+    citation: "FINRA 4210(f)(8)(B)(iv)(b)"
+    source_quote: >
+      the special maintenance margin required, based on the cost of all the day
+      trades made during the day, shall be 25 percent for margin eligible equity
+      securities, and 100 percent for non-margin eligible equity securities.
+    conditions:
+      account_type: "margin"
+      pattern_day_trader: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+      description: "Day-trading margin = 25% of cost of all day trades"
+
+  - id: "4210_dt_buying_power_4x"
+    description: "Day-trading buying power — 4x maintenance excess"
+    citation: "FINRA 4210(f)(8)(B)(iv)(b)"
+    source_quote: >
+      the equity in a customer's account at the close of business of the previous
+      day, less any maintenance margin requirement as prescribed in paragraph (c)
+      of this Rule, multiplied by four for equity securities.
+    conditions:
+      account_type: "margin"
+      pattern_day_trader: true
+      restricted: false
+    formula:
+      type: "buying_power_multiplier"
+      multiplier: 4
+      description: "Day-trading BP = 4x (equity - maintenance requirement)"
+
+  - id: "4210_dt_buying_power_restricted"
+    description: "Restricted day-trading buying power — 2x after unmet call"
+    citation: "FINRA 4210(f)(8)(B)(iv)(c)"
+    source_quote: >
+      The customer's day-trading buying power will be limited to the equity in
+      the customer's account at the close of business of the previous day, less
+      the maintenance margin required in paragraph (c) of this Rule, multiplied
+      by two for equity securities.
+    conditions:
+      account_type: "margin"
+      pattern_day_trader: true
+      restricted: true
+    formula:
+      type: "buying_power_multiplier"
+      multiplier: 2
+      description: "Restricted BP = 2x (equity - maintenance) for 90 days after unmet DT call"
+
+  - id: "4210_dt_call_deadline"
+    description: "Day-trade margin call — 5 business days to meet"
+    citation: "FINRA 4210(f)(8)(B)(iv)(d)"
+    source_quote: >
+      Pattern day traders who fail to meet their special maintenance margin calls
+      as required within five business days from the date the margin deficiency
+      occurs will be permitted to execute transactions only on a cash available
+      basis for 90 days or until the special maintenance margin call is met.
+    conditions:
+      account_type: "margin"
+      pattern_day_trader: true
+    formula:
+      type: "fixed_amount"
+      amount: 0
+      description: "Day-trade calls must be met within 5 business days; failure restricts to 2x BP for 90 days"
+
+  - id: "4210_non_pdt_day_trade"
+    description: "Non-PDT day trade — standard Reg T applies"
+    citation: "FINRA 4210(f)(8)(A)"
+    source_quote: >
+      FINRA may, whenever it shall determine that market conditions so warrant,
+      prescribe higher initial margin requirements for the purpose of effecting
+      new securities transactions and commitments in accounts of customers with
+      respect to specific securities.
+    conditions:
+      account_type: "margin"
+      pattern_day_trader: false
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.50
+      description: "Non-PDT accounts: day trades subject to standard 50% Reg T initial margin"

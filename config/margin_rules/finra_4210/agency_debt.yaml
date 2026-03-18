@@ -1,0 +1,271 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(e)(2)(D)
+  description: Mortgage-related securities and agency debt maintenance margin
+  effective_date: '2024-01-01'
+  notes: >
+    FINRA 4210(e)(2)(D) sets maintenance margin for mortgage-related securities including agency pass-throughs
+    (GNMA, FNMA, FHLMC), CMOs, TBAs, and agency debentures. GNMA securities carry the full faith and credit
+    of the US Government and are treated as government securities under 4210(e)(2)(A).
+rules:
+- id: 4210_agency_gnma_under_5y
+  description: GNMA pass-through - average life < 5 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: true
+    years_to_maturity_lt: 5
+  formula:
+    type: percentage_of_market_value
+    rate: 0.02
+  notes: >-
+    GNMA pass-throughs are backed by the full faith and credit of the US Government. Margin rates follow
+    the government securities schedule under 4210(e)(2)(D). 2% for average life under 5 years.
+- id: 4210_agency_gnma_5y_to_15y
+  description: GNMA pass-through - average life 5 to < 15 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: true
+    years_to_maturity_gte: 5
+    years_to_maturity_lt: 15
+  formula:
+    type: percentage_of_market_value
+    rate: 0.04
+  notes: GNMA pass-throughs are backed by the full faith and credit of the US Government. 4% for average
+    life 5 to 15 years.
+- id: 4210_agency_gnma_15y_to_25y
+  description: GNMA pass-through - average life 15 to < 25 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: true
+    years_to_maturity_gte: 15
+    years_to_maturity_lt: 25
+  formula:
+    type: percentage_of_market_value
+    rate: 0.05
+  notes: GNMA pass-throughs are backed by the full faith and credit of the US Government. 5% for average
+    life 15 to 25 years.
+- id: 4210_agency_gnma_25y_plus
+  description: GNMA pass-through - average life >= 25 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: true
+    years_to_maturity_gte: 25
+  formula:
+    type: percentage_of_market_value
+    rate: 0.06
+  notes: GNMA pass-throughs are backed by the full faith and credit of the US Government. 6% for average
+    life 25 years or more.
+- id: 4210_agency_mbs_under_5y
+  description: Agency MBS/CMO - average life < 5 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: false
+    maturity_tier: under_5y
+  formula:
+    type: percentage_of_market_value
+    rate: 0.02
+  notes: 2% of market value for agency MBS/CMO with average life under 5 years.
+- id: 4210_agency_mbs_5y_to_15y
+  description: Agency MBS/CMO - average life 5 to < 15 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: false
+    maturity_tier: 5y_to_15y
+  formula:
+    type: percentage_of_market_value
+    rate: 0.04
+  notes: 4% of market value for agency MBS/CMO with average life 5-15 years.
+- id: 4210_agency_mbs_15y_to_25y
+  description: Agency MBS/CMO - average life 15 to < 25 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: false
+    maturity_tier: 15y_to_25y
+  formula:
+    type: percentage_of_market_value
+    rate: 0.05
+  notes: 5% of market value for agency MBS/CMO with average life 15-25 years.
+- id: 4210_agency_mbs_25y_plus
+  description: Agency MBS/CMO - average life >= 25 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    is_gnma: false
+    maturity_tier: 25y_plus
+  formula:
+    type: percentage_of_market_value
+    rate: 0.06
+  notes: 6% of market value for agency MBS/CMO with average life 25+ years.
+- id: 4210_agency_tba
+  description: TBA (To-Be-Announced) mortgage-backed security
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    product_type: tba
+  formula:
+    type: percentage_of_market_value
+    rate: 0.03
+  notes: >
+    TBA securities require 3% margin. Additional margin of 1% per $100 price change from par may be required
+    by house rules for mark-to-market exposure.
+- id: 4210_agency_debenture_under_5y
+  description: Agency debenture - remaining maturity < 5 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    product_type: debenture
+    maturity_tier: under_5y
+  formula:
+    type: percentage_of_market_value
+    rate: 0.02
+  notes: >-
+    Agency debentures (FNMA, FHLMC, FHLB) margined at government securities rates under 4210(e)(2)(D).
+    2% for remaining maturity under 5 years.
+- id: 4210_agency_debenture_5y_to_15y
+  description: Agency debenture - remaining maturity 5 to < 15 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    product_type: debenture
+    maturity_tier: 5y_to_15y
+  formula:
+    type: percentage_of_market_value
+    rate: 0.04
+  notes: Agency debentures margined at government securities rates under 4210(e)(2)(D). 4% for remaining
+    maturity 5 to 15 years.
+- id: 4210_agency_debenture_15y_to_25y
+  description: Agency debenture - remaining maturity 15 to < 25 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    product_type: debenture
+    maturity_tier: 15y_to_25y
+  formula:
+    type: percentage_of_market_value
+    rate: 0.05
+  notes: Agency debentures margined at government securities rates under 4210(e)(2)(D). 5% for remaining
+    maturity 15 to 25 years.
+- id: 4210_agency_debenture_25y_plus
+  description: Agency debenture - remaining maturity >= 25 years
+  citation: FINRA 4210(e)(2)(D)
+  source_quote: >-
+    (D) Baskets Notwithstanding the other provisions of this Rule, a member may clear and carry basket
+    transactions of one or more members registered as market makers (who are deemed specialists for purposes
+    of Section 7 of the Exchange Act pursuant to the rules of a national securities exchange) upon a margin
+    basis satisfactory to the concerned parties, provided all real and potential risks in accounts carried
+    under such arrangements are at all times adequately covered by the margin maintained in the account
+    or, in the absence thereof, by the carrying member when computing net capital under SEA Rule 15c3-1
+    and, if applicable, Rule 4110(a).
+  conditions:
+    security_type: agency_debt
+    product_type: debenture
+    maturity_tier: 25y_plus
+  formula:
+    type: percentage_of_market_value
+    rate: 0.06
+  notes: >-
+    Agency debentures margined at government securities rates under 4210(e)(2)(D). 6% for remaining maturity
+    25 years or more.

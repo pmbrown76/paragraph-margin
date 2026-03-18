@@ -1,0 +1,91 @@
+rule_set:
+  regulation: "House Rules"
+  description: "Firm-specific margin requirements that exceed regulatory minimums"
+  effective_date: "2024-01-01"
+  notes: "These are example house requirements. Firms may set requirements above but never below regulatory minimums."
+
+rules:
+  - id: "house_equity_long"
+    description: "House requirement for long equities"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "long"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.30
+    notes: "30% house requirement (above FINRA 25% minimum)"
+
+  - id: "house_equity_short"
+    description: "House requirement for short equities"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "equity"
+      position_side: "short"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.35
+    notes: "35% house requirement (above FINRA 30% minimum)"
+
+  - id: "house_concentrated_position"
+    description: "House surcharge for concentrated positions"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      concentrated: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.50
+    notes: "50% for any concentrated position"
+
+  # --- Fixed Income House Rules ---
+  - id: "house_corp_bond_ig"
+    description: "House requirement for IG corporate bonds"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "corporate_bond"
+      investment_grade: true
+      convertible: false
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.15
+    notes: "15% house requirement (above FINRA 10% minimum for IG corporates)"
+
+  - id: "house_corp_bond_hy"
+    description: "House requirement for HY corporate bonds"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "corporate_bond"
+      investment_grade: false
+      convertible: false
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.25
+    notes: "25% house requirement (above FINRA 20% minimum for HY corporates)"
+
+  - id: "house_convertible_bond"
+    description: "House requirement for convertible bonds"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "corporate_bond"
+      convertible: true
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.30
+    notes: "30% house requirement for convertible bonds"
+
+  - id: "house_muni_bond"
+    description: "House requirement for municipal bonds"
+    citation: "Internal Policy"
+    source_quote: ""
+    conditions:
+      security_type: "municipal_bond"
+    formula:
+      type: "percentage_of_market_value"
+      rate: 0.10
+    notes: "10% house requirement (above FINRA 7% minimum for IG munis)"

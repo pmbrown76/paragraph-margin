@@ -1,0 +1,261 @@
+rule_set:
+  regulation: "Securities Exchange Act — Customer Protection Rule"
+  authority: "Securities and Exchange Commission"
+  cfr: "17 CFR Part 240"
+  section: "240.15c3-3"
+  description: "Requires broker-dealers to safeguard customer securities and maintain a special reserve bank account for the exclusive benefit of customers"
+  effective_date: "1972-01-01"
+  last_amended: "2024-05-28"
+  notes: "Adopted in 1972 following back-office crisis of late 1960s. The rule creates two core obligations: possession/control of customer securities and the customer reserve formula."
+
+rules:
+  - id: "sec_15c3_3_possession_control"
+    description: "Possession or control — BD must hold customer fully-paid and excess margin securities"
+    citation: "17 CFR 240.15c3-3(b)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Every broker or dealer shall promptly obtain and shall thereafter
+      maintain the physical possession or control of all fully paid
+      securities and excess margin securities carried by a broker or
+      dealer for the account of customers.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+      has_customer_accounts: true
+    formula:
+      type: "compliance_requirement"
+      description: "Physically possess or control all customer fully-paid and excess margin securities in an acceptable control location"
+    notes: >
+      Fully-paid securities: securities paid for in full by the customer.
+      Excess margin securities: securities with a market value exceeding
+      140% of the customer's debit balance. These must be held at an
+      acceptable control location (DTC, bank, clearing organization)
+      and not used for the firm's own purposes.
+
+  - id: "sec_15c3_3_acceptable_control_locations"
+    description: "Acceptable control locations — where customer securities must be held"
+    citation: "17 CFR 240.15c3-3(c)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Physical possession or control of securities shall include, but shall
+      not be limited to, securities in the broker's or dealer's physical
+      possession, held in a satisfactory control location, or in transfer
+      to the broker or dealer.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+    formula:
+      type: "compliance_requirement"
+      description: "Control locations: DTC, clearing corporation, bank (with control agreement), in-transfer, or in physical vault"
+    notes: >
+      Key control locations: (1) DTC or other registered clearing agency;
+      (2) a bank with a written control agreement; (3) physical vault of the
+      BD; (4) in transfer to the BD (limited time). Securities loaned out or
+      at a counterparty for fails are NOT in control and must be recalled.
+
+  - id: "sec_15c3_3_reserve_formula"
+    description: "Customer reserve formula — weekly computation of credits vs debits"
+    citation: "17 CFR 240.15c3-3(e)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Every broker or dealer shall maintain with a bank or banks at all
+      times a Special Reserve Bank Account for the Exclusive Benefit of
+      Customers. The amount required to be on deposit shall be determined
+      by the computations set forth in the exhibit to this section.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+      has_customer_accounts: true
+    formula:
+      type: "reserve_computation"
+      description: "Credits (free credit balances, short sale proceeds, customer payables) minus Debits (margin loans, securities borrowed). Net credit must be deposited in Special Reserve Account."
+    notes: >
+      The reserve formula is computed weekly (as of the close of the last
+      business day of the week). If credits exceed debits, the difference
+      must be deposited in the Special Reserve Bank Account by the following
+      day (T+1). The account must be at a bank that has entered into a
+      written agreement not to lien the account.
+
+  - id: "sec_15c3_3_reserve_credit_items"
+    description: "Reserve formula — credit items (customer obligations to the firm)"
+    citation: "17 CFR 240.15c3-3 Exhibit A, Item 1"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Credit balances in customers' securities accounts, including free credit
+      balances in cash accounts, credit balances in short accounts representing
+      the market value of securities sold short, and credit balances resulting
+      from margin transactions.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+    formula:
+      type: "reserve_computation"
+      description: "Credits include: free credit balances, short sale proceeds (market value of shorts), money market fund balances, customer payables, and fails-to-receive aged 30+ days"
+    notes: >
+      Credit items represent what the firm owes to customers collectively.
+      Key credit items: (1) free credit balances in cash and margin accounts;
+      (2) credit balances in short accounts (130% of short market value);
+      (3) customer funds held in money market; (4) security deposits on
+      borrowed securities; (5) fails-to-receive outstanding 30+ calendar days.
+
+  - id: "sec_15c3_3_reserve_debit_items"
+    description: "Reserve formula — debit items (customer obligations to the firm)"
+    citation: "17 CFR 240.15c3-3 Exhibit A, Item 2"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Debit balances in customers' securities accounts, including debit
+      balances in margin accounts, debit balances representing margin
+      deficiencies, and debit balances in customers' cash accounts.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+    formula:
+      type: "reserve_computation"
+      description: "Debits include: margin loans to customers, securities borrowed for customer shorts, fails-to-deliver aged 30+ days, customer receivables"
+    notes: >
+      Debit items represent what customers owe the firm. Key debit items:
+      (1) margin debit balances (loans to customers); (2) cash owed by
+      customers; (3) value of securities borrowed to make delivery for
+      customer short sales; (4) fails-to-deliver outstanding 30+ days.
+      Total debits are subtracted from total credits to determine the
+      reserve requirement.
+
+  - id: "sec_15c3_3_special_reserve_account"
+    description: "Special Reserve Bank Account — exclusive benefit of customers"
+    citation: "17 CFR 240.15c3-3(e)(1)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      The broker or dealer shall deposit the amount computed in the
+      formula into a Special Reserve Bank Account for the Exclusive
+      Benefit of Customers maintained at a bank which has agreed in
+      writing not to use the deposits as security for a loan to the
+      broker or dealer and not to lien the account.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+    formula:
+      type: "compliance_requirement"
+      description: "Deposit net credit balance into Special Reserve Bank Account by next business day after weekly computation; bank must agree not to lien or use as security"
+    notes: >
+      The Special Reserve Account is sacred — the bank cannot use these
+      funds to offset any obligations the BD has to the bank. Deposits
+      must be in cash or qualified securities (US Treasuries). Withdrawals
+      are only permitted if a subsequent computation shows a reduced
+      requirement. This is the primary mechanism protecting customer
+      cash from firm insolvency.
+
+  - id: "sec_15c3_3_140pct_rehypothecation"
+    description: "140% rehypothecation limit — customer margin securities used by firm"
+    citation: "17 CFR 240.15c3-3(b)(3)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      A broker or dealer shall not permit the sum of (i) the debit balances
+      in customers' margin accounts and (ii) the amount required to be
+      deposited under paragraph (e) of this section to be greater than
+      140 percent of the aggregate debit balances in all customer margin
+      accounts.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+      account_type: "margin"
+    formula:
+      type: "restriction"
+      rate: 1.40
+      description: "Firm may only rehypothecate (use) customer margin securities up to 140% of the customer's debit balance; excess must be segregated"
+    notes: >
+      Example: if a customer has a $50,000 debit balance, the firm can use
+      up to $70,000 (140%) of that customer's securities for its own purposes
+      (lending, pledging). Any securities above $70,000 in market value are
+      'excess margin securities' and must be locked up in a control location.
+      This limits the firm's use of customer assets.
+
+  - id: "sec_15c3_3_pab_accounts"
+    description: "PAB accounts — broker-dealer accounts carried by another broker-dealer"
+    citation: "17 CFR 240.15c3-3(e)(2)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Every broker or dealer shall maintain with a bank or banks a
+      Special Reserve Bank Account for the Exclusive Benefit of Customers
+      which shall include a separate PAB reserve account.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+      has_pab_accounts: true
+    formula:
+      type: "reserve_computation"
+      description: "Separate reserve computation for Proprietary Accounts of Broker-Dealers (PAB) — other BDs' customer funds carried by the clearing firm"
+    notes: >
+      When a carrying/clearing firm holds accounts for introducing BDs
+      (proprietary accounts of broker-dealers), it must perform a separate
+      PAB reserve computation. This ensures that the introducing BD's
+      customers' funds are protected even though they are held at the
+      carrying firm level. PAB accounts are treated with the same
+      protections as direct customer accounts.
+
+  - id: "sec_15c3_3_weekly_computation"
+    description: "Weekly computation requirement — reserve formula calculated as of last business day"
+    citation: "17 CFR 240.15c3-3(e)(3)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Computations necessary to determine the amount required to be
+      deposited as specified shall be made weekly as of the close of
+      the last business day of the week and the deposit so computed
+      shall be made no later than one hour after the opening of banking
+      business on the second following business day.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+    formula:
+      type: "compliance_requirement"
+      description: "Reserve computed weekly (Friday close); deposit required by 1 hour after bank opening on Tuesday (or next business day)"
+    notes: >
+      Some firms with large customer bases are required to compute daily
+      rather than weekly. The one-hour window after bank opening is
+      strictly enforced. Late deposits are reported to SEC and FINRA
+      and may result in enforcement action.
+
+  - id: "sec_15c3_3_notification_deficit"
+    description: "Notification — immediate notice if reserve or possession/control deficiency"
+    citation: "17 CFR 240.17a-11(c)"
+    rule_category: "notification"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      Every broker or dealer shall send notice promptly to the Commission
+      and its designated examining authority if at any time the broker or
+      dealer discovers any material inadequacy in its possession or control
+      of customer fully paid or excess margin securities.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+    formula:
+      type: "notification_requirement"
+      description: "Immediate notice to SEC and FINRA of any material possession/control deficiency or reserve computation shortfall"
+    notes: >
+      A possession/control deficiency means the firm does not have
+      customer securities where they should be. This triggers immediate
+      buy-in obligations — the firm must purchase or borrow the securities
+      to cure the deficiency. Repeated deficiencies can lead to
+      restrictions on the firm's operations.
+
+  - id: "sec_15c3_3_close_out_buy_in"
+    description: "Buy-in requirement — firm must purchase securities to cure possession/control deficiency"
+    citation: "17 CFR 240.15c3-3(d)"
+    rule_category: "customer_protection"
+    rule_group: "financial_responsibility"
+    source_quote: >
+      If any securities included on the list referred to in paragraph
+      (b) of this section are not in the possession or control of the
+      broker or dealer within the number of business days specified,
+      the broker or dealer shall immediately take steps to obtain
+      physical possession or control of such securities.
+    conditions:
+      applies_to: "carrying_clearing_bd"
+      has_possession_control_deficiency: true
+    formula:
+      type: "delivery_requirement"
+      description: "Must buy in or borrow securities to cure possession/control deficiency; typically within 2 business days of identifying the deficiency"
+    notes: >
+      The buy-in obligation is strict — the firm must take affirmative
+      steps to obtain the securities, not merely wait for them to arrive.
+      If securities were loaned out, they must be recalled. If they are
+      at a counterparty for a fail, the firm must buy in. The cost of
+      the buy-in is borne by the firm, not the customer.

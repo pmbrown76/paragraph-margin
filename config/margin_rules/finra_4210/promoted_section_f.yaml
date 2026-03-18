@@ -1,0 +1,496 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: f
+  description: FINRA 4210(f) — Other Provisions (promoted from stubs)
+rules:
+- id: 4210_f_1
+  description: (1) Determination of Value for Margin Purposes
+  citation: FINRA 4210(f)(1)
+  source_quote: (1) Determination of Value for Margin Purposes Active securities dealt in on a national securities exchange
+    shall, for margin purposes, be valued at current market prices provided that only those options contracts on a stock or
+    stock index, or a stock index warrant, having an expiration that exceeds nine months and that are listed or OTC (as defined
+    in this Rule), may be deemed to have market value for the purposes of this Rule. Other securities shall be valued conservatively
+    in view of current market prices and the amount that might be realized upon liquidation. Substantial additional margin
+    must be required in all cases where the securities carried in "long" or "short" positions are subject to unusually rapid
+    or violent changes in value, or do not have an active market on a national securities exchange, or where the amount carried
+    is such that the position(s) cannot be liquidated promptly.
+  conditions: {}
+  formula:
+    type: informational
+    description: (1) Determination of Value for Margin Purposes
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_10_B_i
+  description: (i) General Rule. As set forth in paragraphs (b) and (c) of this Rule, the minimum initial and maintenance
+    margin levels
+  citation: FINRA 4210(f)(10)(B)(i)
+  source_quote: (i) General Rule. As set forth in paragraphs (b) and (c) of this Rule, the minimum initial and maintenance
+    margin levels for each security futures contract, long and short, shall be 20 percent of the current market value of such
+    contract.
+  conditions:
+    security_type: security_future
+  formula:
+    type: percentage_of_market_value
+    rate: 0.2
+    description: 'Security futures contracts: 20% initial and maintenance margin of current market value'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_10_G_ii
+  description: (ii) Day trading of security futures is subject to the minimum requirements of this Rule. If deemed a pattern
+    day trader
+  citation: FINRA 4210(f)(10)(G)(ii)
+  source_quote: (ii) Day trading of security futures is subject to the minimum requirements of this Rule. If deemed a pattern
+    day trader, the customer must maintain equity of $25,000. The 20 percent requirement, for security futures contracts,
+    should be calculated based on the greater of the initial or closing transaction and any amount exceeding FINRA excess
+    must be collected. The creation of a customer call subjects the account to all the restrictions contained in paragraph
+    (f)(8)(B) of this Rule.
+  conditions:
+    security_type: security_future
+    day_trade: true
+  formula:
+    type: percentage_of_market_value
+    rate: 0.2
+    description: 'Security futures day trading: 20% maintenance; $25,000 minimum equity for PDT'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_A_i
+  description: (i) The term "aggregate discount amount" as used with reference to a Treasury bill option contract means the
+    principal a
+  citation: FINRA 4210(f)(2)(A)(i)
+  source_quote: (i) The term "aggregate discount amount" as used with reference to a Treasury bill option contract means the
+    principal amount of the underlying Treasury bill (A) multiplied by the annualized discount (i.e., 100 percent minus the
+    exercise price of the option contract) and (B) further multiplied by a fraction having a numerator equal to the number
+    of days to maturity of the underlying Treasury bill on the earliest date on which it could be delivered pursuant to the
+    rules of The Options Clearing Corporation in connection with the exercise of the option (normally 91 or 182 days) and
+    a denominator of 360.
+  conditions:
+    security_type: definitions_reference
+  formula:
+    type: informational
+    description: Aggregate discount amount = principal × annualized discount (100% - exercise price) × (days to maturity /
+      360)
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_A_xxv
+  description: (xxv) The term "nominal principal amount" as used with reference to a GNMA option means the remaining unpaid
+    principal b
+  citation: FINRA 4210(f)(2)(A)(xxv)
+  source_quote: (xxv) The term "nominal principal amount" as used with reference to a GNMA option means the remaining unpaid
+    principal balance of GNMAs required to be delivered to the holder of a call or by the holder of a put upon exercise of
+    an option without regard to any variance in the remaining unpaid principal balance permitted to be delivered upon such
+    exercise and shall be $100,000 in the case of a single call or put.
+  conditions:
+    security_type: definitions_reference
+  formula:
+    type: informational
+    description: Nominal principal amount for GNMA options = remaining unpaid principal of GNMAs for delivery, minimum $100,000
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_A_xxxii
+  description: (xxxii) The term "spread" means a "long" and "short" position in different call option series, different put
+    option seri
+  citation: FINRA 4210(f)(2)(A)(xxxii)
+  source_quote: (xxxii) The term "spread" means a "long" and "short" position in different call option series, different put
+    option series, or a combination of call and put option series, that collectively have a limited risk / reward profile,
+    and meet the following conditions;
+  conditions: {}
+  formula:
+    type: informational
+    description: (xxxii) The term "spread" means a "long" and "short" position in different call option series, different
+      put option seri
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_D
+  description: (D) For purposes of this paragraph (f)(2), obligations issued by the United States Government shall be referred
+    to as Un
+  citation: FINRA 4210(f)(2)(D)
+  source_quote: (D) For purposes of this paragraph (f)(2), obligations issued by the United States Government shall be referred
+    to as United States Government obligations. Mortgage pass-through obligations guaranteed as to timely payment of principal
+    and interest by the Government National Mortgage Association shall be referred to as GNMA obligations. In the case of
+    any put, call, currency warrant, currency index warrant, or stock index warrant carried "long" in a customer's account
+    that expires in nine months or less, initial margin must be deposited and maintained equal to at least 100 percent of
+    the purchase price of the option or warrant. "Long" Listed Option or Warrant With An Expiration Exceeding Nine Months.
+    In the case of a listed put, call, index stock group option, or stock index warrant carried "long", margin must be deposited
+    and maintained equal to at least 75 percent of the current market value of the option or warrant; provided that the option
+    or warrant has a remaining period to expiration exceeding nine months. "Long" Listed Option or Warrant With An Expiration
+    Exceeding Nine Months. "Long" OTC Option or Warrant With An Expiration Exceeding Nine Months.
+  conditions:
+    security_type: government_debt
+  formula:
+    type: informational
+    description: US Government obligations include GNMAs at 100% of unpaid principal; FHLMC PCs valued at 75% of comparable
+      GNMAs
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_E
+  description: (E) The margin required on any listed or OTC put, call, currency warrant, currency index warrant, or stock
+    index warrant
+  citation: FINRA 4210(f)(2)(E)
+  source_quote: '(E) The margin required on any listed or OTC put, call, currency warrant, currency index warrant, or stock
+    index warrant carried "short" in a customer''s account shall be:'
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_E_i
+  description: (i) In the case of listed puts and calls, 100 percent of the current market value of the option plus the percentage
+    of t
+  citation: FINRA 4210(f)(2)(E)(i)
+  source_quote: (i) In the case of listed puts and calls, 100 percent of the current market value of the option plus the percentage
+    of the current market value of the underlying component specified in column II of the chart below. In the case of currency
+    warrants, currency index warrants and stock index warrants, 100 percent of the current market value of each such warrant
+    plus the percentage of the warrant's current "underlying component value" (as column IV of the chart below describes)
+    specified in column II of the chart below. The margin on any listed put, call, currency warrant, currency index warrant,
+    or stock index warrant carried "short" in a customer's account may be reduced by any "out-of-the-money amount" (as defined
+    below), but shall not be less than 100 percent of the current market value of the option or warrant plus the percentage
+    of the current market value of the underlying component specified in column III, except in the case of any listed put
+    carried "short" in a customer's account.
+  conditions:
+    security_type: option
+    option_listed: true
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.2
+    minimum_underlying_pct: 0.1
+    description: 'Listed options: 100% of premium + underlying % per chart; warrants: 100% of market value + underlying %'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_E_ii
+  description: (ii) In the case of listed puts and calls which represent options on GNMA obligations in the principal amount
+    of $100,00
+  citation: FINRA 4210(f)(2)(E)(ii)
+  source_quote: (ii) In the case of listed puts and calls which represent options on GNMA obligations in the principal amount
+    of $100,000, 130 percent of the current market value of the option plus $1,500, except that the margin required need not
+    exceed $5,000 plus the current market value of the option.
+  conditions:
+    security_type: option
+    underlying_type: gnma
+  formula:
+    type: naked_option
+    premium_pct: 1.3
+    underlying_pct: 0.0
+    amount: 1500.0
+    description: 'GNMA options: 130% of option market value + $1,500; max = $5,000 + option market value'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_E_iii
+  description: (iii) In the case of OTC puts and calls, the percentage of the current value of the underlying component and
+    the applica
+  citation: FINRA 4210(f)(2)(E)(iii)
+  source_quote: '(iii) In the case of OTC puts and calls, the percentage of the current value of the underlying component
+    and the applicable multiplier, if any, specified in column II below, plus any "in-the-money amount" (as defined in this
+    paragraph (f)(2)(E)(iii)). In the case of OTC options, the margin on any put or call carried "short" in a customer''s
+    account may be reduced by any "out-of-the-money amount" (as defined in paragraph (f)(2)(E)(i)), but shall not be less
+    than the percentage of the current value of the underlying component and the applicable multiplier, if any, specified
+    in column III below, except in the case of any OTC put carried "short" in a customer''s account. Margin on such put option
+    contracts shall not be less than the percentage of the put option''s exercise price as specified in column III below.
+    Type of Option * Option contracts under category (4) must be for a principal amount of not less than $500,000. For the
+    purpose of this paragraph (f)(2)(E)(iii), "in-the-money amounts" are determined as follows: Option Issue'
+  conditions:
+    security_type: option
+    option_listed: false
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    description: 'OTC options: underlying % per chart + in-the-money amount; put/call on same underlying may not exceed margin
+      on underlying'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_E_iv
+  description: '(iv) OTC puts and calls representing options on U.S. Government and U.S. Government Agency debt securities
+    that qualify '
+  citation: FINRA 4210(f)(2)(E)(iv)
+  source_quote: '(iv) OTC puts and calls representing options on U.S. Government and U.S. Government Agency debt securities
+    that qualify for exemption pursuant to SEA Rule 3a12-7, must be for a principal amount of not less than $500,000, and
+    shall be subject to the following requirements:'
+  conditions:
+    security_type: option
+    underlying_type: government_debt
+  formula:
+    type: informational
+    description: 'OTC options on US Government/Agency debt (Rule 3a12-7 exempt): minimum $500,000 principal amount; margin
+      per (iv)(a) exempt accounts or (iv)(b) non-exempt'
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_E_iv_a._a
+  description: a. For exempt accounts, as defined in paragraph (a)(13), 3 percent of the current value of the underlying principal
+    amou
+  citation: FINRA 4210(f)(2)(E)(iv)(a.)
+  source_quote: 'a. For exempt accounts, as defined in paragraph (a)(13), 3 percent of the current value of the underlying
+    principal amount on thirty (30) year U.S. Treasury bonds and non-mortgage backed U.S. Government agency debt securities;
+    and 2 percent of the current value of the underlying principal amount on all other U.S. Government and U.S. Government
+    agency debt securities, plus any "in-the-money amount" (as defined in paragraph (f)(2)(E)(iii)) or minus any "out-of-the-money
+    amount" (as defined in paragraph (f)(2)(E)(i)). The amount of any deficiency between the equity in the account and the
+    margin required shall be deducted in computing the net capital of the member under SEA Rule 15c3-1 and, if applicable,
+    Rule 4110(a), on the following basis:'
+  conditions:
+    security_type: option
+    underlying_type: government_debt
+    exempt_account: true
+  formula:
+    type: percentage_of_principal
+    rate: 0.03
+    description: 'Exempt account OTC govt options: 3% for 30yr Treasury/agency; 2% for other govt; 0.5% for 4yr or less'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_E_iv_a._1._a_1
+  description: 1. On any one account or group of commonly controlled accounts to the extent such deficiency exceeds 5 percent
+    of a memb
+  citation: FINRA 4210(f)(2)(E)(iv)(a.)(1.)
+  source_quote: 1. On any one account or group of commonly controlled accounts to the extent such deficiency exceeds 5 percent
+    of a member's tentative net capital (as such term is defined in SEA Rule 15c3-1), 100 percent of such excess amount, and
+  conditions: {}
+  formula:
+    type: concentration_threshold
+    rate: 0.05
+    description: 'OTC govt option deficiency on one account exceeding 5% of tentative net capital: 100% net capital deduction
+      on excess'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_E_iv_a._2._a_2
+  description: 2. On all accounts combined to the extent such deficiency exceeds 25 percent of a member's tentative net capital
+    (as suc
+  citation: FINRA 4210(f)(2)(E)(iv)(a.)(2.)
+  source_quote: 2. On all accounts combined to the extent such deficiency exceeds 25 percent of a member's tentative net capital
+    (as such term is defined in SEA Rule 15c3-1), 100 percent of such excess amount, reduced by any amount already deducted
+    pursuant to subparagraph (a) above.
+  conditions: {}
+  formula:
+    type: concentration_threshold
+    rate: 0.25
+    description: 'OTC govt option deficiency on all accounts exceeding 25% of tentative net capital: 100% net capital deduction
+      on excess'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_E_iv_b._b
+  description: b. For non-exempt accounts, 5 percent of the current value of the underlying principal amount on thirty (30)
+    year U.S. T
+  citation: FINRA 4210(f)(2)(E)(iv)(b.)
+  source_quote: b. For non-exempt accounts, 5 percent of the current value of the underlying principal amount on thirty (30)
+    year U.S. Treasury bonds and non-mortgage backed U.S. Government agency debt securities; and 3 percent of the current
+    value of the underlying principal amount on all other U.S. Government and U.S. Government agency debt securities, plus
+    any "in-the-money amount" or minus any "out-of-the-money amount," provided the minimum margin shall not be less than 1
+    percent of the current value of the underlying principal amount.
+  conditions:
+    security_type: option
+    underlying_type: government_debt
+    exempt_account: false
+  formula:
+    type: percentage_of_principal
+    rate: 0.05
+    description: 'Non-exempt OTC govt options: 5% for 30yr Treasury/agency; 3% for other govt; 1% for 4yr or less'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_2_F_ii
+  description: (ii) No margin need be required on any "covered" put or call.
+  citation: FINRA 4210(f)(2)(F)(ii)
+  source_quote: (ii) No margin need be required on any "covered" put or call.
+  conditions: {}
+  formula:
+    type: informational
+    description: (ii) No margin need be required on any "covered" put or call.
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_G_iii
+  description: '(iii) If both a put and call for the same GNMA obligation in the principal amount of $100,000 are listed or
+    OTC and are '
+  citation: FINRA 4210(f)(2)(G)(iii)
+  source_quote: (iii) If both a put and call for the same GNMA obligation in the principal amount of $100,000 are listed or
+    OTC and are carried "short" for a customer, the amount of margin required shall be the margin on the put or call, whichever
+    is greater, as required pursuant to paragraph (f)(2)(E)(ii) above, plus the current market value of the other option.
+  conditions:
+    security_type: option
+    underlying_type: gnma
+  formula:
+    type: informational
+    description: 'GNMA straddle: margin = greater of put or call margin per (f)(2)(E)(ii), plus other side premium; principal
+      amount $100,000'
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_2_I_iv
+  description: (iv) Where a listed or OTC put or call option or stock index warrant is carried "short" in the account of a
+    customer, ag
+  citation: FINRA 4210(f)(2)(I)(iv)
+  source_quote: (iv) Where a listed or OTC put or call option or stock index warrant is carried "short" in the account of
+    a customer, against an escrow agreement, that is in a form satisfactory to FINRA, is issued by a third party custodian
+    bank or trust company (the "custodian"), either is held in the account at the time the put or call is written, or is received
+    in the account promptly thereafter, and is in compliance with the requirements of Rule 610 of The Options Clearing Corporation,
+    no margin need be required on the put or call. In the case of a call option or warrant on a broad index stock group, the
+    escrow agreement must certify that the custodian holds for the account of the customer as security for the agreement either
+    cash, cash equivalents, one or more qualified securities, or any combination thereof, having an aggregate market value,
+    computed as at the close of business on the day the call is written, of not less than 100 percent of the aggregate index
+    value computed as at the same time and that the custodian will promptly pay the member the exercise settlement amount
+    in the event the account is assigned
+  conditions:
+    security_type: option
+    position_side: short
+  formula:
+    type: informational
+    description: 'Short options carried against escrow agreement from custodian bank: 100% of underlying deposited — no additional
+      margin required'
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_3_A
+  description: (A) Margin Accounts
+  citation: FINRA 4210(f)(3)(A)
+  source_quote: (A) Margin Accounts The margin to be maintained on any transaction or net position in each "when issued" security
+    shall be the same as if such security were issued. Each position in a "when issued" security shall be margined separately
+    and any unrealized profit shall be of value only in providing the amount of margin required on that particular position.
+    When an account has a "short" position in a "when issued" security and there are held in the account securities upon which
+    the "when issued" security may be issued, such "short" position shall be marked to the market and the balance in the account
+    shall for the purpose of this Rule be adjusted for any unrealized loss in such "short" position.
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_5
+  description: (5) Consolidation of Accounts
+  citation: FINRA 4210(f)(5)
+  source_quote: (5) Consolidation of Accounts When two or more accounts are carried for a customer, the margin to be maintained
+    may be determined on the net position of said accounts, provided the customer has consented that the money and securities
+    in each of such accounts may be used to carry or pay any deficit in all such accounts.
+  conditions: {}
+  formula:
+    type: informational
+    description: (5) Consolidation of Accounts
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_6
+  description: (6) Time Within Which Margin or "Mark to Market" Must Be Obtained
+  citation: FINRA 4210(f)(6)
+  source_quote: (6) Time Within Which Margin or "Mark to Market" Must Be Obtained The amount of margin or "mark to market"
+    required by any provision of this Rule shall be obtained as promptly as possible and in any event within 15 business days
+    from the date such deficiency occurred, unless FINRA has specifically granted the member additional time.
+  conditions: {}
+  formula:
+    type: informational
+    description: (6) Time Within Which Margin or "Mark to Market" Must Be Obtained
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_7
+  description: (7) Practice of Meeting Regulation T Margin Calls by Liquidation Prohibited
+  citation: FINRA 4210(f)(7)
+  source_quote: (7) Practice of Meeting Regulation T Margin Calls by Liquidation Prohibited When a "margin call," as defined
+    in Section 220.2 of Regulation T, is required in a customer's account, no member shall permit a customer to make a practice
+    of either deferring the deposit of cash or securities beyond the time when such transactions would ordinarily be settled
+    or cleared, or meeting the margin required by the liquidation of the same or other commitments in the account. This prohibition
+    on liquidations shall not apply (i) to those accounts that, at the time of liquidation, are in compliance with the equity
+    to be maintained pursuant to the provisions of this Rule or (ii) to any account carried on an omnibus basis as prescribed
+    by Regulation T.
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_8
+  description: (8) Special Initial and Maintenance Margin Requirements
+  citation: FINRA 4210(f)(8)
+  source_quote: (8) Special Initial and Maintenance Margin Requirements
+  conditions: {}
+  formula:
+    type: informational
+    description: (8) Special Initial and Maintenance Margin Requirements
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_8_B_i
+  description: (i) The term "day trading" means the purchasing and selling or the selling and purchasing of the same security
+    on the sa
+  citation: FINRA 4210(f)(8)(B)(i)
+  source_quote: '(i) The term "day trading" means the purchasing and selling or the selling and purchasing of the same security
+    on the same day in a margin account except for:'
+  conditions: {}
+  formula:
+    type: informational
+    description: (i) The term "day trading" means the purchasing and selling or the selling and purchasing of the same security
+      on the sa
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_8_B_ii
+  description: (ii) The term "pattern day trader" means any customer who executes four or more day trades within five business
+    days. Ho
+  citation: FINRA 4210(f)(8)(B)(ii)
+  source_quote: (ii) The term "pattern day trader" means any customer who executes four or more day trades within five business
+    days. However, if the number of day trades is 6 percent or less of total trades for the five business day period, the
+    customer will not be considered a pattern day trader and the special requirements under paragraph (f)(8)(B)(iv) of this
+    Rule will not apply. In the event that the member at which a customer seeks to open an account or to resume day trading
+    knows or has a reasonable basis to believe that the customer will engage in pattern day trading, then the special requirements
+    under paragraph (f)(8)(B)(iv) of this Rule will apply.
+  conditions:
+    account_type: margin
+  formula:
+    type: informational
+    description: Pattern day trader = 4+ day trades in 5 business days, unless <= 6% of total trades
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_8_B_iii
+  description: (iii) The term "day-trading buying power" means the equity in a customer's account at the close of business
+    of the previ
+  citation: FINRA 4210(f)(8)(B)(iii)
+  source_quote: (iii) The term "day-trading buying power" means the equity in a customer's account at the close of business
+    of the previous day, less any maintenance margin requirement as prescribed in paragraph (c) of this Rule, multiplied by
+    four for equity securities. The day-trading buying power for non-equity securities may be computed using the applicable
+    special maintenance margin requirements pursuant to other provisions of this Rule. Whenever day trading occurs in a customer's
+    margin account the special maintenance margin required, based on the cost of all the day trades made during the day, shall
+    be 25 percent for margin eligible equity securities, and 100 percent for non-margin eligible equity securities. For non-equity
+    securities, the special maintenance margin shall be as required pursuant to the other provisions of this Rule. Alternatively,
+    when two or more day trades occur on the same day in the same customer's account, the margin required may be computed
+    utilizing the highest (dollar amount) open position during that day. To utilize the highest open position computation
+    method, a record showing the "time and tick" of each trade must be maintained to document the sequence in which each day
+    trade was completed.
+  conditions:
+    account_type: pattern_day_trader
+  formula:
+    type: buying_power_multiplier
+    multiplier: 4.0
+    description: Day-trading buying power = (equity - maintenance requirement) x 4 for equity securities
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_8_B_iv
+  description: (iv) Special Requirements for Pattern Day Traders
+  citation: FINRA 4210(f)(8)(B)(iv)
+  source_quote: (iv) Special Requirements for Pattern Day Traders
+  conditions: {}
+  formula:
+    type: informational
+    description: (iv) Special Requirements for Pattern Day Traders
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_f_8_B_iv_a._a
+  description: a. Minimum Equity Requirement for Pattern Day Traders — The minimum equity required for the accounts of customers
+    deemed
+  citation: FINRA 4210(f)(8)(B)(iv)(a.)
+  source_quote: a. Minimum Equity Requirement for Pattern Day Traders — The minimum equity required for the accounts of customers
+    deemed to be pattern day traders shall be $25,000. This minimum equity must be deposited in the account before such customer
+    may continue day trading and must be maintained in the customer's account at all times.
+  conditions:
+    account_type: pattern_day_trader
+  formula:
+    type: account_minimum
+    amount: 25000.0
+    description: 'Pattern day trader minimum equity: $25,000; must be deposited before day trading and maintained at all times'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_f_8_B_iv_b._b
+  description: b. In the event that the member at which a customer seeks to open an account or resume day trading in an existing
+    accoun
+  citation: FINRA 4210(f)(8)(B)(iv)(b.)
+  source_quote: b. In the event that the member at which a customer seeks to open an account or resume day trading in an existing
+    account, knows or has a reasonable basis to believe that the customer will engage in pattern day trading, then the minimum
+    equity required under subparagraph (iv)a. above ($25,000) must be deposited in the account prior to commencement of day
+    trading.
+  conditions:
+    account_type: pattern_day_trader
+  formula:
+    type: account_minimum
+    amount: 25000.0
+    description: PDT minimum equity must be in account before day trading begins if member knows or has reasonable basis to
+      believe customer will day trade
+  produces_calculation: true
+  calculation_status: active

@@ -1,0 +1,179 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  section: 4210(f)(2)(A)(xxvi)
+  description: Naked option margin for options on leveraged/inverse ETFs and ETPs
+  effective_date: '2009-12-01'
+  notes: >
+    Options on leveraged ETFs use a scaled underlying percentage in the naked option formula.  Per RN
+    09-53, the percentage scales by the ETF's absolute leverage factor:
+      1x → 20%,  2x → 30%,  3x → 45%.
+    Inverse ETFs use the same absolute-leverage scaling because the option is priced off the ETF itself.  ETPs
+    (ETNs, etc.) are treated identically to ETFs. Long options on leveraged ETFs carry no maintenance
+    (matched by the generic 4210_long_call / 4210_long_put rules already).
+rules:
+- id: 4210_naked_call_etf_1x
+  description: Uncovered call on standard (1x) ETF
+  citation: FINRA 4210(f)(2)(A)(xxvi)(a)
+  source_quote: >
+    In the case of listed puts and calls, 100 percent of the current market value of the option plus the
+    percentage of the current market value of the underlying component specified in column II of the chart
+    below. (1) Stock 20 percent.
+  conditions:
+    security_type: option
+    option_type: call
+    position_side: short
+    covered: false
+    underlying_type: etf
+    underlying_leverage_factor: 1
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.2
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_put_etf_1x
+  description: Uncovered put on standard (1x) ETF
+  citation: FINRA 4210(f)(2)(A)(xxvi)(a)
+  source_quote: >
+    In the case of listed puts and calls, 100 percent of the current market value of the option plus the
+    percentage of the current market value of the underlying component specified in column II of the chart
+    below. (1) Stock 20 percent.
+  conditions:
+    security_type: option
+    option_type: put
+    position_side: short
+    covered: false
+    underlying_type: etf
+    underlying_leverage_factor: 1
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.2
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_call_etf_2x
+  description: Uncovered call on 2x leveraged ETF
+  citation: FINRA 4210(f)(2)(A)(xxvi)
+  source_quote: >-
+    (xxvi) The term "numerical index value," when used in respect of a currency index warrant or stock
+    index warrant, shall mean the level of a particular currency index or stock index as reported by the
+    reporting authority for the index.
+  conditions:
+    security_type: option
+    option_type: call
+    position_side: short
+    covered: false
+    underlying_type: etf
+    underlying_leverage_factor: 2
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.3
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_put_etf_2x
+  description: Uncovered put on 2x leveraged ETF
+  citation: FINRA 4210(f)(2)(A)(xxvi)
+  source_quote: >-
+    (xxvi) The term "numerical index value," when used in respect of a currency index warrant or stock
+    index warrant, shall mean the level of a particular currency index or stock index as reported by the
+    reporting authority for the index.
+  conditions:
+    security_type: option
+    option_type: put
+    position_side: short
+    covered: false
+    underlying_type: etf
+    underlying_leverage_factor: 2
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.3
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_call_etf_3x
+  description: Uncovered call on 3x leveraged ETF
+  citation: FINRA 4210(f)(2)(A)(xxvi)
+  source_quote: >-
+    (xxvi) The term "numerical index value," when used in respect of a currency index warrant or stock
+    index warrant, shall mean the level of a particular currency index or stock index as reported by the
+    reporting authority for the index.
+  conditions:
+    security_type: option
+    option_type: call
+    position_side: short
+    covered: false
+    underlying_type: etf
+    underlying_leverage_factor: 3
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.45
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_put_etf_3x
+  description: Uncovered put on 3x leveraged ETF
+  citation: FINRA 4210(f)(2)(A)(xxvi)
+  source_quote: >-
+    (xxvi) The term "numerical index value," when used in respect of a currency index warrant or stock
+    index warrant, shall mean the level of a particular currency index or stock index as reported by the
+    reporting authority for the index.
+  conditions:
+    security_type: option
+    option_type: put
+    position_side: short
+    covered: false
+    underlying_type: etf
+    underlying_leverage_factor: 3
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.45
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_call_etp
+  description: Uncovered call on ETP/ETN — fixed 20%
+  citation: FINRA 4210(f)(2)(A)(xxvi)(a)
+  source_quote: >
+    In the case of listed puts and calls, 100 percent of the current market value of the option plus the
+    percentage of the current market value of the underlying component specified in column II of the chart
+    below. (1) Stock 20 percent.
+  conditions:
+    security_type: option
+    option_type: call
+    position_side: short
+    covered: false
+    underlying_type: etp
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.2
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250
+- id: 4210_naked_put_etp
+  description: Uncovered put on ETP/ETN — fixed 20%
+  citation: FINRA 4210(f)(2)(A)(xxvi)(a)
+  source_quote: >
+    In the case of listed puts and calls, 100 percent of the current market value of the option plus the
+    percentage of the current market value of the underlying component specified in column II of the chart
+    below. (1) Stock 20 percent.
+  conditions:
+    security_type: option
+    option_type: put
+    position_side: short
+    covered: false
+    underlying_type: etp
+  formula:
+    type: naked_option
+    premium_pct: 1.0
+    underlying_pct: 0.2
+    otm_deduction: true
+    minimum_underlying_pct: 0.1
+    minimum_per_contract: 250

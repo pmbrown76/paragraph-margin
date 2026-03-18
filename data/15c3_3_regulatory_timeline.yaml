@@ -1,0 +1,504 @@
+## Regulatory Timeline — SEC Rule 15c3-3 (17 CFR 240.15c3-3)
+##
+## Maps each cited 15c3-3 section to its original rule text, amendments,
+## and current interpretation. Used by the waterfall UI to show lineage
+## when a user clicks a customer protection citation.
+
+sections:
+
+  "15c3-3(a)":
+    title: Definitions
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        For purposes of this section, the following terms shall have the
+        meanings indicated: "customer" means any person from whom or on
+        whose behalf a broker or dealer has received or acquired or holds
+        funds or securities for the account of that person; "excess margin
+        securities" means securities having a market value in excess of
+        140 percent of the customer's debit balance; "free credit balance"
+        means the amount of cash in a customer's account after all
+        transactions are settled.
+    amendments:
+      - date: "1975-06-26"
+        source: "SEC Release 34-11497"
+        change: >-
+          Coordinated the definitions in 15c3-3(a) with the Uniform Net
+          Capital Rule amendments. Clarified the treatment of proprietary
+          accounts of broker-dealers (PAB accounts) and their relationship
+          to customer accounts for purposes of the possession or control
+          and reserve requirements.
+      - date: "2013-07-30"
+        source: "SEC Release 34-70072"
+        change: >-
+          Expanded definitions to address OTC derivatives and security-
+          based swap customer accounts. Added definitions for "security-
+          based swap customer" and related terms to support the Dodd-Frank
+          customer protection framework.
+    current_interpretation: >-
+      The definitions in 15c3-3(a) establish the scope of the customer
+      protection rule. The definition of "customer" is intentionally broad
+      — it includes any person for whom the broker-dealer holds funds or
+      securities, not merely retail customers. PAB accounts (proprietary
+      accounts of other broker-dealers) receive separate treatment under
+      the reserve formula. The 140% rehypothecation limit referenced in
+      the excess margin securities definition is one of the most
+      significant customer protections in the rule.
+
+  "15c3-3(b)":
+    title: Possession or Control
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        Every broker or dealer shall promptly obtain and shall thereafter
+        maintain the physical possession or control of all fully-paid
+        securities and excess margin securities carried for the account
+        of customers. Such securities shall be held free of any lien or
+        interest of the broker-dealer or any person associated with the
+        broker-dealer.
+    amendments:
+      - date: "2019-06-21"
+        source: "SEC Release 34-86175"
+        change: >-
+          Updated the possession or control requirements to address modern
+          settlement and custody practices. Clarified the application of
+          possession or control to dematerialized securities, securities
+          held in book-entry form at depositories, and securities in
+          transfer.
+      - date: "2024-05-28"
+        source: "SEC Release 34-103320"
+        change: >-
+          Amended the possession or control timeline to conform with T+1
+          settlement. Broker-dealers must now achieve possession or control
+          of fully-paid and excess margin securities within one business
+          day of settlement, reduced from two business days.
+    current_interpretation: >-
+      The possession or control requirement is the first pillar of customer
+      protection. Broker-dealers must segregate fully-paid securities and
+      excess margin securities so that they are not commingled with the
+      firm's proprietary positions or pledged to the firm's creditors.
+      "Good control locations" (defined in paragraph (c)) include DTC,
+      bank custodians, and clearing corporation accounts designated as
+      customer segregation. The daily box count reconciliation ensures
+      compliance. Violations of the possession or control requirement are
+      among the most serious regulatory infractions.
+
+  "15c3-3(b)(3)":
+    title: 140% Rehypothecation Limit
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        A broker or dealer may use customer margin securities as collateral
+        for financing the customer's debit balance, but in no event shall
+        the market value of securities so used exceed 140 percent of the
+        customer's debit balance. Any securities with market value in
+        excess of 140 percent of the debit balance are excess margin
+        securities and must be maintained in possession or control.
+    amendments:
+      - date: "1975-06-26"
+        source: "SEC Release 34-11497"
+        change: >-
+          Clarified the computation of the 140% limit in coordination with
+          net capital rule amendments. Specified the methodology for
+          determining which specific securities may be pledged when
+          multiple securities are held in a customer's margin account.
+    current_interpretation: >-
+      The 140% rehypothecation limit is the critical boundary between
+      securities a broker-dealer may pledge for financing and those it
+      must segregate. For a customer with a $100,000 debit balance, the
+      firm may pledge up to $140,000 in market value of the customer's
+      margin securities. Any excess must be placed in a good control
+      location. This limit prevents broker-dealers from using customer
+      securities to fund proprietary activities beyond the amount needed
+      to finance the customer's own borrowing. The 140% figure has
+      remained unchanged since the rule's adoption in 1972.
+
+  "15c3-3(c)":
+    title: Good Control Locations
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        For purposes of this section, a broker or dealer shall be deemed
+        to have possession or control of securities if: (1) they are held
+        in the broker-dealer's physical possession in a vault or secure
+        location; (2) they are held in a good control location including
+        a clearing corporation, a bank pursuant to a satisfactory control
+        agreement, or a depository with appropriate account segregation;
+        (3) they are in transit to the broker-dealer or to a good control
+        location.
+    amendments:
+      - date: "2019-06-21"
+        source: "SEC Release 34-86175"
+        change: >-
+          Modernized the good control location framework to address
+          book-entry securities held at the Depository Trust Company (DTC)
+          and other central securities depositories. Clarified that
+          segregation at DTC requires placement in a customer segregation
+          account (DTC Seg account) rather than the firm's general free
+          account.
+    current_interpretation: >-
+      Good control locations are the approved places where customer
+      securities may be held in compliance with the possession or control
+      requirement. The primary good control locations in modern practice
+      are: (1) DTC customer segregation accounts; (2) bank custody accounts
+      subject to satisfactory control agreements (SCAs) that prohibit the
+      bank from exercising a lien on customer securities; (3) Options
+      Clearing Corporation (OCC) accounts for options positions; (4)
+      transfer agent locations for securities in transit. The satisfactory
+      control agreement requirement for bank locations is essential —
+      without it, a bank custody account does not qualify as a good
+      control location.
+
+  "15c3-3(d)":
+    title: Buy-In Requirements
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        If a broker or dealer has not obtained possession or control of
+        securities as required by paragraph (b) within the prescribed
+        time period, the broker-dealer shall take steps to obtain
+        possession or control of such securities, including initiating
+        a buy-in or borrowing the securities, no later than the close
+        of business on the next business day.
+    amendments:
+      - date: "2024-05-28"
+        source: "SEC Release 34-103320"
+        change: >-
+          Conformed the buy-in timeline to T+1 settlement. Shortened the
+          period within which broker-dealers must take action to achieve
+          possession or control of customer securities that remain
+          outstanding after settlement date.
+    current_interpretation: >-
+      The buy-in requirement is the enforcement mechanism for the
+      possession or control obligation. When customer securities are not
+      in a good control location by the required date, the firm must
+      initiate a buy-in — purchasing identical securities in the open
+      market — or borrow the securities to satisfy the segregation
+      requirement. The costs of buy-ins are borne by the broker-dealer,
+      not the customer. Under T+1 settlement, the timeline is compressed,
+      requiring firms to achieve possession or control more quickly and
+      to initiate buy-in procedures sooner when failures occur.
+
+  "15c3-3(e)":
+    title: Customer Reserve Computation
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        Every broker or dealer shall maintain with a bank or banks at all
+        times, in an account or accounts designated as "Special Reserve
+        Bank Account for the Exclusive Benefit of Customers," cash and/or
+        qualified securities in amounts computed in accordance with the
+        formula set forth in Exhibit A to this section. The reserve
+        deposit shall be made no later than one hour after the opening
+        of banking business on the second business day following the
+        computation date.
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Modernized the reserve computation to reflect changes in
+          settlement practices and product types. Updated the treatment
+          of money market fund shares as qualified securities for reserve
+          deposit purposes.
+      - date: "2024-05-28"
+        source: "SEC Release 34-103320"
+        change: >-
+          Conformed the reserve deposit timeline to T+1 settlement.
+          Adjusted the timing of when excess reserve deposits may be
+          withdrawn to align with the shortened settlement cycle.
+    current_interpretation: >-
+      The customer reserve computation is the second pillar of customer
+      protection (alongside possession or control). It ensures that
+      customer cash is segregated in a special reserve bank account and
+      cannot be used by the broker-dealer for proprietary purposes. The
+      reserve formula (Exhibit A) nets customer credits against customer
+      debits to determine the required reserve deposit. The reserve bank
+      account is legally insulated from the firm's creditors in
+      bankruptcy under SIPA. Qualified reserve deposits include cash
+      and U.S. Treasury securities.
+
+  "15c3-3(e)(1)":
+    title: Special Reserve Bank Account
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        The special reserve bank account required by paragraph (e) shall
+        be maintained at a bank as defined in Section 3(a)(6) of the
+        Securities Exchange Act of 1934. The account shall be titled
+        "Special Reserve Bank Account for the Exclusive Benefit of
+        Customers" and shall be subject to a written notification to the
+        bank that the cash and securities deposited therein are for the
+        exclusive benefit of customers of the broker-dealer.
+    amendments:
+      - date: "2013-07-30"
+        source: "SEC Release 34-70072"
+        change: >-
+          Expanded the special reserve bank account framework to require
+          a separate reserve account for security-based swap customers,
+          distinct from the general customer reserve account. Established
+          requirements for the written agreement between the broker-dealer
+          and the reserve bank.
+    current_interpretation: >-
+      The special reserve bank account (SRBA) is the mechanism by which
+      customer cash is segregated. The bank must acknowledge in writing
+      that the funds are held for the exclusive benefit of customers and
+      that the bank will not assert any lien or right of offset against
+      the account. In practice, most SRBAs are held at money center banks
+      and earn interest that accrues to the broker-dealer (not the
+      customers). Firms with security-based swap customers must maintain
+      a separate SRBA for those customers. The SRBA designation provides
+      critical protection in a broker-dealer liquidation under SIPA.
+
+  "15c3-3(e)(2)":
+    title: PAB Reserve
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        A broker or dealer shall compute a separate reserve requirement
+        for proprietary accounts of broker-dealers (PAB accounts). The
+        PAB reserve shall be computed using the same formula as the
+        customer reserve but applied to the credits and debits arising
+        from transactions with other broker-dealers carried on a fully
+        disclosed or omnibus basis.
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Clarified the PAB reserve computation methodology and its
+          relationship to the customer reserve. Updated the treatment of
+          intercompany balances and clearing fund deposits in the PAB
+          computation.
+    current_interpretation: >-
+      The PAB reserve is a separate computation from the customer reserve,
+      reflecting the different risk profile of broker-dealer counterparties
+      versus retail customers. PAB accounts arise when one broker-dealer
+      carries accounts for another (correspondent clearing relationships).
+      The PAB reserve deposit is maintained in a separate special reserve
+      bank account titled for PAB customers. While the computation
+      methodology mirrors the customer reserve formula, the inputs differ
+      because PAB credits and debits arise from professional counterparty
+      relationships. The PAB reserve provides protection for correspondent
+      firms in the event of the carrying firm's failure.
+
+  "15c3-3(e)(3)":
+    title: Computation Frequency
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        The computations required by paragraph (e) shall be made weekly,
+        as of the close of the last business day of the week, and the
+        required deposit shall be made no later than one hour after the
+        opening of banking business on the second business day following
+        the computation date.
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Clarified computation frequency requirements. Required firms
+          with significant customer activity to perform more frequent
+          (daily) computations if their weekly computations showed
+          substantial volatility in reserve requirements.
+      - date: "2023-07-12"
+        source: "SEC Release 34-97877 (Proposed)"
+        change: >-
+          Proposed requiring daily reserve computations for broker-dealers
+          with total credits exceeding $250 million. Would eliminate the
+          weekly computation option for the largest carrying firms to
+          reduce the risk of reserve shortfalls between computation dates.
+    current_interpretation: >-
+      Most broker-dealers perform the reserve computation weekly as of
+      Friday close, with the required deposit made by the opening of
+      banking business on Tuesday (one hour after opening). Firms may
+      elect to perform daily computations, and FINRA has informally
+      encouraged large carrying firms to do so. The proposed daily
+      computation requirement for large firms (Release 34-97877) reflects
+      the recognition that weekly computation can leave significant gaps
+      in customer protection during volatile markets. As of March 2026,
+      the daily computation proposal remains pending.
+
+  "Exhibit A":
+    title: Reserve Formula
+    original:
+      date: "1972-09-19"
+      source: "SEC Release 34-9775 — Customer Protection Rule"
+      text: >-
+        The reserve formula computes the required deposit as: total credits
+        minus total debits. Credits include: free credit balances, customer
+        short sale proceeds, customer credit balances in margin accounts,
+        and other amounts payable to customers. Debits include: customer
+        margin debit balances, securities borrowed to cover customer short
+        sales, and margin deposits on customer futures and options positions.
+        If credits exceed debits, the excess must be deposited in the
+        special reserve bank account. If debits exceed credits, no reserve
+        deposit is required.
+    amendments:
+      - date: "1992-11-24"
+        source: "SEC Release 34-31511"
+        change: >-
+          Modernized the reserve formula to address new product types and
+          settlement practices. Updated line items for money market fund
+          positions, mutual fund receivables, and clearing organization
+          deposits. Clarified the treatment of fails-to-deliver and
+          fails-to-receive in the formula.
+      - date: "2013-07-30"
+        source: "SEC Release 34-70072"
+        change: >-
+          Amended the reserve formula to incorporate security-based swap
+          customer credits and debits. Added new line items for initial
+          margin collected from and posted on behalf of security-based
+          swap customers.
+      - date: "2024-05-28"
+        source: "SEC Release 34-103320"
+        change: >-
+          Conformed the reserve formula timing to T+1 settlement. Adjusted
+          the aging schedule for fails-to-deliver and fails-to-receive to
+          reflect the shortened settlement cycle. Updated the treatment of
+          CNS (Continuous Net Settlement) items in the formula.
+    current_interpretation: >-
+      The reserve formula (Exhibit A) is the quantitative core of the
+      customer protection rule. It computes the net amount that the broker-
+      dealer owes to customers in aggregate, producing the required reserve
+      deposit. The formula operates on a net basis — customer debits
+      (amounts owed to the firm) reduce the reserve requirement dollar for
+      dollar against customer credits (amounts owed to customers). Key
+      credit items include free credit balances and short sale proceeds.
+      Key debit items include margin loan balances and securities borrowed
+      to cover customer shorts. The formula includes specific aging
+      schedules for fail items: fails-to-deliver older than the prescribed
+      period must be charged to the formula as credits, increasing the
+      reserve requirement. The reserve formula is the most operationally
+      intensive component of the customer protection framework.
+
+cross_cutting_amendments:
+
+  - id: "SEC_34-9775"
+    date: "1972-09-19"
+    title: "Customer Protection — Original Adoption"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Original adoption of the Customer Protection Rule as 17 CFR 240.15c3-3.
+      Established the twin pillars of customer protection: possession or
+      control of customer securities, and the customer reserve formula
+      requiring segregation of customer cash in a special reserve bank
+      account. Adopted in response to the back-office crisis of the late
+      1960s, when multiple broker-dealer failures resulted in customer
+      losses due to commingling of customer and proprietary assets.
+
+  - id: "SEC_34-11497"
+    date: "1975-06-26"
+    title: "Coordination with Net Capital Amendments"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Coordinated the customer protection rule with the adoption of the
+      Uniform Net Capital Rule (15c3-1). Harmonized definitions, clarified
+      the interaction between the net capital computation and the reserve
+      formula, and updated the PAB account framework to reflect the new
+      net capital structure. Established the complementary relationship
+      between Rules 15c3-1 and 15c3-3 that persists today.
+
+  - id: "SEC_34-31511"
+    date: "1992-11-24"
+    title: "Reserve Formula Modernization"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Comprehensive modernization of the reserve formula to reflect changes
+      in market structure, settlement practices, and product types. Updated
+      Exhibit A line items, clarified fail aging schedules, and revised
+      the PAB computation methodology. This amendment brought the reserve
+      formula into alignment with modern clearing and settlement practices
+      at DTC and NSCC.
+
+  - id: "SEC_34-70072"
+    date: "2013-07-30"
+    title: "Amendments for OTC Derivatives"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Extended the customer protection framework to security-based swap
+      customers pursuant to the Dodd-Frank Act. Required separate reserve
+      accounts and computations for security-based swap customers.
+      Established new possession or control requirements for collateral
+      posted by security-based swap counterparties. Represented the most
+      significant expansion of Rule 15c3-3 since its original adoption.
+
+  - id: "SEC_34-86175"
+    date: "2019-06-21"
+    title: "Customer Protection Amendments"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Updated the possession or control and good control location
+      frameworks to address modern custody practices, including book-entry
+      securities at DTC, dematerialized securities, and electronic vault
+      receipts. Modernized the satisfactory control agreement requirements
+      for bank custody arrangements and clarified DTC segregation account
+      procedures.
+
+  - id: "SEC_34-97877"
+    date: "2023-07-12"
+    title: "Proposed: Daily Computation for Large Firms"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Proposed requiring daily reserve computations for broker-dealers
+      with total credits exceeding $250 million. Would eliminate the
+      weekly computation option for the largest carrying firms. The
+      proposal reflects concerns that weekly computation intervals create
+      unacceptable gaps in customer protection during periods of market
+      stress, when reserve requirements can change rapidly. As of March
+      2026, this proposal remains pending.
+
+  - id: "SEC_34-103320"
+    date: "2024-05-28"
+    title: "T+1 Settlement Conforming Amendments"
+    source: "Securities and Exchange Commission"
+    impact: >-
+      Conformed Rule 15c3-3 to the SEC's transition to T+1 settlement
+      (effective May 28, 2024). Amended the possession or control timeline,
+      buy-in procedures, reserve deposit timing, and Exhibit A fail aging
+      schedules to reflect the shortened settlement cycle. Required
+      broker-dealers to achieve possession or control of customer
+      securities one business day sooner and adjusted the reserve formula
+      to account for the accelerated settlement of CNS items.
+
+reference_sources:
+
+  - id: "SEC_15C3_3_CURRENT"
+    title: "17 CFR 240.15c3-3 — Current Full Text"
+    version: "As amended through 2024"
+    role: >-
+      The authoritative text of the Customer Protection Rule as published
+      in the Code of Federal Regulations. Establishes the possession or
+      control and reserve requirements that form the foundation of
+      customer asset protection for broker-dealer customers. Includes
+      the reserve formula (Exhibit A) and the good control location
+      framework.
+
+  - id: "SEC_15C3_3_EXHIBIT_A"
+    title: "Exhibit A — Reserve Formula"
+    version: "As amended through 2024 (T+1 conforming)"
+    role: >-
+      The reserve formula annexed to Rule 15c3-3. Prescribes the
+      computation of the required customer reserve deposit by netting
+      total customer credits against total customer debits. The formula
+      includes specific line items for free credit balances, margin
+      debits, short sale proceeds, fail items, and clearing organization
+      deposits. Exhibit A is the quantitative engine of the customer
+      protection framework.
+
+  - id: "FINRA_CUSTOMER_PROTECTION_GUIDE"
+    title: "FINRA Customer Protection Interpretations"
+    version: "Current"
+    role: >-
+      FINRA's interpretive guidance on customer protection issues under
+      Rule 15c3-3. Provides practical guidance on possession or control
+      procedures, reserve computation methodology, good control location
+      requirements, and common compliance issues. Supplements the SEC
+      rule text with industry-specific interpretations and examination
+      findings from FINRA's financial surveillance program.

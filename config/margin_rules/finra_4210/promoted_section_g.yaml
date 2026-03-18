@@ -1,0 +1,206 @@
+rule_set:
+  regulation: FINRA Rule 4210
+  authority: FINRA
+  section: g
+  description: FINRA 4210(g) — Portfolio Margin (promoted from stubs)
+rules:
+- id: 4210_g
+  description: (g) Portfolio Margin
+  citation: FINRA 4210(g)
+  source_quote: (g) Portfolio Margin As an alternative to the "strategy-based" margin requirements set forth in paragraphs
+    (a) through (f) of this Rule, members may elect to apply the portfolio margin requirements set forth in this paragraph
+    (g) to all margin equity securities,1 listed options, security futures products (as defined in Section 3(a)(56) of the
+    Exchange Act), unlisted derivatives, warrants, stock index warrants, and related instruments (as defined in paragraph
+    (g)(2)(D)), provided that the requirements of paragraph (g)(6)(B)(i) of this Rule are met. In addition, a member, provided
+    that it is a Futures Commission Merchant ("FCM") and is either a clearing member of a futures clearing organization or
+    has an affiliate that is a clearing member of a futures clearing organization, is permitted under this paragraph (g) to
+    combine an eligible participant's related instruments with listed index options, unlisted derivatives, options on exchange
+    traded funds ("ETF"), stock index warrants and underlying instruments and compute a margin requirement for such combined
+    products on a portfolio margin basis. The portfolio margin provisions of this Rule shall not apply to Individual Retirement
+    Accounts ("IRAs").
+  conditions: {}
+  formula:
+    type: informational
+    description: (g) Portfolio Margin
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_1_C
+  description: (C) monitoring credit risk exposure to the member from portfolio margin accounts, on both an intra-day and
+    end of day ba
+  citation: FINRA 4210(g)(1)(C)
+  source_quote: (C) monitoring credit risk exposure to the member from portfolio margin accounts, on both an intra-day and
+    end of day basis, including the type, scope and frequency of reporting to senior management;
+  conditions: {}
+  formula:
+    type: informational
+    description: (C) monitoring credit risk exposure to the member from portfolio margin accounts, on both an intra-day and
+      end of day ba
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_1_I
+  description: (I) monitoring the credit exposure resulting from concentrated positions within both individual portfolio margin
+    account
+  citation: FINRA 4210(g)(1)(I)
+  source_quote: (I) monitoring the credit exposure resulting from concentrated positions within both individual portfolio
+    margin accounts and across all portfolio margin accounts. Moreover, management must periodically review, in accordance
+    with written procedures, the member's credit extension activities for consistency with these guidelines. Management must
+    periodically determine if the data necessary to apply this paragraph (g) is accessible on a timely basis and information
+    systems are available to adequately capture, monitor, analyze and report relevant data.
+  conditions: {}
+  formula:
+    type: informational
+    description: (I) monitoring the credit exposure resulting from concentrated positions within both individual portfolio
+      margin account
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_10_A
+  description: (A) If, as of the close of business, the equity in the portfolio margin account of an eligible participant,
+    as described
+  citation: FINRA 4210(g)(10)(A)
+  source_quote: (A) If, as of the close of business, the equity in the portfolio margin account of an eligible participant,
+    as described in paragraph (g)(4)(A) through (g)(4)(C), is less than the margin required, the eligible participant may
+    deposit additional funds and/or securities or establish a hedge to meet the margin requirement within three business days.
+    After the three business day period, members are prohibited from accepting new opening orders, except that new opening
+    orders entered for the purpose of reducing market risk may be accepted if the result would be to lower margin requirements.
+    In the event an eligible participant fails to hedge existing positions or deposit additional funds and/or securities in
+    an amount sufficient to eliminate any margin deficiency after three business days, the member must liquidate positions
+    in an amount sufficient to, at a minimum, lower the total margin required to an amount less than or equal to the account
+    equity.
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_10_E
+  description: '(E) Notwithstanding the provisions of subparagraph (A) above, members should not permit an eligible participant
+    to make '
+  citation: FINRA 4210(g)(10)(E)
+  source_quote: (E) Notwithstanding the provisions of subparagraph (A) above, members should not permit an eligible participant
+    to make a practice of meeting a portfolio margin deficiency by liquidation. Members must have procedures in place to identify
+    accounts that periodically liquidate positions to eliminate margin deficiencies, and the member is expected to take appropriate
+    action when warranted. Liquidation to eliminate margin deficiencies that are caused solely by adverse price movements
+    may be disregarded.
+  conditions: {}
+  formula:
+    type: informational
+    description: '(E) Notwithstanding the provisions of subparagraph (A) above, members should not permit an eligible participant
+      to make '
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_13
+  description: (13) Day Trading Requirements — The day trading restrictions promulgated under paragraph (f)(8)(B) of this
+    Rule shall no
+  citation: FINRA 4210(g)(13)
+  source_quote: (13) Day Trading Requirements — The day trading restrictions promulgated under paragraph (f)(8)(B) of this
+    Rule shall not apply to portfolio margin accounts that establish and maintain at least $5 million in equity, provided
+    that a member has the ability to monitor the intra-day risk associated with day trading. Portfolio margin accounts that
+    do not establish and maintain at least $5 million in equity will be subject to the day trading restrictions under paragraph
+    (f)(8)(B) of this Rule, provided the member has the ability to apply the applicable day trading requirement under this
+    Rule. However, if the position or positions day traded were part of a hedge strategy, the day trading restrictions will
+    not apply. A "hedge strategy" for purposes of this Rule means a transaction or a series of transactions that reduces or
+    offsets a material portion of the risk in a portfolio. Members are expected to monitor these portfolio margin accounts
+    to detect and prevent circumvention of the day trading requirements.
+  conditions:
+    account_type: portfolio_margin
+  formula:
+    type: account_minimum
+    amount: 5000000.0
+    description: Portfolio margin accounts with $5M+ equity exempt from day trading restrictions under (f)(8)(B)
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_4_C
+  description: (C) any person or entity not included in paragraphs (g)(4)(A) and (g)(4)(B) above approved for uncovered options
+    and, if
+  citation: FINRA 4210(g)(4)(C)
+  source_quote: (C) any person or entity not included in paragraphs (g)(4)(A) and (g)(4)(B) above approved for uncovered options
+    and, if transactions in security futures are to be included in the account, approval for such transactions is also required.
+    However, an eligible participant under this paragraph (g)(4)(C) may not establish or maintain positions in unlisted derivatives
+    unless minimum equity of at least $5 million is established and maintained with the member. For purposes of this minimum
+    equity requirement, all securities and futures accounts carried by the member for the same eligible participant may be
+    combined provided ownership across the accounts is identical. A guarantee pursuant to paragraph (f)(4) of this Rule is
+    not permitted for purposes of the minimum equity requirement.
+  conditions:
+    account_type: portfolio_margin
+  formula:
+    type: account_minimum
+    amount: 5000000.0
+    description: 'Portfolio margin eligible participant (non-BD/non-futures): approved for uncovered options; $5M minimum
+      if unlisted derivatives included'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_g_7
+  description: (7) Margin Required
+  citation: FINRA 4210(g)(7)
+  source_quote: '(7) Margin Required The amount of margin required under this paragraph (g) for each portfolio shall be the
+    greater of:'
+  conditions: {}
+  formula:
+    type: informational
+    description: Computational rule — needs margin formula implementation
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_7_D
+  description: (D) Positions other than those listed in paragraph (g)(6)(B)(i) above are not eligible for portfolio margin
+    treatment. H
+  citation: FINRA 4210(g)(7)(D)
+  source_quote: '(D) Positions other than those listed in paragraph (g)(6)(B)(i) above are not eligible for portfolio margin
+    treatment. However, positions not eligible for portfolio margin treatment (except for ineligible related instruments)
+    may be carried in a portfolio margin account, provided the member has the ability to apply the applicable strategy-based
+    margin requirements promulgated under this Rule, with the exception of securities subject to other provisions of paragraph
+    (g). Shares of a money market mutual fund may be carried in a portfolio margin account, also subject to the applicable
+    strategy-based margin requirement under this Rule provided that:'
+  conditions: {}
+  formula:
+    type: informational
+    description: (D) Positions other than those listed in paragraph (g)(6)(B)(i) above are not eligible for portfolio margin
+      treatment. H
+  produces_calculation: false
+  calculation_status: informational
+- id: 4210_g_7_E
+  description: (E) Non-margin eligible equity securities held "long" in a portfolio margin account shall be maintained at
+    100 percent o
+  citation: FINRA 4210(g)(7)(E)
+  source_quote: (E) Non-margin eligible equity securities held "long" in a portfolio margin account shall be maintained at
+    100 percent of the current market value at all times. Non-margin eligible equity securities held "short" in a portfolio
+    margin account shall be maintained at 50 percent of the current market value at all times.
+  conditions:
+    security_type: equity
+    marginable: false
+    account_type: portfolio_margin
+  formula:
+    type: percentage_of_market_value
+    rate: 1.0
+    description: 'Non-margin eligible equities long in portfolio margin: 100% margin; short: 50% + current market value'
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_g_9_A
+  description: '(A) If, as of the close of business, the equity in the portfolio margin account of an eligible participant
+    as described '
+  citation: FINRA 4210(g)(9)(A)
+  source_quote: (A) If, as of the close of business, the equity in the portfolio margin account of an eligible participant
+    as described in paragraph (g)(4)(C), declines below the $5 million minimum equity required, if applicable, and is not
+    restored to at least $5 million within three business days by a deposit of funds and/or securities or through favorable
+    market action, members are prohibited from accepting new opening orders beginning on the fourth business day, except that
+    new opening orders entered for the purpose of reducing market risk may be accepted if the result would be to lower margin
+    requirements. This prohibition shall remain in effect until,
+  conditions:
+    account_type: portfolio_margin
+  formula:
+    type: account_minimum
+    amount: 5000000.0
+    description: Portfolio margin eligible participant must maintain $5M minimum equity; 3 business day cure period
+  produces_calculation: true
+  calculation_status: active
+- id: 4210_g_9_A_i
+  description: (i) equity of $5 million is established, or
+  citation: FINRA 4210(g)(9)(A)(i)
+  source_quote: (i) equity of $5 million is established, or
+  conditions:
+    account_type: portfolio_margin
+  formula:
+    type: account_minimum
+    amount: 5000000.0
+    description: 'Portfolio margin deficiency: $5M equity must be re-established within 3 business days'
+  produces_calculation: true
+  calculation_status: active
