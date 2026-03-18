@@ -22,6 +22,7 @@ RUN uv pip install --system -e ".[web]"
 # Copy application code
 COPY paragraph_margin/ paragraph_margin/
 COPY api/ api/
+COPY data/ data/
 
 # Copy margin rules from TPM (included via build context or COPY)
 # On Railway, set MARGIN_RULES_DIR env var to point to the rules location
