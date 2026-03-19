@@ -5,6 +5,7 @@ first, then falls back to simpler patterns. Unmatched positions are returned
 separately for individual margin calculation.
 
 Recognition priority:
+0. Cross-asset (convertible bond + equity arbitrage)
 1. Cross-product with stock (conversion, collar, covered call, protective put)
 2. 4-leg pure option (box spread, iron condor/butterfly, butterflies, short butterflies, condors)
 3. Ratio spreads / backspreads (unequal leg quantities)
@@ -22,7 +23,7 @@ from typing import Optional
 
 from paragraph_margin.models.enums import OptionType, PositionSide, SecurityType, StrategyType
 from paragraph_margin.models.positions import Position
-from paragraph_margin.models.securities import Equity, Option
+from paragraph_margin.models.securities import CorporateBond, Equity, Option
 from paragraph_margin.models.strategies import RecognizedStrategy, StrategyGroup, StrategyLeg
 from paragraph_margin.money import ZERO
 
@@ -102,6 +103,38 @@ class _EquityPoolEntry:
         return self.remaining <= ZERO
 
 
+@dataclass
+class _BondPoolEntry:
+    """Tracks a convertible bond position's remaining unmatched quantity."""
+
+    position: Position
+    bond: CorporateBond
+    remaining: Decimal
+
+    @property
+    def side(self) -> PositionSide:
+        return self.position.side
+
+    @property
+    def is_long(self) -> bool:
+        return self.side == PositionSide.LONG
+
+    @property
+    def is_short(self) -> bool:
+        return self.side == PositionSide.SHORT
+
+    @property
+    def conversion_ratio(self) -> Decimal:
+        return self.bond.conversion_ratio or Decimal("1")
+
+    def consume(self, qty: Decimal) -> None:
+        self.remaining -= qty
+
+    @property
+    def exhausted(self) -> bool:
+        return self.remaining <= ZERO
+
+
 def _next_id(prefix: str) -> str:
     uid = uuid.uuid4().hex[:8]
     return f"{prefix}_{uid}"
@@ -145,6 +178,9 @@ class StrategyRecognizer:
                 groups[sec.underlying_symbol].append(pos)
             elif isinstance(sec, Equity):
                 groups[sec.symbol].append(pos)
+            elif isinstance(sec, CorporateBond) and sec.convertible and sec.conversion_underlying:
+                # Route convertible bonds to the underlying equity's group
+                groups[sec.conversion_underlying].append(pos)
             else:
                 groups["_other_"].append(pos)
         return dict(groups)
@@ -167,8 +203,17 @@ class StrategyRecognizer:
             for p in positions
             if isinstance(p.security, Option)
         ]
+        bond_pool = [
+            _BondPoolEntry(p, p.security, abs(p.quantity))
+            for p in positions
+            if isinstance(p.security, CorporateBond) and p.security.convertible
+        ]
 
         strategies: list[RecognizedStrategy] = []
+
+        # Priority 0: Cross-asset (convertible bond + equity)
+        if bond_pool:
+            self._try_convertible_arb(symbol, bond_pool, equity_pool, strategies)
 
         # Priority 1: Cross-product (stock + options)
         self._recognize_cross_product(symbol, equity_pool, option_pool, strategies)
@@ -200,8 +245,71 @@ class StrategyRecognizer:
                 unmatched.append(
                     o.position.model_copy(update={"quantity": o.remaining})
                 )
+        for b in bond_pool:
+            if not b.exhausted:
+                unmatched.append(
+                    b.position.model_copy(update={"quantity": b.remaining})
+                )
 
         return strategies, unmatched
+
+    # ================================================================
+    # Cross-asset strategies (convertible bond + equity)
+    # ================================================================
+
+    def _try_convertible_arb(
+        self,
+        symbol: str,
+        bond_pool: list[_BondPoolEntry],
+        equity_pool: list[_EquityPoolEntry],
+        strategies: list[RecognizedStrategy],
+    ) -> None:
+        """Convertible arbitrage: long convertible bond + short underlying equity.
+
+        Matches by conversion_underlying. The bond's conversion_ratio determines
+        how many shares each bond converts to. We match the lesser of the bond's
+        equivalent share count and the short equity quantity.
+        """
+        for bp in bond_pool:
+            if bp.exhausted or not bp.is_long:
+                continue
+            for eq in equity_pool:
+                if eq.exhausted or not eq.is_short:
+                    continue
+                # Compute how many shares the remaining bonds convert to
+                bond_equivalent_shares = bp.remaining * bp.conversion_ratio
+                matchable_shares = min(bond_equivalent_shares, eq.remaining)
+                if matchable_shares <= ZERO:
+                    continue
+                # How many bonds are consumed (may be fractional — floor to whole bonds)
+                bonds_consumed = min(bp.remaining, matchable_shares / bp.conversion_ratio)
+                if bonds_consumed <= ZERO:
+                    continue
+                shares_consumed = bonds_consumed * bp.conversion_ratio
+
+                bp.consume(bonds_consumed)
+                eq.consume(shares_consumed)
+                strategies.append(RecognizedStrategy(
+                    strategy_id=_next_id("cvt_arb"),
+                    strategy_type=StrategyType.CONVERTIBLE_ARB,
+                    legs=[
+                        StrategyLeg(
+                            position=bp.position.model_copy(update={"quantity": bonds_consumed}),
+                            role="long_convertible",
+                            ratio=int(bonds_consumed),
+                        ),
+                        StrategyLeg(
+                            position=eq.position.model_copy(update={"quantity": shares_consumed}),
+                            role="short_equity_hedge",
+                            ratio=int(shares_consumed),
+                        ),
+                    ],
+                    underlying_symbol=symbol,
+                    description=(
+                        f"Convertible arb: {int(bonds_consumed)} bonds "
+                        f"({bp.conversion_ratio}:1) + {int(shares_consumed)} short {symbol}"
+                    ),
+                ))
 
     # ================================================================
     # Cross-product strategies (stock + options)

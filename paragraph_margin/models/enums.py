@@ -173,6 +173,9 @@ class StrategyType(StrEnum):
     SYNTHETIC_LONG = "synthetic_long"
     SYNTHETIC_SHORT = "synthetic_short"
 
+    # Cross-asset (bond + equity)
+    CONVERTIBLE_ARB = "convertible_arb"
+
     # Unrecognized
     UNRECOGNIZED = "unrecognized"
 
