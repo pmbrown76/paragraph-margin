@@ -654,6 +654,49 @@ class StrategyMarginCalculator:
         return reg_t, finra, detail, rule_ids, citations
 
     # ================================================================
+    # Cross-Asset: Convertible Bond Arbitrage
+    # ================================================================
+
+    def _calc_convertible_arb(
+        self, strategy: RecognizedStrategy, underlying_price: Decimal
+    ) -> tuple[Decimal, Decimal, str, list[str], list[str]]:
+        """Convertible arbitrage per FINRA 4210(e)(2)(H) / 4210(c)(1).
+
+        Long convertible bond + short underlying equity.
+        FINRA maintenance: 10% of bond market value (hedged convertible rate).
+        Reg T initial: 50% of short equity market value + bond is fully paid.
+        """
+        bond_leg = _find_leg(strategy, "long_convertible")
+        equity_leg = _find_leg(strategy, "short_equity_hedge")
+
+        bond_mv = abs(bond_leg.position.market_value)
+        equity_mv = abs(equity_leg.position.market_value)
+
+        # No YAML rule yet — hardcoded per FINRA 4210(e)(2)(H)
+        rule_ids = ["4210_e_2_H"]
+        citations = ["FINRA 4210(e)(2)(H)", "FINRA 4210(c)(1)", "Reg T 220.12(c)"]
+
+        # Hedged convertible: 10% of combined position value
+        # (vs 25% bond + 30% short if margined separately)
+        hedged_rate = Decimal("0.10")
+        finra = round_margin(pct(hedged_rate, bond_mv + equity_mv))
+
+        # Reg T: short equity at 50%, bond is fully paid (long, no additional margin)
+        reg_t = pct(Decimal("0.50"), equity_mv)
+
+        detail = (
+            f"Convertible bond arbitrage\n"
+            f"Rule: {rule_ids[0]} | {citations[0]}\n"
+            f"Formula: Hedged convertible — 10% of combined position value\n"
+            f"Bond market value: ${bond_mv}\n"
+            f"Short equity market value: ${equity_mv}\n"
+            f"Combined value: ${bond_mv + equity_mv}\n"
+            f"FINRA 4210 maint = 10% x ${bond_mv + equity_mv} = ${finra}\n"
+            f"Reg T initial = 50% x ${equity_mv} = ${reg_t}"
+        )
+        return reg_t, finra, detail, rule_ids, citations
+
+    # ================================================================
     # Conversions & Reverse Conversions
     # ================================================================
 
@@ -1262,4 +1305,6 @@ _STRATEGY_CALCULATORS: dict[StrategyType, _StrategyCalcFn] = {
     # Synthetic positions
     StrategyType.SYNTHETIC_LONG: StrategyMarginCalculator._calc_synthetic_long,
     StrategyType.SYNTHETIC_SHORT: StrategyMarginCalculator._calc_synthetic_short,
+    # Cross-asset
+    StrategyType.CONVERTIBLE_ARB: StrategyMarginCalculator._calc_convertible_arb,
 }
